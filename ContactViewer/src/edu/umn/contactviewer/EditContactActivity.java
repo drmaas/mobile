@@ -34,19 +34,19 @@ public class EditContactActivity extends Activity {
 
         Contact c = getIntent().getExtras().getParcelable("contact");
 
-        EditText name = (EditText)findViewById(R.id.name_label);
+        EditText name = (EditText)findViewById(R.id.name_text);
         name.setText(c.getName());
 
-        EditText title = (EditText)findViewById(R.id.title_label);
+        EditText title = (EditText)findViewById(R.id.title_text);
         title.setText(c.getTitle());
 
-        EditText email = (EditText)findViewById(R.id.email_label);
+        EditText email = (EditText)findViewById(R.id.email_text);
         email.setText(c.getEmail());
 
-        EditText phone = (EditText)findViewById(R.id.phone_label);
+        EditText phone = (EditText)findViewById(R.id.phone_text);
         phone.setText(c.getPhone());
 
-        EditText twitter = (EditText)findViewById(R.id.twitter_label);
+        EditText twitter = (EditText)findViewById(R.id.twitter_text);
         twitter.setText(c.getTwitterId());
 
     }
