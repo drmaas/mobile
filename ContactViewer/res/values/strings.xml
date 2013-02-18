@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello_world">Hello World!</string>
     <string name="app_name">ContactViewer</string>
-    <string name="contacts">Contacts</string>
+
+    <!-- contacts page toolbar -->
+    <string name="contacts">My Contacts</string>
     <string name="about">About</string>
+
+    <!-- edit contact page toolbar -->
+    <string name="edit">Edit Contact</string>
+    <string name="save">Save</string>
     <string name="back">Back</string>
+
+    <!-- contact fields -->
+    <string name="name_label">Name</string>
+    <string name="title_label">Title</string>
+    <string name="email_label">Email</string>
+    <string name="phone_label">Phone</string>
+    <string name="twitter_label">Twitter</string>
+
+    <!-- about message -->
+    <string name="info">ContactViewer applicaton for team \'kill -9\'</string>
+
+    <!-- toast when contact is clicked -->
+    <string name="contact_toast">Showing details for contact</string>
 </resources>

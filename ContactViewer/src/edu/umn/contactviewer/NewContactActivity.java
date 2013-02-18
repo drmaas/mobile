@@ -8,6 +8,7 @@ import android.os.Bundle;
  * Date: 2/17/13
  */
 public class NewContactActivity extends Activity {
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }

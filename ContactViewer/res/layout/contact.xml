@@ -1,7 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <!-- name -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/name_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/name_label"/>
+        <EditText android:id="@+id/name_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
 
-</RelativeLayout>
+    <!-- title -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/title_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/title_label"/>
+        <EditText android:id="@+id/title_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <!-- email -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/email_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/email_label"/>
+        <EditText android:id="@+id/email_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <!-- phone -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/phone_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/phone_label"/>
+        <EditText android:id="@+id/phone_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <!-- twitter -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/twitter_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/twitter_label"/>
+        <EditText android:id="@+id/twitter_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+</LinearLayout>

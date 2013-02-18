@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,17 +21,17 @@ public class ContactListActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list);
-        ToolbarConfig toolbar = new ToolbarConfig(this, "Contacts");
+        ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.contacts));
 
 	    // setup the about button
 	    Button button = toolbar.getToolbarRightButton();
-	    button.setText("About");
+	    button.setText(getString(R.string.about));
 		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(ContactListActivity.this, "This is a sample application made for SENG 5199-1 in the MSSE program.", Toast.LENGTH_LONG).show();
-			}
-		});
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ContactListActivity.this, getString(R.string.info), Toast.LENGTH_LONG).show();
+            }
+        });
         
         // make some contacts
         ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -79,21 +80,23 @@ public class ContactListActivity extends ListActivity {
         setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
-        
-        // handle the item click events
-        lv.setOnItemClickListener(new OnItemClickListener() {
-        	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// When clicked, show a toast with the TextView text
-				Toast.makeText(getApplicationContext(), 
-					"Clicked: " + ((ContactAdapter)getListAdapter()).getItem(position).getName(),
-					Toast.LENGTH_SHORT).show();
-				}
-			}
-        );
-        
     }
-    
-    
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+
+        //super
+        super.onListItemClick(l, v, position, id);
+
+        //get selected items
+        Contact contact = (Contact)getListAdapter().getItem(position);
+        Toast.makeText(this, getString(R.string.contact_toast) + " " + contact.getName(), Toast.LENGTH_SHORT).show();
+
+        //make new intent from this list activity to edit activity
+        Intent intent = new Intent(this, EditContactActivity.class);
+        intent.putExtra("contact", contact);
+        startActivity(intent);
+    }
 
 
 	/* We need to provide a custom adapter in order to use a custom list item view.

@@ -1,10 +1,23 @@
 package edu.umn.contactviewer;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /** Model class for storing a single contact.
  *
+ * Implements parcelable to pass between intents
  */
-public class Contact {
-	
+public class Contact implements Parcelable {
+
+    public static final Parcelable.Creator<Contact> CREATOR = new Parcelable.Creator<Contact>() {
+        public Contact createFromParcel(Parcel pc) {
+            return new Contact(pc);
+        }
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
+
 	/** Creates a contact and assigns its name.
 	 * 
 	 * @param name the contact's name
@@ -12,7 +25,20 @@ public class Contact {
 	public Contact(String name) {
 		_name = name;
 	}
-	
+
+    /**
+     * Constructor for parcelable
+     *
+     * @param p
+     */
+    public Contact(Parcel p) {
+        _name  = p.readString();
+        _title = p.readString();
+        _email = p.readString();
+        _phone = p.readString();
+        _twitterId = p.readString();
+    }
+
 	private String _name;
 	
 	/** Set the contact's name.
@@ -95,5 +121,19 @@ public class Contact {
 	public String toString() {
 		return _name + " (" + _title + ")";
 	}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel p, int flags) {
+        p.writeString(_name);
+        p.writeString(_title);
+        p.writeString(_email);
+        p.writeString(_phone);
+        p.writeString(_twitterId);
+    }
 }
 
