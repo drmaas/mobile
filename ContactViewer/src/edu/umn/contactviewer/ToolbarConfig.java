@@ -33,7 +33,25 @@ public class ToolbarConfig {
     public Button getToolbarRightButton() {
     	return (Button)_activity.findViewById(R.id.toolbar_right_button);
     }
-	
+
+    /**
+     * get middle button
+     *
+     * @return
+     */
+    public Button getToolbarMiddleButton() {
+        return (Button)_activity.findViewById(R.id.toolbar_middle_button);
+    }
+
+    /**
+     * get left button
+     *
+     * @return
+     */
+    public Button getToolbarLeftButton() {
+        return (Button)_activity.findViewById(R.id.toolbar_left_button);
+    }
+
     /** Gets a reference to the title TextView on the toolbar.
      */
     public TextView getToolbarTitleView() {

@@ -2,6 +2,7 @@ package edu.umn.contactviewer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,6 +16,22 @@ public class EditContactActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.contact);
+
+        //get toolbar
+        ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.edit));
+
+        //set left button
+        Button lbutton = toolbar.getToolbarLeftButton();
+        lbutton.setText(getString(R.string.back));
+
+        //set middle button
+        Button mbutton = toolbar.getToolbarMiddleButton();
+        mbutton.setText(getString(R.string.save));
+
+        //set right button
+        Button rbutton = toolbar.getToolbarRightButton();
+        rbutton.setText(getString(R.string.cancel));
+
         Contact c = getIntent().getExtras().getParcelable("contact");
 
         EditText name = (EditText)findViewById(R.id.name_label);

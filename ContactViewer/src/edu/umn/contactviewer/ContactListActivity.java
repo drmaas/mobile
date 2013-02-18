@@ -24,9 +24,15 @@ public class ContactListActivity extends ListActivity {
         ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.contacts));
 
 	    // setup the about button
-	    Button button = toolbar.getToolbarRightButton();
-	    button.setText(getString(R.string.about));
-		button.setOnClickListener(new View.OnClickListener() {
+        Button lbutton = toolbar.getToolbarLeftButton();
+        lbutton.setVisibility(View.INVISIBLE);
+
+        Button mbutton = toolbar.getToolbarMiddleButton();
+        mbutton.setVisibility(View.INVISIBLE);
+
+	    Button rbutton = toolbar.getToolbarRightButton();
+	    rbutton.setText(getString(R.string.about));
+		rbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ContactListActivity.this, getString(R.string.info), Toast.LENGTH_LONG).show();
