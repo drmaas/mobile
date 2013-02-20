@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="ContactListActivity"
+            android:name=".activiy.ContactListActivity"
             android:label="@string/app_name"
             android:theme="@style/MnTheme" >
             <intent-filter>
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".EditContactActivity"
+                android:name=".activiy.EditContactActivity"
                 android:label="@string/app_name"
                 android:theme="@style/MnTheme"/>
         <activity
-                android:name=".NewContactActivity"
+                android:name=".activiy.NewContactActivity"
                 android:label="@string/app_name"
                 android:theme="@style/MnTheme"/>
     </application>

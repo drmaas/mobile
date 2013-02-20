@@ -1,19 +1,19 @@
-package edu.umn.contactviewer;
+package edu.umn.contactviewer.activiy;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import edu.umn.contactviewer.R;
+import edu.umn.contactviewer.ui.ToolbarConfig;
 import edu.umn.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.contactviewer.model.Contact;
 import edu.umn.contactviewer.model.ContactDataSource;

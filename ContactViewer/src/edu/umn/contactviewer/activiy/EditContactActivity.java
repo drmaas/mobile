@@ -1,9 +1,11 @@
-package edu.umn.contactviewer;
+package edu.umn.contactviewer.activiy;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import edu.umn.contactviewer.R;
+import edu.umn.contactviewer.ui.ToolbarConfig;
 import edu.umn.contactviewer.model.Contact;
 
 /**

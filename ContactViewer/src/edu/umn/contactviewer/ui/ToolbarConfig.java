@@ -1,10 +1,11 @@
-package edu.umn.contactviewer;
+package edu.umn.contactviewer.ui;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import edu.umn.contactviewer.R;
 
 /** Use this class to configure the toolbar for an activity.
  *

@@ -1,4 +1,4 @@
-package edu.umn.contactviewer;
+package edu.umn.contactviewer.activiy;
 
 import android.app.Activity;
 import android.os.Bundle;

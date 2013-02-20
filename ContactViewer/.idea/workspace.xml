@@ -24,15 +24,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/ContactViewer" afterPath="$PROJECT_DIR$/assets/databases/contactviewer.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/db/CVSQLiteOpenHelper.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/db/CVSQLiteOpenHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/model/ContactDataSource.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/model/ContactDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/ContactListActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/EditContactActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/EditContactActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/NewContactActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/NewContactActivity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/edu/umn/contactviewer/ToolbarConfig.java" afterPath="$PROJECT_DIR$/src/edu/umn/contactviewer/ui/ToolbarConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ContactViewer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361336096846" ignored="false" />
+    <file path="/Dummy.txt" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361384996564" ignored="false" />
     <file path="/contact.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162496971" ignored="false" />
     <file path="/strings.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361164433025" ignored="false" />
     <file path="/list_item.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361161024646" ignored="false" />
@@ -43,8 +44,8 @@
     <file path="$USER_HOME$/IdeaProjects/ClassExercise/gen/com/example/ClassExercise/BuildConfig.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162371497" ignored="false" />
     <file path="/toolbar.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162839534" ignored="false" />
     <file path="/ToolbarConfig.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162959558" ignored="false" />
-    <file path="/fragment.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361329160632" ignored="false" />
-    <file path="/CVSQLiteOpenHelper.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361342026011" ignored="false" />
+    <file path="/fragment.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361385136412" ignored="false" />
+    <file path="/CVSQLiteOpenHelper.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361384890702" ignored="false" />
     <file path="/ContactDataSource.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361335129386" ignored="false" />
     <file path="/Contact.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361328522485" ignored="false" />
     <file path="/ContactUtils.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361329631153" ignored="false" />
@@ -63,7 +64,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -98,6 +98,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -108,9 +109,9 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="ContactListActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java">
+        <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/ContactListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="33" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+            <state line="111" column="27" selection-start="3719" selection-end="3719" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -125,10 +126,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CVSQLiteOpenHelper.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CVSQLiteOpenHelper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/db/CVSQLiteOpenHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="7" selection-start="2854" selection-end="2854" vertical-scroll-proportion="0.29565218">
+            <state line="86" column="32" selection-start="2725" selection-end="2725" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -165,32 +166,32 @@
       </file>
       <file leaf-file-name="contact.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/contact.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state line="14" column="45" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="toolbar.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/toolbar.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state line="37" column="0" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="ToolbarConfig.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ToolbarConfig.java">
+      <file leaf-file-name="ToolbarConfig.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ui/ToolbarConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="24" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
+            <state line="28" column="24" selection-start="786" selection-end="786" vertical-scroll-proportion="0.9299191">
               <folding />
             </state>
           </provider>
@@ -231,13 +232,15 @@
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/model/ContactDataSource.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/db/CVSQLiteOpenHelper.java" />
+        <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/ContactListActivity.java" />
+        <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/ui/ToolbarConfig.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1365" />
-    <option name="width" value="1922" />
-    <option name="height" value="1081" />
+    <option name="x" value="-1" />
+    <option name="width" value="1368" />
+    <option name="height" value="769" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -265,6 +268,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -300,6 +305,10 @@
               <option name="myItemId" value="contactviewer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -319,7 +328,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
+              <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -377,6 +386,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="contactviewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activiy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContactViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ContactViewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -387,28 +418,28 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/HelloListView" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/HelloListView" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.umn.contactviewer.ui" />
+      <recent name="edu.umn.contactviewer.activiy" />
+      <recent name="edu.umn.contactviewer.model" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/databases" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="edu.umn.contactviewer.model" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.ContactViewer">
@@ -462,6 +493,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -487,19 +531,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -615,12 +646,16 @@
       <created>1361331929051</created>
       <updated>1361331929051</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Remove TODO, to get the app to work you need to reboot the device after the app is first run, so it can properly find the database.  Weird issue.">
+      <created>1361385003900</created>
+      <updated>1361385003900</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1365" y="0" width="1922" height="1081" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1" y="0" width="1368" height="769" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -631,13 +666,13 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19423692" sideWeight="0.6709539" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279743" sideWeight="0.49466383" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25833333" sideWeight="0.67310786" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3268921" sideWeight="0.49466383" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -689,7 +724,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change id field to _id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove TODO, to get the app to work you need to reboot the device after the app is first run, so it can properly find the database.  Weird issue." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -704,6 +739,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Initial commit of sqlite model code" />
     <MESSAGE value="Change id field to _id" />
+    <MESSAGE value="Remove TODO, to get the app to work you need to reboot the device after the app is first run, so it can properly find the database.  Weird issue." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -719,19 +755,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="52" selection-start="274" selection-end="274" vertical-scroll-proportion="0.02631579" />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="0" selection-start="229" selection-end="302" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
@@ -740,30 +776,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/contact.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="45" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/toolbar.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/toolbar.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="0" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ToolbarConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="24" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
@@ -773,7 +802,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/EditContactActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/EditContactActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="50" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0">
           <folding />
@@ -796,9 +825,7 @@
     </entry>
     <entry file="file://$USER_HOME$/android-sdk-linux/sources/android-17/android/database/sqlite/SQLiteDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="803" column="0" selection-start="31257" selection-end="31257" vertical-scroll-proportion="0.33260393">
-          <folding />
-        </state>
+        <state line="803" column="0" selection-start="31257" selection-end="31257" vertical-scroll-proportion="0.33260393" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/model/ContactDataSource.java">
@@ -810,24 +837,29 @@
     </entry>
     <entry file="file://$USER_HOME$/android-sdk-linux/sources/android-17/android/os/Handler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="7" selection-start="4126" selection-end="4126" vertical-scroll-proportion="0.4572025">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="33" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="102" column="7" selection-start="4126" selection-end="4126" vertical-scroll-proportion="0.4572025" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/db/CVSQLiteOpenHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="7" selection-start="2854" selection-end="2854" vertical-scroll-proportion="0.29565218">
+        <state line="86" column="32" selection-start="2725" selection-end="2725" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/activiy/ContactListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="27" selection-start="3719" selection-end="3719" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/umn/contactviewer/ui/ToolbarConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="24" selection-start="786" selection-end="786" vertical-scroll-proportion="0.9299191">
+          <folding />
         </state>
       </provider>
     </entry>
