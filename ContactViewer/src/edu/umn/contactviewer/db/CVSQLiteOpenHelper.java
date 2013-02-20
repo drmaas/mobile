@@ -11,6 +11,8 @@ import android.util.Log;
  *
  * Based on example found at http://www.vogella.com/articles/AndroidSQLite/article.html
  *
+ * Seeding the DB is based on http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
+ *
  * Here the DAO pattern is implemented, could also use ContentProvider for a shared DB
  */
 public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
