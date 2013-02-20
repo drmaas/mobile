@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import edu.umn.contactviewer.model.Contact;
 
 /**
  * User: drmaas

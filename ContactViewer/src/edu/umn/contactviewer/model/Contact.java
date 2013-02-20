@@ -1,4 +1,4 @@
-package edu.umn.contactviewer;
+package edu.umn.contactviewer.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,6 +9,7 @@ import android.os.Parcelable;
  */
 public class Contact implements Parcelable {
 
+    //Called by framework to create a contact from a parcelable
     public static final Parcelable.Creator<Contact> CREATOR = new Parcelable.Creator<Contact>() {
         public Contact createFromParcel(Parcel pc) {
             return new Contact(pc);
@@ -37,6 +38,16 @@ public class Contact implements Parcelable {
         _email = p.readString();
         _phone = p.readString();
         _twitterId = p.readString();
+    }
+
+    private Long _id;
+
+    public Long getId() {
+        return _id;
+    }
+
+    public void setId(Long _id) {
+        this._id = _id;
     }
 
 	private String _name;
