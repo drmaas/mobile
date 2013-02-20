@@ -84,10 +84,8 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * Copies your database from your local assets-folder to the just created empty database in the
      * system folder, from where it can be accessed and handled.
-     * This is done by transfering bytestream.
+     * This is done by transferring bytestream.
      *
-     * TODO the contact table is not appearing in the android db on the device, viewed from monitor
-     * 
      * @throws IOException
      */
     private void copyDataBase(String assetDBPath, String dbName) {
