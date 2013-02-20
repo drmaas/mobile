@@ -19,7 +19,6 @@ public class ContactDataSource {
 
     // Database fields
     private SQLiteDatabase database;
-    private CVSQLiteOpenHelper dbHelper;
     private String[] allColumns = {
             CVSQLiteOpenHelper.COLUMN_ID,
             CVSQLiteOpenHelper.COLUMN_NAME,
@@ -31,25 +30,10 @@ public class ContactDataSource {
 
     /**
      *
-     * @param context
+     * @param database
      */
-    public ContactDataSource(Context context) {
-        dbHelper = new CVSQLiteOpenHelper(context);
-    }
-
-    /**
-     *
-     * @throws SQLException
-     */
-    public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
-    }
-
-    /**
-     *
-     */
-    public void close() {
-        dbHelper.close();
+    public ContactDataSource(SQLiteDatabase database) {
+        this.database = database;
     }
 
     /**

@@ -3,7 +3,8 @@ package edu.umn.contactviewer.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import java.io.*;
 
 /**
  * User: drmaas
@@ -27,32 +28,87 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "contactviewer.db";
     private static final int DATABASE_VERSION = 1;
+    private static String LOCAL_DATABASE_PATH = "databases/" + DATABASE_NAME;
 
-    // Database creation sql statement
-    private static final String DATABASE_CREATE = "create table " +
-            TABLE_CONTACT +
-            "(" + COLUMN_ID + " integer primary key autoincrement, " +
-            COLUMN_NAME + " text not null, " +
-            COLUMN_TITLE + ", " +
-            COLUMN_EMAIL + ", " +
-            COLUMN_PHONE + ", " +
-            COLUMN_TWITTER + ");";
+    private SQLiteDatabase db;
+
+    private File dbFile;
+
+    private final Context context;
 
     public CVSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.dbFile = context.getDatabasePath(DATABASE_NAME);
+        this.context = context;
+    }
+
+    @Override
+    public synchronized SQLiteDatabase getWritableDatabase() {
+
+        if(!dbFile.exists()) {
+            db = super.getWritableDatabase();
+            copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
+        }
+        return super.getWritableDatabase();
+    }
+
+    @Override
+    public synchronized SQLiteDatabase getReadableDatabase() {
+        if(!dbFile.exists()) {
+            db = super.getReadableDatabase();
+            copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
+        }
+        return super.getReadableDatabase();
+    }
+
+    public synchronized void open() {
+        getWritableDatabase();
+    }
+
+    @Override
+    public synchronized void close() {
+        if(db != null) {
+            db.close();
+        }
+        super.close();
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL(DATABASE_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String msg = "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data";
-        Log.w(CVSQLiteOpenHelper.class.getName(), msg);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACT);
-        onCreate(db);
+    }
+
+    /**
+     * Copies your database from your local assets-folder to the just created empty database in the
+     * system folder, from where it can be accessed and handled.
+     * This is done by transfering bytestream.
+     *
+     * TODO the contact table is not appearing in the android db on the device, viewed from monitor
+     * 
+     * @throws IOException
+     */
+    private void copyDataBase(String assetDBPath, String dbName) {
+
+        try {
+            InputStream assetDB = context.getAssets().open(assetDBPath);
+            OutputStream appDB = new FileOutputStream(dbFile,false);
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = assetDB.read(buffer)) != -1) {
+                appDB.write(buffer, 0, length);
+            }
+
+            appDB.flush();
+            appDB.close();
+            assetDB.close();
+        }
+        catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 
 }

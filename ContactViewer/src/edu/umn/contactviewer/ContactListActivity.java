@@ -1,22 +1,30 @@
 package edu.umn.contactviewer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import edu.umn.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.contactviewer.model.Contact;
+import edu.umn.contactviewer.model.ContactDataSource;
 
 /** Displays a list of contacts.
  *
  */
 public class ContactListActivity extends ListActivity {
+
+    private CVSQLiteOpenHelper dbHelper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +46,15 @@ public class ContactListActivity extends ListActivity {
                 Toast.makeText(ContactListActivity.this, getString(R.string.info), Toast.LENGTH_LONG).show();
             }
         });
-        
+
+        //open (and possibly initialize) database
+        dbHelper = new CVSQLiteOpenHelper(this);
+        SQLiteDatabase contactDB = dbHelper.getWritableDatabase();
+        ContactDataSource datasource = new ContactDataSource(contactDB);
+
         // make some contacts
         ArrayList<Contact> contacts = new ArrayList<Contact>();
+        /*
         contacts.add(new Contact("Malcom Reynolds")
     		.setEmail("mal@serenity.com")
     		.setTitle("Captain")
@@ -81,7 +95,10 @@ public class ContactListActivity extends ListActivity {
 			.setTitle("Shepherd")
 			.setPhone("612-555-2109")
 			.setTwitterId("shepherdbook"));
-        
+        */
+
+        contacts.addAll(datasource.getAllContacts());
+
         // initialize the list view
         setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
         ListView lv = getListView();
@@ -104,6 +121,17 @@ public class ContactListActivity extends ListActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        dbHelper.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        dbHelper.close();
+        super.onPause();
+    }
 
 	/* We need to provide a custom adapter in order to use a custom list item view.
 	 */
