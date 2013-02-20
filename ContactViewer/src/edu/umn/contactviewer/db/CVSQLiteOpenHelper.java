@@ -10,11 +10,13 @@ import android.util.Log;
  * Date: 2/19/13
  *
  * Based on example found at http://www.vogella.com/articles/AndroidSQLite/article.html
+ *
+ * Here the DAO pattern is implemented, could also use ContentProvider for a shared DB
  */
 public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_CONTACT = "contact";
-    public static final String COLUMN_ID = "contact_id";
+    public static final String COLUMN_ID = "_id"; //I think this has to be _id for android to understand it?
     public static final String COLUMN_NAME = "contact_name";
     public static final String COLUMN_TITLE = "contact_title";
     public static final String COLUMN_EMAIL = "contact_email";
