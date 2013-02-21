@@ -56,9 +56,10 @@ public class ContactDataSource {
         long insertId = database.insert(CVSQLiteOpenHelper.TABLE_CONTACT, null, values);
         Cursor cursor = database.query(CVSQLiteOpenHelper.TABLE_CONTACT, allColumns, CVSQLiteOpenHelper.COLUMN_ID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
-        Contact newComment = cursorToContact(cursor);
+        Contact contact = cursorToContact(cursor);
         cursor.close();
-        return newComment;
+        System.out.println("Created contact with id: " + insertId);
+        return contact;
     }
 
     /**
@@ -72,7 +73,7 @@ public class ContactDataSource {
      * @param phone
      * @param twitter
      */
-    public void editContact(String name, String title, String email, String phone, String twitter) {
+    public void editContact(Long id, String name, String title, String email, String phone, String twitter) {
         ContentValues values = new ContentValues();
         if (!ContactUtils.empty(name)) {
             values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
@@ -89,7 +90,8 @@ public class ContactDataSource {
         if (!ContactUtils.empty(twitter)) {
             values.put(CVSQLiteOpenHelper.COLUMN_TWITTER, twitter);
         }
-        database.replace(CVSQLiteOpenHelper.TABLE_CONTACT, null, values);
+        database.update(CVSQLiteOpenHelper.TABLE_CONTACT, values, CVSQLiteOpenHelper.COLUMN_ID+"=?", new String[] { String.valueOf(id) } );
+        System.out.println("Updated contact with id: " + id);
     }
 
     /**
@@ -113,9 +115,10 @@ public class ContactDataSource {
 
         Cursor cursor = database.query(CVSQLiteOpenHelper.TABLE_CONTACT, allColumns, null, null, null, null, null);
 
+        Contact contact;
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Contact contact = cursorToContact(cursor);
+            contact = cursorToContact(cursor);
             contacts.add(contact);
             cursor.moveToNext();
         }

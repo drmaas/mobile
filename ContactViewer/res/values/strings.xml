@@ -24,4 +24,6 @@
 
     <!-- toast when contact is clicked -->
     <string name="contact_toast">Showing details for contact</string>
+    <string name="save_contact_toast">Saving contact details</string>
+    <string name="done_contact_toast">Done with contact, going back to contact list</string>
 </resources>

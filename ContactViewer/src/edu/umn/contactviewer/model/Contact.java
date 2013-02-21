@@ -33,6 +33,7 @@ public class Contact implements Parcelable {
      * @param p
      */
     public Contact(Parcel p) {
+        _id = p.readLong();
         _name  = p.readString();
         _title = p.readString();
         _email = p.readString();
@@ -140,6 +141,7 @@ public class Contact implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel p, int flags) {
+        p.writeLong(_id);
         p.writeString(_name);
         p.writeString(_title);
         p.writeString(_email);

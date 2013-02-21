@@ -97,6 +97,7 @@ public class ContactListActivity extends ListActivity {
 			.setTwitterId("shepherdbook"));
         */
 
+        //get contacts from the sqlite database!
         contacts.addAll(datasource.getAllContacts());
 
         // initialize the list view
