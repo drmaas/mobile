@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.activity;
+package edu.umn.kill9.contactviewer.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import edu.umn.contactviewer.R;
-import edu.umn.contactviewer.ui.ToolbarConfig;
-import edu.umn.contactviewer.db.CVSQLiteOpenHelper;
-import edu.umn.contactviewer.model.Contact;
-import edu.umn.contactviewer.model.ContactDataSource;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import edu.umn.kill9.contactviewer.R;
+import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
+import edu.umn.kill9.contactviewer.model.Contact;
+import edu.umn.kill9.contactviewer.model.ContactDataSource;
+import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 
 /** Displays a list of contacts.
  *

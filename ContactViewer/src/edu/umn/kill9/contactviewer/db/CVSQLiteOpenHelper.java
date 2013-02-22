@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.db;
+package edu.umn.kill9.contactviewer.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
