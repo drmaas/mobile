@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.activiy;
+package edu.umn.contactviewer.activity;
 
 import java.util.ArrayList;
 import java.util.List;
