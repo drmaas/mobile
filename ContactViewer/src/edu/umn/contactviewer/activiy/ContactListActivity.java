@@ -22,7 +22,7 @@ import edu.umn.contactviewer.model.ContactDataSource;
  *
  */
 public class ContactListActivity extends ListActivity {
-
+//Dummy comment, just to make sure git is working
     private CVSQLiteOpenHelper dbHelper;
 
     @Override
