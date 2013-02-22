@@ -45,8 +45,8 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public synchronized SQLiteDatabase getWritableDatabase() {
 
+        db = super.getWritableDatabase();
         if(!dbFile.exists()) {
-            db = super.getWritableDatabase();
             copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
         }
         return super.getWritableDatabase();
@@ -54,15 +54,11 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public synchronized SQLiteDatabase getReadableDatabase() {
+        db = super.getReadableDatabase();
         if(!dbFile.exists()) {
-            db = super.getReadableDatabase();
             copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
         }
         return super.getReadableDatabase();
-    }
-
-    public synchronized void open() {
-        getWritableDatabase();
     }
 
     @Override
@@ -79,6 +75,32 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+
+    /**
+     * utility for starting a transaction
+     */
+    public void startTransaction() {
+        db.beginTransaction();
+    }
+
+    /**
+     * Utility for committing all changes
+     */
+    public void commit() {
+        try {
+            db.setTransactionSuccessful();
+        }
+        finally {
+            db.endTransaction();
+        }
+    }
+
+    /**
+     * Utility for rolling back a transaction
+     */
+    public void rollback() {
+        db.endTransaction();
     }
 
     /**

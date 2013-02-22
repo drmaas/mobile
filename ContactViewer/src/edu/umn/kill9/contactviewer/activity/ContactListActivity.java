@@ -29,6 +29,7 @@ import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 public class ContactListActivity extends ListActivity {
 
     private CVSQLiteOpenHelper dbHelper;
+    private SQLiteDatabase contactDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,21 +53,15 @@ public class ContactListActivity extends ListActivity {
             }
         });
 
-        //open (and possibly initialize) database
-        dbHelper = new CVSQLiteOpenHelper(this);
-        SQLiteDatabase contactDB = dbHelper.getWritableDatabase();
-        ContactDataSource datasource = new ContactDataSource(contactDB);
-
-        // make some contacts
-        ArrayList<Contact> contacts = new ArrayList<Contact>();
-
-        //get contacts from the sqlite database
-        contacts.addAll(datasource.getAllContacts());
-
-        // initialize the list view
-        setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
+
+        //open (and possibly initialize) database
+        dbHelper = new CVSQLiteOpenHelper(this);
+        contactDB = dbHelper.getWritableDatabase();
+
+        //refresh data
+        refreshContacts();
     }
 
     @Override
@@ -89,11 +84,10 @@ public class ContactListActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //restart this activity to get all data changes if result was OK
+        //re-open database and refresh data
         if(resultCode == RESULT_OK) {
-            Intent refresh = new Intent(this, ContactListActivity.class);
-            startActivity(refresh);
-            this.finish();
+            contactDB = dbHelper.getWritableDatabase();
+            refreshContacts();
         }
     }
 
@@ -102,7 +96,7 @@ public class ContactListActivity extends ListActivity {
         super.onResume();
 
         //re-open database
-        dbHelper.open();
+        contactDB = dbHelper.getWritableDatabase();
     }
 
     @Override
@@ -111,6 +105,24 @@ public class ContactListActivity extends ListActivity {
 
         //close the db
         dbHelper.close();
+    }
+
+    /**
+     * helper method to refresh contact list
+     * assumes dbHelper already created and open
+     */
+    private void refreshContacts() {
+        //get db object
+        ContactDataSource datasource = new ContactDataSource(contactDB);
+
+        // make some contacts
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+
+        //get contacts from the sqlite database
+        contacts.addAll(datasource.getAllContacts());
+
+        // initialize the list view
+        setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
     }
 
 	/* We need to provide a custom adapter in order to use a custom list item view.
