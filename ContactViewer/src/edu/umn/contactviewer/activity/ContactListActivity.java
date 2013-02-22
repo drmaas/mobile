@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.activiy;
+package edu.umn.contactviewer.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ import edu.umn.contactviewer.model.ContactDataSource;
 /** Displays a list of contacts.
  *
  */
+// test comment
 public class ContactListActivity extends ListActivity {
 //Dummy comment, just to make sure git is working
     private CVSQLiteOpenHelper dbHelper;
