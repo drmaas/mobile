@@ -67,12 +67,7 @@ public class EditContactActivity extends Activity {
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
             public void onClick(View v) {
-                Toast.makeText(EditContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
-                datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                                       phone.getText().toString(), twitter.getText().toString());
-                dbHelper.commit();
-                setResult(RESULT_OK, null);
-                finish();
+                goBack();
             }
         });
 
@@ -82,9 +77,7 @@ public class EditContactActivity extends Activity {
         mbutton.setOnClickListener(new View.OnClickListener() {
             //save everything but don't go back
             public void onClick(View v) {
-                Toast.makeText(EditContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
-                datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                        phone.getText().toString(), twitter.getText().toString());
+            save();
             }
         });
 
@@ -94,9 +87,7 @@ public class EditContactActivity extends Activity {
         rbutton.setOnClickListener(new View.OnClickListener() {
             //go back without saving anything
             public void onClick(View v) {
-                setResult(RESULT_CANCELED, null);
-                dbHelper.rollback();
-                finish();
+                cancel();
             }
         });
 
@@ -111,12 +102,37 @@ public class EditContactActivity extends Activity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+        goBack();
+    }
+
+    /**
+     * go back and keep all saves, including most recent unsaved change
+     */
+    private void goBack() {
         Toast.makeText(EditContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
         datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                               phone.getText().toString(), twitter.getText().toString());
+                phone.getText().toString(), twitter.getText().toString());
         dbHelper.commit();
         setResult(RESULT_OK, null);
         finish();
+    }
+
+    /**
+     * Go back and undo all saves
+     */
+    private void cancel() {
+        setResult(RESULT_CANCELED, null);
+        dbHelper.rollback();
+        finish();
+    }
+
+    /**
+     * save and stay on screen
+     */
+    private void save() {
+        Toast.makeText(EditContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
+        datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
+                phone.getText().toString(), twitter.getText().toString());
     }
 
 }

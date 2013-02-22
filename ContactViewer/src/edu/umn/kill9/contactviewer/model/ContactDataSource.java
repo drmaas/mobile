@@ -46,7 +46,7 @@ public class ContactDataSource {
      * @param twitter
      * @return
      */
-    public Contact createContact(String name, String title, String email, String phone, String twitter) {
+    public Contact createContact(String name, String title, String email, String phone, String twitter) throws SQLException {
         ContentValues values = new ContentValues();
         values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
         values.put(CVSQLiteOpenHelper.COLUMN_TITLE, title);
@@ -73,7 +73,7 @@ public class ContactDataSource {
      * @param phone
      * @param twitter
      */
-    public void editContact(Long id, String name, String title, String email, String phone, String twitter) {
+    public void editContact(Long id, String name, String title, String email, String phone, String twitter) throws SQLException {
         ContentValues values = new ContentValues();
         if (!ContactUtils.empty(name)) {
             values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
@@ -99,7 +99,7 @@ public class ContactDataSource {
      *
      * @param contact
      */
-    public void deleteContact(Contact contact) {
+    public void deleteContact(Contact contact) throws SQLException {
         long id = contact.getId();
         database.delete(CVSQLiteOpenHelper.TABLE_CONTACT, CVSQLiteOpenHelper.COLUMN_ID + " = " + id, null);
         System.out.println("Contact deleted with id: " + id);
@@ -110,7 +110,7 @@ public class ContactDataSource {
      *
      * @return
      */
-    public List<Contact> getAllContacts() {
+    public List<Contact> getAllContacts() throws SQLException {
         List<Contact> contacts = new ArrayList<Contact>();
 
         Cursor cursor = database.query(CVSQLiteOpenHelper.TABLE_CONTACT, allColumns, null, null, null, null, null);
