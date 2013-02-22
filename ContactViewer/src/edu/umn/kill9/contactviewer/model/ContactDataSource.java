@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.model;
+package edu.umn.kill9.contactviewer.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import edu.umn.contactviewer.db.CVSQLiteOpenHelper;
-import edu.umn.contactviewer.util.ContactUtils;
+import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
+import edu.umn.kill9.contactviewer.util.ContactUtils;
 
 /**
  * User: drmaas

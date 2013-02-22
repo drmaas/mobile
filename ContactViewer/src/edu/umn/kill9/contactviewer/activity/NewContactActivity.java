@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.activity;
+package edu.umn.kill9.contactviewer.activity;
 
 import android.app.Activity;
 import android.os.Bundle;

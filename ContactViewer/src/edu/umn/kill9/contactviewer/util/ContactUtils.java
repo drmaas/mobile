@@ -1,4 +1,4 @@
-package edu.umn.contactviewer.util;
+package edu.umn.kill9.contactviewer.util;
 
 /**
  * User: drmaas

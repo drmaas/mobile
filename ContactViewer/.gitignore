@@ -1,0 +1,6 @@
+#binary files
+bin/
+
+#eclipse files
+proguard-project.txt
+android-support-v4.jar
