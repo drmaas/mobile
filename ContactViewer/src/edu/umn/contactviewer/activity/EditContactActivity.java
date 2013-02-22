@@ -54,7 +54,7 @@ public class EditContactActivity extends Activity {
 
         //set left button
         final Button lbutton = toolbar.getToolbarLeftButton();
-        final Intent back = new Intent(this, ContactListActivity.class);
+        //final Intent back = new Intent(this, ContactListActivity.class);
         lbutton.setText(getString(R.string.back));
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
@@ -62,7 +62,7 @@ public class EditContactActivity extends Activity {
                 Toast.makeText(EditContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
                 datasource.editContact(id, name.getText().toString(), title.getText().toString(), email.getText().toString(),
                                        phone.getText().toString(), twitter.getText().toString());
-                startActivity(back);
+                finish();
             }
         });
 
@@ -81,12 +81,11 @@ public class EditContactActivity extends Activity {
 
         //set right button
         final Button rbutton = toolbar.getToolbarRightButton();
-        final Intent cancel = new Intent(this, ContactListActivity.class);
         rbutton.setText(getString(R.string.cancel));
         rbutton.setOnClickListener(new View.OnClickListener() {
             //go back without saving anything
             public void onClick(View v) {
-                startActivity(back);
+                finish();
             }
         });
 
