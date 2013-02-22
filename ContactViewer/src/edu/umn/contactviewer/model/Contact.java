@@ -7,6 +7,7 @@ import android.os.Parcelable;
  *
  * Implements parcelable to pass between intents
  */
+//Awwww yeah! Caleb is awesome!
 public class Contact implements Parcelable {
 
     //Called by framework to create a contact from a parcelable
