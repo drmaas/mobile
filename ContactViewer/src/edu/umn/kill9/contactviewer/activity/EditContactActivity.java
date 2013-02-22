@@ -20,18 +20,22 @@ import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
  */
 public class EditContactActivity extends Activity {
 
+    private CVSQLiteOpenHelper dbHelper;
+    private SQLiteDatabase contactDB;
+    private ContactDataSource datasource;
+    private Contact c;
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.contact);
 
         //open database and get DAO
-        CVSQLiteOpenHelper dbHelper = new CVSQLiteOpenHelper(this);
-        SQLiteDatabase contactDB = dbHelper.getWritableDatabase();
-        final ContactDataSource datasource = new ContactDataSource(contactDB);
-
-        Contact c = getIntent().getExtras().getParcelable("contact");
-        final Long id = c.getId();
+        dbHelper = new CVSQLiteOpenHelper(this);
+        contactDB = dbHelper.getWritableDatabase();
+        datasource = new ContactDataSource(contactDB);
+        c = getIntent().getExtras().getParcelable("contact");
 
         //set initial contact information for display
         final EditText name = (EditText)findViewById(R.id.name_text);
@@ -60,8 +64,9 @@ public class EditContactActivity extends Activity {
             //go back, saving everything
             public void onClick(View v) {
                 Toast.makeText(EditContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
-                datasource.editContact(id, name.getText().toString(), title.getText().toString(), email.getText().toString(),
+                datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
                                        phone.getText().toString(), twitter.getText().toString());
+                setResult(RESULT_OK, null);
                 finish();
             }
         });
@@ -73,8 +78,7 @@ public class EditContactActivity extends Activity {
             //save everything but don't go back
             public void onClick(View v) {
                 Toast.makeText(EditContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
-                //datasource.editContact(id, c.getName(), c.getTitle(), c.getEmail(), c.getPhone(), c.getTwitterId());
-                datasource.editContact(id, name.getText().toString(), title.getText().toString(), email.getText().toString(),
+                datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
                         phone.getText().toString(), twitter.getText().toString());
             }
         });
@@ -85,9 +89,18 @@ public class EditContactActivity extends Activity {
         rbutton.setOnClickListener(new View.OnClickListener() {
             //go back without saving anything
             public void onClick(View v) {
+                setResult(RESULT_CANCELED, null);
                 finish();
             }
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
+        //        phone.getText().toString(), twitter.getText().toString());
+        return;
+    }
+
 }
