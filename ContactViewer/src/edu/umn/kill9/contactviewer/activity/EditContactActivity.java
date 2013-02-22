@@ -96,6 +96,7 @@ public class EditContactActivity extends Activity {
     }
 
     @Override
+    //TODO define what this should do on each activity
     public void onBackPressed() {
         //datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
         //        phone.getText().toString(), twitter.getText().toString());
