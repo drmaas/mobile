@@ -24,9 +24,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" name="Default" comment="when going back, do finish() instead of calling a new activity,">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java" afterPath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/ContactListActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/ContactListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/EditContactActivity.java" afterPath="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/EditContactActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ContactViewer.iws" />
@@ -35,7 +32,7 @@
     <file path="/contact.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162496971" ignored="false" />
     <file path="/strings.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361423216199" ignored="false" />
     <file path="/list_item.xml" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361161024646" ignored="false" />
-    <file path="/EditContactActivity.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361557536219" ignored="false" />
+    <file path="/EditContactActivity.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361559917741" ignored="false" />
     <file path="/ContactListActivity.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361555320579" ignored="false" />
     <file path="$USER_HOME$/IdeaProjects/ClassExercise/gen/com/example/ClassExercise/R.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361161908168" ignored="false" />
     <file path="$USER_HOME$/IdeaProjects/ClassExercise/gen/com/example/ClassExercise/Manifest.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361161908168" ignored="false" />
@@ -44,7 +41,7 @@
     <file path="/ToolbarConfig.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361162959558" ignored="false" />
     <file path="/fragment.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361385136412" ignored="false" />
     <file path="/CVSQLiteOpenHelper.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361557127241" ignored="false" />
-    <file path="/ContactDataSource.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361424817010" ignored="false" />
+    <file path="/ContactDataSource.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361561541379" ignored="false" />
     <file path="/Contact.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361424781278" ignored="false" />
     <file path="/ContactUtils.java" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361329631153" ignored="false" />
     <file path="/a.dummy" changelist="8e3d29e1-8722-4929-a2f3-d62adfacbfb5" time="1361340419218" ignored="false" />
@@ -118,13 +115,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EditContactActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EditContactActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/EditContactActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="13" selection-start="4069" selection-end="4069" vertical-scroll-proportion="0.43699732">
+            <state line="108" column="71" selection-start="3317" selection-end="3317" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#2134#2730#0" expanded="true" />
-                <element signature="e#2719#2720#0" expanded="true" />
+                <element signature="e#2134#2295#0" expanded="true" />
+                <element signature="e#2284#2285#0" expanded="true" />
+                <element signature="e#2478#2640#0" expanded="true" />
+                <element signature="e#2629#2630#0" expanded="true" />
+                <element signature="e#2823#2989#0" expanded="true" />
+                <element signature="e#2978#2979#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,10 +140,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CVSQLiteOpenHelper.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CVSQLiteOpenHelper.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="43" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.0">
+            <state line="51" column="43" selection-start="1847" selection-end="1847" vertical-scroll-proportion="-1.2520107">
               <folding />
             </state>
           </provider>
@@ -151,7 +152,7 @@
       <file leaf-file-name="ContactDataSource.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/model/ContactDataSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="61" selection-start="2546" selection-end="2546" vertical-scroll-proportion="0.0">
+            <state line="112" column="62" selection-start="3766" selection-end="3766" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -198,7 +199,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/EditContactActivity.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/Contact.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/util/ContactUtils.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/contactviewer/ContactListActivity.java" />
@@ -214,12 +214,12 @@
         <option value="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/ContactListActivity.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java" />
         <option value="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/EditContactActivity.java" />
+        <option value="$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/model/ContactDataSource.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
-    <option name="y" value="13" />
     <option name="width" value="1368" />
     <option name="height" value="769" />
   </component>
@@ -679,7 +679,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="13" width="1368" height="769" extended-state="6" />
+    <frame x="-1" y="0" width="1368" height="769" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290461" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -861,20 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/model/ContactDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="61" selection-start="2546" selection-end="2546" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="43" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/ContactListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="98" column="51" selection-start="3204" selection-end="3204" vertical-scroll-proportion="0.0">
@@ -884,11 +870,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/activity/EditContactActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="13" selection-start="4069" selection-end="4069" vertical-scroll-proportion="0.43699732">
+        <state line="108" column="71" selection-start="3317" selection-end="3317" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#2134#2730#0" expanded="true" />
-            <element signature="e#2719#2720#0" expanded="true" />
+            <element signature="e#2134#2295#0" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+            <element signature="e#2478#2640#0" expanded="true" />
+            <element signature="e#2629#2630#0" expanded="true" />
+            <element signature="e#2823#2989#0" expanded="true" />
+            <element signature="e#2978#2979#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/model/ContactDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="62" selection-start="3766" selection-end="3766" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/umn/kill9/contactviewer/db/CVSQLiteOpenHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="43" selection-start="1847" selection-end="1847" vertical-scroll-proportion="-1.2520107">
+          <folding />
         </state>
       </provider>
     </entry>
