@@ -31,6 +31,11 @@ public class ContactListActivity extends ListActivity {
     private CVSQLiteOpenHelper dbHelper;
     private SQLiteDatabase contactDB;
 
+    public static final String ACTION = "action";
+    public static final String EDIT = "edit";
+    public static final String CREATE = "create";
+    public static final String CONTACT = "contact";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,18 @@ public class ContactListActivity extends ListActivity {
         lbutton.setVisibility(View.INVISIBLE);
 
         Button mbutton = toolbar.getToolbarMiddleButton();
-        mbutton.setVisibility(View.INVISIBLE);
+        mbutton.setText(getString(R.string.new_contact));
+        mbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ContactListActivity.this, getString(R.string.contact_create), Toast.LENGTH_SHORT).show();
+
+                //make new intent from this list activity to edit activity
+                Intent intent = new Intent(ContactListActivity.this, ContactActivity.class);
+                intent.putExtra(ACTION, CREATE);
+                startActivityForResult(intent, 1);
+            }
+        });
 
 	    Button rbutton = toolbar.getToolbarRightButton();
 	    rbutton.setText(getString(R.string.about));
@@ -62,6 +78,9 @@ public class ContactListActivity extends ListActivity {
 
         //refresh data
         refreshContacts();
+
+        //set to last contact
+        lv.setSelection(getListAdapter().getCount() - 1);
     }
 
     @Override
@@ -75,8 +94,9 @@ public class ContactListActivity extends ListActivity {
         Toast.makeText(this, getString(R.string.contact_toast) + " " + contact.getName(), Toast.LENGTH_SHORT).show();
 
         //make new intent from this list activity to edit activity
-        Intent intent = new Intent(this, EditContactActivity.class);
-        intent.putExtra("contact", contact);
+        Intent intent = new Intent(this, ContactActivity.class);
+        intent.putExtra(ACTION, EDIT);
+        intent.putExtra(CONTACT, contact);
         startActivityForResult(intent, 1);
     }
 

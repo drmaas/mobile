@@ -19,11 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activity.EditContactActivity"
-                android:label="@string/app_name"
-                android:theme="@style/MnTheme"/>
-        <activity
-                android:name=".activity.NewContactActivity"
+                android:name=".activity.ContactActivity"
                 android:label="@string/app_name"
                 android:theme="@style/MnTheme"/>
     </application>

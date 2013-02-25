@@ -8,6 +8,7 @@
 
     <!-- edit contact page toolbar -->
     <string name="edit">Edit Contact</string>
+    <string name="new_contact">New Contact</string>
     <string name="save">Save</string>
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
@@ -24,6 +25,7 @@
 
     <!-- toast when contact is clicked -->
     <string name="contact_toast">Showing details for contact</string>
+    <string name="contact_create">Creating new contact</string>
     <string name="save_contact_toast">Saving contact details</string>
     <string name="done_contact_toast">Done with contact, going back to contact list</string>
 </resources>
