@@ -2,6 +2,7 @@ package edu.umn.kill9.contactviewer.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.*;
@@ -44,21 +45,22 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public synchronized SQLiteDatabase getWritableDatabase() {
-
-        db = super.getWritableDatabase();
-        if(!dbFile.exists()) {
-            copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
+        String dbname = this.dbFile.getAbsolutePath();
+        if(!checkDataBase(dbname)) {
+            copyDataBase(LOCAL_DATABASE_PATH, dbname);
         }
-        return super.getWritableDatabase();
+        db = super.getWritableDatabase();
+        return db;
     }
 
     @Override
     public synchronized SQLiteDatabase getReadableDatabase() {
-        db = super.getReadableDatabase();
-        if(!dbFile.exists()) {
-            copyDataBase(LOCAL_DATABASE_PATH, db.getPath());
+        String dbname = this.dbFile.getAbsolutePath();
+        if(!checkDataBase(dbname)) {
+            copyDataBase(LOCAL_DATABASE_PATH, dbname);
         }
-        return super.getReadableDatabase();
+        db = super.getReadableDatabase();
+        return db;
     }
 
     @Override
@@ -101,6 +103,27 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void rollback() {
         db.endTransaction();
+    }
+
+    /**
+     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * @return true if it exists, false if it doesn't
+     */
+    private boolean checkDataBase(String dbPath) {
+
+        SQLiteDatabase checkDB = null;
+
+        try {
+            checkDB = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);
+        }
+        catch(SQLiteException e){
+            //database does't exist yet.
+        }
+
+        if(checkDB != null) {
+            checkDB.close();
+        }
+        return checkDB != null ? true : false;
     }
 
     /**
