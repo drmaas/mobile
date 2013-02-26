@@ -116,7 +116,7 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
         try {
             checkDB = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);
         }
-        catch(SQLiteException e){
+        catch (SQLiteException e) {
             //database does't exist yet.
         }
 
@@ -137,7 +137,11 @@ public class CVSQLiteOpenHelper extends SQLiteOpenHelper {
 
         try {
             InputStream assetDB = context.getAssets().open(assetDBPath);
-            OutputStream appDB = new FileOutputStream(dbFile,false);
+
+            //hack to create databases directory if not there
+            new File(dbFile.getParent()).mkdir();
+
+            OutputStream appDB = new FileOutputStream(dbFile);
 
             byte[] buffer = new byte[1024];
             int length;
