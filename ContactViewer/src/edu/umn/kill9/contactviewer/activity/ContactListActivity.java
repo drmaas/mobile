@@ -44,10 +44,10 @@ public class ContactListActivity extends ListActivity {
 
 	    // setup the about button
         Button lbutton = toolbar.getToolbarLeftButton();
-        lbutton.setVisibility(View.INVISIBLE);
+        lbutton.setVisibility(View.GONE);
 
         Button flbutton = toolbar.getToolbarFarLeftButton();
-        flbutton.setVisibility(View.INVISIBLE);
+        flbutton.setVisibility(View.GONE);
 
         Button mbutton = toolbar.getToolbarMiddleButton();
         mbutton.setText(getString(R.string.new_contact));
