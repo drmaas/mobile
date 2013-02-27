@@ -12,6 +12,7 @@
     <string name="save">Save</string>
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 
     <!-- contact fields -->
     <string name="name_label">Name</string>

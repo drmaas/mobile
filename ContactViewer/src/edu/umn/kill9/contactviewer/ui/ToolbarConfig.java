@@ -51,6 +51,15 @@ public class ToolbarConfig {
         return (Button)_activity.findViewById(R.id.toolbar_left_button);
     }
 
+    /**
+     * get far left button
+     *
+     * @return
+     */
+    public Button getToolbarFarLeftButton() {
+        return (Button)_activity.findViewById(R.id.toolbar_farleft_button);
+    }
+
     /** Gets a reference to the title TextView on the toolbar.
      */
     public TextView getToolbarTitleView() {

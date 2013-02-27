@@ -13,6 +13,14 @@
             android:layout_weight="1"/>
 
     <Button
+            android:id="@+id/toolbar_farleft_button"
+            style="@style/ToolbarButton"
+            android:text="FarLeft"
+            android:layout_weight="0"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"/>
+
+    <Button
             android:id="@+id/toolbar_left_button"
             style="@style/ToolbarButton"
             android:text="Left"

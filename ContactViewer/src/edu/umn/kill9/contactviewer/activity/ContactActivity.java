@@ -1,6 +1,8 @@
 package edu.umn.kill9.contactviewer.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -66,6 +68,16 @@ public class ContactActivity extends Activity {
 
         //get toolbar
         ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.edit));
+
+        //set far left button
+        final Button flbutton = toolbar.getToolbarFarLeftButton();
+        flbutton.setText(getString(R.string.delete));
+        flbutton.setOnClickListener(new View.OnClickListener() {
+            //go back, saving everything
+            public void onClick(View v) {
+                delete();
+            }
+        });
 
         //set left button
         final Button lbutton = toolbar.getToolbarLeftButton();
@@ -152,5 +164,33 @@ public class ContactActivity extends Activity {
             c = datasource.createContact(name.getText().toString(), title.getText().toString(), email.getText().toString(),
                     phone.getText().toString(), twitter.getText().toString());
         }
+    }
+
+
+    /**
+     * delete and go back
+     */
+    private void delete() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        setResult(RESULT_OK, null);
+                        datasource.deleteContact(c);
+                        dbHelper.commit();
+                        finish();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //Do Nothing
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }
