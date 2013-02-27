@@ -52,6 +52,7 @@ public class ContactActivity extends Activity {
         datasource = new ContactDataSource(contactDB);
 
         action = getIntent().getStringExtra("action");
+        ToolbarConfig toolbar = null;
         if (action.equals("edit")) {
             c = getIntent().getExtras().getParcelable("contact");
 
@@ -61,13 +62,16 @@ public class ContactActivity extends Activity {
             email.setText(c.getEmail());
             phone.setText(c.getPhone());
             twitter.setText(c.getTwitterId());
+
+            //get toolbar
+            toolbar = new ToolbarConfig(this, getString(R.string.edit));
         }
         else {
             c = null;
-        }
 
-        //get toolbar
-        ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.edit));
+            //get toolbar
+            toolbar = new ToolbarConfig(this, getString(R.string.new_contact));
+        }
 
         //set far left button
         final Button flbutton = toolbar.getToolbarFarLeftButton();
