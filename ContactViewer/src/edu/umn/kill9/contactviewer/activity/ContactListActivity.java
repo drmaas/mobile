@@ -1,6 +1,8 @@
 package edu.umn.kill9.contactviewer.activity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -80,7 +82,7 @@ public class ContactListActivity extends ListActivity {
         contactDB = dbHelper.getWritableDatabase();
 
         //refresh data
-        refreshContacts();
+        refreshContacts(true);
 
         //set to last contact
         //lv.setSelection(getListAdapter().getCount() - 1);
@@ -110,7 +112,7 @@ public class ContactListActivity extends ListActivity {
         //re-open database and refresh data
         if(resultCode == RESULT_OK) {
             contactDB = dbHelper.getWritableDatabase();
-            refreshContacts();
+            refreshContacts(true);
         }
     }
 
@@ -134,7 +136,7 @@ public class ContactListActivity extends ListActivity {
      * helper method to refresh contact list
      * assumes dbHelper already created and open
      */
-    private void refreshContacts() {
+    private void refreshContacts(boolean sortAscendingOrder) {
         //get db object
         ContactDataSource datasource = new ContactDataSource(contactDB);
 
@@ -144,8 +146,23 @@ public class ContactListActivity extends ListActivity {
         //get contacts from the sqlite database
         contacts.addAll(datasource.getAllContacts());
 
+        Collections.sort(contacts, new ContactComparator());
+
+        //If sortIncreasing is false, reverse the sort to decreasing order.
+        if(!sortAscendingOrder)
+        {
+            Collections.reverse(contacts);
+        }
+
         // initialize the list view
         setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
+    }
+
+    public class ContactComparator implements Comparator<Contact> {
+        @Override
+        public int compare(Contact contact1, Contact contact2) {
+            return contact1.getName().compareTo(contact2.getName());
+        }
     }
 
 	/* We need to provide a custom adapter in order to use a custom list item view.
