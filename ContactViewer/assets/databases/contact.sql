@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS "contact";
+CREATE TABLE contact (_id INTEGER PRIMARY KEY, contact_name TEXT NOT NULL, contact_title TEXT, contact_email TEXT, contact_phone TEXT, contact_twitter TEXT);
+INSERT INTO "contact" VALUES(1,'Malcom Reynolds','Captain','mal@serenity.com','612-555-1234','malcomreynolds');
+INSERT INTO "contact" VALUES(3,'Hoban Washburne','Pilot','wash@serenity.com','612-555-9012','wash');
+INSERT INTO "contact" VALUES(4,'Jayne Cobb','Muscle','jayne@serenity.com','612-555-3456','heroofcanton');
+INSERT INTO "contact" VALUES(5,'Kaylee Frye','Engineer','kaylee@serenity.com','612-555-7890','kaylee');
+INSERT INTO "contact" VALUES(6,'Simon Tam','Doctor','simon@serenity.com','612-555-4321','simontam');
+INSERT INTO "contact" VALUES(7,'River Tam','Doctor''s Sister','river@serenity.com','612-555-8765','miranda');
+INSERT INTO "contact" VALUES(8,'Shepherd Book','Shepherd','shepherd@serenity.com','612-555-2109','shepherdbook');
+INSERT INTO "contact" VALUES(10,'Zoe Washburne','First Mate','zoe@serenity.com','612-555-5678','zoewashburne');
