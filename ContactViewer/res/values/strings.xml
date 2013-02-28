@@ -29,4 +29,14 @@
     <string name="contact_create">Creating new contact</string>
     <string name="save_contact_toast">Saving contact details</string>
     <string name="done_contact_toast">Done with contact, going back to contact list</string>
+
+    <!-- delete alert -->
+    <string name="confirm_delete">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- validation -->
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="name_not_empty">Thy contact shall not be nameless</string>
 </resources>

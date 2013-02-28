@@ -25,7 +25,7 @@ public class ContactActivity extends Activity {
     private SQLiteDatabase contactDB;
     private ContactDataSource datasource;
     private Contact c;
-    private String action;
+    private boolean edit;
 
     private EditText name;
     private EditText title;
@@ -51,8 +51,9 @@ public class ContactActivity extends Activity {
         contactDB = dbHelper.getWritableDatabase();
         datasource = new ContactDataSource(contactDB);
 
-        action = getIntent().getStringExtra("action");
-        if (action.equals("edit")) {
+        edit = getIntent().getStringExtra("action").equals("edit") ? true : false;
+        ToolbarConfig toolbar = null;
+        if (edit) {
             c = getIntent().getExtras().getParcelable("contact");
 
             //set initial contact information for display
@@ -61,23 +62,31 @@ public class ContactActivity extends Activity {
             email.setText(c.getEmail());
             phone.setText(c.getPhone());
             twitter.setText(c.getTwitterId());
+
+            //get toolbar
+            toolbar = new ToolbarConfig(this, getString(R.string.edit));
         }
         else {
             c = null;
-        }
 
-        //get toolbar
-        ToolbarConfig toolbar = new ToolbarConfig(this, getString(R.string.edit));
+            //get toolbar
+            toolbar = new ToolbarConfig(this, getString(R.string.new_contact));
+        }
 
         //set far left button
         final Button flbutton = toolbar.getToolbarFarLeftButton();
-        flbutton.setText(getString(R.string.delete));
-        flbutton.setOnClickListener(new View.OnClickListener() {
-            //go back, saving everything
-            public void onClick(View v) {
-                delete();
-            }
-        });
+        if (edit) {
+            flbutton.setText(getString(R.string.delete));
+            flbutton.setOnClickListener(new View.OnClickListener() {
+                //go back, saving everything
+                public void onClick(View v) {
+                    delete();
+                }
+            });
+        }
+        else {
+            flbutton.setVisibility(View.GONE);
+        }
 
         //set left button
         final Button lbutton = toolbar.getToolbarLeftButton();
@@ -85,7 +94,9 @@ public class ContactActivity extends Activity {
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
             public void onClick(View v) {
-                goBack();
+                if (validateName(name.getText().toString())) {
+                    goBack();
+                }
             }
         });
 
@@ -95,7 +106,9 @@ public class ContactActivity extends Activity {
         mbutton.setOnClickListener(new View.OnClickListener() {
             //save everything but don't go back
             public void onClick(View v) {
-                save();
+                if (validateName(name.getText().toString())) {
+                    save();
+                }
             }
         });
 
@@ -190,7 +203,31 @@ public class ContactActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(getString(R.string.confirm_delete)).setPositiveButton(getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(getString(R.string.no), dialogClickListener).show();
+    }
+
+    /**
+     * validate that name can't be empty
+     *
+     * @param name_value
+     * @return
+     */
+    private boolean validateName(String name_value) {
+        if (name_value == null || name_value == "" || name_value.length() < 1) {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.error)).setMessage(getString(R.string.name_not_empty)).setPositiveButton(getString(R.string.ok), dialogClickListener).show();
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

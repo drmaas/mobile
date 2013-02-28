@@ -83,7 +83,7 @@ public class ContactListActivity extends ListActivity {
         refreshContacts();
 
         //set to last contact
-        lv.setSelection(getListAdapter().getCount() - 1);
+        //lv.setSelection(getListAdapter().getCount() - 1);
     }
 
     @Override
