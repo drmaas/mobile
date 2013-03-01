@@ -210,8 +210,7 @@ public class ContactActivity extends Activity {
         String twitterString = twitter.getText().toString();
         
         if (c != null) {
-            Long id = c.getId();
-            datasource.editContact(id, nameString, titleString, emailString, phoneString, twitterString);
+            datasource.editContact(c, nameString, titleString, emailString, phoneString, twitterString);
         }
         else {
         	c = datasource.createContact(nameString, titleString, emailString, phoneString, twitterString);

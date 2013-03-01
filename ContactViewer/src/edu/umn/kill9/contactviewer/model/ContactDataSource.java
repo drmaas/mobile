@@ -71,8 +71,10 @@ public class ContactDataSource {
      * @param phone
      * @param twitter
      */
-    public void editContact(Long id, String name, String title, String email, String phone, String twitter) throws SQLException {
-        ContentValues values = new ContentValues();
+    public void editContact(Contact c, String name, String title, String email, String phone, String twitter) throws SQLException {
+        Long id = c.getId();
+    	
+    	ContentValues values = new ContentValues();
         if (name != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
         }
@@ -89,6 +91,13 @@ public class ContactDataSource {
             values.put(CVSQLiteOpenHelper.COLUMN_TWITTER, twitter);
         }
         database.update(CVSQLiteOpenHelper.TABLE_CONTACT, values, CVSQLiteOpenHelper.COLUMN_ID+"=?", new String[] { String.valueOf(id) } );
+
+        c.setName(name);
+        c.setTitle(title);
+        c.setEmail(email);
+        c.setPhone(phone);
+        c.setTwitterId(twitter);
+
         System.out.println("Updated contact with id: " + id);
     }
 
