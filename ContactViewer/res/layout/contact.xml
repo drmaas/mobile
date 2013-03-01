@@ -21,7 +21,8 @@
         <EditText android:id="@+id/name_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="10dp"/>
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName"/>
     </LinearLayout>
 
     <!-- title -->
@@ -37,7 +38,8 @@
         <EditText android:id="@+id/title_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="10dp"/>
+                  android:layout_marginRight="10dp"
+                  android:inputType="text"/>
     </LinearLayout>
 
     <!-- email -->
@@ -53,7 +55,8 @@
         <EditText android:id="@+id/email_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="10dp"/>
+                  android:layout_marginRight="10dp"
+                  android:inputType="textEmailAddress"/>
     </LinearLayout>
 
     <!-- phone -->
@@ -69,7 +72,8 @@
         <EditText android:id="@+id/phone_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="10dp"/>
+                  android:layout_marginRight="10dp"
+                  android:inputType="phone"/>
     </LinearLayout>
 
     <!-- twitter -->
@@ -85,7 +89,8 @@
         <EditText android:id="@+id/twitter_text"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_marginRight="10dp"/>
+                  android:layout_marginRight="10dp"
+                  android:inputType="text"/>
     </LinearLayout>
 
     <!-- actions -->
