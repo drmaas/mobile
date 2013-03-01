@@ -17,6 +17,7 @@ import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.kill9.contactviewer.model.Contact;
 import edu.umn.kill9.contactviewer.model.ContactDataSource;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
+import edu.umn.kill9.contactviewer.util.ContactUtils;
 
 /**
  * User: drmaas
@@ -257,7 +258,7 @@ public class ContactActivity extends Activity {
      * @return
      */
     private boolean validateName(String name_value) {
-        return (name_value != null && !name_value.equals("") && name_value.length() > 0);
+        return !ContactUtils.empty(name_value);
     }
 
     /**
