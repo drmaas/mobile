@@ -2,6 +2,7 @@ package edu.umn.kill9.contactviewer.ui;
 
 import android.app.Activity;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import edu.umn.kill9.contactviewer.R;
 
@@ -64,6 +65,14 @@ public class ToolbarConfig {
      */
     public TextView getToolbarTitleView() {
     	return (TextView)_activity.findViewById(R.id.toolbar_title);
+    }
+
+    public ImageView getDescIcon() {
+        return (ImageView)_activity.findViewById(R.id.sort_desc);
+    }
+
+    public ImageView getAscIcon() {
+        return (ImageView)_activity.findViewById(R.id.sort_asc);
     }
 	
 }

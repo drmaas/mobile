@@ -13,11 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.kill9.contactviewer.model.Contact;
@@ -71,6 +67,22 @@ public class ContactListActivity extends ListActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ContactListActivity.this, getString(R.string.info), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        //setup sorting icons
+        final ImageView desc = toolbar.getDescIcon();
+        desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshContacts(false);
+            }
+        });
+        final ImageView asc = toolbar.getAscIcon();
+        asc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshContacts(true);
             }
         });
 

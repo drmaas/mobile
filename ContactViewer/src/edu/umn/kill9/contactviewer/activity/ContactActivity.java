@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
@@ -72,6 +73,12 @@ public class ContactActivity extends Activity {
             //get toolbar
             toolbar = new ToolbarConfig(this, getString(R.string.new_contact));
         }
+
+        //hide sorting icons
+        final ImageView desc = toolbar.getDescIcon();
+        desc.setVisibility(View.GONE);
+        final ImageView asc = toolbar.getAscIcon();
+        asc.setVisibility(View.GONE);
 
         //set far left button
         final Button flbutton = toolbar.getToolbarFarLeftButton();
