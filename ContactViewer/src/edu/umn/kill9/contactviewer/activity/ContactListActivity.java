@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +99,10 @@ public class ContactListActivity extends ListActivity {
 
         //refresh data
         refreshContacts(true);
+
+        //filter
+        EditText filterText = (EditText) findViewById(R.id.search_box);
+        filterText.addTextChangedListener(filterTextWatcher);
 
         //set to last contact
         //lv.setSelection(getListAdapter().getCount() - 1);
@@ -200,6 +206,20 @@ public class ContactListActivity extends ListActivity {
 			return item;
 		}
 	}
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        public void afterTextChanged(Editable s) {
+        }
+
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            ((ContactAdapter)getListAdapter()).getFilter().filter(s);
+        }
+
+    };
     
 }
 

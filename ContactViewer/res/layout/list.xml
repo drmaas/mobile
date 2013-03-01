@@ -9,6 +9,11 @@
             layout="@layout/toolbar"
             android:layout_weight="0"/>
 
+    <EditText android:id="@+id/search_box"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content" />
+
+
     <ListView
             android:id="@android:id/list"
             android:layout_width="fill_parent"
