@@ -73,19 +73,24 @@ public class ContactListActivity extends ListActivity {
 
         //setup sorting icons
         final ImageView desc = toolbar.getDescIcon();
+        final ImageView asc = toolbar.getAscIcon();
         desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 refreshContacts(false);
+                asc.setVisibility(View.VISIBLE);
+                desc.setVisibility(View.GONE);
             }
         });
-        final ImageView asc = toolbar.getAscIcon();
         asc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 refreshContacts(true);
+                asc.setVisibility(View.GONE);
+                desc.setVisibility(View.VISIBLE);
             }
         });
+        asc.setVisibility(View.GONE);
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
