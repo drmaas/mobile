@@ -3,7 +3,9 @@ package edu.umn.kill9.contactviewer.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,10 @@ public class ContactActivity extends Activity {
     private EditText phone;
     private EditText twitter;
 
+    private ImageView action_call;
+    private ImageView action_text;
+    private ImageView action_email;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,9 @@ public class ContactActivity extends Activity {
         email = (EditText)findViewById(R.id.email_text);
         phone = (EditText)findViewById(R.id.phone_text);
         twitter = (EditText)findViewById(R.id.twitter_text);
+        action_call = (ImageView)findViewById(R.id.phone_call_icon);
+        action_text = (ImageView)findViewById(R.id.phone_text_icon);
+        action_email = (ImageView)findViewById(R.id.phone_email_icon);
 
         //open database and get DAO
         dbHelper = new CVSQLiteOpenHelper(this);
@@ -128,6 +137,27 @@ public class ContactActivity extends Activity {
                 cancel();
             }
         });
+
+        action_call.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				contact_call();
+			}
+		});
+
+        action_text.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				contact_text();
+			}
+		});
+
+        action_email.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				contact_email();
+			}
+		});
 
         //start transaction
         dbHelper.startTransaction();
@@ -237,4 +267,41 @@ public class ContactActivity extends Activity {
             return true;
         }
     }
+    
+    private void contact_call() {
+    	if (c != null)
+    	{
+    		String contact_text = c.getPhone();
+        	try {
+        		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact_text)));
+        	} catch (android.content.ActivityNotFoundException ex) {
+        	    Toast.makeText(ContactActivity.this, "There are no dialer clients installed.", Toast.LENGTH_SHORT).show();
+        	}
+    	}
+	}
+    
+    private void contact_text() {
+    	if (c != null)
+    	{
+    		String contact_text = c.getPhone();
+        	try {
+        		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact_text)));
+        	} catch (android.content.ActivityNotFoundException ex) {
+        	    Toast.makeText(ContactActivity.this, "There are no SMS clients installed.", Toast.LENGTH_SHORT).show();
+        	}
+    	}
+	}
+    
+    private void contact_email() {
+    	if (c != null)
+    	{
+    		String contact_email = c.getEmail();
+        	try {
+        		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + contact_email)));
+        	} catch (android.content.ActivityNotFoundException ex) {
+        	    Toast.makeText(ContactActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        	}
+    	}
+	}
+    
 }
