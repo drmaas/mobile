@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
-import edu.umn.kill9.contactviewer.util.ContactUtils;
 
 /**
  * User: drmaas
@@ -64,7 +63,7 @@ public class ContactDataSource {
     /**
      * Edit an existing contact
      *
-     * To leave a column unchanged, pass in null or ""
+     * To leave a column unchanged, pass in null
      *
      * @param name
      * @param title
@@ -74,19 +73,19 @@ public class ContactDataSource {
      */
     public void editContact(Long id, String name, String title, String email, String phone, String twitter) throws SQLException {
         ContentValues values = new ContentValues();
-        if (!ContactUtils.empty(name)) {
+        if (name != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
         }
-        if (!ContactUtils.empty(title)) {
+        if (title != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_TITLE, title);
         }
-        if (!ContactUtils.empty(email)) {
+        if (email != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_EMAIL, email);
         }
-        if (!ContactUtils.empty(phone)) {
+        if (phone != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_PHONE, phone);
         }
-        if (!ContactUtils.empty(twitter)) {
+        if (twitter != null) {
             values.put(CVSQLiteOpenHelper.COLUMN_TWITTER, twitter);
         }
         database.update(CVSQLiteOpenHelper.TABLE_CONTACT, values, CVSQLiteOpenHelper.COLUMN_ID+"=?", new String[] { String.valueOf(id) } );
