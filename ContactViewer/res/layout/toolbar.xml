@@ -29,8 +29,8 @@
 
             <ImageView
                     android:id="@+id/sort_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:clickable="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/arrow_down_float"
@@ -38,12 +38,12 @@
 
             <ImageView
                     android:id="@+id/sort_asc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:clickable="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/arrow_up_float"
-                    android:layout_marginLeft="30dp"/>
+                    android:layout_marginLeft="20dp"/>
         </LinearLayout>
 
     </LinearLayout>

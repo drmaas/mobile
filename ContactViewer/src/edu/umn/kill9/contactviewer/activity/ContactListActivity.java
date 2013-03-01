@@ -45,7 +45,8 @@ public class ContactListActivity extends ListActivity {
         lbutton.setVisibility(View.GONE);
 
         Button flbutton = toolbar.getToolbarFarLeftButton();
-        flbutton.setVisibility(View.GONE);
+        //HACK ALERT for layout beautification
+        flbutton.setVisibility(View.INVISIBLE);
 
         Button mbutton = toolbar.getToolbarMiddleButton();
         mbutton.setText(getString(R.string.new_contact));
