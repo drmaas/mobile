@@ -110,7 +110,7 @@ public class ContactActivity extends Activity {
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
             public void onClick(View v) {
-                if (validateName(name.getText().toString())) {
+                if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
                     goBack();
                 }
             }
@@ -122,7 +122,7 @@ public class ContactActivity extends Activity {
         mbutton.setOnClickListener(new View.OnClickListener() {
             //save everything but don't go back
             public void onClick(View v) {
-                if (validateName(name.getText().toString())) {
+                if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
                     save();
                 }
             }
@@ -245,27 +245,61 @@ public class ContactActivity extends Activity {
     }
 
     /**
-     * validate that name can't be empty
+     * validate that name
      *
      * @param name_value
      * @return
      */
     private boolean validateName(String name_value) {
-        if (name_value == null || name_value == "" || name_value.length() < 1) {
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            };
+        return (name_value != null && !name_value.equals("") && name_value.length() > 0);
+    }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.error)).setMessage(getString(R.string.name_not_empty)).setPositiveButton(getString(R.string.ok), dialogClickListener).show();
-            return false;
-        }
-        else {
-            return true;
-        }
+    /**
+     * validate the email
+     *
+     * @param name_value
+     * @return
+     */
+    private boolean validateEmail(String email_value) {
+    	boolean result;
+    	
+    	if (email_value == null)
+    	{
+    		result = false;
+    	}
+    	else
+    	{
+    		if ( email_value.equals("") )
+    			result = true;
+    		else
+    			result = android.util.Patterns.EMAIL_ADDRESS.matcher(email_value).matches();
+    	}
+    	
+    	return result;
+    }
+
+    /**
+     * validate the phone number
+     *
+     * @param name_value
+     * @return
+     */
+    private boolean validatePhone(String phone_value) {
+    	boolean result;
+    	
+    	if (phone_value == null)
+    	{
+    		result = false;
+    	}
+    	else
+    	{
+    		if ( phone_value.equals("") )
+    			result = true;
+    		else
+    			result = android.util.Patterns.PHONE.matcher(phone_value).matches();
+    	}
+    	
+    	return result;
     }
     
     private void contact_call() {
@@ -275,7 +309,7 @@ public class ContactActivity extends Activity {
         	try {
         		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + contact_text)));
         	} catch (android.content.ActivityNotFoundException ex) {
-        	    Toast.makeText(ContactActivity.this, "There are no dialer clients installed.", Toast.LENGTH_SHORT).show();
+        	    Toast.makeText(ContactActivity.this, getString(R.string.no_dialer_msg), Toast.LENGTH_SHORT).show();
         	}
     	}
 	}
@@ -287,7 +321,7 @@ public class ContactActivity extends Activity {
         	try {
         		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + contact_text)));
         	} catch (android.content.ActivityNotFoundException ex) {
-        	    Toast.makeText(ContactActivity.this, "There are no SMS clients installed.", Toast.LENGTH_SHORT).show();
+        	    Toast.makeText(ContactActivity.this, getString(R.string.no_sms_msg), Toast.LENGTH_SHORT).show();
         	}
     	}
 	}
@@ -299,9 +333,52 @@ public class ContactActivity extends Activity {
         	try {
         		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + contact_email)));
         	} catch (android.content.ActivityNotFoundException ex) {
-        	    Toast.makeText(ContactActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        	    Toast.makeText(ContactActivity.this, getString(R.string.no_email_msg), Toast.LENGTH_SHORT).show();
         	}
     	}
 	}
+    
+    private boolean validateContact (String name, String email, String phone) {
+
+    	boolean name_valid = validateName(name);
+    	boolean email_valid = validateEmail(email);
+    	boolean phone_valid = validatePhone(phone);
+    	
+        boolean contact_valid = true;
+        
+        String messageText = "";
+        
+        if(!name_valid)
+        {
+        	contact_valid = false;
+            messageText += getString(R.string.name_not_empty) + "\n";        	
+        }
+        
+        if(!email_valid)
+        {
+        	contact_valid = false;
+            messageText += getString(R.string.email_address_invalid) + "\n";        	
+        }
+        
+        if(!phone_valid)
+        {
+        	contact_valid = false;
+            messageText += getString(R.string.phone_num_invalid) + "\n";        	
+        }
+        
+        if (!contact_valid) {
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            };
+            
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.error)).setMessage(messageText).setPositiveButton(getString(R.string.ok), dialogClickListener).show();
+        }
+    	
+    	return contact_valid;
+    }
     
 }
