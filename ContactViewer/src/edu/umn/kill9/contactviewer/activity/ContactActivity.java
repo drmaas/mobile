@@ -92,8 +92,9 @@ public class ContactActivity extends Activity {
 
         //set far left button
         final Button flbutton = toolbar.getToolbarFarLeftButton();
+        flbutton.setBackgroundResource(android.R.drawable.ic_menu_delete);
         if (edit) {
-            flbutton.setText(getString(R.string.delete));
+            flbutton.setText("");
             flbutton.setOnClickListener(new View.OnClickListener() {
                 //go back, saving everything
                 public void onClick(View v) {
@@ -107,7 +108,8 @@ public class ContactActivity extends Activity {
 
         //set left button
         final Button lbutton = toolbar.getToolbarLeftButton();
-        lbutton.setText(getString(R.string.back));
+        lbutton.setText("");
+        lbutton.setBackgroundResource(android.R.drawable.ic_menu_revert);
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
             public void onClick(View v) {
@@ -119,7 +121,8 @@ public class ContactActivity extends Activity {
 
         //set middle button
         final Button mbutton = toolbar.getToolbarMiddleButton();
-        mbutton.setText(getString(R.string.save));
+        mbutton.setText("");
+        mbutton.setBackgroundResource(android.R.drawable.ic_menu_save);
         mbutton.setOnClickListener(new View.OnClickListener() {
             //save everything but don't go back
             public void onClick(View v) {
@@ -131,6 +134,7 @@ public class ContactActivity extends Activity {
 
         //set right button
         final Button rbutton = toolbar.getToolbarRightButton();
+        rbutton.setText("");
         rbutton.setText(getString(R.string.cancel));
         rbutton.setOnClickListener(new View.OnClickListener() {
             //go back without saving anything
@@ -241,7 +245,7 @@ public class ContactActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.confirm_delete)).setPositiveButton(getString(R.string.yes), dialogClickListener)
+        builder.setMessage(getString(R.string.confirm_delete) + (c==null?"":c.getName()) + "?").setPositiveButton(getString(R.string.yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 

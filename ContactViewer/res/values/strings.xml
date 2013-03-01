@@ -31,7 +31,7 @@
     <string name="done_contact_toast">Done with contact, going back to contact list</string>
 
     <!-- delete alert -->
-    <string name="confirm_delete">Are you sure?</string>
+    <string name="confirm_delete">Are you sure you wish to delete: </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 

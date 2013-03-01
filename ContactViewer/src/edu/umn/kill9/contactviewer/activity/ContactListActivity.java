@@ -47,9 +47,11 @@ public class ContactListActivity extends ListActivity {
         Button flbutton = toolbar.getToolbarFarLeftButton();
         //HACK ALERT for layout beautification
         flbutton.setVisibility(View.INVISIBLE);
+        flbutton.setText("");
 
         Button mbutton = toolbar.getToolbarMiddleButton();
-        mbutton.setText(getString(R.string.new_contact));
+        mbutton.setText("");
+        mbutton.setBackgroundResource(android.R.drawable.ic_menu_add);
         mbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,13 +65,7 @@ public class ContactListActivity extends ListActivity {
         });
 
 	    Button rbutton = toolbar.getToolbarRightButton();
-	    rbutton.setText(getString(R.string.about));
-		rbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ContactListActivity.this, getString(R.string.info), Toast.LENGTH_LONG).show();
-            }
-        });
+	    rbutton.setVisibility(View.INVISIBLE);
 
         //setup sorting icons
         final ImageView desc = toolbar.getDescIcon();
