@@ -173,7 +173,7 @@ public class ContactListActivity extends ListActivity {
     public class ContactComparator implements Comparator<Contact> {
         @Override
         public int compare(Contact contact1, Contact contact2) {
-            return contact1.getName().compareTo(contact2.getName());
+            return contact1.getName().toLowerCase().compareTo(contact2.getName().toLowerCase());
         }
     }
 
