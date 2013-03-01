@@ -206,13 +206,19 @@ public class ContactActivity extends Activity {
      */
     private void save() {
         Toast.makeText(ContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
+
+        String nameString = name.getText().toString();
+        String titleString = title.getText().toString();
+        String emailString = email.getText().toString();
+        String phoneString = phone.getText().toString();
+        String twitterString = twitter.getText().toString();
+        
         if (c != null) {
-            datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                    phone.getText().toString(), twitter.getText().toString());
+            Long id = c.getId();
+            datasource.editContact(id, nameString, titleString, emailString, phoneString, twitterString);
         }
         else {
-            c = datasource.createContact(name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                    phone.getText().toString(), twitter.getText().toString());
+        	c = datasource.createContact(nameString, titleString, emailString, phoneString, twitterString);
         }
     }
 
