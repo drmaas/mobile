@@ -178,15 +178,10 @@ public class ContactActivity extends Activity {
      * go back and keep all saves, including most recent unsaved change
      */
     private void goBack() {
-        Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
-        if (c != null) {
-            datasource.editContact(c.getId(), name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                    phone.getText().toString(), twitter.getText().toString());
-        }
-        else {
-            c = datasource.createContact(name.getText().toString(), title.getText().toString(), email.getText().toString(),
-                    phone.getText().toString(), twitter.getText().toString());
-        }
+
+    	save();
+    	
+    	Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
 
         dbHelper.commit();
         setResult(RESULT_OK, null);
