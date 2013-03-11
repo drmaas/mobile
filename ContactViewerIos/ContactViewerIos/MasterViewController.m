@@ -89,7 +89,8 @@
 
 
 #pragma mark - Table View Data Source
-
+//This is the place to create the detail controller
+//data only needs to be persisted when app is closed / loaded when opened
 -(IBAction)onAddContact:(id)sender {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"New Contact"
                                                     message:@"You need to do something here"
