@@ -70,6 +70,10 @@ static ContactList* _singleton = nil;
     [_contacts addObject:contact];
 }
 
+-(void)removeContact:(NSInteger)index {
+    [_contacts removeObjectAtIndex:index];
+}
+
 -(Contact*)contactAtIndex:(NSInteger)index {
     return [_contacts objectAtIndex:index];
 }

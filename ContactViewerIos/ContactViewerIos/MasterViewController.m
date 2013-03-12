@@ -48,6 +48,21 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
+    
+    //setup edit button
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+}
+
+//set the state of the edit button
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [super.tableView setEditing:editing animated:YES];
+    if (editing) {
+        //self.navigationItem.leftBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+    }
 }
 
 - (void)viewDidUnload
@@ -129,7 +144,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.detailViewController.detailItem = [contacts contactAtIndex:indexPath.row];
+    self.detailViewController.contact = [contacts contactAtIndex:indexPath.row];
 }
 
 
@@ -140,18 +155,32 @@
     return YES;
 }
 
-/*
-// Override to support editing the table view.
+//Return the editing style
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+// Override to support adding and removing from the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source.
+        //AppDelegate *controller = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        //[controller removeObjectFromListAtIndex:indexPath.row];
+        [contacts removeContact:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }   
 }
-*/
+
+//sent selected object to the detail view
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"ViewContactDetails"]) {
+        DetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.contact = [self.contacts contactAtIndex:[self.tableView indexPathForSelectedRow].row];
+    }
+}
 
 /*
 // Override to support rearranging the table view.

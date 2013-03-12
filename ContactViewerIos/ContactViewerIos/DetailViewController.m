@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "Contact.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -15,16 +16,20 @@
 
 @implementation DetailViewController
 
-@synthesize detailItem = _detailItem;
-@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize contact = _contact;
+@synthesize cname = _cname;
+@synthesize ctitle = _ctitle;
+@synthesize cemail = _cemail;
+@synthesize cphone = _cphone;
+@synthesize ctwitter = _ctwitter;
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setContact:(Contact *)newContact
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+    if (_contact != newContact) {
+        _contact = newContact;
         
         // Update the view.
         [self configureView];
@@ -38,9 +43,16 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+    Contact *c = self.contact;
+    if (c) {
+        //NSString *test = [NSString stringWithFormat:@"Name: %@", c.name];
+        //NSLog(test);
+        NSLog(self.cname.text);
+        self.cname.text = c.name;
+        self.ctitle.text = c.title;
+        self.cemail.text = c.email;
+        self.cphone.text = c.phone;
+        self.ctwitter.text = c.twitterId;
     }
 }
 

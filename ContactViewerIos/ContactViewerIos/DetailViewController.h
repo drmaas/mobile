@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Contact.h"
+
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
 
-@property (strong, nonatomic) id detailItem;
-
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) Contact *contact;
+@property (weak, nonatomic) IBOutlet UITextField *cname;
+@property (weak, nonatomic) IBOutlet UITextField *ctitle;
+@property (weak, nonatomic) IBOutlet UITextField *cemail;
+@property (weak, nonatomic) IBOutlet UITextField *cphone;
+@property (weak, nonatomic) IBOutlet UITextField *ctwitter;
 
 @end

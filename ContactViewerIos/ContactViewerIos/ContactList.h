@@ -23,6 +23,8 @@
 
 -(void)addContact:(Contact*)contact;
 
+-(void)removeContact:(NSInteger)index;
+
 -(Contact*)contactAtIndex:(NSInteger)index;
 
 @property(strong) NSMutableArray* allContacts;

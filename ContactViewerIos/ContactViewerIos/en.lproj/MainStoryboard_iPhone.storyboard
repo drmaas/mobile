@@ -56,7 +56,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.90588241815567017" blue="0.58039218187332153" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
-                                    <segue destination="21" kind="push" id="r9g-Ic-fhs"/>
+                                    <segue destination="21" kind="push" identifier="ViewContactDetails" id="r9g-Ic-fhs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -67,6 +67,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contact Viewer" id="35">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="2AB-EW-bIY"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ih-1o-IbV">
                             <connections>
                                 <action selector="onAddContact:" destination="12" id="jsa-Z6-qSu"/>
@@ -121,42 +122,42 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="HGr-HU-ZId">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="name" borderStyle="roundedRect" minimumFontSize="17" id="HGr-HU-ZId">
                                 <rect key="frame" x="87" y="17" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Kwg-aW-JD0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="title" borderStyle="roundedRect" minimumFontSize="17" id="Kwg-aW-JD0">
                                 <rect key="frame" x="87" y="56" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="4kl-Zm-lQa">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="email" borderStyle="roundedRect" minimumFontSize="17" id="4kl-Zm-lQa">
                                 <rect key="frame" x="87" y="95" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="HEe-K9-3IO">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="phone" borderStyle="roundedRect" minimumFontSize="17" id="HEe-K9-3IO">
                                 <rect key="frame" x="87" y="137" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Gaz-Y4-LFH">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="twitter" borderStyle="roundedRect" minimumFontSize="17" id="Gaz-Y4-LFH">
                                 <rect key="frame" x="87" y="176" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="gVT-4v-PT1">
-                                <rect key="frame" x="0.0" y="353" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="355" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Save" id="e2k-Cv-DWU"/>
-                                    <barButtonItem title="Cancel" id="7e4-5K-jBW"/>
+                                    <barButtonItem title="Edit/Save" id="ZJh-3y-1Bd"/>
+                                    <barButtonItem title="Back/Cancel" id="7e4-5K-jBW"/>
                                     <barButtonItem title="Delete" id="DM5-Cz-Vu1"/>
                                 </items>
                                 <color key="tintColor" red="0.46666669849999998" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
@@ -167,6 +168,13 @@
                     <navigationItem key="navigationItem" title="Contact Detail" id="26">
                         <barButtonItem key="backBarButtonItem" title="Home" id="UiG-4M-9we"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cemail" destination="4kl-Zm-lQa" id="jha-GT-fc4"/>
+                        <outlet property="cname" destination="HGr-HU-ZId" id="f9J-Ln-Vo2"/>
+                        <outlet property="cphone" destination="HEe-K9-3IO" id="vP7-pQ-0br"/>
+                        <outlet property="ctitle" destination="Kwg-aW-JD0" id="ndi-5F-4L6"/>
+                        <outlet property="ctwitter" destination="Gaz-Y4-LFH" id="s3U-wu-ZJQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" sceneMemberID="firstResponder"/>
             </objects>
@@ -177,7 +185,11 @@
         <class className="DetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="cemail" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="cname" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="cphone" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ctitle" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ctwitter" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="MasterViewController" superclassName="UITableViewController">
