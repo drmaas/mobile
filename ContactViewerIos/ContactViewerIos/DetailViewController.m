@@ -91,10 +91,13 @@
 - (void)onEditPress:(id)sender {
     
     //save
-    //TODO add popup indicated contact saved
     if ([self.mode isEqual: @"edit"]) {
         self.mode = @"view";
         [self.contact update:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
+        
+        //show message indicating save
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
     //edit
     else {
