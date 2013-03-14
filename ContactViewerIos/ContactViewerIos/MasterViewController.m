@@ -179,6 +179,7 @@
     if ([[segue identifier] isEqualToString:@"ViewContactDetails"]) {
         DetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.contact = [self.contacts contactAtIndex:[self.tableView indexPathForSelectedRow].row];
+        detailViewController.mode = @"view";
     }
 }
 

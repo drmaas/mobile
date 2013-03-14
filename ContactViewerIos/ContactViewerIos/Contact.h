@@ -23,4 +23,10 @@
         andEmail:(NSString*)email
         andTwitterId:(NSString*)twitterId;
 
+-(void)update:(NSString*)name
+        andPhone:(NSString*)phone
+        andTitle:(NSString*)title
+        andEmail:(NSString*)email
+        andTwitterId:(NSString*)twitterId;
+
 @end

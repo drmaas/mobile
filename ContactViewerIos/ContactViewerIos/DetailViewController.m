@@ -18,6 +18,7 @@
 
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize contact = _contact;
+@synthesize mode = _mode;
 @synthesize cname = _cname;
 @synthesize ctitle = _ctitle;
 @synthesize cemail = _cemail;
@@ -25,6 +26,12 @@
 @synthesize ctwitter = _ctwitter;
 
 #pragma mark - Managing the detail item
+
+//make keyboard go away
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (void)setContact:(Contact *)newContact
 {
@@ -47,13 +54,60 @@
     if (c) {
         //NSString *test = [NSString stringWithFormat:@"Name: %@", c.name];
         //NSLog(test);
-        NSLog(self.cname.text);
         self.cname.text = c.name;
         self.ctitle.text = c.title;
         self.cemail.text = c.email;
         self.cphone.text = c.phone;
         self.ctwitter.text = c.twitterId;
+        
     }
+    
+    [self updateMode];
+}
+
+- (void)updateMode {
+    //disable edit fields when viewing
+    if ([self.mode isEqualToString:@"view"]) {
+        self.cname.enabled = NO;
+        self.ctitle.enabled = NO;
+        self.cemail.enabled = NO;
+        self.cphone.enabled = NO;
+        self.ctwitter.enabled = NO;
+        self.editButton.title = @"Edit";
+        self.backButton.title = @"Back";
+    }
+    else {
+        self.cname.enabled = YES;
+        self.ctitle.enabled = YES;
+        self.cemail.enabled = YES;
+        self.cphone.enabled = YES;
+        self.ctwitter.enabled = YES;
+        self.editButton.title = @"Done";
+        self.backButton.title = @"Cancel";
+    }
+}
+
+//enable editing or saving
+- (void)onEditPress:(id)sender {
+    
+    //save
+    //TODO add popup indicated contact saved
+    if ([self.mode isEqual: @"edit"]) {
+        self.mode = @"view";
+        [self.contact update:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
+    }
+    //edit
+    else {
+        self.mode = @"edit";
+    }
+    
+    [self updateMode];
+}
+
+//go back
+-(void)onBackPress:(id)sender {
+    //figure out how to navigate to main view
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,10 +123,19 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    //for hiding keyboard
+    self.cname.delegate = self;
+    self.ctitle.delegate = self;
+    self.cemail.delegate = self;
+    self.cphone.delegate = self;
+    self.ctwitter.delegate = self;
+    
 }
 
 - (void)viewDidUnload
 {
+    [self setEditButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

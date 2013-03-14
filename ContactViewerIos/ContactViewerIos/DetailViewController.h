@@ -10,13 +10,21 @@
 
 #import "Contact.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) Contact *contact;
+@property (strong, nonatomic) NSString *mode;
 @property (weak, nonatomic) IBOutlet UITextField *cname;
 @property (weak, nonatomic) IBOutlet UITextField *ctitle;
 @property (weak, nonatomic) IBOutlet UITextField *cemail;
 @property (weak, nonatomic) IBOutlet UITextField *cphone;
 @property (weak, nonatomic) IBOutlet UITextField *ctwitter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField;
+
+-(IBAction)onEditPress:(id)sender;
+-(IBAction)onBackPress:(id)sender;
 
 @end

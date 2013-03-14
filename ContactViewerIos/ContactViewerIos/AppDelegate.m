@@ -64,4 +64,12 @@
      */
 }
 
+//TODO: add method to save existing contact to JSON file
+
+//TODO: add method to delete contact from JSON file
+
+//TODO: add method to add new contact to JSON file
+
+//TODO: add method to get all contacts from JSON file
+
 @end

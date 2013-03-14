@@ -29,4 +29,18 @@
     return self;
 }
 
+-(void)update:(NSString*)newName
+         andPhone:(NSString*)newPhone
+         andTitle:(NSString*)newTitle
+         andEmail:(NSString*)newEmail
+     andTwitterId:(NSString*)newTwitterId {
+    
+    self.name = newName;
+    self.phone = newPhone;
+    self.title = newTitle;
+    self.email = newEmail;
+    self.twitterId = newTwitterId;
+    
+}
+
 @end
