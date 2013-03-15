@@ -166,7 +166,11 @@
                                             <action selector="onBackPress:" destination="21" id="dbk-GU-akT"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Delete" id="DM5-Cz-Vu1"/>
+                                    <barButtonItem title="Delete" id="DM5-Cz-Vu1">
+                                        <connections>
+                                            <action selector="onDeletePress:" destination="21" id="JgY-kg-eBE"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.46666669849999998" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>

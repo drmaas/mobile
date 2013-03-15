@@ -113,6 +113,28 @@
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
+//delete press, show popup alert
+- (IBAction)onDeletePress:(id)sender {
+    //show message indicating save
+    NSString* title = [NSString stringWithFormat:@"Delete %@", self.cname.text];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+}
+
+
+//delete contact or cancel
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        //delete contact by calling contactdatacontroller.delete
+        
+        //go back to main page
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
+    else {
+        //cancel
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -12,6 +12,7 @@
 
 @synthesize window = _window;
 @synthesize contacts;
+@synthesize datacontroller;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,6 +40,9 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    
+    //save all contacts
+    [self.datacontroller saveAllContacts:contacts];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -53,6 +57,9 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    
+    //retrieve all contacts
+    contacts = [self.datacontroller getAllContacts];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -64,12 +71,5 @@
      */
 }
 
-//TODO: add method to save existing contact to JSON file
-
-//TODO: add method to delete contact from JSON file
-
-//TODO: add method to add new contact to JSON file
-
-//TODO: add method to get all contacts from JSON file
 
 @end

@@ -26,5 +26,6 @@
 
 -(IBAction)onEditPress:(id)sender;
 -(IBAction)onBackPress:(id)sender;
+-(IBAction)onDeletePress:(id)sender;
 
 @end

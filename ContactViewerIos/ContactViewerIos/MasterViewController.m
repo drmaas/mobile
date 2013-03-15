@@ -75,6 +75,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //TODO: do we need to refresh contact list here?
 }
 
 - (void)viewDidAppear:(BOOL)animated
