@@ -14,23 +14,25 @@
 @synthesize datastore;
 
 //add contact, and return the data added
-- (NSDictionary*)addWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
+- (int)addWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
     
-    return nil;
+    NSString *_id = [self createId:16];
+    
+    return _id.intValue;
 }
 
 //delete contact
-- (void)deleteWithId:(NSInteger*)jid {
+- (void)deleteWithId:(int)_id {
     
 }
 
 //update contact details
-- (void)updateWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
+- (void)updateWithId:(int)_id andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
     
 }
 
 //get particular contact details
-- (NSDictionary*)getWithId:(NSInteger*)jid {
+- (NSDictionary*)getWithId:(int)_id {
     
     return nil;
 }
@@ -44,6 +46,19 @@
 - (NSDictionary*)loadFromFile {
     
     return self.datastore;
+}
+
+//create random id
+- (NSString *) createId:(int)len {
+    
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzZ0123456789";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+    
+    return randomString;
 }
 
 @end

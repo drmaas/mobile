@@ -15,13 +15,13 @@
 @property(nonatomic,retain) NSString* filepath;
 @property(strong) NSDictionary* datastore;
 
-- (NSDictionary*)addWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
+- (int)addWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
-- (void)deleteWithId:(NSInteger*)jid;
+- (void)deleteWithId:(int)_id;
 
-- (void)updateWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
+- (void)updateWithId:(int)_id andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
-- (NSDictionary*)getWithId:(NSInteger*)jid;
+- (NSDictionary*)getWithId:(int)_id;
 
 - (NSDictionary*)getAll;
 

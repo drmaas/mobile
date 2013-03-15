@@ -26,6 +26,8 @@
 
 - (void)deleteContact:(Contact*)contact;
 
+- (Contact*)getContact:(NSInteger*)cid;
+
 - (ContactList*)getAllContacts;
 
 - (void)saveAllContacts:(ContactList*) list;
