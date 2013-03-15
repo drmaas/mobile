@@ -10,14 +10,21 @@
 
 @interface JSONDataStore : NSObject
 
-//TODO: add method to save existing contact to JSON file
+//TODO need method to keep track of largest existing id, so we can increment when adding contacts
 
-//TODO: add method to delete contact from JSON file
+@property(nonatomic,retain) NSString* filepath;
+@property(strong) NSDictionary* datastore;
 
-//TODO: add method to add new contact to JSON file
+- (NSDictionary*)addWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
-//TODO: add method to get all contacts from JSON file
+- (void)deleteWithId:(NSInteger*)jid;
 
-//TODO: add method to save contact list to JSON file
+- (void)updateWithId:(NSInteger*)jid andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
+
+- (NSDictionary*)getWithId:(NSInteger*)jid;
+
+- (NSDictionary*)getAll;
+
+- (NSDictionary*)loadFromFile;
 
 @end

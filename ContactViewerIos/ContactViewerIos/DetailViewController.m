@@ -17,6 +17,7 @@
 @implementation DetailViewController
 
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize datacontroller = _datacontroller;
 @synthesize contact = _contact;
 @synthesize mode = _mode;
 @synthesize cname = _cname;
@@ -62,6 +63,8 @@
         
     }
     
+    //TODO get datacontroller from delegate? 
+    
     [self updateMode];
 }
 
@@ -95,6 +98,9 @@
         self.mode = @"view";
         [self.contact update:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
         
+        //TODO persist to JSON via ContactDataController
+        //[self.datacontroller updateContact:self.contact];
+        
         //show message indicating save
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
@@ -126,6 +132,7 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         //delete contact by calling contactdatacontroller.delete
+        //[self.datacontroller deleteContact:self.contact];
         
         //go back to main page
         [[self navigationController] popViewControllerAnimated:YES];

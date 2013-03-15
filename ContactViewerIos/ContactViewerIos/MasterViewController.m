@@ -16,12 +16,15 @@
 
 @synthesize detailViewController = _detailViewController;
 @synthesize contacts;
+@synthesize datacontroller;
 
 - (void)awakeFromNib
 {
     // get the contact list
     [ContactList initSingleton];
     contacts = [ContactList singleton];
+    //TODO hook this up
+    //contacts = [datacontroller getAllContacts];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
@@ -168,7 +171,12 @@
         // Delete the row from the data source.
         //AppDelegate *controller = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         //[controller removeObjectFromListAtIndex:indexPath.row];
+        
+        //TODO implement this
+        //Contact* selectedContact = [self.contacts contactAtIndex:indexPath.row];
+        //[datacontroller deleteContact:selectedContact];
         [contacts removeContact:indexPath.row];
+        
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

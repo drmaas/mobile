@@ -11,7 +11,7 @@
 @implementation Contact
 
 @synthesize name, title, email, phone, twitterId;
-
+//TODO add id
 -(id)initWithName:(NSString*)newName 
         andPhone:(NSString*)newPhone
         andTitle:(NSString*)newTitle 

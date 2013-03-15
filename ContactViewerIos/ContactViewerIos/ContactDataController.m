@@ -27,7 +27,7 @@
 }
 
 //update contact details, delegating to JSONDataStore
-- (void)updateContact:(Contact*)contact andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
+- (void)updateContact:(Contact*)contact {
     
 }
 

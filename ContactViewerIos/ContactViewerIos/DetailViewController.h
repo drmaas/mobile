@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "Contact.h"
+#import "ContactDataController.h"
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
+@property (strong, nonatomic) ContactDataController* datacontroller;
 @property (strong, nonatomic) Contact *contact;
 @property (strong, nonatomic) NSString *mode;
 @property (weak, nonatomic) IBOutlet UITextField *cname;
