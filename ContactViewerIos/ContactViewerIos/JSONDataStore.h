@@ -13,7 +13,7 @@
 //TODO need method to keep track of largest existing id, so we can increment when adding contacts
 
 @property(nonatomic,retain) NSString* filepath;
-@property(strong) NSDictionary* datastore;
+@property(strong) NSMutableDictionary* datastore;
 
 - (int)addWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
@@ -21,10 +21,12 @@
 
 - (void)updateWithId:(int)_id andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
-- (NSDictionary*)getWithId:(int)_id;
+- (NSMutableDictionary*)getWithId:(int)_id;
 
-- (NSDictionary*)getAll;
+- (NSMutableArray*)getAllContacts;
 
-- (NSDictionary*)loadFromFile;
+- (void)saveAllContacts:(NSMutableArray*)contacts;
+
+- (NSMutableDictionary*)loadFromFile;
 
 @end

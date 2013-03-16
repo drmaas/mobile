@@ -10,6 +10,7 @@
 
 @interface Contact : NSObject
 
+@property(nonatomic) int _id;
 @property(retain) NSString* name;
 @property(retain) NSString* phone;
 @property(retain) NSString* title;

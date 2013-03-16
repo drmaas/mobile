@@ -21,40 +21,69 @@
 }
 
 //add contact, delegating to JSONDataStore
+/*
 - (Contact *)addContactWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
     
     int _id = [self.store addWithName:name andTitle:title andEmail:email andPhone:phone andTwitter:twitter];
     
-    //TODO: create contact object and return it. add id field to contact
+    //create contact object and return it. add id field to contact
+    Contact *c = [[Contact alloc] initWithName:name andPhone:phone andTitle:title andEmail:email andTwitterId:twitter];
+    c._id = _id;
     
-    return nil;
+    return c;
 }
+ */
 
 //update contact details, delegating to JSONDataStore
+/*
 - (void)updateContact:(Contact*)contact {
     
+    [self.store updateWithId:contact._id andName:contact.name andTitle:contact.title andEmail:contact.email andPhone:contact.phone andTwitter:contact.twitterId];
+    
 }
+ */
 
 //delete contact, delegating to JSONDataStore
+/*
 - (void)deleteContact:(Contact*)contact {
     
+    [self.store deleteWithId:contact._id];
+    
 }
+ */
 
 //get contact
-- (Contact*)getContact:(NSInteger*)cid {
+/*
+- (Contact*)getContact:(int)cid {
     
-    return nil;
+    NSMutableDictionary *dict = [self.store getWithId:cid];
+    NSString *name = [dict objectForKey:@"name"];
+    NSString *title = [dict objectForKey:@"title"];
+    NSString *email = [dict objectForKey:@"email"];
+    NSString *phone = [dict objectForKey:@"phone"];
+    NSString *twitter = [dict objectForKey:@"twitter"];
+    
+    Contact *c = [[Contact alloc] initWithName:name andPhone:phone andTitle:title andEmail:email andTwitterId:twitter];
+    c._id = cid;
+    
+    return c;
 }
+ */
 
 //return all contacts, delegating to JSONDataStore
 - (ContactList*)getAllContacts {
     
-    return nil;
+    NSMutableArray *array = [self.store getAllContacts];
+    ContactList *contacts = [ContactList singletonFromArray:array];
+    
+    return contacts;
 }
 
 //save current contact list
 - (void)saveAllContacts:(ContactList*) list {
     
+    NSMutableArray *array = [list allContacts];
+    [self.store saveAllContacts:array];
 }
 
 @end

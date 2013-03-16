@@ -63,7 +63,7 @@
         
     }
     
-    //TODO get datacontroller from delegate? 
+    //TODO get contactlist from delegate? 
     
     [self updateMode];
 }
@@ -98,7 +98,7 @@
         self.mode = @"view";
         [self.contact update:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
         
-        //TODO persist to JSON via ContactDataController
+        //TODO save contact to contact list
         //[self.datacontroller updateContact:self.contact];
         
         //show message indicating save
@@ -131,8 +131,8 @@
 //delete contact or cancel
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        //delete contact by calling contactdatacontroller.delete
-        //[self.datacontroller deleteContact:self.contact];
+        //TODO delete contact from contact list
+        //
         
         //go back to main page
         [[self navigationController] popViewControllerAnimated:YES];

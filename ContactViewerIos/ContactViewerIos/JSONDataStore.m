@@ -32,18 +32,27 @@
 }
 
 //get particular contact details
-- (NSDictionary*)getWithId:(int)_id {
+- (NSMutableDictionary*)getWithId:(int)_id {
     
     return nil;
 }
 
 //get all contacts
-- (NSDictionary*)getAll {
-    return self.datastore;
+- (NSMutableArray*)getAllContacts {
+    return [self.datastore objectForKey:@"contacts"];
+}
+
+//save contact list
+- (void)saveAllContacts:(NSMutableArray *)contacts {
+    if (contacts != nil) {
+        [self.datastore setObject:contacts forKey:@"contacts"];
+    }
 }
 
 //load all contacts from file and return them
-- (NSDictionary*)loadFromFile {
+- (NSMutableDictionary*)loadFromFile {
+    
+    //TODO load from file
     
     return self.datastore;
 }

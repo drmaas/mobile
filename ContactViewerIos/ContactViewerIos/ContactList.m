@@ -79,6 +79,24 @@ static ContactList* _singleton = nil;
 }
 
 +(ContactList*)singleton {
+    if (_singleton == nil) {
+        [self initSingleton];
+    }
+    return _singleton;
+}
+
+//return a contactlist from an array of contacts
++(ContactList*)singletonFromArray:(NSMutableArray*)contacts {
+    _singleton = [[ContactList alloc] initWithCapacity:[contacts count]];
+    
+    NSEnumerator *e = [contacts objectEnumerator];
+    id object;
+    Contact *c;
+    while (object = [e nextObject]) {
+        c = (Contact*)object;
+        [_singleton addContact:c];
+    }
+    
     return _singleton;
 }
 

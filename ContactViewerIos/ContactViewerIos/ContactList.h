@@ -17,6 +17,8 @@
 
 +(ContactList*)singleton;
 
++(ContactList*)singletonFromArray:(NSMutableArray*)contacts;
+
 -(id)initWithCapacity:(NSInteger)capacity;
 
 -(NSInteger)count;

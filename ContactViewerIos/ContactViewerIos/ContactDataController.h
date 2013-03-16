@@ -20,14 +20,16 @@
 
 - (id)initWithDataStore:(JSONDataStore*)store;
 
+/*
 - (Contact *)addContactWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
 
 - (void)updateContact:(Contact*)contact;
 
 - (void)deleteContact:(Contact*)contact;
 
-- (Contact*)getContact:(NSInteger*)cid;
-
+- (Contact*)getContact:(int)cid;
+*/
+ 
 - (ContactList*)getAllContacts;
 
 - (void)saveAllContacts:(ContactList*) list;
