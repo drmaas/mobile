@@ -85,6 +85,7 @@
 }
 
 //load contact list from file
+//TODO toggle last 2 lines when we want to use the datastore
 - (void)loadContactsFromStorage {
     JSONDataStore *datastore = [JSONDataStore singleton];
     ContactDataController *datacontroller = [[ContactDataController alloc] initWithDataStore:datastore];
