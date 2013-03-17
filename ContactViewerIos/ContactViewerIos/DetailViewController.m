@@ -17,7 +17,7 @@
 @implementation DetailViewController
 
 @synthesize masterPopoverController = _masterPopoverController;
-@synthesize datacontroller = _datacontroller;
+@synthesize contacts = _contacts;
 @synthesize contact = _contact;
 @synthesize mode = _mode;
 @synthesize cname = _cname;
@@ -63,7 +63,8 @@
         
     }
     
-    //TODO get contactlist from delegate? 
+    //get contactlist
+    self.contacts = [ContactList singleton];
     
     [self updateMode];
 }
@@ -96,10 +97,7 @@
     //save
     if ([self.mode isEqual: @"edit"]) {
         self.mode = @"view";
-        [self.contact update:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
-        
-        //TODO save contact to contact list
-        //[self.datacontroller updateContact:self.contact];
+        [self.contact updateWithName:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
         
         //show message indicating save
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -132,7 +130,7 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         //TODO delete contact from contact list
-        //
+        [self.contacts removeContact:self.contact];
         
         //go back to main page
         [[self navigationController] popViewControllerAnimated:YES];

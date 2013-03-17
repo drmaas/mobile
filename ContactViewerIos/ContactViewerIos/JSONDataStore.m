@@ -8,33 +8,26 @@
 
 #import "JSONDataStore.h"
 
+static JSONDataStore* _singleton = nil;
+
 @implementation JSONDataStore
 
-@synthesize filepath;
-@synthesize datastore;
+@synthesize filepath = _filepath;
+@synthesize datastore = _datastore;
 
-//add contact, and return the data added
-- (int)addWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
-    
-    NSString *_id = [self createId:16];
-    
-    return _id.intValue;
+//get instance
++ (id)singleton {
+    _singleton = [[self alloc] initWithFileName:@"REPLACEME"];
+    return _singleton;
 }
 
-//delete contact
-- (void)deleteWithId:(int)_id {
+//init
+- (id)initWithFileName:(NSString*)filepath {
+    self = [super init];
+    _filepath = filepath;
+    _datastore = [self loadFromFile];
     
-}
-
-//update contact details
-- (void)updateWithId:(int)_id andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter {
-    
-}
-
-//get particular contact details
-- (NSMutableDictionary*)getWithId:(int)_id {
-    
-    return nil;
+    return self;
 }
 
 //get all contacts
@@ -52,22 +45,18 @@
 //load all contacts from file and return them
 - (NSMutableDictionary*)loadFromFile {
     
-    //TODO load from file
+    NSMutableDictionary *dict = nil;
     
-    return self.datastore;
+    //TODO load dict from file
+    
+    return dict;
 }
 
-//create random id
-- (NSString *) createId:(int)len {
+//save all contact to file
+- (void)saveToFile {
     
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzZ0123456789";
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    //TODO save dict to file
     
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
-    }
-    
-    return randomString;
 }
 
 @end

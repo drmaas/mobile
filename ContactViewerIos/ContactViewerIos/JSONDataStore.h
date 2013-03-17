@@ -15,18 +15,16 @@
 @property(nonatomic,retain) NSString* filepath;
 @property(strong) NSMutableDictionary* datastore;
 
-- (int)addWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
-
-- (void)deleteWithId:(int)_id;
-
-- (void)updateWithId:(int)_id andName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
-
-- (NSMutableDictionary*)getWithId:(int)_id;
++ (id)singleton;
+    
+- (id)initWithFileName:(NSString*)filepath;
 
 - (NSMutableArray*)getAllContacts;
 
 - (void)saveAllContacts:(NSMutableArray*)contacts;
 
 - (NSMutableDictionary*)loadFromFile;
+
+- (void)saveToFile;
 
 @end

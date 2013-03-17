@@ -10,7 +10,7 @@
 
 @interface Contact : NSObject
 
-@property(nonatomic) int _id;
+@property(retain) NSString* contact_id;
 @property(retain) NSString* name;
 @property(retain) NSString* phone;
 @property(retain) NSString* title;
@@ -24,7 +24,7 @@
         andEmail:(NSString*)email
         andTwitterId:(NSString*)twitterId;
 
--(void)update:(NSString*)name
+-(void)updateWithName:(NSString*)name
         andPhone:(NSString*)phone
         andTitle:(NSString*)title
         andEmail:(NSString*)email

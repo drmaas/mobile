@@ -15,22 +15,13 @@
 
 @interface ContactDataController : NSObject
 
-//TODO: what do these properties mean?
 @property (strong) JSONDataStore* store;
 
 - (id)initWithDataStore:(JSONDataStore*)store;
-
-/*
-- (Contact *)addContactWithName:(NSString*)name andTitle:(NSString*)title andEmail:(NSString*)email andPhone:(NSString*)phone andTwitter:(NSString*)twitter;
-
-- (void)updateContact:(Contact*)contact;
-
-- (void)deleteContact:(Contact*)contact;
-
-- (Contact*)getContact:(int)cid;
-*/
  
 - (ContactList*)getAllContacts;
+
+- (ContactList*)getAllSampleContacts;
 
 - (void)saveAllContacts:(ContactList*) list;
 

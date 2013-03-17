@@ -20,11 +20,6 @@
 
 - (void)awakeFromNib
 {
-    // get the contact list
-    [ContactList initSingleton];
-    contacts = [ContactList singleton];
-    //TODO hook this up
-    //contacts = [datacontroller getAllContacts];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.clearsSelectionOnViewWillAppear = NO;
@@ -52,6 +47,9 @@
         [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
     }
     
+    // get the contact list
+    contacts = [ContactList singleton];
+    
     //setup edit button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
@@ -78,7 +76,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //TODO: do we need to refresh contact list here?
+    
+    //refresh contact list
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -168,14 +168,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
         //AppDelegate *controller = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         //[controller removeObjectFromListAtIndex:indexPath.row];
         
-        //TODO implement this
-        //Contact* selectedContact = [self.contacts contactAtIndex:indexPath.row];
-        //[datacontroller deleteContact:selectedContact];
-        [contacts removeContact:indexPath.row];
+        //remove contact from list
+        [contacts removeContactAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

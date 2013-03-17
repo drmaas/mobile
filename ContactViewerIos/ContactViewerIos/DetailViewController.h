@@ -13,7 +13,7 @@
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
-@property (strong, nonatomic) ContactDataController* datacontroller;
+@property (strong, nonatomic) ContactList* contacts;
 @property (strong, nonatomic) Contact *contact;
 @property (strong, nonatomic) NSString *mode;
 @property (weak, nonatomic) IBOutlet UITextField *cname;

@@ -10,7 +10,7 @@
 
 @implementation Contact
 
-@synthesize _id, name, title, email, phone, twitterId;
+@synthesize contact_id, name, title, email, phone, twitterId;
 
 -(id)initWithName:(NSString*)newName 
         andPhone:(NSString*)newPhone
@@ -29,7 +29,7 @@
     return self;
 }
 
--(void)update:(NSString*)newName
+-(void)updateWithName:(NSString*)newName
          andPhone:(NSString*)newPhone
          andTitle:(NSString*)newTitle
          andEmail:(NSString*)newEmail

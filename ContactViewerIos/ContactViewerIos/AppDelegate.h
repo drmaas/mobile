@@ -15,8 +15,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property(strong) ContactList* contacts;
-
-@property(strong) ContactDataController* datacontroller;
-
 @end
