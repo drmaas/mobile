@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35A0B1F616F5603900AEFB44 /* ContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A0B1F516F5603900AEFB44 /* ContactUtils.m */; };
+		35AC00B016F2CDF300B2E55F /* ContactDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AC00AF16F2CDF300B2E55F /* ContactDataController.m */; };
+		35AC00B316F2D3D200B2E55F /* JSONDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AC00B216F2D3D200B2E55F /* JSONDataStore.m */; };
 		A1523E3D1507C4CC00AAD412 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3C1507C4CC00AAD412 /* UIKit.framework */; };
 		A1523E3F1507C4CC00AAD412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E3E1507C4CC00AAD412 /* Foundation.framework */; };
 		A1523E411507C4CC00AAD412 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1523E401507C4CC00AAD412 /* CoreGraphics.framework */; };
@@ -22,6 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35A0B1F416F5603900AEFB44 /* ContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtils.h; sourceTree = "<group>"; };
+		35A0B1F516F5603900AEFB44 /* ContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtils.m; sourceTree = "<group>"; };
+		35AC00AE16F2CDF300B2E55F /* ContactDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDataController.h; sourceTree = "<group>"; };
+		35AC00AF16F2CDF300B2E55F /* ContactDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataController.m; sourceTree = "<group>"; };
+		35AC00B116F2D3D100B2E55F /* JSONDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDataStore.h; sourceTree = "<group>"; };
+		35AC00B216F2D3D200B2E55F /* JSONDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONDataStore.m; sourceTree = "<group>"; };
 		A1523E381507C4CC00AAD412 /* ContactViewerIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactViewerIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1523E3C1507C4CC00AAD412 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A1523E3E1507C4CC00AAD412 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,6 +110,12 @@
 				A1523E601507D37A00AAD412 /* Contact.m */,
 				A17B9CE61507DB7D00DE386B /* ContactList.h */,
 				A17B9CE71507DB7D00DE386B /* ContactList.m */,
+				35AC00AE16F2CDF300B2E55F /* ContactDataController.h */,
+				35AC00AF16F2CDF300B2E55F /* ContactDataController.m */,
+				35AC00B116F2D3D100B2E55F /* JSONDataStore.h */,
+				35AC00B216F2D3D200B2E55F /* JSONDataStore.m */,
+				35A0B1F416F5603900AEFB44 /* ContactUtils.h */,
+				35A0B1F516F5603900AEFB44 /* ContactUtils.m */,
 			);
 			path = ContactViewerIos;
 			sourceTree = "<group>";
@@ -186,6 +201,9 @@
 				A1523E591507C4CC00AAD412 /* DetailViewController.m in Sources */,
 				A1523E611507D37A00AAD412 /* Contact.m in Sources */,
 				A17B9CE81507DB7D00DE386B /* ContactList.m in Sources */,
+				35AC00B016F2CDF300B2E55F /* ContactDataController.m in Sources */,
+				35AC00B316F2D3D200B2E55F /* JSONDataStore.m in Sources */,
+				35A0B1F616F5603900AEFB44 /* ContactUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

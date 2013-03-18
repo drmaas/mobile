@@ -10,6 +10,7 @@
 
 @interface Contact : NSObject
 
+@property(retain) NSString* contact_id;
 @property(retain) NSString* name;
 @property(retain) NSString* phone;
 @property(retain) NSString* title;
@@ -20,6 +21,12 @@
 -(id)initWithName:(NSString*)name 
         andPhone:(NSString*)phone
         andTitle:(NSString*)title 
+        andEmail:(NSString*)email
+        andTwitterId:(NSString*)twitterId;
+
+-(void)updateWithName:(NSString*)name
+        andPhone:(NSString*)phone
+        andTitle:(NSString*)title
         andEmail:(NSString*)email
         andTwitterId:(NSString*)twitterId;
 

@@ -8,10 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+#import "Contact.h"
+#import "ContactDataController.h"
 
-@property (strong, nonatomic) id detailItem;
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) ContactList* contacts;
+@property (strong, nonatomic) Contact *contact;
+@property (strong, nonatomic) NSString *mode;
+@property (weak, nonatomic) IBOutlet UITextField *cname;
+@property (weak, nonatomic) IBOutlet UITextField *ctitle;
+@property (weak, nonatomic) IBOutlet UITextField *cemail;
+@property (weak, nonatomic) IBOutlet UITextField *cphone;
+@property (weak, nonatomic) IBOutlet UITextField *ctwitter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField;
+
+-(IBAction)onEditPress:(id)sender;
+-(IBAction)onBackPress:(id)sender;
+-(IBAction)onDeletePress:(id)sender;
 
 @end

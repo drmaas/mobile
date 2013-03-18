@@ -21,7 +21,9 @@ static ContactList* _singleton = nil;
     return self;
 }
 
+//TODO when we are able to read/write json files, don't call this
 +(void)initSingleton {
+
     _singleton = [[ContactList alloc] initWithCapacity:8];
     
    [_singleton addContact:[[Contact alloc] initWithName:@"Malcom Reynolds"
@@ -66,8 +68,32 @@ static ContactList* _singleton = nil;
                                             andTwitterId:@"shepherdbook"]];
 }
 
+//add contact
 -(void)addContact:(Contact*)contact {
+    NSInteger len = 24;
+    contact.contact_id = [ContactUtils createId:len];
     [_contacts addObject:contact];
+}
+
+//remove contact at array index
+-(void)removeContactAtIndex:(NSInteger)index {
+    [_contacts removeObjectAtIndex:index];
+}
+
+//remove contact based on id
+-(void)removeContact:(Contact *)contact {
+    NSString *cid = contact.contact_id;
+    [_contacts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Contact* c = (Contact*)obj;
+        NSString *tmp_cid = c.contact_id;
+        NSLog([NSString stringWithFormat:@"delete id:%@ this id:%@",cid, tmp_cid]);
+        if ([tmp_cid isEqualToString:cid]) {
+            [_contacts removeObjectAtIndex:idx];
+            *stop = YES;
+            return;
+        }
+    }];
+    
 }
 
 -(Contact*)contactAtIndex:(NSInteger)index {
@@ -75,6 +101,30 @@ static ContactList* _singleton = nil;
 }
 
 +(ContactList*)singleton {
+    return _singleton;
+}
+
+//sample data singleton
++(ContactList*)singletonFromSample {
+    if (_singleton == nil) {
+        [self initSingleton];
+    }
+    return _singleton;
+}
+
+//return a contactlist from an array of contacts
++(ContactList*)singletonFromArray:(NSMutableArray*)contacts {
+    
+    _singleton = [[ContactList alloc] initWithCapacity:[contacts count]];
+    
+    NSEnumerator *e = [contacts objectEnumerator];
+    id object;
+    Contact *c;
+    while (object = [e nextObject]) {
+        c = (Contact*)object;
+        [_singleton addContact:c];
+    }
+    
     return _singleton;
 }
 

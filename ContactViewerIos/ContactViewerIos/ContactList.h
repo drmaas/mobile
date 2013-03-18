@@ -10,6 +10,8 @@
 
 #import "Contact.h"
 
+#import "ContactUtils.h"
+
 @interface ContactList : NSObject
 
 // initializes the singleton instance
@@ -17,11 +19,21 @@
 
 +(ContactList*)singleton;
 
++(ContactList*)singletonFromSample;
+
++(ContactList*)singletonFromArray:(NSMutableArray*)contacts;
+
 -(id)initWithCapacity:(NSInteger)capacity;
 
 -(NSInteger)count;
 
 -(void)addContact:(Contact*)contact;
+
+-(void)removeContactAtIndex:(NSInteger)index;
+
+-(void)removeContact:(Contact*)contact;
+
+//-(void)updateContact:(Contact*)contact atIndex:(NSInteger)index;
 
 -(Contact*)contactAtIndex:(NSInteger)index;
 

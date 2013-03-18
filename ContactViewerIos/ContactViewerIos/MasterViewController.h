@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ContactList.h"
+#import "ContactDataController.h"
 
 @class DetailViewController;
 
@@ -17,6 +18,8 @@
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 @property (strong, nonatomic) ContactList* contacts;
+
+@property (strong, nonatomic) ContactDataController* datacontroller;
 
 // this gets called when the user taps the plus button above the list
 -(IBAction)onAddContact:(id)sender;
