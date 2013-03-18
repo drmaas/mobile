@@ -32,4 +32,4 @@ proguard-project.txt
 *.iml
 *.ipr
 *.iws
-.idea/
+.idea/*

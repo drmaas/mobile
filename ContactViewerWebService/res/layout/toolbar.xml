@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/toolbar"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              style="@style/Toolbar">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/toolbar_left"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:gravity="left">
+
+        <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/ToolbarTitle"
+                android:text="Title"
+                android:layout_weight="1"/>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:id="@+id/toolbar_sort"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="5dp"
+                      android:layout_marginBottom="5dp">
+
+            <ImageView
+                    android:id="@+id/sort_desc"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/arrow_down_float"
+                    android:layout_marginLeft="15dp"/>
+
+            <ImageView
+                    android:id="@+id/sort_asc"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="true"
+                    android:layout_centerVertical="true"
+                    android:src="@android:drawable/arrow_up_float"
+                    android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/toolbar_buttons"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginLeft="2dp"
+                  android:layout_gravity="center_vertical">
+
+        <Button
+                android:id="@+id/toolbar_farleft_button"
+                style="@style/ToolbarButton"
+                android:text="FarLeft"
+                android:layout_weight="0"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"/>
+
+        <Button
+                android:id="@+id/toolbar_left_button"
+                style="@style/ToolbarButton"
+                android:text="Left"
+                android:layout_weight="0"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"/>
+
+        <Button
+                android:id="@+id/toolbar_middle_button"
+                style="@style/ToolbarButton"
+                android:text="Middle"
+                android:layout_weight="0"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"/>
+
+        <Button
+                android:id="@+id/toolbar_right_button"
+                style="@style/ToolbarButton"
+                android:text="Right"
+                android:layout_weight="0"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+    

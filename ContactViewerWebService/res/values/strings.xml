@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ContactViewer</string>
+
+    <!-- contacts page toolbar -->
+    <string name="contacts">My Contacts</string>
+    <string name="about">About</string>
+
+    <!-- edit contact page toolbar -->
+    <string name="edit">Edit Contact</string>
+    <string name="new_contact">New Contact</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <!-- contact fields -->
+    <string name="name_label">Name</string>
+    <string name="title_label">Title</string>
+    <string name="email_label">Email</string>
+    <string name="phone_label">Phone</string>
+    <string name="twitter_label">Twitter</string>
+
+    <!-- about message -->
+    <string name="info">ContactViewer applicaton for team \'kill -9\'</string>
+
+    <!-- toast when contact is clicked -->
+    <string name="contact_toast">Showing details for contact</string>
+    <string name="contact_create">Creating new contact</string>
+    <string name="save_contact_toast">Saving contact details</string>
+    <string name="done_contact_toast">Done with contact, going back to contact list</string>
+
+    <!-- delete alert -->
+    <string name="confirm_delete">Are you sure you wish to delete: </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- validation -->
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="name_not_empty">Thy contact shall not be nameless</string>
+    <string name="email_address_invalid">Thy email address is not valid</string>
+    <string name="phone_num_invalid">Thy phone number is not valid</string>
+    <string name="no_dialer_msg">There are no dialer clients installed</string>
+    <string name="no_sms_msg">There are no SMS clients installed</string>
+    <string name="no_email_msg">There are no email clients installed</string>
+</resources>
