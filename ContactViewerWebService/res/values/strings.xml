@@ -44,4 +44,6 @@
     <string name="no_dialer_msg">There are no dialer clients installed</string>
     <string name="no_sms_msg">There are no SMS clients installed</string>
     <string name="no_email_msg">There are no email clients installed</string>
+    <string name="contacts_load">Loading Contacts...</string>
+    <string name="API_KEY">kill-9</string>
 </resources>
