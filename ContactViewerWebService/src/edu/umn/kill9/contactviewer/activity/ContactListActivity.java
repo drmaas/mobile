@@ -9,6 +9,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,13 +21,16 @@ import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.kill9.contactviewer.model.Contact;
 import edu.umn.kill9.contactviewer.model.ContactDataSource;
+import edu.umn.kill9.contactviewer.model.ContactJson;
+import edu.umn.kill9.contactviewer.model.ContactWebService;
+import edu.umn.kill9.contactviewer.model.ContactWebService.GetJsonListener;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 
 /**
  * Displays a list of contacts.
  */
 
-public class ContactListActivity extends ListActivity {
+public class ContactListActivity extends ListActivity implements GetJsonListener {
 
     private CVSQLiteOpenHelper dbHelper;
     private SQLiteDatabase contactDB;
@@ -97,9 +101,13 @@ public class ContactListActivity extends ListActivity {
         dbHelper = new CVSQLiteOpenHelper(this);
         contactDB = dbHelper.getWritableDatabase();
 
-        //refresh data
-        refreshContacts(true);
+        //refresh data from db
+        //refreshContacts(true);
 
+        //refresh data from web service
+        refreshContactsFromWebService(true);
+        
+        
         //filter
         EditText filterText = (EditText) findViewById(R.id.search_box);
         filterText.addTextChangedListener(filterTextWatcher);
@@ -159,13 +167,13 @@ public class ContactListActivity extends ListActivity {
     private void refreshContacts(boolean sortAscendingOrder) {
         //get db object
         ContactDataSource datasource = new ContactDataSource(contactDB);
-
+        
         // make some contacts
         ArrayList<Contact> contacts = new ArrayList<Contact>();
 
         //get contacts from the sqlite database
         contacts.addAll(datasource.getAllContacts());
-
+        
         Collections.sort(contacts, new ContactComparator());
 
         //If sortIncreasing is false, reverse the sort to decreasing order.
@@ -177,7 +185,33 @@ public class ContactListActivity extends ListActivity {
         // initialize the list view
         setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
     }
+    
+    private void refreshContactsFromWebService(boolean sortAscendingOrder){
+    	ContactWebService contactwebservice = new ContactWebService(this);
+        contactwebservice.execute("kill-9");        
+        //TODO:sorting 
+    }
+    
+    
+    public void onWebServiceCallComplete(List<Contact> contactsList){
+    	// make some contacts
+        ArrayList<Contact> contacts = new ArrayList<Contact>();
+        
+        contacts.addAll(contactsList);
+        
+        Collections.sort(contacts, new ContactComparator());
 
+        //TODO:sorting
+        //If sortIncreasing is false, reverse the sort to decreasing order.
+        //if(!sortAscendingOrder)
+        //{
+        //    Collections.reverse(contacts);
+        //}
+    	setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
+    }
+    
+     
+    
     public class ContactComparator implements Comparator<Contact> {
         @Override
         public int compare(Contact contact1, Contact contact2) {
