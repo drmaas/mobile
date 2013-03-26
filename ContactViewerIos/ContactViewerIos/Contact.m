@@ -43,4 +43,17 @@
     
 }
 
+-(NSMutableDictionary*)convertToDictionary{
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:5];
+    
+    [dict setObject:self.name forKey:@"Name"];
+    [dict setObject:self.phone forKey:@"Phone"];
+    [dict setObject:self.title forKey:@"Title"];
+    [dict setObject:self.email forKey:@"Email"];
+    [dict setObject:self.twitterId forKey:@"TwitterId"];
+    
+    return dict;
+}
+
 @end

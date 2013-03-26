@@ -39,13 +39,14 @@ static JSONDataStore* _singleton = nil;
 - (void)saveAllContacts:(NSMutableArray *)contacts {
     if (contacts != nil) {
         [self.datastore setObject:contacts forKey:@"contacts"];
+        [self saveToFile];
     }
 }
 
 //load all contacts from file and return them
 - (NSMutableDictionary*)loadFromFile {
     
-    NSMutableDictionary *dict = nil;
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     
     //TODO load dict from file
     
@@ -54,9 +55,23 @@ static JSONDataStore* _singleton = nil;
 
 //save all contact to file
 - (void)saveToFile {
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.datastore
+                                            options:NSJSONWritingPrettyPrinted
+                                            error:&error];
     
-    //TODO save dict to file
+    //applications Documents dirctory path
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
     
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
+    
+    [jsonData writeToFile:filePath atomically:YES];
+    
+//    NSString* aStr;
+//    aStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    
+//    NSLog(aStr);   
 }
 
 @end

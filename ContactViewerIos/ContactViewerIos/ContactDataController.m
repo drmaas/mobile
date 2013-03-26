@@ -40,7 +40,7 @@
 //save current contact list
 - (void)saveAllContacts:(ContactList*) list {
     
-    NSMutableArray *array = [list allContacts];
+    NSMutableArray *array = [list contactsAsDictionaries];
     [self.store saveAllContacts:array];
 }
 

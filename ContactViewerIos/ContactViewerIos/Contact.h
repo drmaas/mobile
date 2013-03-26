@@ -30,4 +30,6 @@
         andEmail:(NSString*)email
         andTwitterId:(NSString*)twitterId;
 
+-(NSMutableDictionary*)convertToDictionary;
+
 @end

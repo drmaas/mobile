@@ -37,6 +37,8 @@
 
 -(Contact*)contactAtIndex:(NSInteger)index;
 
+-(NSMutableArray*)contactsAsDictionaries;
+
 @property(strong) NSMutableArray* allContacts;
 
 @end

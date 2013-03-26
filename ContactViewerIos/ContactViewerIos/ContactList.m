@@ -132,4 +132,16 @@ static ContactList* _singleton = nil;
     return [_contacts count];
 }
 
+
+-(NSMutableArray*)contactsAsDictionaries{
+    NSMutableArray *myArray = [NSMutableArray array];
+    
+    for (Contact* contact in self.allContacts) {
+        NSMutableDictionary *contactDict = [contact convertToDictionary];
+        [myArray addObject:contactDict];
+    }
+    
+    return myArray;
+}
+
 @end
