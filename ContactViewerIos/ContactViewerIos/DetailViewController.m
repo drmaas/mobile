@@ -120,7 +120,7 @@
         [self updateMode];
     }
     //save (new)
-    if ([self.mode isEqual:@"new"]) {
+    else if ([self.mode isEqual:@"new"]) {
         self.mode = @"view";
         [self.contact updateWithName:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
         [self.contacts addContact:self.contact];
