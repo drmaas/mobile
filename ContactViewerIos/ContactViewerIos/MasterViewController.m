@@ -111,10 +111,14 @@
 //This is the place to create the detail controller
 //data only needs to be persisted when app is closed / loaded when opened
 -(IBAction)onAddContact:(id)sender {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"New Contact"
-                                                    message:@"You need to do something here"
-                                                   delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-    [alert show];
+    //UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"New Contact"
+    //                                                message:@"You need to do something here"
+    //                                               delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    //[alert show];
+    
+    //navigate to new contact screen
+    //self.detailViewController.mode = @"new";
+    //[self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
 
@@ -148,7 +152,10 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.detailViewController.contact = [contacts contactAtIndex:indexPath.row];
+    //self.detailViewController.contact = [contacts contactAtIndex:indexPath.row];
+    //self.detailViewController.mode = @"view";
+    //[self.navigationController pushViewController:self.detailViewController animated:YES];
+    //[self performSegueWithIdentifier:@"ContactDetails" sender:self];
 }
 
 
@@ -182,10 +189,14 @@
 
 //sent selected object to the detail view
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"ViewContactDetails"]) {
-        DetailViewController *detailViewController = [segue destinationViewController];
+    DetailViewController *detailViewController = [segue destinationViewController];
+    if ([[segue identifier] isEqualToString:@"ViewContact"]) {
         detailViewController.contact = [self.contacts contactAtIndex:[self.tableView indexPathForSelectedRow].row];
         detailViewController.mode = @"view";
+    }
+    else if ([[segue identifier] isEqualToString:@"NewContact"]) {
+        detailViewController.contact = [[Contact alloc] init];
+        detailViewController.mode = @"new";
     }
 }
 

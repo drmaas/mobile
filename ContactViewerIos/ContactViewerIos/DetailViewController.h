@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *ctwitter;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField;
 

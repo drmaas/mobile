@@ -56,7 +56,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.90588241815567017" blue="0.58039218187332153" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
-                                    <segue destination="21" kind="push" identifier="ViewContactDetails" id="r9g-Ic-fhs"/>
+                                    <segue destination="21" kind="push" identifier="ViewContact" id="r9g-Ic-fhs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -71,6 +71,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Ih-1o-IbV">
                             <connections>
                                 <action selector="onAddContact:" destination="12" id="jsa-Z6-qSu"/>
+                                <segue destination="21" kind="push" identifier="NewContact" id="uKa-yA-0mO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -187,6 +188,7 @@
                         <outlet property="cphone" destination="HEe-K9-3IO" id="vP7-pQ-0br"/>
                         <outlet property="ctitle" destination="Kwg-aW-JD0" id="ndi-5F-4L6"/>
                         <outlet property="ctwitter" destination="Gaz-Y4-LFH" id="s3U-wu-ZJQ"/>
+                        <outlet property="deleteButton" destination="DM5-Cz-Vu1" id="jKx-bI-Gdd"/>
                         <outlet property="editButton" destination="ZJh-3y-1Bd" id="Jnd-4o-mbA"/>
                     </connections>
                 </viewController>
@@ -200,4 +202,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="uKa-yA-0mO"/>
+    </inferredMetricsTieBreakers>
 </document>

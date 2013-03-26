@@ -79,8 +79,10 @@
         self.ctwitter.enabled = NO;
         self.editButton.title = @"Edit";
         self.backButton.title = @"Back";
+        self.deleteButton.width = 0;
+        self.deleteButton.enabled = YES;
     }
-    else {
+    else if ([self.mode isEqualToString:@"edit"]) {
         self.cname.enabled = YES;
         self.ctitle.enabled = YES;
         self.cemail.enabled = YES;
@@ -88,13 +90,21 @@
         self.ctwitter.enabled = YES;
         self.editButton.title = @"Done";
         self.backButton.title = @"Cancel";
+        self.deleteButton.width = 0.01;
+        self.deleteButton.enabled = NO;
+    }
+    else if ([self.mode isEqualToString:@"new"]) {
+        self.editButton.title = @"Save";
+        self.backButton.title = @"Cancel";
+        self.deleteButton.width = 0.01;
+        self.deleteButton.enabled = NO;
     }
 }
 
 //enable editing or saving
 - (void)onEditPress:(id)sender {
     
-    //save
+    //save (done)
     if ([self.mode isEqual: @"edit"]) {
         self.mode = @"view";
         [self.contact updateWithName:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
@@ -102,13 +112,24 @@
         //show message indicating save
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
+        [self updateMode];
     }
     //edit
-    else {
+    else if ([self.mode isEqual:@"view"]){
         self.mode = @"edit";
+        [self updateMode];
     }
-    
-    [self updateMode];
+    //save (new)
+    if ([self.mode isEqual:@"new"]) {
+        self.mode = @"view";
+        [self.contact updateWithName:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
+        [self.contacts addContact:self.contact];
+        //show message indicating contact created
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Created" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        //go back to main page
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
 }
 
 //go back
@@ -129,7 +150,6 @@
 //delete contact or cancel
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        //TODO delete contact from contact list
         [self.contacts removeContact:self.contact];
         
         //go back to main page
