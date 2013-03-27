@@ -45,12 +45,18 @@ static JSONDataStore* _singleton = nil;
 
 //load all contacts from file and return them
 - (NSMutableDictionary*)loadFromFile {
+//    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    NSError *jsonError = nil;
     
-    //TODO load dict from file
+    NSString *jsonFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
+    NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath options:kNilOptions error:&jsonError ];
     
-    return dict;
+    NSMutableDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:&jsonError];
+        
+    return dictionary;
 }
 
 //save all contact to file

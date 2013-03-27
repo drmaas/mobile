@@ -89,8 +89,8 @@
 - (void)loadContactsFromStorage {
     JSONDataStore *datastore = [JSONDataStore singleton];
     ContactDataController *datacontroller = [[ContactDataController alloc] initWithDataStore:datastore];
-    //[datacontroller getAllContacts];
-    [datacontroller getAllSampleContacts];
+    [datacontroller getAllContacts];
+    //[datacontroller getAllSampleContacts];
 }
 
 @end

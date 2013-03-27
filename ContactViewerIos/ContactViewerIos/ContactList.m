@@ -119,10 +119,9 @@ static ContactList* _singleton = nil;
     
     NSEnumerator *e = [contacts objectEnumerator];
     id object;
-    Contact *c;
     while (object = [e nextObject]) {
-        c = (Contact*)object;
-        [_singleton addContact:c];
+        Contact* contact = [[Contact alloc]initWithContactJson:(NSDictionary*)object];
+        [_singleton addContact:contact];
     }
     
     return _singleton;

@@ -24,6 +24,8 @@
         andEmail:(NSString*)email
         andTwitterId:(NSString*)twitterId;
 
+-(id)initWithContactJson:(NSDictionary*)contactJson;
+
 -(void)updateWithName:(NSString*)name
         andPhone:(NSString*)phone
         andTitle:(NSString*)title

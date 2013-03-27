@@ -29,6 +29,19 @@
     return self;
 }
 
+-(id)initWithContactJson:(NSDictionary*)contactJson {
+    
+    self = [super init];
+    
+    self.name = [contactJson objectForKey:@"Name"];
+    self.phone = [contactJson objectForKey:@"Phone"];
+    self.title = [contactJson objectForKey:@"Title"];
+    self.email = [contactJson objectForKey:@"Email"];
+    self.twitterId = [contactJson objectForKey:@"TwitterId"];
+    
+    return self;
+}
+
 -(void)updateWithName:(NSString*)newName
          andPhone:(NSString*)newPhone
          andTitle:(NSString*)newTitle
@@ -55,5 +68,13 @@
     
     return dict;
 }
+//
+//-(void)convertFromDictionary:(NSDictionary*) contactJson{
+//    self.name = [contactJson objectForKey:@"Name"];
+//    self.phone = [contactJson objectForKey:@"Phone"];
+//    self.title = [contactJson objectForKey:@"Title"];
+//    self.email = [contactJson objectForKey:@"Email"];
+//    self.twitterId = [contactJson objectForKey:@"TwitterId"];
+//}
 
 @end
