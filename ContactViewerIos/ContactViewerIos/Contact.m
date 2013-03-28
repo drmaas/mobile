@@ -33,6 +33,7 @@
     
     self = [super init];
     
+    self.contact_id = [contactJson objectForKey:@"Id"];
     self.name = [contactJson objectForKey:@"Name"];
     self.phone = [contactJson objectForKey:@"Phone"];
     self.title = [contactJson objectForKey:@"Title"];
@@ -60,6 +61,7 @@
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:5];
     
+    [dict setObject:self.contact_id forKey:@"Id"];
     [dict setObject:self.name forKey:@"Name"];
     [dict setObject:self.phone forKey:@"Phone"];
     [dict setObject:self.title forKey:@"Title"];

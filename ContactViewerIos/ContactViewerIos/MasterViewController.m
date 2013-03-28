@@ -192,6 +192,7 @@
     DetailViewController *detailViewController = [segue destinationViewController];
     if ([[segue identifier] isEqualToString:@"ViewContact"]) {
         detailViewController.contact = [self.contacts contactAtIndex:[self.tableView indexPathForSelectedRow].row];
+        NSLog([NSString stringWithFormat:@"view id:%@",detailViewController.contact.contact_id]);
         detailViewController.mode = @"view";
     }
     else if ([[segue identifier] isEqualToString:@"NewContact"]) {
