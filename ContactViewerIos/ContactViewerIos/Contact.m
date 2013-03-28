@@ -20,6 +20,8 @@
     
     self = [super init];
     
+    self.contact_id = [ContactUtils createId:24];
+    
     self.name = newName;
     self.phone = newPhone;
     self.title = newTitle;

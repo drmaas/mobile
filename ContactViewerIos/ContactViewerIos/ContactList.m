@@ -70,8 +70,6 @@ static ContactList* _singleton = nil;
 
 //add contact
 -(void)addContact:(Contact*)contact {
-    NSInteger len = 24;
-    contact.contact_id = [ContactUtils createId:len];
     [_contacts addObject:contact];
 }
 
