@@ -196,7 +196,7 @@
         detailViewController.mode = @"view";
     }
     else if ([[segue identifier] isEqualToString:@"NewContact"]) {
-        detailViewController.contact = [[Contact alloc] init];
+        detailViewController.contact = [[Contact alloc] initWithName:@"" andPhone:@"" andTitle:@"" andEmail:@"" andTwitterId:@""];
         detailViewController.mode = @"new";
     }
 }
