@@ -12,12 +12,12 @@
 
 //TODO need method to keep track of largest existing id, so we can increment when adding contacts
 
-@property(nonatomic,retain) NSString* filepath;
+@property(nonatomic,retain) NSString* filename;
 @property(strong) NSMutableDictionary* datastore;
 
 + (id)singleton;
     
-- (id)initWithFileName:(NSString*)filepath;
+- (id)initWithFileName:(NSString*)filename;
 
 - (NSMutableArray*)getAllContacts;
 

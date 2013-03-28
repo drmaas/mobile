@@ -12,19 +12,19 @@ static JSONDataStore* _singleton = nil;
 
 @implementation JSONDataStore
 
-@synthesize filepath = _filepath;
+@synthesize filename = _filename;
 @synthesize datastore = _datastore;
 
 //get instance
 + (id)singleton {
-    _singleton = [[self alloc] initWithFileName:@"REPLACEME"];
+    _singleton = [[self alloc] initWithFileName:@"data.json"];
     return _singleton;
 }
 
 //init
-- (id)initWithFileName:(NSString*)filepath {
+- (id)initWithFileName:(NSString*)filename {
     self = [super init];
-    _filepath = filepath;
+    _filename = filename;
     _datastore = [self loadFromFile];
     
     return self;
@@ -51,8 +51,14 @@ static JSONDataStore* _singleton = nil;
     
     NSError *jsonError = nil;
     
-    NSString *jsonFilePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
-    NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath options:kNilOptions error:&jsonError ];
+    NSFileManager *fileManager =[NSFileManager defaultManager];
+    
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:self.filename];
+    if(![fileManager fileExistsAtPath:filePath]){
+        return [[NSMutableDictionary alloc] init];
+    }
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:filePath options:kNilOptions error:&jsonError ];
     
     NSMutableDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONWritingPrettyPrinted error:&jsonError];
         
@@ -70,7 +76,7 @@ static JSONDataStore* _singleton = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"data.json"];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,self.filename];
     
     [jsonData writeToFile:filePath atomically:YES];
     
