@@ -94,6 +94,11 @@ static ContactList* _singleton = nil;
     
 }
 
+//update contact data
+-(void)updateContact:(Contact*)contact atIndex:(NSInteger)idx {
+    [_contacts replaceObjectAtIndex:idx withObject:contact];
+}
+
 -(Contact*)contactAtIndex:(NSInteger)index {
     return [_contacts objectAtIndex:index];
 }

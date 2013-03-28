@@ -33,7 +33,7 @@
 
 -(void)removeContact:(Contact*)contact;
 
-//-(void)updateContact:(Contact*)contact atIndex:(NSInteger)index;
+-(void)updateContact:(Contact*)contact atIndex:(NSInteger)index;
 
 -(Contact*)contactAtIndex:(NSInteger)index;
 
