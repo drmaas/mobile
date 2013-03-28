@@ -77,6 +77,11 @@
 {
     [super viewWillAppear:animated];
     
+    // get the contact list
+    // this is important, since when app goes to background
+    // viewdidload does not get called again
+    contacts = [ContactList singleton];
+    
     //refresh contact list
     [self.tableView reloadData];
 }
