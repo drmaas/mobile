@@ -108,6 +108,7 @@
     if ([self.mode isEqual: @"edit"]) {
         self.mode = @"view";
         [self.contact updateWithName:self.cname.text andPhone:self.cphone.text andTitle:self.ctitle.text andEmail:self.cemail.text andTwitterId:self.ctwitter.text];
+        [self.contacts updateContact:self.contact];
         
         //show message indicating save
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

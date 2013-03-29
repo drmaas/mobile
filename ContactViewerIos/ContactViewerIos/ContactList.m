@@ -99,6 +99,21 @@ static ContactList* _singleton = nil;
     [_contacts replaceObjectAtIndex:idx withObject:contact];
 }
 
+//update contact data by finding it based on id
+-(void)updateContact:(Contact *)contact {
+    NSString *cid = contact.contact_id;
+    [_contacts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Contact* c = (Contact*)obj;
+        NSString *tmp_cid = c.contact_id;
+        if ([tmp_cid isEqualToString:cid]) {
+            [_contacts replaceObjectAtIndex:idx withObject:contact];
+            *stop = YES;
+            return;
+        }
+    }];
+     
+}
+
 -(Contact*)contactAtIndex:(NSInteger)index {
     return [_contacts objectAtIndex:index];
 }

@@ -35,6 +35,8 @@
 
 -(void)updateContact:(Contact*)contact atIndex:(NSInteger)index;
 
+-(void)updateContact:(Contact *)contact;
+    
 -(Contact*)contactAtIndex:(NSInteger)index;
 
 -(NSMutableArray*)contactsAsDictionaries;
