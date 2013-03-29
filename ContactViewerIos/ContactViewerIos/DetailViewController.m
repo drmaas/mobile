@@ -40,7 +40,7 @@
         _contact = newContact;
         
         // Update the view.
-        [self configureView];
+        //[self configureView];
     }
 
     if (self.masterPopoverController != nil) {
@@ -62,9 +62,6 @@
         self.ctwitter.text = c.twitterId;
         
     }
-    
-    //get contactlist
-    self.contacts = [ContactList singleton];
     
     [self updateMode];
 }
