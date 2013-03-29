@@ -133,6 +133,7 @@ static ContactList* _singleton = nil;
 //return a contactlist from an array of contacts
 +(ContactList*)singletonFromArray:(NSMutableArray*)contacts {
     
+    if (_singleton == nil) {
     _singleton = [[ContactList alloc] initWithCapacity:[contacts count]];
     
     NSEnumerator *e = [contacts objectEnumerator];
@@ -140,6 +141,7 @@ static ContactList* _singleton = nil;
     while (object = [e nextObject]) {
         Contact* contact = [[Contact alloc]initWithContactJson:(NSDictionary*)object];
         [_singleton addContact:contact];
+    }
     }
     
     return _singleton;

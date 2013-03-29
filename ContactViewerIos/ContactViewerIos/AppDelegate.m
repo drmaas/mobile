@@ -11,6 +11,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize contacts;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -78,7 +79,7 @@
 
 //save contact list to file
 - (void)saveContactsToStorage {
-    ContactList *contacts = [ContactList singleton];
+    contacts = [ContactList singleton];
     JSONDataStore *datastore = [JSONDataStore singleton];
     ContactDataController *datacontroller = [[ContactDataController alloc] initWithDataStore:datastore];
     [datacontroller saveAllContacts:contacts];
@@ -91,10 +92,10 @@
     ContactDataController *datacontroller = [[ContactDataController alloc] initWithDataStore:datastore];
     
     if([[datastore datastore] count] == 0){
-        [datacontroller getAllSampleContacts];
+        contacts = [datacontroller getAllSampleContacts];
     }
     else{
-        [datacontroller getAllContacts];
+        contacts = [datacontroller getAllContacts];
     }
 }
 

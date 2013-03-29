@@ -12,6 +12,8 @@
 
 #import "Contact.h"
 
+#import "AppDelegate.h"
+
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
@@ -48,7 +50,9 @@
     }
     
     // get the contact list
-    contacts = [ContactList singleton];
+    //contacts = [ContactList singleton];
+    AppDelegate *controller = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    contacts = controller.contacts;
     
     //setup edit button
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -186,7 +190,7 @@
         //remove contact from list
         Contact* c = [contacts contactAtIndex:indexPath.row];
         [contacts removeContactAtIndex:indexPath.row];
-        
+                
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
