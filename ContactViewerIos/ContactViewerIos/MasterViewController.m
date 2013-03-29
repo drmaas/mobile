@@ -80,8 +80,8 @@
     // get the contact list
     // this is important, since when app goes to background
     // viewdidload does not get called again
-    //contacts = [ContactList singleton];
-
+    contacts = [ContactList singleton];
+    
     //refresh contact list
     [self.tableView reloadData];
 }
@@ -184,7 +184,6 @@
         //[controller removeObjectFromListAtIndex:indexPath.row];
         
         //remove contact from list
-        Contact* c = [contacts contactAtIndex:indexPath.row];
         [contacts removeContactAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -196,7 +195,6 @@
 //sent selected object to the detail view
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     DetailViewController *detailViewController = [segue destinationViewController];
-    detailViewController.contacts = contacts;
     if ([[segue identifier] isEqualToString:@"ViewContact"]) {
         detailViewController.contact = [self.contacts contactAtIndex:[self.tableView indexPathForSelectedRow].row];
         NSLog([NSString stringWithFormat:@"view id:%@",detailViewController.contact.contact_id]);
