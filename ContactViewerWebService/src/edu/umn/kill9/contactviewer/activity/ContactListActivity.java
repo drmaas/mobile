@@ -20,17 +20,17 @@ import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.model.dao.ContactDBDataSource;
-import edu.umn.kill9.contactviewer.model.json.JsonListener;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 import edu.umn.kill9.contactviewer.web.ContactListWebService;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 
 /**
  * Displays a list of contacts.
  *
- * TODO: move JsonListener implementation to ContactWebDataSource
+ * TODO: move ContactListJsonListener implementation to ContactWebDataSource
  */
 
-public class ContactListActivity extends ListActivity implements JsonListener {
+public class ContactListActivity extends ListActivity {
 
     private CVSQLiteOpenHelper dbHelper;
     private SQLiteDatabase contactDB;
@@ -39,6 +39,8 @@ public class ContactListActivity extends ListActivity implements JsonListener {
     public static final String EDIT = "edit";
     public static final String CREATE = "create";
     public static final String CONTACT = "contact";
+
+    private boolean sortAscendingOrder = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,8 @@ public class ContactListActivity extends ListActivity implements JsonListener {
         desc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refreshContacts(false);
+                sortAscendingOrder = false;
+                refreshContactsFromWebService();
                 asc.setVisibility(View.VISIBLE);
                 desc.setVisibility(View.GONE);
             }
@@ -87,7 +90,8 @@ public class ContactListActivity extends ListActivity implements JsonListener {
         asc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                refreshContacts(true);
+                sortAscendingOrder = true;
+                refreshContactsFromWebService();
                 asc.setVisibility(View.GONE);
                 desc.setVisibility(View.VISIBLE);
             }
@@ -105,7 +109,7 @@ public class ContactListActivity extends ListActivity implements JsonListener {
         //refreshContacts(true);
 
         //refresh data from web service
-        refreshContactsFromWebService(true);
+        refreshContactsFromWebService();
         
         
         //filter
@@ -186,51 +190,28 @@ public class ContactListActivity extends ListActivity implements JsonListener {
         setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
     }
     
-    private void refreshContactsFromWebService(boolean sortAscendingOrder){
-    	ContactListWebService contactwebservice = new ContactListWebService(this);
+    private void refreshContactsFromWebService() {
+    	ContactListWebService contactwebservice = new ContactListWebService(new ContactListJsonListener() {
+
+            @Override
+            public void onContactListWebServiceCallComplete(List<Contact> contactsList) {
+                // make some contacts
+                ArrayList<Contact> contacts = new ArrayList<Contact>();
+                contacts.addAll(contactsList);
+                Collections.sort(contacts, new ContactComparator());
+
+                //If sortIncreasing is false, reverse the sort to decreasing order.
+                if(!sortAscendingOrder) {
+                    Collections.reverse(contacts);
+                }
+                setListAdapter(new ContactAdapter(ContactListActivity.this, R.layout.list_item, contacts));
+            }
+        });
         contactwebservice.execute();
-        //TODO:sorting 
     }
-    
-    //TODO: move to ContactWebDataSource
-    @Override
-    public void onContactListWebServiceCallComplete(List<Contact> contactsList){
-    	// make some contacts
-        ArrayList<Contact> contacts = new ArrayList<Contact>();
-        
-        contacts.addAll(contactsList);
-        
-        Collections.sort(contacts, new ContactComparator());
-
-        //TODO:sorting
-        //If sortIncreasing is false, reverse the sort to decreasing order.
-        //if(!sortAscendingOrder)
-        //{
-        //    Collections.reverse(contacts);
-        //}
-    	setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
-    }
-
-    //TODO: move to ContactWebDataSource
-    @Override
-    public void onAddContactWebServiceCallComplete(Contact contact) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    //TODO: move to ContactWebDataSource
-    @Override
-    public void onDeleteContactWebServiceCallComplete() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    //TODO: move to ContactWebDataSource
-    @Override
-    public void onEditContactWebServiceCallComplete(Contact contact) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
 
     public class ContactComparator implements Comparator<Contact> {
+
         @Override
         public int compare(Contact contact1, Contact contact2) {
             return contact1.getName().toLowerCase().compareTo(contact2.getName().toLowerCase());

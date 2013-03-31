@@ -1,11 +1,8 @@
 package edu.umn.kill9.contactviewer.web;
 
-import android.os.AsyncTask;
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
-import edu.umn.kill9.contactviewer.model.json.JsonListener;
+import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
-
-import java.util.List;
 
 /**
  * User: drmaas
@@ -13,9 +10,9 @@ import java.util.List;
  */
 public class AddContactWebService extends ContactWebService<ContactJson> {
 
-    JsonListener jsonListener;
+    ContactJsonListener jsonListener;
 
-    public AddContactWebService(JsonListener listenerActivity) {
+    public AddContactWebService(ContactJsonListener listenerActivity) {
         this.jsonListener = listenerActivity;
     }
 

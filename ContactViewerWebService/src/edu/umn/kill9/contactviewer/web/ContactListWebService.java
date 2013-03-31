@@ -1,7 +1,5 @@
 package edu.umn.kill9.contactviewer.web;
 
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.umn.kill9.contactviewer.R;
@@ -9,24 +7,16 @@ import edu.umn.kill9.contactviewer.application.ContactApplication;
 import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
-import edu.umn.kill9.contactviewer.model.json.JsonListener;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 
 //import android.R;
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 public class ContactListWebService extends ContactWebService<List<ContactJson>> {
 
-	JsonListener jsonListener;
+	ContactListJsonListener jsonListener;
 	
-	public ContactListWebService(JsonListener listenerActivity){
+	public ContactListWebService(ContactListJsonListener listenerActivity){
 		this.jsonListener = listenerActivity;	
 	}
 	
