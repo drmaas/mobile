@@ -1,4 +1,4 @@
-package edu.umn.kill9.contactviewer.model;
+package edu.umn.kill9.contactviewer.model.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

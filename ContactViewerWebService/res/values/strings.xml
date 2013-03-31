@@ -45,5 +45,8 @@
     <string name="no_sms_msg">There are no SMS clients installed</string>
     <string name="no_email_msg">There are no email clients installed</string>
     <string name="contacts_load">Loading Contacts...</string>
+
+    <!-- web -->
+    <string name="API_URL">http://contacts.tinyapollo.com/contacts</string>
     <string name="API_KEY">kill-9</string>
 </resources>

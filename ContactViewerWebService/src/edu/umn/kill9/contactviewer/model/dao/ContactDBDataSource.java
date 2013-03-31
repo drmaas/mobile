@@ -1,4 +1,4 @@
-package edu.umn.kill9.contactviewer.model;
+package edu.umn.kill9.contactviewer.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,13 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
+import edu.umn.kill9.contactviewer.model.pojo.Contact;
 
 /**
  * User: drmaas
  * Date: 2/19/13
  */
-public class ContactDataSource {
+public class ContactDBDataSource implements ContactDataSource {
 
     // Database fields
     private SQLiteDatabase database;
@@ -30,7 +31,7 @@ public class ContactDataSource {
      *
      * @param database
      */
-    public ContactDataSource(SQLiteDatabase database) {
+    public ContactDBDataSource(SQLiteDatabase database) {
         this.database = database;
     }
 
@@ -44,6 +45,7 @@ public class ContactDataSource {
      * @param twitter
      * @return
      */
+    @Override
     public Contact createContact(String name, String title, String email, String phone, String twitter) throws SQLException {
         ContentValues values = new ContentValues();
         values.put(CVSQLiteOpenHelper.COLUMN_NAME, name);
@@ -71,6 +73,7 @@ public class ContactDataSource {
      * @param phone
      * @param twitter
      */
+    @Override
     public void editContact(Contact c, String name, String title, String email, String phone, String twitter) throws SQLException {
         Long id = c.getId();
     	
@@ -106,6 +109,7 @@ public class ContactDataSource {
      *
      * @param contact
      */
+    @Override
     public void deleteContact(Contact contact) throws SQLException {
         long id = contact.getId();
         database.delete(CVSQLiteOpenHelper.TABLE_CONTACT, CVSQLiteOpenHelper.COLUMN_ID + " = " + id, null);
@@ -117,6 +121,7 @@ public class ContactDataSource {
      *
      * @return
      */
+    @Override
     public List<Contact> getAllContacts() throws SQLException {
         List<Contact> contacts = new ArrayList<Contact>();
 

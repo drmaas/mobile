@@ -9,7 +9,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,18 +18,19 @@ import android.view.ViewGroup;
 import android.widget.*;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
-import edu.umn.kill9.contactviewer.model.Contact;
-import edu.umn.kill9.contactviewer.model.ContactDataSource;
-import edu.umn.kill9.contactviewer.model.ContactJson;
-import edu.umn.kill9.contactviewer.model.ContactWebService;
-import edu.umn.kill9.contactviewer.model.ContactWebService.GetJsonListener;
+import edu.umn.kill9.contactviewer.model.pojo.Contact;
+import edu.umn.kill9.contactviewer.model.dao.ContactDBDataSource;
+import edu.umn.kill9.contactviewer.model.json.JsonListener;
+import edu.umn.kill9.contactviewer.web.ContactListWebService;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 
 /**
  * Displays a list of contacts.
+ *
+ * TODO: move JsonListener implementation to ContactWebDataSource
  */
 
-public class ContactListActivity extends ListActivity implements GetJsonListener {
+public class ContactListActivity extends ListActivity implements JsonListener {
 
     private CVSQLiteOpenHelper dbHelper;
     private SQLiteDatabase contactDB;
@@ -166,7 +166,7 @@ public class ContactListActivity extends ListActivity implements GetJsonListener
      */
     private void refreshContacts(boolean sortAscendingOrder) {
         //get db object
-        ContactDataSource datasource = new ContactDataSource(contactDB);
+        ContactDBDataSource datasource = new ContactDBDataSource(contactDB);
         
         // make some contacts
         ArrayList<Contact> contacts = new ArrayList<Contact>();
@@ -187,13 +187,14 @@ public class ContactListActivity extends ListActivity implements GetJsonListener
     }
     
     private void refreshContactsFromWebService(boolean sortAscendingOrder){
-    	ContactWebService contactwebservice = new ContactWebService(this);
-        contactwebservice.execute("kill-9");        
+    	ContactListWebService contactwebservice = new ContactListWebService(this);
+        contactwebservice.execute();
         //TODO:sorting 
     }
     
-    
-    public void onWebServiceCallComplete(List<Contact> contactsList){
+    //TODO: move to ContactWebDataSource
+    @Override
+    public void onContactListWebServiceCallComplete(List<Contact> contactsList){
     	// make some contacts
         ArrayList<Contact> contacts = new ArrayList<Contact>();
         
@@ -209,9 +210,26 @@ public class ContactListActivity extends ListActivity implements GetJsonListener
         //}
     	setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
     }
-    
-     
-    
+
+    //TODO: move to ContactWebDataSource
+    @Override
+    public void onAddContactWebServiceCallComplete(Contact contact) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    //TODO: move to ContactWebDataSource
+    @Override
+    public void onDeleteContactWebServiceCallComplete() {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    //TODO: move to ContactWebDataSource
+    @Override
+    public void onEditContactWebServiceCallComplete(Contact contact) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
     public class ContactComparator implements Comparator<Contact> {
         @Override
         public int compare(Contact contact1, Contact contact2) {

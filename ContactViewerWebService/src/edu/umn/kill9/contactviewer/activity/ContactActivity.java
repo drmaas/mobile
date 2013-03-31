@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.db.CVSQLiteOpenHelper;
-import edu.umn.kill9.contactviewer.model.Contact;
-import edu.umn.kill9.contactviewer.model.ContactDataSource;
+import edu.umn.kill9.contactviewer.model.pojo.Contact;
+import edu.umn.kill9.contactviewer.model.dao.ContactDBDataSource;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 import edu.umn.kill9.contactviewer.util.ContactUtils;
 
@@ -27,7 +27,7 @@ public class ContactActivity extends Activity {
 
     private CVSQLiteOpenHelper dbHelper;
     private SQLiteDatabase contactDB;
-    private ContactDataSource datasource;
+    private ContactDBDataSource datasource;
     private Contact c;
     private boolean edit;
 
@@ -60,7 +60,7 @@ public class ContactActivity extends Activity {
         //open database and get DAO
         dbHelper = new CVSQLiteOpenHelper(this);
         contactDB = dbHelper.getWritableDatabase();
-        datasource = new ContactDataSource(contactDB);
+        datasource = new ContactDBDataSource(contactDB);
 
         edit = getIntent().getStringExtra("action").equals("edit") ? true : false;
         ToolbarConfig toolbar = null;
