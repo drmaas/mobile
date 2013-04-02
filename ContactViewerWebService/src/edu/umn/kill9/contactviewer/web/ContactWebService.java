@@ -1,9 +1,16 @@
 package edu.umn.kill9.contactviewer.web;
 
+import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
+import android.util.Log;
+import com.google.gson.Gson;
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpRequestBase;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +34,37 @@ public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
         {}
     }
 
+
+
     /**
-     * Get a contact list from json
+     * Get a contact list from json    /**
+     * Generic method to get json data from the reqest object of type clazz
      *
+     * @param request
+     * @param clazz
+     * @return
+     */
+    public static Object getJsonObject(HttpRequestBase request, Class clazz) {
+        AndroidHttpClient client = null;
+        try {
+            client = AndroidHttpClient.newInstance("Android", null);
+            HttpResponse response = client.execute(request);
+            Gson gson = new Gson();
+            return gson.fromJson(new InputStreamReader(response.getEntity().getContent()), clazz);
+        }
+        catch (IOException ex) {
+            Log.w("getJsonObject", "Error getting web object", ex);
+        }
+        finally {
+            if (client != null) {
+                client.close();
+            }
+        }
+        return null;
+    }
+
+
+    /**
      * @param contactsListJson
      * @return
      */

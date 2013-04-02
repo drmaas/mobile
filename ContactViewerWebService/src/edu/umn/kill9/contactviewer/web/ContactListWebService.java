@@ -8,6 +8,8 @@ import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
 import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 
 //import android.R;
 
@@ -28,7 +30,8 @@ public class ContactListWebService extends ContactWebService<List<ContactJson>> 
         String url = baseurl + "?key=" + key;
 
         List<ContactJson> contactsListJson = null;
-        ContactListJsonResponse jsonResponse = (ContactListJsonResponse)JsonObject.getJsonObject(url);
+        HttpRequestBase request = new HttpGet(url);
+        ContactListJsonResponse jsonResponse = (ContactListJsonResponse)getJsonObject(request, ContactListJsonResponse.class);
         if (jsonResponse != null) {
             contactsListJson = jsonResponse.getContacts();
         }
