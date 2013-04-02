@@ -14,7 +14,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 //import android.R;
 
 
-public class ContactListWebService extends ContactWebService<List<ContactJson>> {
+public class ContactListWebService extends ContactWebService<ContactListJsonResponse, Void> {
 
 	ContactListJsonListener jsonListener;
 	
@@ -23,28 +23,21 @@ public class ContactListWebService extends ContactWebService<List<ContactJson>> 
 	}
 	
 	@Override
-	protected List<ContactJson> doInBackground(String... params) {
+	protected ContactListJsonResponse doInBackground(Void... params) {
 
         String baseurl = ContactApplication.getContext().getResources().getString(R.string.API_URL);
         String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
         String url = baseurl + "?key=" + key;
 
-        List<ContactJson> contactsListJson = null;
         HttpRequestBase request = new HttpGet(url);
-        ContactListJsonResponse jsonResponse = (ContactListJsonResponse)getJsonObject(request, ContactListJsonResponse.class);
-        if (jsonResponse != null) {
-            contactsListJson = jsonResponse.getContacts();
-        }
 
-        // This result is passed to the onPostExecute method
-        return contactsListJson;
+        return (ContactListJsonResponse)getJsonObject(request, ContactListJsonResponse.class);
+
 	}
-	
-	
+
 	@Override
-	protected void onPostExecute(List<ContactJson> result) {
-		List<Contact> contactsList = getContactsListFromJsonList(result);
-		jsonListener.onContactListWebServiceCallComplete(contactsList);
-	}
+	protected void onPostExecute(ContactListJsonResponse jsonResponse) {
+	    jsonListener.onContactListWebServiceCallComplete(jsonResponse, this);
+    }
 	
 }

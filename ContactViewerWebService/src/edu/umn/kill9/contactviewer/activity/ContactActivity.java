@@ -13,9 +13,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import edu.umn.kill9.contactviewer.R;
+import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
+import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 import edu.umn.kill9.contactviewer.util.ContactUtils;
+import edu.umn.kill9.contactviewer.web.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * User: drmaas
@@ -23,9 +31,6 @@ import edu.umn.kill9.contactviewer.util.ContactUtils;
  */
 public class ContactActivity extends Activity {
 
-    private CVSQLiteOpenHelper dbHelper;
-    private SQLiteDatabase contactDB;
-    private ContactDBDataSource datasource;
     private Contact c;
     private boolean edit;
 
@@ -54,11 +59,6 @@ public class ContactActivity extends Activity {
         action_call = (ImageView)findViewById(R.id.phone_call_icon);
         action_text = (ImageView)findViewById(R.id.phone_text_icon);
         action_email = (ImageView)findViewById(R.id.phone_email_icon);
-
-        //open database and get DAO
-        dbHelper = new CVSQLiteOpenHelper(this);
-        contactDB = dbHelper.getWritableDatabase();
-        datasource = new ContactDBDataSource(contactDB);
 
         edit = getIntent().getStringExtra("action").equals("edit") ? true : false;
         ToolbarConfig toolbar = null;
@@ -162,9 +162,6 @@ public class ContactActivity extends Activity {
 			}
 		});
 
-        //start transaction
-        dbHelper.startTransaction();
-
     }
 
     /**
@@ -176,6 +173,14 @@ public class ContactActivity extends Activity {
         goBack();
     }
 
+    public Contact getContact() {
+        return c;
+    }
+
+    public void setContact(Contact c) {
+        this.c = c;
+    }
+
     /**
      * go back and keep all saves, including most recent unsaved change
      */
@@ -185,7 +190,6 @@ public class ContactActivity extends Activity {
     	
     	Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
 
-        dbHelper.commit();
         setResult(RESULT_OK, null);
         finish();
     }
@@ -195,7 +199,6 @@ public class ContactActivity extends Activity {
      */
     private void cancel() {
         setResult(RESULT_CANCELED, null);
-        dbHelper.rollback();
         finish();
     }
 
@@ -210,12 +213,32 @@ public class ContactActivity extends Activity {
         String emailString = email.getText().toString();
         String phoneString = phone.getText().toString();
         String twitterString = twitter.getText().toString();
-        
+
         if (c != null) {
-            datasource.editContact(c, nameString, titleString, emailString, phoneString, twitterString);
+            EditContactWebService editwebservice = new EditContactWebService(new ContactJsonListener() {
+
+                @Override
+                public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
+                    //TODO check status of response
+                }
+            });
+            //TODO pass in contact object with text field strings to doInBackground
+            editwebservice.execute();
         }
         else {
-        	c = datasource.createContact(nameString, titleString, emailString, phoneString, twitterString);
+            AddContactWebService addwebservice = new AddContactWebService(new ContactJsonListener() {
+
+                @Override
+                public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
+                    //TODO check status of response
+
+                    //set this contact
+                    Contact contact = service.getContactFromJson(response.getContact());
+                    setContact(contact);
+                }
+            });
+            //TODO pass in new contact object with text field strings to doInBackground
+            addwebservice.execute();
         }
     }
 
@@ -230,8 +253,17 @@ public class ContactActivity extends Activity {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         setResult(RESULT_OK, null);
-                        datasource.deleteContact(c);
-                        dbHelper.commit();
+
+                        DeleteContactWebService deleteservice = new DeleteContactWebService(new ContactJsonListener() {
+
+                            @Override
+                            public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
+                                //TODO check status of response
+                            }
+                        });
+                        //TODO pass in contact object to doInBackground
+                        deleteservice.execute();
+
                         finish();
                         break;
 
@@ -260,7 +292,7 @@ public class ContactActivity extends Activity {
     /**
      * validate the email
      *
-     * @param name_value
+     * @param email_value
      * @return
      */
     private boolean validateEmail(String email_value) {
@@ -284,7 +316,7 @@ public class ContactActivity extends Activity {
     /**
      * validate the phone number
      *
-     * @param name_value
+     * @param phone_value
      * @return
      */
     private boolean validatePhone(String phone_value) {

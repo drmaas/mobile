@@ -22,10 +22,10 @@ import java.util.List;
  * T is the type of object we expect back from doInBackground, and is passed
  * to onPostExecute.
  */
-public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
+public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
 
     @Override
-    protected T doInBackground(String... params) {
+    protected T doInBackground(R... params) {
         return null;
     }
 
@@ -33,8 +33,6 @@ public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
     protected void onPostExecute(T result) {
         {}
     }
-
-
 
     /**
      * Get a contact list from json    /**
@@ -68,7 +66,7 @@ public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
      * @param contactsListJson
      * @return
      */
-    protected ArrayList<Contact> getContactsListFromJsonList(List<ContactJson> contactsListJson) {
+    public ArrayList<Contact> getContactsListFromJsonList(List<ContactJson> contactsListJson) {
         ArrayList<Contact> contacts = new ArrayList<Contact>();
 
         if (contactsListJson != null) {
@@ -93,7 +91,7 @@ public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
      * @param json
      * @return
      */
-    protected Contact getContactFromJson(ContactJson json) {
+    public Contact getContactFromJson(ContactJson json) {
 
         Contact contact = null;
         if (json != null) {

@@ -17,10 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import edu.umn.kill9.contactviewer.R;
+import edu.umn.kill9.contactviewer.model.json.ContactJson;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 import edu.umn.kill9.contactviewer.web.ContactListWebService;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
+import edu.umn.kill9.contactviewer.web.ContactWebService;
 
 /**
  * Displays a list of contacts.
@@ -29,9 +32,6 @@ import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
  */
 
 public class ContactListActivity extends ListActivity {
-
-    private CVSQLiteOpenHelper dbHelper;
-    private SQLiteDatabase contactDB;
 
     public static final String ACTION = "action";
     public static final String EDIT = "edit";
@@ -99,23 +99,13 @@ public class ContactListActivity extends ListActivity {
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
 
-        //open (and possibly initialize) database
-        dbHelper = new CVSQLiteOpenHelper(this);
-        contactDB = dbHelper.getWritableDatabase();
-
-        //refresh data from db
-        //refreshContacts(true);
-
         //refresh data from web service
         refreshContactsFromWebService();
-        
         
         //filter
         EditText filterText = (EditText) findViewById(R.id.search_box);
         filterText.addTextChangedListener(filterTextWatcher);
 
-        //set to last contact
-        //lv.setSelection(getListAdapter().getCount() - 1);
     }
 
     @Override
@@ -141,59 +131,33 @@ public class ContactListActivity extends ListActivity {
 
         //re-open database and refresh data
         if(resultCode == RESULT_OK) {
-            contactDB = dbHelper.getWritableDatabase();
-            refreshContacts(true);
+            refreshContactsFromWebService();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        //re-open database
-        contactDB = dbHelper.getWritableDatabase();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        //close the db
-        dbHelper.close();
     }
 
     /**
-     * helper method to refresh contact list
-     * assumes dbHelper already created and open
+     * Get all contacts from the web
      */
-    private void refreshContacts(boolean sortAscendingOrder) {
-        //get db object
-        ContactDBDataSource datasource = new ContactDBDataSource(contactDB);
-        
-        // make some contacts
-        ArrayList<Contact> contacts = new ArrayList<Contact>();
-
-        //get contacts from the sqlite database
-        contacts.addAll(datasource.getAllContacts());
-        
-        Collections.sort(contacts, new ContactComparator());
-
-        //If sortIncreasing is false, reverse the sort to decreasing order.
-        if(!sortAscendingOrder)
-        {
-            Collections.reverse(contacts);
-        }
-
-        // initialize the list view
-        setListAdapter(new ContactAdapter(this, R.layout.list_item, contacts));
-    }
-    
     private void refreshContactsFromWebService() {
     	ContactListWebService contactwebservice = new ContactListWebService(new ContactListJsonListener() {
 
             @Override
-            public void onContactListWebServiceCallComplete(List<Contact> contactsList) {
+            public void onContactListWebServiceCallComplete(ContactListJsonResponse response, ContactWebService service) {
+                //TODO check the status of response
+
                 // make some contacts
+                List<ContactJson> contactsListJson = response.getContacts();
+                List<Contact> contactsList = service.getContactsListFromJsonList(contactsListJson);
                 ArrayList<Contact> contacts = new ArrayList<Contact>();
                 contacts.addAll(contactsList);
                 Collections.sort(contacts, new ContactComparator());
