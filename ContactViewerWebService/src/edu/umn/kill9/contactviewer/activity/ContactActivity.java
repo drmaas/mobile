@@ -214,32 +214,36 @@ public class ContactActivity extends Activity {
         String phoneString = phone.getText().toString();
         String twitterString = twitter.getText().toString();
 
-        if (c != null) {
-            EditContactWebService editwebservice = new EditContactWebService(new ContactJsonListener() {
+        ContactWebService webservice = null;
+        Contact contact = getContact();
+        if (contact != null) {
+            contact.setName(nameString);
+            contact.setTitle(titleString);
+            contact.setPhone(phoneString);
+            contact.setEmail(emailString);
+            contact.setTwitterId(twitterString);
+            webservice = new EditContactWebService(new ContactJsonListener() {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                    //TODO check status of response
+                //TODO check status of response
                 }
             });
-            //TODO pass in contact object with text field strings to doInBackground
-            editwebservice.execute();
         }
         else {
-            AddContactWebService addwebservice = new AddContactWebService(new ContactJsonListener() {
+            webservice = new AddContactWebService(new ContactJsonListener() {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                    //TODO check status of response
+                //TODO check status of response
 
-                    //set this contact
-                    Contact contact = service.getContactFromJson(response.getContact());
-                    setContact(contact);
+                //set this contact
+                Contact tmpcontact = service.getContactFromJson(response.getContact());
+                setContact(tmpcontact);
                 }
             });
-            //TODO pass in new contact object with text field strings to doInBackground
-            addwebservice.execute();
         }
+        webservice.execute(getContact());
     }
 
 
@@ -262,7 +266,7 @@ public class ContactActivity extends Activity {
                             }
                         });
                         //TODO pass in contact object to doInBackground
-                        deleteservice.execute();
+                        deleteservice.execute(getContact());
 
                         finish();
                         break;
