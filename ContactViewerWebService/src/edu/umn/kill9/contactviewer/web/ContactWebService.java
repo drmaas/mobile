@@ -44,7 +44,7 @@ public abstract class ContactWebService<T> extends AsyncTask<String, Void, T> {
      * @param clazz
      * @return
      */
-    public static Object getJsonObject(HttpRequestBase request, Class clazz) {
+    protected static Object getJsonObject(HttpRequestBase request, Class clazz) {
         AndroidHttpClient client = null;
         try {
             client = AndroidHttpClient.newInstance("Android", null);
