@@ -14,7 +14,7 @@ import org.apache.http.client.methods.HttpRequestBase;
  * User: drmaas
  * Date: 3/30/13
  */
-public class AddContactWebService extends ContactWebService<ContactJsonResponse, Contact> {
+public class AddContactWebService extends ContactWebService<ContactJsonResponse, Object> {
 
     ContactJsonListener jsonListener;
 
@@ -23,21 +23,21 @@ public class AddContactWebService extends ContactWebService<ContactJsonResponse,
     }
 
     @Override
-    protected ContactJsonResponse doInBackground(Contact... contacts) {
+    protected ContactJsonResponse doInBackground(Object... contacts) {
         if (contacts.length > 0) {
-            Contact c = contacts[0];
-            String baseurl = ContactApplication.getContext().getResources().getString(R.string.API_URL);
-            String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
-            String url = baseurl + "?key=" + key + "&name=" + c.getName() + "&title=" + c.getTitle() + "&email=" + c.getEmail() + "&phone=" + c.getPhone() + "&twitterId=" + c.getTwitterId();
+            Contact c = (Contact)contacts[0];
+            if (c != null) {
+                String baseurl = ContactApplication.getContext().getResources().getString(R.string.API_URL);
+                String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
+                String url = baseurl + "?key=" + key + "&name=" + c.getName() + "&title=" + c.getTitle() + "&email=" + c.getEmail() + "&phone=" + c.getPhone() + "&twitterId=" + c.getTwitterId();
 
-            HttpRequestBase request = new HttpPost(url);
+                HttpRequestBase request = new HttpPost(url);
 
-            return (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
+                return (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
+            }
         }
-        else {
-            return null;
-        }
 
+        return null;
     }
 
     @Override

@@ -8,7 +8,7 @@ import edu.umn.kill9.contactviewer.model.pojo.Contact;
  * User: drmaas
  * Date: 3/30/13
  */
-public class DeleteContactWebService extends ContactWebService<ContactJsonResponse, Contact> {
+public class DeleteContactWebService extends ContactWebService<ContactJsonResponse, Object> {
 
 
     ContactJsonListener jsonListener;
@@ -18,9 +18,9 @@ public class DeleteContactWebService extends ContactWebService<ContactJsonRespon
     }
 
     @Override
-    protected ContactJsonResponse doInBackground(Contact... contacts) {
+    protected ContactJsonResponse doInBackground(Object... contacts) {
         if (contacts.length > 0) {
-            Contact c = contacts[0];
+            Contact c = (Contact)contacts[0];
 
             //TODO add details here
         }

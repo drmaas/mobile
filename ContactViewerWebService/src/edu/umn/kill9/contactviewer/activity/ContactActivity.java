@@ -170,7 +170,9 @@ public class ContactActivity extends Activity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        goBack();
+        if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
+            goBack();
+        }
     }
 
     public Contact getContact() {
@@ -235,11 +237,13 @@ public class ContactActivity extends Activity {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                //TODO check status of response
+                    //TODO check status of response
 
-                //set this contact
-                Contact tmpcontact = service.getContactFromJson(response.getContact());
-                setContact(tmpcontact);
+                    //set this contact
+                    if  (response != null) {
+                        Contact tmpcontact = service.getContactFromJson(response.getContact());
+                        setContact(tmpcontact);
+                    }
                 }
             });
         }
