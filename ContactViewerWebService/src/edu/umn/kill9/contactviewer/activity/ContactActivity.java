@@ -219,35 +219,40 @@ public class ContactActivity extends Activity {
         ContactWebService webservice = null;
         Contact contact = getContact();
         if (contact != null) {
-            contact.setName(nameString);
-            contact.setTitle(titleString);
-            contact.setPhone(phoneString);
-            contact.setEmail(emailString);
-            contact.setTwitterId(twitterString);
             webservice = new EditContactWebService(new ContactJsonListener() {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                //TODO check status of response
+                    //TODO check status of response
+
+                    //TODO contact verification
+                    if  (response != null) {
+                        Contact tmpcontact = service.getContactFromJson(response.getContact());
+                    }
                 }
             });
         }
         else {
+            contact = new Contact(nameString);
             webservice = new AddContactWebService(new ContactJsonListener() {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
                     //TODO check status of response
 
-                    //set this contact
+                    //TODO contact verification
                     if  (response != null) {
                         Contact tmpcontact = service.getContactFromJson(response.getContact());
-                        setContact(tmpcontact);
                     }
                 }
             });
         }
-        webservice.execute(getContact());
+        contact.setTitle(titleString);
+        contact.setPhone(phoneString);
+        contact.setEmail(emailString);
+        contact.setTwitterId(twitterString);
+        setContact(contact);
+        webservice.execute(contact);
     }
 
 
