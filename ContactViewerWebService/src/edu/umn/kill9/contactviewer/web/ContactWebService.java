@@ -74,7 +74,7 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
                 ContactJson jsonContact = contactsListJson.get(i);
                 Contact contact = new Contact(jsonContact.getName());
                 contact.setEmail(jsonContact.getEmail());
-                contact.setId(Long.parseLong(jsonContact.getId()));
+                contact.setId(jsonContact.getId());
                 contact.setPhone(jsonContact.getPhone());
                 contact.setTitle(jsonContact.getTitle());
                 contact.setTwitterId(jsonContact.getTwitterId());
@@ -97,7 +97,7 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
         if (json != null) {
             contact = new Contact(json.getName());
             contact.setEmail(json.getEmail());
-            contact.setId(Long.parseLong(json.getId()));
+            contact.setId(json.getId());
             contact.setPhone(json.getPhone());
             contact.setTitle(json.getTitle());
             contact.setTwitterId(json.getTwitterId());

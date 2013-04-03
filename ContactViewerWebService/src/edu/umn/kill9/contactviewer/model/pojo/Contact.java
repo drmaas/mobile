@@ -7,7 +7,6 @@ import android.os.Parcelable;
  *
  * Implements parcelable to pass between intents
  */
-//Awwww yeah! Caleb is awesome!
 public class Contact implements Parcelable {
 
     //Called by framework to create a contact from a parcelable
@@ -34,7 +33,7 @@ public class Contact implements Parcelable {
      * @param p
      */
     public Contact(Parcel p) {
-        _id = p.readLong();
+        _id = p.readString();
         _name  = p.readString();
         _title = p.readString();
         _email = p.readString();
@@ -42,13 +41,13 @@ public class Contact implements Parcelable {
         _twitterId = p.readString();
     }
 
-    private Long _id;
+    private String _id;
 
-    public Long getId() {
+    public String getId() {
         return _id;
     }
 
-    public void setId(Long _id) {
+    public void setId(String _id) {
         this._id = _id;
     }
 
@@ -142,7 +141,7 @@ public class Contact implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel p, int flags) {
-        p.writeLong(_id);
+        p.writeString(_id);
         p.writeString(_name);
         p.writeString(_title);
         p.writeString(_email);
