@@ -1,15 +1,12 @@
 package edu.umn.kill9.contactviewer.web;
 
-import java.util.List;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpRequestBase;
 
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.application.ContactApplication;
-import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
-import edu.umn.kill9.contactviewer.model.pojo.Contact;
-import edu.umn.kill9.contactviewer.model.json.ContactJson;
 import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 
 //import android.R;
 

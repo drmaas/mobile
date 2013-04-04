@@ -1,6 +1,5 @@
 package edu.umn.kill9.contactviewer.util;
 
-import android.content.Context;
 
 /**
  * User: drmaas

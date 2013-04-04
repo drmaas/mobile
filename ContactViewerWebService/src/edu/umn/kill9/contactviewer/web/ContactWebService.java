@@ -1,18 +1,21 @@
 package edu.umn.kill9.contactviewer.web;
 
-import android.net.http.AndroidHttpClient;
-import android.os.AsyncTask;
-import android.util.Log;
-import com.google.gson.Gson;
-import edu.umn.kill9.contactviewer.model.json.ContactJson;
-import edu.umn.kill9.contactviewer.model.pojo.Contact;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpRequestBase;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpRequestBase;
+
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import edu.umn.kill9.contactviewer.model.json.ContactJson;
+import edu.umn.kill9.contactviewer.model.pojo.Contact;
 
 /**
  * User: drmaas

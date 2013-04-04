@@ -1,6 +1,5 @@
 package edu.umn.kill9.contactviewer.model.json;
 
-import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.web.ContactWebService;
 
 /**
