@@ -244,6 +244,7 @@ public class ContactActivity extends Activity {
                 }
             });
         }
+        contact.setName(nameString);
         contact.setTitle(titleString);
         contact.setPhone(phoneString);
         contact.setEmail(emailString);
