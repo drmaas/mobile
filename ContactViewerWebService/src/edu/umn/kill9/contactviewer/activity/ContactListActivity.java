@@ -161,7 +161,12 @@ public class ContactListActivity extends ListActivity {
 
             @Override
             public void onContactListWebServiceCallComplete(ContactListJsonResponse response, ContactWebService service) {
-                //TODO check the status of response
+
+                String status = response.getStatus();
+                String message = response.getMessage();
+                if (status.equals("error")) {
+                    Toast.makeText(ContactListActivity.this, getString(R.string.WEB_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                }
 
                 // make some contacts
                 List<ContactJson> contactsListJson = response.getContacts();

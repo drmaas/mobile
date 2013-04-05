@@ -51,4 +51,5 @@
     <!-- web -->
     <string name="API_URL">http://contacts.tinyapollo.com/contacts</string>
     <string name="API_KEY">kill-9</string>
+    <string name="WEB_ERROR">Failed to load contact data, please try again later</string>
 </resources>
