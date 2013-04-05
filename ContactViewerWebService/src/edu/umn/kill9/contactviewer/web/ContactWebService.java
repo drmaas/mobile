@@ -59,7 +59,14 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
             webresponse = gson.fromJson(new InputStreamReader(response.getEntity().getContent()), clazz);
         }
         catch (IOException ex) {
-            webresponse = getContactErrorResponse(ex.getMessage());
+            if (ContactJsonResponse.class == clazz)
+            {
+            	webresponse = getContactErrorResponse(ex.getMessage());
+            }
+            else if (ContactListJsonResponse.class == clazz)
+            {
+            	webresponse = getContactListErrorResponse(ex.getMessage());
+            }
             Log.w("getJsonObject", "Error getting web object", ex);
         }
         finally {
