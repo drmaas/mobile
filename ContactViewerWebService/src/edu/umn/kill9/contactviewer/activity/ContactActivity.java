@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,15 +14,13 @@ import android.widget.Toast;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
 import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
-import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
 import edu.umn.kill9.contactviewer.util.ContactUtils;
-import edu.umn.kill9.contactviewer.web.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import edu.umn.kill9.contactviewer.web.AddContactWebService;
+import edu.umn.kill9.contactviewer.web.ContactWebService;
+import edu.umn.kill9.contactviewer.web.DeleteContactWebService;
+import edu.umn.kill9.contactviewer.web.EditContactWebService;
 
 /**
  * User: drmaas
@@ -247,6 +244,7 @@ public class ContactActivity extends Activity {
                 }
             });
         }
+        contact.setName(nameString);
         contact.setTitle(titleString);
         contact.setPhone(phoneString);
         contact.setEmail(emailString);

@@ -1,14 +1,13 @@
 package edu.umn.kill9.contactviewer.web;
 
-import edu.umn.kill9.contactviewer.R;
-import edu.umn.kill9.contactviewer.application.ContactApplication;
-import edu.umn.kill9.contactviewer.model.json.ContactJson;
-import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
-import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
-import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
-import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+
+import edu.umn.kill9.contactviewer.R;
+import edu.umn.kill9.contactviewer.application.ContactApplication;
+import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
+import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
+import edu.umn.kill9.contactviewer.model.pojo.Contact;
 
 /**
  * User: drmaas

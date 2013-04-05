@@ -8,21 +8,27 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import edu.umn.kill9.contactviewer.R;
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
 import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
-import edu.umn.kill9.contactviewer.model.json.ContactListJsonListener;
-import edu.umn.kill9.contactviewer.web.ContactListWebService;
 import edu.umn.kill9.contactviewer.ui.ToolbarConfig;
+import edu.umn.kill9.contactviewer.web.ContactListWebService;
 import edu.umn.kill9.contactviewer.web.ContactWebService;
 
 /**
@@ -106,6 +112,8 @@ public class ContactListActivity extends ListActivity {
         EditText filterText = (EditText) findViewById(R.id.search_box);
         filterText.addTextChangedListener(filterTextWatcher);
 
+        // This will remove the keyboard from being displayed when this activity is created, but it will still have focus
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
