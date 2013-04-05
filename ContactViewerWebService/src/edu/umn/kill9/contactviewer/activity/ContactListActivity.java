@@ -137,10 +137,10 @@ public class ContactListActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //re-open database and refresh data
-        if(resultCode == RESULT_OK) {
+        //always refresh the contact list
+        //if(resultCode == RESULT_OK) {
             refreshContactsFromWebService();
-        }
+        //}
     }
 
     @Override

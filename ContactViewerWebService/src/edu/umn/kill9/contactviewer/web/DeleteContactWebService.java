@@ -32,7 +32,7 @@ public class DeleteContactWebService extends ContactWebService<ContactJsonRespon
                 String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
                 String url = baseurl + "/" + c.getId() + "?key=" + key;
 
-                HttpRequestBase request = new HttpDelete(encode(url));
+                HttpRequestBase request = new HttpDelete(url);
 
                 response = (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
             }
