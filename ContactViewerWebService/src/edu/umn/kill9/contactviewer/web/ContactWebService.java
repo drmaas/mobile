@@ -51,13 +51,15 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
      */
     protected Object getJsonObject(HttpRequestBase request, Class clazz) {
         AndroidHttpClient client = null;
+        Object webresponse = null;
         try {
             client = AndroidHttpClient.newInstance("Android", null);
             HttpResponse response = client.execute(request);
             Gson gson = new Gson();
-            return gson.fromJson(new InputStreamReader(response.getEntity().getContent()), clazz);
+            webresponse = gson.fromJson(new InputStreamReader(response.getEntity().getContent()), clazz);
         }
         catch (IOException ex) {
+            webresponse = getContactErrorResponse(ex.getMessage());
             Log.w("getJsonObject", "Error getting web object", ex);
         }
         finally {
@@ -65,7 +67,7 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
                 client.close();
             }
         }
-        return null;
+        return webresponse;
     }
 
 
