@@ -30,6 +30,7 @@ public class ContactActivity extends Activity {
 
     private Contact c;
     private boolean edit;
+    private boolean goback;
 
     private EditText name;
     private EditText title;
@@ -186,11 +187,12 @@ public class ContactActivity extends Activity {
     private void goBack() {
 
     	save();
-    	
-    	Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
 
-        setResult(RESULT_OK, null);
-        finish();
+        if (goback) {
+            Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK, null);
+            finish();
+        }
     }
 
     /**
@@ -205,6 +207,7 @@ public class ContactActivity extends Activity {
      * save and stay on screen
      */
     private void save() {
+        goback = true;
         Toast.makeText(ContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
 
         String nameString = name.getText().toString();
@@ -220,7 +223,13 @@ public class ContactActivity extends Activity {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                    //TODO check status of response
+
+                    String status = response.getStatus();
+                    String message = response.getMessage();
+                    if (status.equals("error")) {
+                        goback = false;
+                        Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                    }
 
                     //TODO contact verification
                     if  (response != null) {
@@ -235,7 +244,13 @@ public class ContactActivity extends Activity {
 
                 @Override
                 public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                    //TODO check status of response
+
+                    String status = response.getStatus();
+                    String message = response.getMessage();
+                    if (status.equals("error")) {
+                        goback = false;
+                        Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                    }
 
                     //TODO contact verification
                     if  (response != null) {
@@ -258,6 +273,7 @@ public class ContactActivity extends Activity {
      * delete and go back
      */
     private void delete() {
+        goback = true;
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -269,10 +285,14 @@ public class ContactActivity extends Activity {
 
                             @Override
                             public void onContactWebServiceCallComplete(ContactJsonResponse response, ContactWebService service) {
-                                //TODO check status of response
+                                String status = response.getStatus();
+                                String message = response.getMessage();
+                                if (status.equals("error")) {
+                                    goback = false;
+                                    Toast.makeText(ContactActivity.this, getString(R.string.WEB_DELETE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
-                        //TODO pass in contact object to doInBackground
                         deleteservice.execute(getContact());
 
                         finish();
