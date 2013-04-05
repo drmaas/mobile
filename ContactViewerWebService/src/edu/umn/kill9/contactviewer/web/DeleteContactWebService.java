@@ -6,7 +6,6 @@ import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
 import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 
 /**
