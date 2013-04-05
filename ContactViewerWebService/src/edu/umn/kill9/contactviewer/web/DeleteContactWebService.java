@@ -23,6 +23,7 @@ public class DeleteContactWebService extends ContactWebService<ContactJsonRespon
 
     @Override
     protected ContactJsonResponse doInBackground(Object... contacts) {
+        ContactJsonResponse response = null;
         if (contacts.length > 0) {
             Contact c = (Contact)contacts[0];
 
@@ -31,12 +32,20 @@ public class DeleteContactWebService extends ContactWebService<ContactJsonRespon
                 String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
                 String url = baseurl + "/" + c.getId() + "?key=" + key;
 
-                HttpRequestBase request = new HttpDelete(url);
+                HttpRequestBase request = new HttpDelete(encode(url));
 
-                return (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
+                response = (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
             }
+            else {
+                response = getContactErrorResponse("Can't delete null contact!");
+            }
+
         }
-        return null;
+        else {
+            response = getContactErrorResponse("No contacts to delete!");
+        }
+
+        return response;
     }
 
     @Override

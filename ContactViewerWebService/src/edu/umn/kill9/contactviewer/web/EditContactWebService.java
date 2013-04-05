@@ -32,21 +32,28 @@ public class EditContactWebService extends ContactWebService<ContactJsonResponse
             if (c != null) {
                 String baseurl = ContactApplication.getContext().getResources().getString(R.string.API_URL);
                 String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
-                String url = baseurl + "/" + c.getId() + "?key=" + key + "&name=" + c.getName() + "&title=" + c.getTitle() + "&email=" + c.getEmail() + "&phone=" + c.getPhone() + "&twitterId=" + c.getTwitterId();
-                String newurl = Pattern.compile(" ").matcher(url).replaceAll("%20");
-                try {
-                	HttpRequestBase request = new HttpPut(newurl);
-                    response = (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
-                }
-                catch (Exception e)
-                {
-                	System.out.println(e);
-                	response = new ContactJsonResponse();
-                	response.setStatus("error");
-                	response.setMessage(e.toString());
-                }
+                String url = baseurl + "/" + c.getId() + "?key=" + key + "&name=" + encode(c.getName()) + "&title=" + encode(c.getTitle()) + "&email=" + encode(c.getEmail()) + "&phone=" + encode(c.getPhone()) + "&twitterId=" + encode(c.getTwitterId());
+                //String newurl = Pattern.compile(" ").matcher(url).replaceAll("%20");
+                //try {
+                HttpRequestBase request = new HttpPut(url);
+                response = (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
+                //}
+                //catch (Exception e)
+                //{
+                //	System.out.println(e);
+                // 	response = new ContactJsonResponse();
+                //	response.setStatus("error");
+                //	response.setMessage(e.toString());
+                //}
+            }
+            else {
+                response = getContactErrorResponse("Can't edit null contact!");
             }
         }
+        else {
+            response = getContactErrorResponse("No contacts to edit!");
+        }
+
         return response;
     }
 

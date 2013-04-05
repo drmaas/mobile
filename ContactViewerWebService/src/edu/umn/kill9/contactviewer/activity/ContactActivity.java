@@ -108,7 +108,7 @@ public class ContactActivity extends Activity {
         lbutton.setOnClickListener(new View.OnClickListener() {
             //go back, saving everything
             public void onClick(View v) {
-                if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
+                if (validateContact(name.getText().toString(), title.getText().toString(), email.getText().toString(), phone.getText().toString(), twitter.getText().toString())) {
                     goBack();
                 }
             }
@@ -121,7 +121,7 @@ public class ContactActivity extends Activity {
         mbutton.setOnClickListener(new View.OnClickListener() {
             //save everything but don't go back
             public void onClick(View v) {
-                if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
+                if (validateContact(name.getText().toString(), title.getText().toString(), email.getText().toString(), phone.getText().toString(), twitter.getText().toString())) {
                     save();
                 }
             }
@@ -167,7 +167,7 @@ public class ContactActivity extends Activity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        if (validateContact(name.getText().toString(), email.getText().toString(), phone.getText().toString())) {
+        if (validateContact(name.getText().toString(), title.getText().toString(), email.getText().toString(), phone.getText().toString(), twitter.getText().toString())) {
             goBack();
         }
     }
@@ -291,13 +291,18 @@ public class ContactActivity extends Activity {
     }
 
     /**
-     * validate that name
+     * validate a user input string value
      *
-     * @param name_value
+     * @param value
      * @return
      */
-    private boolean validateName(String name_value) {
-        return !ContactUtils.empty(name_value);
+    private boolean validateString(String value) {
+        if (ContactUtils.empty(value)) { // || value.contains("?") || value.contains("&")) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     /**
@@ -384,11 +389,13 @@ public class ContactActivity extends Activity {
     	}
 	}
     
-    private boolean validateContact (String name, String email, String phone) {
+    private boolean validateContact (String name, String title, String email, String phone, String twitter) {
 
-    	boolean name_valid = validateName(name);
+    	boolean name_valid = validateString(name);
+        boolean title_valid = validateString(title);
     	boolean email_valid = validateEmail(email);
     	boolean phone_valid = validatePhone(phone);
+        boolean twitter_valid = validateString(twitter);
     	
         boolean contact_valid = true;
         
@@ -399,7 +406,12 @@ public class ContactActivity extends Activity {
         	contact_valid = false;
             messageText += getString(R.string.name_not_empty) + "\n";        	
         }
-        
+
+        if (!title_valid) {
+            contact_valid = false;
+            messageText += getString(R.string.title_invalid) + "\n";
+        }
+
         if(!email_valid)
         {
         	contact_valid = false;
@@ -410,6 +422,11 @@ public class ContactActivity extends Activity {
         {
         	contact_valid = false;
             messageText += getString(R.string.phone_num_invalid) + "\n";        	
+        }
+
+        if (!twitter_valid) {
+            contact_valid = false;
+            messageText += getString(R.string.twitter_invalid) + "\n";
         }
         
         if (!contact_valid) {

@@ -38,9 +38,11 @@
     <!-- validation -->
     <string name="ok">OK</string>
     <string name="error">Error</string>
-    <string name="name_not_empty">Thy contact shall not be nameless</string>
+    <string name="name_not_empty">Thy contact is not valid</string>
+    <string name="title_invalid">Thy title is invalid</string>
     <string name="email_address_invalid">Thy email address is not valid</string>
     <string name="phone_num_invalid">Thy phone number is not valid</string>
+    <string name="twitter_invalid">Thy twitter account name is invalid</string>
     <string name="no_dialer_msg">There are no dialer clients installed</string>
     <string name="no_sms_msg">There are no SMS clients installed</string>
     <string name="no_email_msg">There are no email clients installed</string>

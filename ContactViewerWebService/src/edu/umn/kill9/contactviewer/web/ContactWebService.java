@@ -2,9 +2,13 @@ package edu.umn.kill9.contactviewer.web;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
+import edu.umn.kill9.contactviewer.model.json.ContactListJsonResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 
@@ -107,5 +111,45 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
         }
 
         return contact;
+    }
+
+    /**
+     *
+     * @param url
+     * @return
+     */
+    protected String encode(String url) {
+        try {
+            return URLEncoder.encode(url, "UTF-8");
+        }
+        catch (UnsupportedEncodingException e) {
+            return url;
+        }
+    }
+
+    /**
+     *
+     * @param message
+     * @return
+     */
+    protected ContactJsonResponse getContactErrorResponse(String message) {
+        ContactJsonResponse response = new ContactJsonResponse();
+        response.setStatus("error");
+        response.setMessage(message);
+
+        return response;
+    }
+
+    /**
+     *
+     * @param message
+     * @return
+     */
+    protected ContactListJsonResponse getContactListErrorResponse(String message) {
+        ContactListJsonResponse response = new ContactListJsonResponse();
+        response.setStatus("error");
+        response.setMessage(message);
+
+        return response;
     }
 }

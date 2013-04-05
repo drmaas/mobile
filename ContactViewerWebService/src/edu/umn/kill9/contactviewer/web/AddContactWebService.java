@@ -9,6 +9,8 @@ import edu.umn.kill9.contactviewer.model.json.ContactJsonListener;
 import edu.umn.kill9.contactviewer.model.json.ContactJsonResponse;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
 
+import java.net.URLEncoder;
+
 /**
  * User: drmaas
  * Date: 3/30/13
@@ -28,15 +30,19 @@ public class AddContactWebService extends ContactWebService<ContactJsonResponse,
             if (c != null) {
                 String baseurl = ContactApplication.getContext().getResources().getString(R.string.API_URL);
                 String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
-                String url = baseurl + "?key=" + key + "&name=" + c.getName() + "&title=" + c.getTitle() + "&email=" + c.getEmail() + "&phone=" + c.getPhone() + "&twitterId=" + c.getTwitterId();
+                String url = baseurl + "?key=" + key + "&name=" + encode(c.getName()) + "&title=" + encode(c.getTitle()) + "&email=" + encode(c.getEmail()) + "&phone=" + encode(c.getPhone()) + "&twitterId=" + encode(c.getTwitterId());
 
                 HttpRequestBase request = new HttpPost(url);
 
                 return (ContactJsonResponse)getJsonObject(request, ContactJsonResponse.class);
             }
+            else {
+                return getContactErrorResponse("Can't add null contact!");
+            }
         }
-
-        return null;
+        else {
+            return getContactErrorResponse("No contacts to add!");
+        }
     }
 
     @Override
