@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 
 import edu.umn.kill9.contactviewer.model.json.ContactJson;
 import edu.umn.kill9.contactviewer.model.pojo.Contact;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
 
 /**
  * User: drmaas
@@ -160,5 +162,25 @@ public abstract class ContactWebService<T, R> extends AsyncTask<R, Void, T> {
         response.setMessage(message);
 
         return response;
+    }
+
+    /**
+     *
+     * @param c
+     * @return
+     */
+    protected String contactToJSON(Contact c) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("name", c.getName());
+            json.put("title", c.getTitle());
+            json.put("phone", c.getPhone());
+            json.put("email", c.getEmail());
+            json.put("twitterId", c.getTwitterId());
+        }
+        catch (Exception e) {
+            Log.w("contactToJSON", "Error creating JSON from contact", e);
+        }
+        return json.toString();
     }
 }

@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -165,7 +167,8 @@ public class ContactListActivity extends ListActivity {
                 String status = response.getStatus();
                 String message = response.getMessage();
                 if (status.equals("error")) {
-                    Toast.makeText(ContactListActivity.this, getString(R.string.WEB_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ContactListActivity.this, getString(R.string.WEB_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                    showError(getString(R.string.WEB_ERROR) + "\nReason: " + message);
                 }
 
                 // make some contacts
@@ -228,6 +231,28 @@ public class ContactListActivity extends ListActivity {
         }
 
     };
+
+    /**
+     * Show error message
+     *
+     * @param message
+     */
+    private void showError(String message) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setPositiveButton(getString(R.string.ok), dialogClickListener).show();
+    }
     
 }
 

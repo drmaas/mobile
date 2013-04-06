@@ -28,6 +28,12 @@ public class Contact implements Parcelable {
 	}
 
     /**
+     *
+     */
+    public Contact() {
+    }
+
+    /**
      * Constructor for parcelable
      *
      * @param p

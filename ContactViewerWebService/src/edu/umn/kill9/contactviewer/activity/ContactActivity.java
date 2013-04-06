@@ -185,14 +185,9 @@ public class ContactActivity extends Activity {
      * go back and keep all saves, including most recent unsaved change
      */
     private void goBack() {
-
+        goback = true;
     	save();
 
-        if (goback) {
-            Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
-            setResult(RESULT_OK, null);
-            finish();
-        }
     }
 
     /**
@@ -207,7 +202,6 @@ public class ContactActivity extends Activity {
      * save and stay on screen
      */
     private void save() {
-        goback = true;
         Toast.makeText(ContactActivity.this, getString(R.string.save_contact_toast), Toast.LENGTH_SHORT).show();
 
         String nameString = name.getText().toString();
@@ -227,8 +221,16 @@ public class ContactActivity extends Activity {
                     String status = response.getStatus();
                     String message = response.getMessage();
                     if (status.equals("error")) {
-                        goback = false;
-                        Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                        showError(getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message);
+                    }
+                    else {
+                        if (goback) {
+                            goback = false;
+                            Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK, null);
+                            finish();
+                        }
                     }
 
                     //TODO contact verification
@@ -248,8 +250,16 @@ public class ContactActivity extends Activity {
                     String status = response.getStatus();
                     String message = response.getMessage();
                     if (status.equals("error")) {
-                        goback = false;
-                        Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ContactActivity.this, getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                        showError(getString(R.string.WEB_SAVE_ERROR) + "\nReason: " + message);
+                    }
+                    else {
+                        if (goback) {
+                            goback = false;
+                            Toast.makeText(ContactActivity.this, getString(R.string.done_contact_toast), Toast.LENGTH_SHORT).show();
+                            setResult(RESULT_OK, null);
+                            finish();
+                        }
                     }
 
                     //TODO contact verification
@@ -288,14 +298,15 @@ public class ContactActivity extends Activity {
                                 String status = response.getStatus();
                                 String message = response.getMessage();
                                 if (status.equals("error")) {
-                                    goback = false;
-                                    Toast.makeText(ContactActivity.this, getString(R.string.WEB_DELETE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(ContactActivity.this, getString(R.string.WEB_DELETE_ERROR) + "\nReason: " + message, Toast.LENGTH_SHORT).show();
+                                    showError(getString(R.string.WEB_DELETE_ERROR) + "\nReason: " + message);
+                                }
+                                else {
+                                    finish();
                                 }
                             }
                         });
                         deleteservice.execute(getContact());
-
-                        finish();
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -308,6 +319,28 @@ public class ContactActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.confirm_delete) + (c==null?"":c.getName()) + "?").setPositiveButton(getString(R.string.yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
+    }
+
+    /**
+     * Show error message
+     *
+     * @param message
+     */
+    private void showError(String message) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message).setPositiveButton(getString(R.string.ok), dialogClickListener).show();
     }
 
     /**
