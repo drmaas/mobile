@@ -1,39 +1,143 @@
-//function saveContact(contact, cb) {
-
-//    $.ajax('http://contacts.tinyapollo.com/contacts/' + contact._id + 
-//    }
-
-
-
-
-
-
-
-
-
 var _apiKey = 'kill-9';
-var _contacts = null;
+var _baseUrl = 'http://contacts.tinyapollo.com/contacts';
+var _selectedContact;
 
 //gets the contact list from the server
 function getContacts(cb) {
+    var url = _baseUrl + '?key=' + _apiKey;
     $.get(
-        'http://contacts.tinyapollo.com/contacts?key=' + _apiKey,
+        url,
         function(data) {
-            _contacts = data.contacts;
-            cb();
-        }
-    )
+	    if (data.status === 'success') {
+                var contacts = data.contacts;
+                cb(contacts);
+	    }
+	    else {
+                return alert("Error: " + data.message);
+            }   
+        },
+	'json'
+    );
 }
 
-//home page before show
-$(document).on("pagebeforeshow", "#home-page", function() {
+//gets specific contact from the server
+function getContact(id, cb) {
+    var url = _baseUrl + '/' + id + '?key=' + _apiKey;
+    $.get(
+        _baseUrl + '/' + id + '?key=' + _apiKey,
+	function(data) {
+	    if (data.status === 'success') {
+	        var contact = data.contact;
+	        cb(contact);
+	    }
+	    else {
+                return alert("Error: " + data.message);
+            }  
+	},
+	'json'
+    );
+}
+
+//add a new contact with data in 'contact' object
+function addContact(contact, cb) {
+    var url = _baseUrl + '?key=' + _apiKey;
+    $.post(
+        url,
+	contact,
+	function(data) {
+	    if (data.status === 'success') {
+	        var contact = data.contact;
+	        cb(contact);
+	    }
+	    else {
+                return alert("Error: " + data.message);
+            } 	
+	},
+	'json'
+    );
+}
+
+//update an existing contact
+function updateContact(contact, cb) {
+var item, url;
+    var id = contact.id;
+    var url = _baseUrl + '/' + id + '?key=' + _apiKey;
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        dataType: 'json',
+        data: contact,
+        success: function(data) {
+            if (data.status === 'success') {
+		var contact = data.contact;
+	        cb(contact);
+            }  
+            else {
+                 return alert("Error: " + data.message);
+            }
+        }
+    });
+ }
+ 
+ //delete this contact
+ function deleteContact(contact, cb) {
+    var id = contact.id;
+    var url = _baseUrl + '/' + id + '?key=' + _apiKey;
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+        dataType: 'json',
+        success: function(data) {
+            if (data.status === 'success') {
+	        cb();
+            }  
+            else {
+                 return alert(data.message);
+            }
+        }
+    });
+ }
+
+//contact list before show
+$(document).on("pagebeforeshow", "#home-page", function(event) {
     var contactList = $('#contact-list');
     contactList.html('');
-    getContacts(function() {
-        for (var i in _contacts) {
-            var contact = _contacts[i];
-            contactList.append('<li><a href="#">' + contact.name + '</a></li>');
+	
+	//get contact list
+    getContacts(function(contacts) {
+		//insert elements into DOM tree
+        for (var i in contacts) {
+            var contact = contacts[i];
+			var contactId = contact._id;
+            contactList.append('<li><a href="#" id=' + i + '>' + contact.name + '</a></li>');
+			
+			//set up links for contact items 
+			$(document).on('click', '#'+i, { contact: contact }, function(event) {
+				if(event.handled !== true) // This will prevent event triggering more then once
+				{
+					_selectedContact = event.data.contact;
+					$.mobile.changePage( $("#details"), { transition: "slide"} );
+					event.handled = true;
+				}              
+			});
         }
         contactList.listview('refresh');
-    })
-})
+
+    });
+	
+});
+
+//contact details before show
+$(document).on('pagebeforeshow', '#details', function(event,data) {    
+    var contact = _selectedContact;
+	var name = $('#contact [name="name"]');
+	var title = $('#contact [name="title"]'); 
+	var email = $('#contact [name="email"]'); 
+	var phone = $('#contact [name="phone"]'); 
+	var twitter = $('#contact [name="twitterId"]'); 
+	$(name).val(contact.name);
+	$(title).val(contact.title);
+	$(email).val(contact.email);
+	$(phone).val(contact.phone);
+	$(twitter).val(contact.twitterId);
+});
