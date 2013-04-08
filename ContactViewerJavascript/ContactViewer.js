@@ -2,6 +2,19 @@ var _apiKey = 'kill-9';
 var _baseUrl = 'http://contacts.tinyapollo.com/contacts';
 var _selectedContact;
 
+//populate contact fields
+function setContactValues(contact) {
+	var name = $('#contact [name="name"]');
+	var title = $('#contact [name="title"]'); 
+	var email = $('#contact [name="email"]'); 
+	var phone = $('#contact [name="phone"]'); 
+	var twitter = $('#contact [name="twitterId"]'); 
+	$(name).val(contact.name);
+	$(title).val(contact.title);
+	$(email).val(contact.email);
+	$(phone).val(contact.phone);
+	$(twitter).val(contact.twitterId);
+}
 //gets the contact list from the server
 function getContacts(cb) {
     var url = _baseUrl + '?key=' + _apiKey;
@@ -130,14 +143,5 @@ $(document).on("pagebeforeshow", "#home-page", function(event) {
 //contact details before show
 $(document).on('pagebeforeshow', '#details', function(event,data) {    
     var contact = _selectedContact;
-	var name = $('#contact [name="name"]');
-	var title = $('#contact [name="title"]'); 
-	var email = $('#contact [name="email"]'); 
-	var phone = $('#contact [name="phone"]'); 
-	var twitter = $('#contact [name="twitterId"]'); 
-	$(name).val(contact.name);
-	$(title).val(contact.title);
-	$(email).val(contact.email);
-	$(phone).val(contact.phone);
-	$(twitter).val(contact.twitterId);
+    setContactValues(contact);
 });
