@@ -8,13 +8,15 @@
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
         <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-        <script type="text/javascript" src="ContactViewer.js"></script>
-        <link rel="stylesheet" type="text/css" href="ContactViewer.css" />
+        <script type="text/javascript" src="js/ContactViewer.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/ContactViewer.css" />
+		<!--<link rel="stylesheet" type="text/css" href="css/themes/kill-9.min.css" />-->
     </head>
     <body>
         <div data-role="page" id="home-page">
             <div data-role="header">
                 <h1>Contact List</h1>
+				<a href="#details" class="ui-btn-left" id="new">New</a>
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-filter="true" id="contact-list">
@@ -27,7 +29,8 @@
 		<div data-role="page" id="details">
 		    <div data-role="header" data-theme="a">
                 <h1>Contact Details</h1>
-				<a href="#home-page" class="ui-btn-left">Back</a>
+				<a href="#home-page" class="ui-btn-left" id="back">Back</a>
+				<a href="#home-page" class="ui-btn-right" id="cancel">Cancel</a>
             </div>
 			<div data-role="content">
 				<div id="contact">

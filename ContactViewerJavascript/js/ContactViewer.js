@@ -2,6 +2,17 @@ var _apiKey = 'kill-9';
 var _baseUrl = 'http://contacts.tinyapollo.com/contacts';
 var _selectedContact;
 
+//return a new empty contact object
+function newContact() {
+    return {
+		name:"",
+		title:"",
+		email:"",
+		phone:"",
+		twitterId:""
+	};
+}
+
 //populate contact fields
 function setContactValues(contact) {
 	var name = $('#contact [name="name"]');
@@ -140,8 +151,18 @@ $(document).on("pagebeforeshow", "#home-page", function(event) {
 	
 });
 
+//add new contact listener
+$(document).on('click', '#new', function(event, data) {
+	if(event.handled !== true) // This will prevent event triggering more then once
+	{
+		_selectedContact = newContact();
+		$.mobile.changePage( $("#details"), { transition: "slide"} );
+		event.handled = true;
+	}              
+});
+
 //contact details before show
-$(document).on('pagebeforeshow', '#details', function(event,data) {    
+$(document).on('pagebeforeshow', '#details', function(event, data) {    
     var contact = _selectedContact;
     setContactValues(contact);
 });
