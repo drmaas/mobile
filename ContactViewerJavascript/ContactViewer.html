@@ -15,8 +15,8 @@
     <body>
         <div data-role="page" id="home-page">
             <div data-role="header">
+				<a href="#details" data-role="button" data-icon="new" id="new">New</a>
                 <h1>Contact List</h1>
-				<a href="#details" class="ui-btn-left" id="new">New</a>
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-filter="true" id="contact-list">
@@ -28,9 +28,9 @@
 	
 		<div data-role="page" id="details">
 		    <div data-role="header" data-theme="a">
+				<a href="#home-page" data-role="button" data-icon="back" id="back">Back</a>
                 <h1>Contact Details</h1>
-				<a href="#home-page" class="ui-btn-left" id="back">Back</a>
-				<a href="#home-page" class="ui-btn-right" id="cancel">Cancel</a>
+				<a href="#home-page" data-role="button" data-icon="check" id="save">Save</a>
             </div>
 			<div data-role="content">
 				<div id="contact">
