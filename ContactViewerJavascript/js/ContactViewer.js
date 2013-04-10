@@ -234,3 +234,31 @@ $(document).on('click', '#back', function(event, data) {
 	
 	event.handled = true;
 });
+
+//delete contact dialog
+$(document).on('click', '#delete', function(event, data) {
+	if(event.handled !== true) // This will prevent event triggering more then once
+	{
+		//create delete dialog
+		$("#deleteDialog [data-role='header'] h2").html('Delete Contact');
+		$("#deleteDialog [data-role='content'] p").html('Delete ' + _selectedContact.name + '?');
+		$.mobile.changePage( $("#deleteDialog"), { role: "dialog", transition:"flip", closeBtnText: "Fermer" } );l
+	}
+	
+	event.handled = true;
+});
+
+//delete contact
+$(document).on('click', '#deleteOK', function(event, data) {
+	if(event.handled !== true) // This will prevent event triggering more then once
+	{
+		var current = getContactFromPage();
+		current._id = _selectedContact._id;
+		deleteContact(current, function() {
+			//do any stuff here
+		});
+		$.mobile.changePage( $("#home-page") );
+	}
+	
+	event.handled = true;
+});
