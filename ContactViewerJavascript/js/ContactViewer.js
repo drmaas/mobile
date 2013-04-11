@@ -3,6 +3,12 @@ var _baseUrl = 'http://contacts.tinyapollo.com/contacts';
 var _selectedContact;
 var  _operation;
 
+//refresh the contact list
+function refreshContactList() {
+		var contactList = $('#contact-list');
+		contactList.listview('refresh');	
+}
+
 //return a new empty contact object
 function newContact() {
     return {
@@ -93,7 +99,7 @@ function addContact(contact, cb) {
 }
 
 //update an existing contact
-function updateContact(contact, cb) {
+function updateContact(contact, confirm, cb) {
 var item, url;
     var id = contact._id;
 	delete(contact['_id']); //need to remove _id from payload
@@ -107,7 +113,9 @@ var item, url;
             if (data.status === 'success') {
 				var contact = data.contact;
 				cb(contact);
-				return alert(data.message);
+				if (confirm) {
+					return alert(data.message);
+				}
             }  
             else {
                  return alert("Error: " + data.message);
@@ -131,7 +139,7 @@ var item, url;
         success: function(data) {
             if (data.status === 'success') {
 				cb();
-				return alert(data.message);
+				//return alert(data.message);
             }  
             else {
                  return alert("Error:" + data.message);
@@ -172,8 +180,7 @@ $(document).on("pagebeforeshow", "#home-page", function(event) {
 				}              
 			});
         }
-        contactList.listview('refresh');
-
+        refreshContactList();
     });
 	
 });
@@ -204,7 +211,7 @@ $(document).on('click', '#save', function(event, data) {
 		//if contact exists
 		if (_operation === 'view') {
 			current._id = _selectedContact._id;
-			updateContact(current, function(contact) {
+			updateContact(current, true, function(contact) {
 				_selectedContact = contact; //set current contact to that returned from request
 			});
 		}
@@ -226,10 +233,10 @@ $(document).on('click', '#back', function(event, data) {
 	{
 		var current = getContactFromPage();
 		current._id = _selectedContact._id;
-		updateContact(current, function(contact) {
+		updateContact(current, false, function(contact) {
 			_selectedContact = contact; //set current contact to that returned from request
+			$.mobile.changePage( $("#home-page") );
 		});
-		$.mobile.changePage( $("#home-page") );
 	}
 	
 	event.handled = true;
@@ -242,7 +249,7 @@ $(document).on('click', '#delete', function(event, data) {
 		//create delete dialog
 		$("#deleteDialog [data-role='header'] h2").html('Delete Contact');
 		$("#deleteDialog [data-role='content'] p").html('Delete ' + _selectedContact.name + '?');
-		$.mobile.changePage( $("#deleteDialog"), { role: "dialog", transition:"flip", closeBtnText: "Fermer" } );l
+		$.mobile.changePage( $("#deleteDialog"), { role: "dialog", transition:"flip" } );
 	}
 	
 	event.handled = true;
@@ -255,9 +262,8 @@ $(document).on('click', '#deleteOK', function(event, data) {
 		var current = getContactFromPage();
 		current._id = _selectedContact._id;
 		deleteContact(current, function() {
-			//do any stuff here
+			$.mobile.changePage( $("#home-page") );
 		});
-		$.mobile.changePage( $("#home-page") );
 	}
 	
 	event.handled = true;
