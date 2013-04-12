@@ -10,58 +10,58 @@
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
         <script src="js/ContactViewer.js"></script>
         <link rel="stylesheet" type="text/css" href="css/ContactViewer.css" />
-		<!--<link rel="stylesheet" type="text/css" href="css/themes/kill-9.min.css" />-->
+        <!--<link rel="stylesheet" type="text/css" href="css/themes/kill-9.min.css" />-->
     </head>
     <body>
         <div data-role="page" id="home-page">
             <div data-role="header">
-				<a href="#details" data-role="button" data-icon="new" id="new">New</a>
+                <a href="#details" data-role="button" data-icon="new" id="new">New</a>
                 <h1>Contact List</h1>
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-filter="true" id="contact-list">
                 </ul>
             </div>
-			<div data-role="footer" data-position="fixed">
-			</div>
+            <div data-role="footer" data-position="fixed">
+            </div>
         </div>
-	
-		<div data-role="page" id="details">
-		    <div data-role="header" data-theme="a">
-				<a href="#" data-role="button" data-icon="back" id="back">Back</a>
+
+        <div data-role="page" id="details">
+            <div data-role="header" data-theme="a">
+                <a href="#" data-role="button" data-icon="back" id="back">Back</a>
                 <h1>Contact Details</h1>
             </div>
-			<div data-role="content">
-				<div id="contact">
-					<label>Name:</label><input type="text" name="name" value=""/>
-					<label>Title:</label><input type="text" name="title" value=""/>
-					<label>Email:</label><input type="email" name="email" value=""/>
-					<label>Phone:</label><input type="text" name="phone" value=""/>
-					<label>Twitter ID:</label><input type="text" name="twitterId" value=""/>
-				</div>
-			</div>
+            <div data-role="content">
+                <div id="contact">
+                    <label>Name:</label><input type="text" name="name" value=""/>
+                    <label>Title:</label><input type="text" name="title" value=""/>
+                    <label>Email:</label><input type="email" name="email" value=""/>
+                    <label>Phone:</label><input type="text" name="phone" value=""/>
+                    <label>Twitter ID:</label><input type="text" name="twitterId" value=""/>
+                </div>
+            </div>
 
-			<div data-role="footer" data-theme="a" data-position="fixed">
-				<div class="ui-btn-center" data-role="controlgroup" data-type="horizontal">          
-					<a href="#" data-role="button" data-icon="check" id="save">Save</a>
-					<a href="#home-page" data-role="button" data-icon="delete" id="cancel">Cancel</a>
-					<a href="#" data-role="button" data-icon="minus" id="delete">Delete</a>
-				</div>
-			</div>
-		</div>    
-		
-		<div data-role="page" id="deleteDialog" >
-			<div data-role="header">
-				<h2></h2>
-			</div>
-			<div data-role="content">
-				<p></p>
-				<a href="#" data-role="button" id="deleteOK">OK</a>       
-				<a href="#" data-role="button" data-rel="back" id="#deleteCancel">Cancel</a>    
-			</div>
-			<div data-role="footer" data-theme="a" data-position="fixed">
-			</div>
-		</div>
-		
+            <div data-role="footer" data-theme="a" data-position="fixed">
+                <div class="ui-btn-center" data-role="controlgroup" data-type="horizontal">
+                    <a href="#" data-role="button" data-icon="check" id="save">Save</a>
+                    <a href="#home-page" data-role="button" data-icon="delete" id="cancel">Cancel</a>
+                    <a href="#" data-role="button" data-icon="minus" id="delete">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="deleteDialog" >
+            <div data-role="header">
+                <h2></h2>
+            </div>
+            <div data-role="content">
+                <p></p>
+                <a href="#" data-role="button" id="deleteOK">OK</a>
+                <a href="#" data-role="button" data-rel="back" id="#deleteCancel">Cancel</a>
+            </div>
+            <div data-role="footer" data-theme="a" data-position="fixed">
+            </div>
+        </div>
+
     </body>
 </html>
