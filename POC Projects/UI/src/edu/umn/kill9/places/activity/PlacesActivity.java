@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.adapter.CategoryAdapter;
+import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.data.SampleCategoryList;
 import edu.umn.kill9.places.dialog.AddCategoryDialogFragment;
 import edu.umn.kill9.places.model.Category;
@@ -43,7 +45,7 @@ public class PlacesActivity extends BaseActivity {
         enableNavigationMode();
 
         //setup navigation menu to switch between list and map view
-        SpinnerAdapter viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view));
+        final SpinnerAdapter viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), currentView);
         getActionBar().setListNavigationCallbacks(viewSpinnerAdapter, new ActionBar.OnNavigationListener() {
             // Get the same strings provided for the drop-down's ArrayAdapter
             String[] strings = getResources().getStringArray(R.array.locations_navigation_view);
@@ -54,12 +56,12 @@ public class PlacesActivity extends BaseActivity {
                 if (item.equals(LISTVIEW)) {
                     //show list view
                     setContentView(R.layout.locations_list);
-                    currentView = LISTVIEW;
+                    ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(LISTVIEW);
                 }
                 else if (item.equals(MAPVIEW)) {
                     //show map view
-                    currentView = MAPVIEW;
                     setContentView(R.layout.locations_map);
+                    ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(MAPVIEW);
                 }
                 return true;
             }
@@ -166,50 +168,6 @@ public class PlacesActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu (Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    /**
-     * This class provides behavior to hide/alter items in the drop-down list
-     */
-    public class NavigationAdapter extends ArrayAdapter<String> {
-
-        String[] strings = getResources().getStringArray(R.array.locations_navigation_view);
-
-        public NavigationAdapter(Context context, int textViewResourceId, String[] objects) {
-            super(context, textViewResourceId, objects);
-        }
-
-        /**
-         * Hide current item if it's the currently applied view
-         *
-         * @param position
-         * @param convertView
-         * @param parent
-         * @return
-         */
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-
-            View v = null;
-            String item = strings[position];
-
-            if (currentView.equals(item)) {
-                TextView tv = new TextView(getContext());
-                tv.setHeight(0);
-                tv.setVisibility(View.GONE);
-                v = tv;
-            }
-            else {
-                v = super.getDropDownView(position, null, parent);
-            }
-
-            // Hide scroll bar because it appears sometimes unnecessarily, this does not prevent scrolling
-            parent.setVerticalScrollBarEnabled(false);
-
-            return v;
-
-        }
-
     }
 
 }
