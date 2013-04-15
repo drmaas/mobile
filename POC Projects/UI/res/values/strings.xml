@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Favorite Places</string>
+    <string name="locations_title">Locations</string>
+    <string name="settings">Settings</string>
+
+    <!-- drop-down action menu for locations_list page to show locations_list as map -->
+    <string-array name="locations_navigation_view">
+        <item>List View</item>
+        <item>Map View</item>
+    </string-array>
+
+    <string name="add_this_location">Add Current</string>
+    <string name="add_external_location">Add External</string>
+    <string name="selectall">Select All</string>
+    <string name="newcategory">Add New Category</string>
+    <string name="samplecategory">Category Name</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

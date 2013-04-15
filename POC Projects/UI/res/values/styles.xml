@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="PlacesTheme" parent="android:Theme.Holo">
+        <!-- add customizations here -->
+        <item name="android:windowNoTitle">false</item>
+    </style>
+</resources>
