@@ -87,4 +87,21 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         }
         notifyDataSetChanged();
     }
+
+    /**
+     *
+     * @return
+     */
+    public boolean areAllSelected() {
+        for (int i = 0; i < selected.size(); i++) {
+           if (selected.get(i) == true) {
+               continue;
+           }
+           else {
+               return false;
+           }
+        }
+        return true;
+    }
+
 }

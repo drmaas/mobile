@@ -11,6 +11,7 @@ import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.data.SampleCategoryList;
 import edu.umn.kill9.places.dialog.AddCategoryDialogFragment;
+import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class PlacesActivity extends BaseActivity {
 
     private List<Category> categories;
     private List<Boolean> selected;
-    private PopupWindow pw;
+    //private PopupWindow pw;
 
     boolean selectAllState = false;
 
@@ -80,70 +81,13 @@ public class PlacesActivity extends BaseActivity {
      * @param v
      */
     public void onDropdownClick(View v) {
-        if (pw != null && pw.isShowing()) {
-            pw.dismiss();
+        CategoryListPopupWrapper wrapper = new CategoryListPopupWrapper(this);
+        if (wrapper.isShowing()) {
+            wrapper.dismiss();
         }
         else {
-            showPopUp(new CategoryAdapter(PlacesActivity.this, R.layout.categorylist_item, categories, selected));
+            wrapper.show(new CategoryAdapter(PlacesActivity.this, R.layout.categorylist_item, categories, selected));
         }
-    }
-
-    /**
-     * Function to set up the pop-up window which acts as drop-down list
-     *
-     * @param adapter
-     */
-    private void showPopUp(final ArrayAdapter adapter) {
-        LayoutInflater inflater = (LayoutInflater)PlacesActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        //get the pop-up window i.e. drop-down layout
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.categorylist, (ViewGroup)findViewById(R.id.dropdownlayout));
-
-        //get the view to which drop-down layout is to be anchored
-        RelativeLayout pwanchor = (RelativeLayout)findViewById(R.id.pwanchor);
-
-        //create popup
-        pw = new PopupWindow(layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-
-        //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
-        pw.setBackgroundDrawable(new ColorDrawable());
-        pw.setTouchable(true);
-
-        //let pop-up be informed about touch events outside its window. This should be done before setting the content of pop-up
-        pw.setOutsideTouchable(true);
-
-        //anchor the drop-down to bottom-left corner of dropdown
-        pw.showAsDropDown(pwanchor);
-
-        //setup select all option
-        final CheckBox selectall = (CheckBox)layout.findViewById(R.id.selectallcheckbox);
-        selectall.setChecked(selectAllState);
-        selectall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectall.isChecked()) {
-                    ((CategoryAdapter) adapter).selectAll();
-                    selectAllState = true;
-                } else {
-                    ((CategoryAdapter) adapter).selectNone();
-                    selectAllState = false;
-                }
-            }
-        });
-
-        //setup new category option
-        final TextView newtext = (TextView)layout.findViewById(R.id.newcategory);
-        newtext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //dialog asking for new category
-                AddCategoryDialogFragment.newInstance(getString(R.string.newcategory), adapter).show(getFragmentManager(), "dialog");
-            }
-        });
-
-        //populate the drop-down list
-        final ListView list = (ListView)layout.findViewById(R.id.dropdownlist);
-        list.setAdapter(adapter);
     }
 
     /**
