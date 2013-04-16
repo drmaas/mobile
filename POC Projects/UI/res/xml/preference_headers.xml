@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header android:fragment="edu.umn.kill9.places.preferences.PlacesPreferenceActivity$BasicPrefsFragment"
+            android:icon="@drawable/location_map"
+            android:title="Basic Preferences"
+            android:summary="Basic application preferences" />
+
+</preference-headers>

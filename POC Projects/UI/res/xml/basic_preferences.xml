@@ -1,0 +1,30 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="Personal Preferences">
+
+        <EditTextPreference
+                android:key="edittext_preference"
+                android:title="Home Address"
+                android:summary="The application will use this as your home address"
+                android:dialogTitle="Edit Home Address"
+                android:defaultValue="None"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Advanced Preferences">
+
+        <ListPreference
+                android:key="list_preference"
+                android:title="Default Homepage View"
+                android:summary="The application will use this homepage view when it launches"
+                android:entries="@array/entries_list_preference"
+                android:entryValues="@array/entryvalues_list_preference"
+                android:dialogTitle="Select Default Homepage View"
+                android:defaultValue="List"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

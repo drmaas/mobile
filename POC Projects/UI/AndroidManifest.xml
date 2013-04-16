@@ -7,19 +7,26 @@
     <uses-sdk android:minSdkVersion="17"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <application
-            android:name=".application.PlacesApplication"
-            android:label="@string/app_name"
-            android:icon="@drawable/places_logo"
-            android:theme="@style/PlacesTheme">
-        <activity
-                android:name=".activity.PlacesActivity"
-                android:label="@string/locations_title"
-                uiOptions="splitActionBarWhenNarrow">
+    <application android:name=".application.PlacesApplication"
+                 android:label="@string/app_name"
+                 android:icon="@drawable/places_logo"
+                 android:theme="@style/PlacesTheme">
+        <activity android:name=".activity.PlacesActivity"
+                  android:label="@string/locations_title"
+                  uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.CurrentLocationActivity"
+                  android:label="@string/currentlocation_title"
+                  uiOptions="splitActionBarWhenNarrow"/>
+        <activity android:name=".activity.ExternalLocationActivity"
+                  android:label="@string/externallocation_title"
+                  uiOptions="splitActionBarWhenNarrow"/>
+        <activity
+                android:name=".preferences.PlacesPreferenceActivity"
+                android:label="Settings"/>
     </application>
 </manifest>

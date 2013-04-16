@@ -2,28 +2,22 @@ package edu.umn.kill9.places.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.model.Category;
 
-import java.util.List;
+import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.preferences.PlacesPreferenceActivity;
 
 /**
  * User: drmaas
  * Date: 4/12/13
  */
 public abstract class BaseActivity extends Activity {
+
+    final static int ADD_CURRENT_LOCATION = 0;
+    final static int ADD_EXTERNAL_LOCATION = 1;
+    final static int PREFERENCES = 2;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,19 +61,23 @@ public abstract class BaseActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+        Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
                 //go home
                 goHome(PlacesActivity.class);
                 return true;
             case R.id.settings:
-                //go to settings
+                intent = new Intent(this, PlacesPreferenceActivity.class);
+                startActivityForResult(intent, PREFERENCES);
                 return true;
             case R.id.add_this_location:
-                //go to add current location screen
+                intent = new Intent(this, CurrentLocationActivity.class);
+                startActivityForResult(intent, ADD_CURRENT_LOCATION);
                 return true;
             case R.id.add_external_location:
-                //got to search for external location screen
+                intent = new Intent(this, ExternalLocationActivity.class);
+                startActivityForResult(intent, ADD_EXTERNAL_LOCATION);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

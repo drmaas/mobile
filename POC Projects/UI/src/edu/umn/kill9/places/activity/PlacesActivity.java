@@ -1,8 +1,8 @@
 package edu.umn.kill9.places.activity;
 
 import android.app.ActionBar;
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -10,7 +10,6 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.data.SampleCategoryList;
-import edu.umn.kill9.places.dialog.AddCategoryDialogFragment;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
 
@@ -21,8 +20,6 @@ public class PlacesActivity extends BaseActivity {
 
     private static final String LISTVIEW = "List View";
     private static final String MAPVIEW = "Map View";
-
-    private String currentView;
 
     private List<Category> categories;
     private List<Boolean> selected;
@@ -37,16 +34,16 @@ public class PlacesActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.locations_list);
-        currentView = LISTVIEW;
 
         //don't show 'up' button next to home icon
         showHomeAsUp(false);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
         //enable navigation mode in action bar
         enableNavigationMode();
 
         //setup navigation menu to switch between list and map view
-        final SpinnerAdapter viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), currentView);
+        final SpinnerAdapter viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), LISTVIEW);
         getActionBar().setListNavigationCallbacks(viewSpinnerAdapter, new ActionBar.OnNavigationListener() {
             // Get the same strings provided for the drop-down's ArrayAdapter
             String[] strings = getResources().getStringArray(R.array.locations_navigation_view);
@@ -112,6 +109,27 @@ public class PlacesActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu (Menu menu) {
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == Activity.RESULT_OK && requestCode == ADD_CURRENT_LOCATION) {
+            //do something here when returning from add current location
+        }
+        else if (resultCode == Activity.RESULT_OK && requestCode == ADD_EXTERNAL_LOCATION) {
+            //do something here when returning from add external location
+        }
+        else if (resultCode == Activity.RESULT_OK && requestCode == PREFERENCES) {
+            //do something here when returning from preferences
+        }
+
     }
 
 }
