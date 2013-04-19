@@ -4,13 +4,23 @@
     <string name="locations_title">Locations</string>
     <string name="settings">Settings</string>
 
-    <!-- drop-down action menu for locations_list page to show locations_list as map -->
+    <!-- drop-down action menu for locations_main page to show locations_main as map -->
     <string-array name="locations_navigation_view">
         <item>List View</item>
         <item>Map View</item>
     </string-array>
     <string name="add_this_location">Add Current</string>
     <string name="add_external_location">Add External</string>
+
+    <!-- drop-down action menu for location details -->
+    <string name="edit_location_details">Edit</string>
+    <string name="save_location_details">Save</string>
+    <string name="delete_location">Delete</string>
+
+    <!-- tab titles -->
+    <string name="tab_details">Details</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_events">Events</string>
 
     <!-- category list -->
     <string name="selectall">Select All</string>

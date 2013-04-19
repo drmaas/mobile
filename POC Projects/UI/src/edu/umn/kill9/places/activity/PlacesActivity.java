@@ -2,16 +2,21 @@ package edu.umn.kill9.places.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
+import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
-import edu.umn.kill9.places.data.SampleCategoryList;
+import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.util.PlacesConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,21 +28,18 @@ public class PlacesActivity extends BaseActivity {
 
     private List<Category> categories;
     private List<Boolean> selected;
-    //private PopupWindow pw;
-
-    boolean selectAllState = false;
 
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.locations_list);
+        setContentView(R.layout.locations_main);
 
         //don't show 'up' button next to home icon
         showHomeAsUp(false);
-        getActionBar().setDisplayHomeAsUpEnabled(false);
 
         //enable navigation mode in action bar
         enableNavigationMode();
@@ -51,16 +53,26 @@ public class PlacesActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(int position, long itemId) {
                 String item = strings[position];
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment content;
                 if (item.equals(LISTVIEW)) {
-                    //show list view
-                    setContentView(R.layout.locations_list);
                     ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(LISTVIEW);
+                    //show list view
+                    content = new PlaceListFragment();
                 }
                 else if (item.equals(MAPVIEW)) {
-                    //show map view
-                    setContentView(R.layout.locations_map);
                     ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(MAPVIEW);
+                    //show map view
+                    content = new PlaceMapFragment();
                 }
+                else {
+                    content = new PlaceListFragment(); //default
+                }
+
+                ft.replace(R.id.contentview, content);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+
                 return true;
             }
         });
@@ -71,6 +83,7 @@ public class PlacesActivity extends BaseActivity {
         for (int i = 0; i < categories.size(); i++) {
             selected.add(new Boolean(false));
         }
+
     }
 
     /**
@@ -120,13 +133,16 @@ public class PlacesActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode == Activity.RESULT_OK && requestCode == ADD_CURRENT_LOCATION) {
+        if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.ADD_CURRENT_LOCATION) {
             //do something here when returning from add current location
         }
-        else if (resultCode == Activity.RESULT_OK && requestCode == ADD_EXTERNAL_LOCATION) {
+        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.ADD_EXTERNAL_LOCATION) {
             //do something here when returning from add external location
         }
-        else if (resultCode == Activity.RESULT_OK && requestCode == PREFERENCES) {
+        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.PREFERENCES) {
+            //do something here when returning from preferences
+        }
+        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.DETAILS) {
             //do something here when returning from preferences
         }
 

@@ -1,4 +1,4 @@
-package edu.umn.kill9.places.data;
+package edu.umn.kill9.places.model.data;
 
 import edu.umn.kill9.places.model.Category;
 

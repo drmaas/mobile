@@ -7,17 +7,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.preferences.PlacesPreferenceActivity;
+import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
+import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
  * User: drmaas
  * Date: 4/12/13
  */
 public abstract class BaseActivity extends Activity {
-
-    final static int ADD_CURRENT_LOCATION = 0;
-    final static int ADD_EXTERNAL_LOCATION = 1;
-    final static int PREFERENCES = 2;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,15 +66,24 @@ public abstract class BaseActivity extends Activity {
                 return true;
             case R.id.settings:
                 intent = new Intent(this, PlacesPreferenceActivity.class);
-                startActivityForResult(intent, PREFERENCES);
+                startActivityForResult(intent, PlacesConstants.PREFERENCES);
                 return true;
             case R.id.add_this_location:
                 intent = new Intent(this, CurrentLocationActivity.class);
-                startActivityForResult(intent, ADD_CURRENT_LOCATION);
+                startActivityForResult(intent, PlacesConstants.ADD_CURRENT_LOCATION);
                 return true;
             case R.id.add_external_location:
                 intent = new Intent(this, ExternalLocationActivity.class);
-                startActivityForResult(intent, ADD_EXTERNAL_LOCATION);
+                startActivityForResult(intent, PlacesConstants.ADD_EXTERNAL_LOCATION);
+                return true;
+            case R.id.edit_location_details:
+                //add edit location details logic - just make certain items editable
+                return true;
+            case R.id.save_location_details:
+                //add save locaton details logic - make all items uneditable and save
+                return true;
+            case R.id.delete_location:
+                //add delete location logic
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

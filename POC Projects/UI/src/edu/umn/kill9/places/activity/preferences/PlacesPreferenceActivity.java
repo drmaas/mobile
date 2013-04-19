@@ -1,18 +1,13 @@
-package edu.umn.kill9.places.preferences;
+package edu.umn.kill9.places.activity.preferences;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.activity.CurrentLocationActivity;
-import edu.umn.kill9.places.activity.ExternalLocationActivity;
 import edu.umn.kill9.places.activity.PlacesActivity;
 
 import java.util.List;

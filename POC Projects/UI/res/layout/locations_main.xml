@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:id="@+id/locations_list_layout">
+    <include layout="@layout/categoryselect"
+             android:layout_weight="0" />
+    <!--
+    <fragment android:name="edu.umn.kill9.places.activity.fragment.PlaceListFragment"
+              android:layout_weight="1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+    -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:id="@+id/contentview"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" />
+</LinearLayout>
+
