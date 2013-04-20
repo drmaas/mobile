@@ -11,6 +11,7 @@ import android.widget.*;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
+import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
@@ -122,6 +123,38 @@ public class PlacesActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu (Menu menu) {
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * Define what happens when home or settings item selected
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        Intent intent;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //go home
+                goHome(PlacesActivity.class);
+                return true;
+            case R.id.settings:
+                intent = new Intent(this, PlacesPreferenceActivity.class);
+                startActivityForResult(intent, PlacesConstants.PREFERENCES);
+                return true;
+            case R.id.add_this_location:
+                intent = new Intent(this, CurrentLocationActivity.class);
+                startActivityForResult(intent, PlacesConstants.ADD_CURRENT_LOCATION);
+                return true;
+            case R.id.add_external_location:
+                intent = new Intent(this, ExternalLocationActivity.class);
+                startActivityForResult(intent, PlacesConstants.ADD_EXTERNAL_LOCATION);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

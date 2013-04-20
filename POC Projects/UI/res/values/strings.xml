@@ -16,6 +16,9 @@
     <string name="edit_location_details">Edit</string>
     <string name="save_location_details">Save</string>
     <string name="delete_location">Delete</string>
+    <string name="get_directions">Directions</string>
+    <string name="add_event">Add</string>
+    <string name="delete_event">Delete</string>
 
     <!-- tab titles -->
     <string name="tab_details">Details</string>

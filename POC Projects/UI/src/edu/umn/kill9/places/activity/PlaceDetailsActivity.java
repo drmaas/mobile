@@ -49,27 +49,4 @@ public class PlaceDetailsActivity extends BaseActivity {
         actionBar.addTab(tab);
     }
 
-    /**
-     * Show menu items
-     *
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.details_menu, menu);
-        return true;
-    }
-
-    /**
-     * Add logic here to add/remove menu items if needed
-     *
-     * @param menu
-     * @return
-     */
-    @Override
-    public boolean onPrepareOptionsMenu (Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
 }

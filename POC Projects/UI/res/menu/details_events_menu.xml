@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add_event"
+          android:icon="@drawable/content_new_event"
+          android:title="@string/add_event"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/delete_event"
+          android:icon="@drawable/content_discard"
+          android:title="@string/delete_event"
+          android:showAsAction="ifRoom"/>
+</menu>

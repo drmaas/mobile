@@ -49,45 +49,4 @@ public abstract class BaseActivity extends Activity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
     }
 
-    /**
-     * Define what happens when home or settings item selected
-     *
-     * @param item
-     * @return
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        Intent intent;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                //go home
-                goHome(PlacesActivity.class);
-                return true;
-            case R.id.settings:
-                intent = new Intent(this, PlacesPreferenceActivity.class);
-                startActivityForResult(intent, PlacesConstants.PREFERENCES);
-                return true;
-            case R.id.add_this_location:
-                intent = new Intent(this, CurrentLocationActivity.class);
-                startActivityForResult(intent, PlacesConstants.ADD_CURRENT_LOCATION);
-                return true;
-            case R.id.add_external_location:
-                intent = new Intent(this, ExternalLocationActivity.class);
-                startActivityForResult(intent, PlacesConstants.ADD_EXTERNAL_LOCATION);
-                return true;
-            case R.id.edit_location_details:
-                //add edit location details logic - just make certain items editable
-                return true;
-            case R.id.save_location_details:
-                //add save locaton details logic - make all items uneditable and save
-                return true;
-            case R.id.delete_location:
-                //add delete location logic
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 }
