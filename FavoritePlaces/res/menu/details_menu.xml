@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/edit_location_details"
+          android:icon="@drawable/content_edit"
+          android:title="@string/edit_location_details"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/save_location_details"
+          android:icon="@drawable/content_save"
+          android:title="@string/save_location_details"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/delete_location"
+          android:icon="@drawable/content_discard"
+          android:title="@string/delete_location"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/get_directions"
+          android:icon="@drawable/location_directions"
+          android:title="@string/get_directions"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/add_event"
+          android:icon="@drawable/content_new_event"
+          android:title="@string/add_event"
+          android:showAsAction="ifRoom"/>
+    <item android:id="@+id/delete_location"
+          android:icon="@drawable/content_discard"
+          android:title="@string/delete_event"
+          android:showAsAction="ifRoom"/>
+</menu>

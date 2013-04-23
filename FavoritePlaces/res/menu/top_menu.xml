@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add_this_location"
+          android:icon="@drawable/content_new"
+          android:title="@string/add_this_location"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/add_external_location"
+          android:icon="@drawable/action_search"
+          android:title="@string/add_external_location"
+          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/settings"
+          android:icon="@drawable/settings"
+          android:title="@string/settings"
+          android:showAsAction="ifRoom"/>
+</menu>
