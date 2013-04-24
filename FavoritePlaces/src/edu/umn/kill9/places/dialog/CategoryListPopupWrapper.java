@@ -11,6 +11,8 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.model.Category;
 
+import java.util.List;
+
 /**
  * User: drmaas
  * Date: 4/15/13
@@ -57,7 +59,7 @@ public class CategoryListPopupWrapper {
      * @param adapter
      */
     public void show(final ArrayAdapter adapter) {
-        LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //get the pop-up window i.e. drop-down layout
         LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.categorylist, (ViewGroup)activity.findViewById(R.id.dropdownlayout));
@@ -70,7 +72,6 @@ public class CategoryListPopupWrapper {
 
         //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
         pw.setBackgroundDrawable(new ColorDrawable());
-        pw.setTouchable(true);
 
         //let pop-up be informed about touch events outside its window. This should be done before setting the content of pop-up
         pw.setOutsideTouchable(true);
@@ -105,5 +106,14 @@ public class CategoryListPopupWrapper {
         //populate the drop-down list
         final ListView list = (ListView)layout.findViewById(R.id.dropdownlist);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                List<Boolean> selected = ((CategoryAdapter) adapter).getSelected();
+                selected.set(position, !selected.get(position));
+                CheckBox box = (CheckBox)view.findViewById(R.id.itemcheckbox);
+                box.setChecked(selected.get(position));
+            }
+        });
     }
 }
