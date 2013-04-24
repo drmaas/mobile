@@ -5,13 +5,16 @@
     <string name="settings">Settings</string>
 
     <!-- drop-down action menu for locations_main page to show locations_main as map -->
+    <string name="default_view">@string/list_view</string>
+    <string name="list_view">List View</string>
+    <string name="map_view">Map View</string>
     <string-array name="locations_navigation_view">
-        <item>List View</item>
-        <item>Map View</item>
+        <item>@string/list_view</item>
+        <item>@string/map_view</item>
     </string-array>
     <string name="add_this_location">Add Current</string>
     <string name="add_external_location">Add External</string>
-
+    
     <!-- drop-down action menu for location details -->
     <string name="edit_location_details">Edit</string>
     <string name="save_location_details">Save</string>
@@ -36,13 +39,7 @@
     <string name="externallocation_title">Search Locations</string>
 
     <!-- preferences strings -->
-    <string-array name="entries_list_preference">
-        <item>List</item>
-        <item>Map</item>
-    </string-array>
-    <string-array name="entryvalues_list_preference">
-        <item>List View</item>
-        <item>Map View</item>
-    </string-array>
+    <string name="preference_view_id">List Preference ID</string>
+    <string name="preference_home_address_id">Home Address ID</string>
 
 </resources>

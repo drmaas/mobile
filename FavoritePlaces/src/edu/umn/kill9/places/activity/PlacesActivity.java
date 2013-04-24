@@ -1,10 +1,15 @@
 package edu.umn.kill9.places.activity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
@@ -14,21 +19,17 @@ import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
-import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.util.PlacesConstants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlacesActivity extends BaseActivity {
 
-    private static final String LISTVIEW = "List View";
-    private static final String MAPVIEW = "Map View";
-
     private List<Category> categories;
     private List<Boolean> selected;
+    
+    private SpinnerAdapter viewSpinnerAdapter;
 
     /**
      * Called when the activity is first created.
@@ -46,7 +47,8 @@ public class PlacesActivity extends BaseActivity {
         enableNavigationMode();
 
         //setup navigation menu to switch between list and map view
-        final SpinnerAdapter viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), LISTVIEW);
+        String defaultView = getResources().getString(R.string.default_view);
+        viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), defaultView);
         getActionBar().setListNavigationCallbacks(viewSpinnerAdapter, new ActionBar.OnNavigationListener() {
             // Get the same strings provided for the drop-down's ArrayAdapter
             String[] strings = getResources().getStringArray(R.array.locations_navigation_view);
@@ -56,19 +58,23 @@ public class PlacesActivity extends BaseActivity {
                 String item = strings[position];
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment content;
-                if (item.equals(LISTVIEW)) {
-                    ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(LISTVIEW);
+
+                String list = getResources().getString(R.string.list_view);
+                String map = getResources().getString(R.string.map_view);
+                
+                if (item.equals( list ) ) {
                     //show list view
                     content = new PlaceListFragment();
                 }
-                else if (item.equals(MAPVIEW)) {
-                    ((NavigationAdapter)viewSpinnerAdapter).setCurrentView(MAPVIEW);
+                else if (item.equals( map )) {
                     //show map view
                     content = new PlaceMapFragment();
                 }
                 else {
                     content = new PlaceListFragment(); //default
                 }
+
+                ((NavigationAdapter)viewSpinnerAdapter).setCurrentView( item );
 
                 ft.replace(R.id.contentview, content);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -176,7 +182,7 @@ public class PlacesActivity extends BaseActivity {
             //do something here when returning from preferences
         }
         else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.DETAILS) {
-            //do something here when returning from preferences
+            //do something here when returning from details
         }
 
     }
