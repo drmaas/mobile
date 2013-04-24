@@ -50,14 +50,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         //setup checkbox
         CheckBox box = (CheckBox)item.findViewById(R.id.itemcheckbox);
         box.setChecked(selected.get(position));
-        final int pos = position;
-        box.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                //toggle saved state
-                selected.set(pos, !selected.get(pos));
-            }
-        });
 
         return item;
     }
@@ -102,6 +94,10 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
            }
         }
         return true;
+    }
+
+    public List<Boolean> getSelected() {
+        return selected;
     }
 
 }

@@ -17,23 +17,22 @@
         <TextView android:id="@+id/selectalltext"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="@string/selectall"/>
+                  android:text="@string/selectall"
+                  android:textStyle="bold"/>
     </LinearLayout>
     <ListView android:id="@+id/dropdownlist"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:choiceMode="multipleChoice">
+              android:layout_height="wrap_content">
     </ListView>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:id="@+id/selectalllayout"
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
-        <TextView android:id="@+id/newcategory"
+        <Button   android:id="@+id/newcategory"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_marginLeft="8dp"
-                  android:textStyle="bold"
+                  android:layout_marginLeft="4dp"
                   android:text="@string/newcategory"/>
     </LinearLayout>
 </LinearLayout>
