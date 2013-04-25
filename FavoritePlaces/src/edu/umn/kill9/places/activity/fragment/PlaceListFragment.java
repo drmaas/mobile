@@ -22,7 +22,7 @@ public class PlaceListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // Populate list with our static array of titles.
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocations()));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocationStrings()));
     }
 
     @Override
