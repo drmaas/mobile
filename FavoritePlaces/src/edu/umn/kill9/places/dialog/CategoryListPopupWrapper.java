@@ -70,10 +70,10 @@ public class CategoryListPopupWrapper {
         //create popup
         pw = new PopupWindow(layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
-        //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
+        //Pop-up window background cannot be null if we want the pop-up to listen touch eventslist outside its window
         pw.setBackgroundDrawable(new ColorDrawable());
 
-        //let pop-up be informed about touch events outside its window. This should be done before setting the content of pop-up
+        //let pop-up be informed about touch eventslist outside its window. This should be done before setting the content of pop-up
         pw.setOutsideTouchable(true);
 
         //anchor the drop-down to bottom-left corner of dropdown
