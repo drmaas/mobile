@@ -43,4 +43,7 @@
     <string name="preference_view_id">List Preference ID</string>
     <string name="preference_home_address_id">Home Address ID</string>
 
+    <!-- maps -->
+    <string name="map_not_ready">Map is not ready yet</string>
+
 </resources>
