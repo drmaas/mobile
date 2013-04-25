@@ -70,6 +70,7 @@ public class PlaceMapFragment extends MapFragment
 
     private void setUpMap() {
         // Hide the zoom controls as the button panel will cover it.
+    	_map.setMyLocationEnabled(true);
     	_map.getUiSettings().setZoomControlsEnabled(true);
 
         // Add lots of markers to the map.
