@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -21,8 +21,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.model.Location;
 import edu.umn.kill9.places.model.data.SampleLocationList;
+import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
  * User: drmaas
@@ -129,9 +131,9 @@ public class PlaceMapFragment extends MapFragment
 
 	@Override
 	public void onInfoWindowClick(Marker mark) {
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity().getApplicationContext(),
-				"Info window clicked for : " + mark.getTitle(),
-				Toast.LENGTH_SHORT).show();
-	}
+		Intent intent = new Intent();
+        intent.setClass(getActivity(), PlaceDetailsActivity.class);
+        intent.putExtra("locationName", mark.getTitle());
+        startActivityForResult(intent, PlacesConstants.DETAILS);
+    }
 }
