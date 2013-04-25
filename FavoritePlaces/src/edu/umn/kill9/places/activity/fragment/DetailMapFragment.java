@@ -1,11 +1,8 @@
 package edu.umn.kill9.places.activity.fragment;
 
-import java.util.LinkedList;
-
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,13 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -120,10 +117,21 @@ public class DetailMapFragment extends MapFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        Intent intent;
         switch (item.getItemId()) {
             case R.id.get_directions:
-                //TODO
+        		if ( _location != null )
+        		{
+	            	try {
+	            		LatLng loc = _location.getLocationPoint();
+	            		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + loc.latitude + "," + loc.longitude)));
+	            	} catch (android.content.ActivityNotFoundException ex) {
+	            	    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.no_maps_msg), Toast.LENGTH_SHORT).show();
+	            	}
+        		}
+        		else
+        		{
+        			Toast.makeText(getActivity().getApplicationContext(), "Location is null", Toast.LENGTH_SHORT).show();
+        		}
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
