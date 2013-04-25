@@ -10,7 +10,9 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.Location;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
+import edu.umn.kill9.places.model.data.SampleLocationList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class DetailInformationFragment extends Fragment {
 
     List<Category> categories;
     List<Boolean> selected;
+    private Location _location;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,16 +36,19 @@ public class DetailInformationFragment extends Fragment {
         categories = SampleCategoryList.getCategories();
         selected = new ArrayList();
         for (int i = 0; i < categories.size(); i++) {
-            selected.add(new Boolean(false));
+            selected.add(Boolean.valueOf(false));
         }
 
-
+        String locationName = getActivity().getIntent().getStringExtra("locationName");
+        _location = SampleLocationList.findByLocationName(locationName);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView text = new TextView(getActivity());
-        text.setText("Information");
+        TextView text = new TextView( getActivity() );
+        text.setText( "" );
+        text.append( "Location Name: " + _location.getLocationName() + "\n\n" );
+        text.append( "Location Point: " + _location.getLocationPoint() );
 
         //inflate details fragment layout and return it
         //View item = inflater.inflate(R.layout.categoryselect, null);
