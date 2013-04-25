@@ -111,8 +111,8 @@ public class CategoryListPopupWrapper {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 List<Boolean> selected = ((CategoryAdapter) adapter).getSelected();
                 selected.set(position, !selected.get(position));
-                CheckBox box = (CheckBox)view.findViewById(R.id.itemcheckbox);
-                box.setChecked(selected.get(position));
+                CheckedTextView ctext = (CheckedTextView)view.findViewById(R.id.itemtext);
+                ctext.setChecked(selected.get(position));
             }
         });
     }
