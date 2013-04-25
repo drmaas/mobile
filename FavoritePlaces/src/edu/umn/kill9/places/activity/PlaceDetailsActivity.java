@@ -28,7 +28,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         setTitle(getIntent().getStringExtra("locationName") + " Details");
 
         // setup action bar for tabs
-        //we will have 3 tabs - information (including call action), map (including navigation action), and events
+        //we will have 3 tabs - information (including call action), map (including navigation action), and eventslist
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -47,7 +47,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         tab = actionBar.newTab()
                 .setText(R.string.tab_events)
                 .setTabListener(new TabListener<EventsFragment>(
-                        this, "events", EventsFragment.class));
+                        this, "eventslist", EventsFragment.class));
         actionBar.addTab(tab);
     }
 

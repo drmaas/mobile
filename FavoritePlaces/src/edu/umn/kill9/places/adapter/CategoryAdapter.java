@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.model.Category;
@@ -44,12 +45,9 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 
         //set text of list item
         final Category c = getItem(position);
-        final TextView text = (TextView)item.findViewById(R.id.itemtext);
-        text.setText(c.getCategoryName());
-
-        //setup checkbox
-        CheckBox box = (CheckBox)item.findViewById(R.id.itemcheckbox);
-        box.setChecked(selected.get(position));
+        CheckedTextView ctext = (CheckedTextView)item.findViewById(R.id.itemtext);
+        ctext.setText(c.getCategoryName());
+        ctext.setChecked(selected.get(position));
 
         return item;
     }

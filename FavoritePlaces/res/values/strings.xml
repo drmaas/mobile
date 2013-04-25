@@ -29,6 +29,7 @@
     <string name="tab_events">Events</string>
 
     <!-- category list -->
+    <string name="categories">Categories</string>
     <string name="selectall">Select All</string>
     <string name="newcategory">Add New Category</string>
     <string name="samplecategory">Category Name</string>

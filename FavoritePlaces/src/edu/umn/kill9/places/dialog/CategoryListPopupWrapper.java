@@ -70,10 +70,10 @@ public class CategoryListPopupWrapper {
         //create popup
         pw = new PopupWindow(layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
-        //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
+        //Pop-up window background cannot be null if we want the pop-up to listen touch eventslist outside its window
         pw.setBackgroundDrawable(new ColorDrawable());
 
-        //let pop-up be informed about touch events outside its window. This should be done before setting the content of pop-up
+        //let pop-up be informed about touch eventslist outside its window. This should be done before setting the content of pop-up
         pw.setOutsideTouchable(true);
 
         //anchor the drop-down to bottom-left corner of dropdown
@@ -111,8 +111,8 @@ public class CategoryListPopupWrapper {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 List<Boolean> selected = ((CategoryAdapter) adapter).getSelected();
                 selected.set(position, !selected.get(position));
-                CheckBox box = (CheckBox)view.findViewById(R.id.itemcheckbox);
-                box.setChecked(selected.get(position));
+                CheckedTextView ctext = (CheckedTextView)view.findViewById(R.id.itemtext);
+                ctext.setChecked(selected.get(position));
             }
         });
     }

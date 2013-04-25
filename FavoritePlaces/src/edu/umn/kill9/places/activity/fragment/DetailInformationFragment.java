@@ -1,11 +1,19 @@
 package edu.umn.kill9.places.activity.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.adapter.CategoryAdapter;
+import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
+import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.data.SampleCategoryList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: drmaas
@@ -13,10 +21,22 @@ import edu.umn.kill9.places.R;
  */
 public class DetailInformationFragment extends Fragment {
 
+    List<Category> categories;
+    List<Boolean> selected;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        //refresh categories drop-down
+        categories = SampleCategoryList.getCategories();
+        selected = new ArrayList();
+        for (int i = 0; i < categories.size(); i++) {
+            selected.add(new Boolean(false));
+        }
+
+
     }
 
     @Override
@@ -24,7 +44,24 @@ public class DetailInformationFragment extends Fragment {
         TextView text = new TextView(getActivity());
         text.setText("Information");
 
+        //inflate details fragment layout and return it
+        //View item = inflater.inflate(R.layout.categoryselect, null);
+
         return text;
+    }
+
+    /**
+     * listener for category drop-down
+     * @param v
+     */
+    public void onDropdownClick(View v) {
+        CategoryListPopupWrapper wrapper = new CategoryListPopupWrapper(getActivity());
+        if (wrapper.isShowing()) {
+            wrapper.dismiss();
+        }
+        else {
+            wrapper.show(new CategoryAdapter(getActivity(), R.layout.categorylist_item, categories, selected));
+        }
     }
 
     @Override
