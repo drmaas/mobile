@@ -29,7 +29,7 @@ import edu.umn.kill9.places.model.data.SampleLocationList;
  * Date: 4/18/13
  */
 public class PlaceMapFragment extends MapFragment
-		implements OnMarkerClickListener, OnInfoWindowClickListener {
+		implements OnInfoWindowClickListener {
 	
 	private static final int LAT_LNG_BOUNDS_PADDING = 50;
 
@@ -73,8 +73,7 @@ public class PlaceMapFragment extends MapFragment
         // Add lots of markers to the map.
         addMarkersToMap();
 
-        // Set listeners for marker events.  See this class for their behavior.
-        _map.setOnMarkerClickListener(this);
+        // Set listeners for marker events.
         _map.setOnInfoWindowClickListener(this);
 
         // Pan to see all markers in view.
@@ -134,14 +133,5 @@ public class PlaceMapFragment extends MapFragment
 		Toast.makeText(getActivity().getApplicationContext(),
 				"Info window clicked for : " + mark.getTitle(),
 				Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public boolean onMarkerClick(Marker mark) {
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity().getApplicationContext(),
-				"Marker clicked for : " + mark.getTitle(),
-				Toast.LENGTH_SHORT).show();
-		return false;
 	}
 }
