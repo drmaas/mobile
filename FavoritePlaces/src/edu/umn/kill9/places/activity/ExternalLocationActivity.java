@@ -1,9 +1,12 @@
 package edu.umn.kill9.places.activity;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.MapSearchFragment;
 
 /**
  * User: drmaas
@@ -18,6 +21,7 @@ public class ExternalLocationActivity extends BaseActivity {
 
         //show 'up' button next to home icon
         showHomeAsUp(true);
+
     }
 
     @Override

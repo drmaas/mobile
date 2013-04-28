@@ -51,7 +51,7 @@ public class EventsFragment extends ListFragment {
         Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         Intent intent = new Intent(Intent.ACTION_EDIT)
                 .setData(uri);
-        startActivity(intent);
+        startActivityForResult(intent, PlacesConstants.EVENTS);
     }
 
     @Override

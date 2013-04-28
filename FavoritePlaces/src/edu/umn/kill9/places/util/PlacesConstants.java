@@ -11,4 +11,5 @@ public class PlacesConstants {
     public final static int PREFERENCES = 2;
     public final static int DETAILS = 3;
 
+    public static final int EVENTS = 4;
 }

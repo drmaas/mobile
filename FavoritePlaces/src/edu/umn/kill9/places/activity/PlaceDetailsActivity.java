@@ -12,6 +12,7 @@ import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
 import edu.umn.kill9.places.tab.TabListener;
+import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
  * User: drmaas
@@ -65,6 +66,21 @@ public class PlaceDetailsActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.EVENTS) {
+            //do something here when returning from events activity
+        }
+
     }
 
 }
