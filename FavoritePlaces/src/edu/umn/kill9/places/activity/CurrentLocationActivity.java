@@ -1,9 +1,13 @@
 package edu.umn.kill9.places.activity;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.CurrLocListFragment;
+import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
 
 /**
  * User: drmaas
@@ -11,6 +15,9 @@ import edu.umn.kill9.places.R;
  */
 public class CurrentLocationActivity extends BaseActivity {
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +25,8 @@ public class CurrentLocationActivity extends BaseActivity {
 
         //show 'up' button next to home icon
         showHomeAsUp(true);
+
+        showCurrentLocations();
     }
 
     @Override
@@ -34,5 +43,14 @@ public class CurrentLocationActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * TODO perform google places search and show the results in the map and list fragments
+     */
+    private void showCurrentLocations() {
+        FragmentManager fm = getFragmentManager();
+        MapFragment mf = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
+        CurrLocListFragment msf = (CurrLocListFragment)fm.findFragmentById(R.id.currloclistfragment);
     }
 }

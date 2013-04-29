@@ -3,9 +3,14 @@ package edu.umn.kill9.places.activity.fragment;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
@@ -14,11 +19,11 @@ import edu.umn.kill9.places.util.PlacesConstants;
  * User: drmaas
  * Date: 4/28/13
  */
-public class MapSearchFragment extends ListFragment {
+public class MapSearchListFragment extends ListFragment {
 
 
     /**
-     * TODO change to use map search results
+     * TODO change to use map search result lists instead of location names
      *
      * @param savedInstanceState
      */
@@ -27,7 +32,7 @@ public class MapSearchFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // Populate list with our static array of titles.
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocations()));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocationStrings()));
     }
 
     /**

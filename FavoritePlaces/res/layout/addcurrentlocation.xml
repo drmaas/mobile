@@ -3,9 +3,19 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <TextView android:id="@+id/test"
-              android:layout_width="fill_parent"
+
+    <!-- search map -->
+    <fragment class="com.google.android.gms.maps.MapFragment"
+              android:id="@+id/currlocmapfragment"
+              android:layout_width="match_parent"
+              android:layout_height="300dp" />
+
+    <!-- search list results -->
+    <fragment class="edu.umn.kill9.places.activity.fragment.CurrLocListFragment"
+              android:id="@+id/currloclistfragment"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="testing add current location view" />
+              android:layout_marginTop="8dp" />
+
 </LinearLayout>
 

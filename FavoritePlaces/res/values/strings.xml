@@ -41,7 +41,7 @@
 
     <!-- search maps strings -->
     <string name="externallocation_title">Search Locations</string>
-    <string name="default_search_text">Type address or location name</string>
+    <string name="default_search_text">Search address or location</string>
 
     <!-- preferences strings -->
     <string name="preference_view_id">List Preference ID</string>

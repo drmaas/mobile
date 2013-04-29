@@ -1,12 +1,16 @@
 package edu.umn.kill9.places.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.activity.fragment.MapSearchFragment;
+import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
 
 /**
  * User: drmaas
@@ -14,6 +18,10 @@ import edu.umn.kill9.places.activity.fragment.MapSearchFragment;
  */
 public class ExternalLocationActivity extends BaseActivity {
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +29,20 @@ public class ExternalLocationActivity extends BaseActivity {
 
         //show 'up' button next to home icon
         showHomeAsUp(true);
+
+        //setup listener on search button pressed on keyboard
+        EditText editText = (EditText)findViewById(R.id.mapsearchtext);
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch(v.getText().toString());
+                    hideKeyboard();
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -38,5 +60,16 @@ public class ExternalLocationActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * TODO perform google places search and show the results in the map and list fragments
+     *
+     * @param searchText
+     */
+    private void performSearch(String searchText) {
+        FragmentManager fm = getFragmentManager();
+        MapFragment mf = (MapFragment)fm.findFragmentById(R.id.mapsearchmapfragment);
+        MapSearchListFragment msf = (MapSearchListFragment)fm.findFragmentById(R.id.mapsearchlistfragment);
     }
 }
