@@ -15,10 +15,12 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/default_search_text"
+              android:inputType="text"
+              android:imeOptions="actionSearch"
               android:layout_marginTop="8dp"/>
 
     <!-- search list results -->
-    <fragment class="edu.umn.kill9.places.activity.fragment.MapSearchFragment"
+    <fragment class="edu.umn.kill9.places.activity.fragment.MapSearchListFragment"
               android:id="@+id/mapsearchlistfragment"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

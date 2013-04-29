@@ -54,4 +54,5 @@
     <string name="WEB_ERROR">Failed to load contact data, please try again later</string>
     <string name="WEB_SAVE_ERROR">Failed to save contact data, please try again later</string>
     <string name="WEB_DELETE_ERROR">Failed to delete contact data, please try again later</string>
+    <string name="PLACE_API_BASE_URL">https://maps.googleapis.com/maps/api/place/search/json</string>
 </resources>

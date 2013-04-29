@@ -1,9 +1,16 @@
 package edu.umn.kill9.places.activity;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.CurrLocListFragment;
+import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
+import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;;
 
 /**
  * User: drmaas
@@ -11,13 +18,30 @@ import edu.umn.kill9.places.R;
  */
 public class CurrentLocationActivity extends BaseActivity {
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addcurrentlocation);
-
+        
+        //setContentView(R.layout.addcurrentlocation);
+        setContentView(R.layout.placelist_main);
+       
         //show 'up' button next to home icon
         showHomeAsUp(true);
+        
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment content = new AddCurrentLocFragment();
+
+        ft.replace(R.id.contentview, content);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+              
+        //content.getPlaces();
+
+        
+        //showCurrentLocations();
     }
 
     @Override
@@ -34,5 +58,14 @@ public class CurrentLocationActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * TODO perform google places search and show the results in the map and list fragments
+     */
+    private void showCurrentLocations() {
+        FragmentManager fm = getFragmentManager();
+        MapFragment mf = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
+        CurrLocListFragment msf = (CurrLocListFragment)fm.findFragmentById(R.id.currloclistfragment);
     }
 }

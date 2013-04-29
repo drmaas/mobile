@@ -41,7 +41,7 @@
 
     <!-- search maps strings -->
     <string name="externallocation_title">Search Locations</string>
-    <string name="default_search_text">Type address or location name</string>
+    <string name="default_search_text">Search address or location</string>
 
     <!-- preferences strings -->
     <string name="preference_view_id">List Preference ID</string>
@@ -50,5 +50,6 @@
     <!-- maps -->
     <string name="map_not_ready">Map is not ready yet</string>
     <string name="no_maps_msg">There are no map clients installed</string>
+    <string name="PLACE_API_BASE_URL">https://maps.googleapis.com/maps/api/place/search/json</string>
 
 </resources>
