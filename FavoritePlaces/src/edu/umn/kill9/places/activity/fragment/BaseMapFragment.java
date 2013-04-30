@@ -181,8 +181,6 @@ public abstract class BaseMapFragment extends MapFragment {
     		}
     	}
     	
-    	refreshMap();
-    	
     	return retValue;
     }
     
@@ -194,8 +192,6 @@ public abstract class BaseMapFragment extends MapFragment {
     	{
     		retValue = _locations.addAll(listLocation);
     	}
-    	
-    	refreshMap();
     	
     	return retValue;
     }
@@ -209,8 +205,6 @@ public abstract class BaseMapFragment extends MapFragment {
     		retValue = _locations.add(location);
     	}
     	
-    	refreshMap();
-    	
     	return retValue;
     }
     
@@ -219,12 +213,11 @@ public abstract class BaseMapFragment extends MapFragment {
     	_locations = new ArrayList<Location>();
     	_markers = new ArrayList<Marker>();
     	
-    	refreshMap();
     }
     
-	protected void refreshMap()
+	public void refreshMap()
 	{
-		//TODO: Somehow refresh the map
+		//TODO: Figure out how to refresh the map
 	}
     
 }
