@@ -25,9 +25,6 @@ import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 public class PlacesActivity extends BaseActivity {
-
-    private List<Category> categories;
-    private List<Boolean> selected;
     
     private SpinnerAdapter viewSpinnerAdapter;
 
@@ -84,27 +81,6 @@ public class PlacesActivity extends BaseActivity {
             }
         });
 
-        //refresh categories drop-down
-        categories = SampleCategoryList.getCategories();
-        selected = new ArrayList();
-        for (int i = 0; i < categories.size(); i++) {
-            selected.add(new Boolean(false));
-        }
-
-    }
-
-    /**
-     * listener for category drop-down
-     * @param v
-     */
-    public void onDropdownClick(View v) {
-        CategoryListPopupWrapper wrapper = new CategoryListPopupWrapper(this);
-        if (wrapper.isShowing()) {
-            wrapper.dismiss();
-        }
-        else {
-            wrapper.show(new CategoryAdapter(PlacesActivity.this, R.layout.categorylist_item, categories, selected));
-        }
     }
 
     /**

@@ -52,4 +52,12 @@
     <string name="no_maps_msg">There are no map clients installed</string>
     <string name="PLACE_API_BASE_URL">https://maps.googleapis.com/maps/api/place/search/json</string>
 
+    <!-- detail information -->
+    <string name="name_label">Name</string>
+    <string name="address_label">Address</string>
+    <string name="phone_label">Phone</string>
+    <string name="website_label">Website</string>
+    <string name="hours_label">Hours</string>
+    <string name="comments_label">Comments</string>
+
 </resources>

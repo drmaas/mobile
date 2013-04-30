@@ -6,10 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
+import edu.umn.kill9.places.adapter.CategoryAdapter;
+import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
+import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.util.PlacesConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: drmaas
@@ -17,8 +25,18 @@ import edu.umn.kill9.places.util.PlacesConstants;
  */
 public abstract class BaseActivity extends Activity {
 
+    private List<Category> categories;
+    private List<Boolean> selected;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //initialize categories drop-down
+        categories = SampleCategoryList.getCategories();
+        selected = new ArrayList();
+        for (int i = 0; i < categories.size(); i++) {
+            selected.add(new Boolean(false));
+        }
     }
 
     /**
@@ -56,6 +74,20 @@ public abstract class BaseActivity extends Activity {
     protected void hideKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    /**
+     * listener for category drop-down
+     * @param v
+     */
+    public void onDropdownClick(View v) {
+        CategoryListPopupWrapper wrapper = new CategoryListPopupWrapper(this);
+        if (wrapper.isShowing()) {
+            wrapper.dismiss();
+        }
+        else {
+            wrapper.show(new CategoryAdapter(this, R.layout.categorylist_item, categories, selected));
+        }
     }
 
 }

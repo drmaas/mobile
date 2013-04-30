@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/categoryselect"
+             android:layout_weight="0" />
+
+    <!-- name -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/name_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/name_label"/>
+        <EditText android:id="@+id/name_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+    <!-- address -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/address_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/address_label"/>
+        <EditText android:id="@+id/address_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+    <!-- phone -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/phone_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/phone_label"/>
+        <EditText android:id="@+id/phone_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+    <!-- website -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/website_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/website_label"/>
+        <EditText android:id="@+id/website_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+    <!-- hours -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/hours_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/hours_label"/>
+        <EditText android:id="@+id/hours_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+    <!-- user comments -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp">
+        <TextView android:id="@+id/comments_label"
+                  android:layout_width="75dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="10dp"
+                  android:text="@string/comments_label"/>
+        <EditText android:id="@+id/comments_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textPersonName|textCapWords"/>
+    </LinearLayout>
+
+</LinearLayout>
