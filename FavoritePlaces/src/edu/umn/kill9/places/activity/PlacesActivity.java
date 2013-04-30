@@ -1,7 +1,6 @@
 package edu.umn.kill9.places.activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -9,11 +8,14 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SpinnerAdapter;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.BaseMapFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
@@ -22,6 +24,7 @@ import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
+import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 public class PlacesActivity extends BaseActivity {
@@ -67,8 +70,17 @@ public class PlacesActivity extends BaseActivity {
                     content = new PlaceListFragment();
                 }
                 else if (item.equals( map )) {
+//                    //show map view
+//                    content = new PlaceMapFragment();
+
                     //show map view
-                    content = new PlaceMapFragment();
+                    content = new BaseMapFragment();
+                    
+                    // Set arguments to the map
+                    Bundle b = new Bundle();
+                    b.putBoolean("multiplePoints", true);
+                    b.putStringArrayList("locations", new ArrayList<String>(SampleLocationList.getLocationStrings()));
+                    content.setArguments(b);
                 }
                 else {
                     content = new PlaceListFragment(); //default

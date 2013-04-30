@@ -1,5 +1,7 @@
 package edu.umn.kill9.places.activity;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.BaseMapFragment;
 import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
+import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.tab.TabListener;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -26,7 +30,8 @@ public class PlaceDetailsActivity extends BaseActivity {
 
         showHomeAsUp(true);
 
-        setTitle(getIntent().getStringExtra("locationName") + " Details");
+        String locationName = getIntent().getStringExtra("locationName");
+        setTitle(locationName + " Details");
 
         // setup action bar for tabs
         //we will have 3 tabs - information (including call action), map (including navigation action), and eventslist
@@ -36,14 +41,30 @@ public class PlaceDetailsActivity extends BaseActivity {
         ActionBar.Tab tab = actionBar.newTab()
                 .setText(R.string.tab_details)
                 .setTabListener(new TabListener<DetailInformationFragment>(
-                        this, "details", DetailInformationFragment.class));
+                        this, "details", DetailInformationFragment.class) {
+                	
+                });
         actionBar.addTab(tab);
 
+        
+        // Set arguments to the map
+        Bundle b = new Bundle();
+        b.putBoolean("multiplePoints", false);
+        ArrayList<String> inputLocations = new ArrayList<String>(1);
+        inputLocations.add( locationName );
+        b.putStringArrayList("locations", inputLocations);
+        
         tab = actionBar.newTab()
                 .setText(R.string.tab_map)
-                .setTabListener(new TabListener<DetailMapFragment>(
-                        this, "map", DetailMapFragment.class));
+                .setTabListener(new TabListener<BaseMapFragment>(
+                        this, "map", BaseMapFragment.class, b));
         actionBar.addTab(tab);
+        
+//        tab = actionBar.newTab()
+//                .setText(R.string.tab_map)
+//                .setTabListener(new TabListener<DetailMapFragment>(
+//                        this, "map", DetailMapFragment.class));
+//        actionBar.addTab(tab);
 
         tab = actionBar.newTab()
                 .setText(R.string.tab_events)
