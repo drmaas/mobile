@@ -67,6 +67,10 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
         catch (IOException ex) {
             Log.w("PlacesWebService", "Error getting web object", ex);
         }
+		finally
+		{
+			client.close();
+		}
         return jsonResults;
 	}
 	
@@ -97,6 +101,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	             destLocation.setLongitude(longitude);
 	             float distance = currentLoc.distanceTo(destLocation);
 	             newplace.setDistance(distance);
+	             
+	             LatLng latLng = new LatLng(latitude, longitude);
+	             newplace.setLatLng(latLng);
 	             
 	             newplace.setName(resultArray.getJSONObject(i).getString("name"));
 	             newplace.setReference(resultArray.getJSONObject(i).getString("reference"));

@@ -1,10 +1,13 @@
 package edu.umn.kill9.places.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Place {
 	private String name;
 	private String reference;
 	private String vicinity;
 	private String strDistance;
+	private LatLng latLng;
 	
 	public void setName(String lname){
 		name = lname;
@@ -34,5 +37,12 @@ public class Place {
 	}
 	public String getDistance(){
 		return strDistance;
+	}
+	
+	public void setLatLng(LatLng llatLng){
+		latLng = llatLng;
+	}
+	public LatLng getLatLng(){
+		return latLng;
 	}
 }
