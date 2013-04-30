@@ -1,8 +1,12 @@
 package edu.umn.kill9.places.activity;
 
+<<<<<<< HEAD
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+=======
+import android.app.FragmentManager;
+>>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,7 +14,10 @@ import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.CurrLocListFragment;
 import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
+<<<<<<< HEAD
 import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;;
+=======
+>>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
 
 /**
  * User: drmaas
@@ -30,6 +37,7 @@ public class CurrentLocationActivity extends BaseActivity {
        
         //show 'up' button next to home icon
         showHomeAsUp(true);
+<<<<<<< HEAD
         
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment content = new AddCurrentLocFragment();
@@ -42,6 +50,10 @@ public class CurrentLocationActivity extends BaseActivity {
 
         
         //showCurrentLocations();
+=======
+
+        showCurrentLocations();
+>>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
     }
 
     @Override
