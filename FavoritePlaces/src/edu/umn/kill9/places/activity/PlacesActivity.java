@@ -1,7 +1,6 @@
 package edu.umn.kill9.places.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -12,18 +11,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.SpinnerAdapter;
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.activity.fragment.BaseMapFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
-import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
-import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
-import edu.umn.kill9.places.model.Category;
-import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -67,17 +60,11 @@ public class PlacesActivity extends BaseActivity {
                     content = new PlaceListFragment();
                 }
                 else if (item.equals( map )) {
-//                    //show map view
-//                    content = new PlaceMapFragment();
-
                     //show map view
-                    content = new BaseMapFragment();
-                    
-                    // Set arguments to the map
-                    Bundle b = new Bundle();
-                    b.putBoolean("multiplePoints", true);
-                    b.putStringArrayList("locations", new ArrayList<String>(SampleLocationList.getLocationStrings()));
-                    content.setArguments(b);
+                	PlaceMapFragment placeMapContent = new PlaceMapFragment();
+                    placeMapContent.addLocation(SampleLocationList.getLocations());
+                	
+                    content = placeMapContent;
                 }
                 else {
                     content = new PlaceListFragment(); //default
