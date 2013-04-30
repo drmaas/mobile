@@ -29,8 +29,7 @@ public class CurrentLocationActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        //setContentView(R.layout.addcurrentlocation);
-        setContentView(R.layout.placelist_main);
+        setContentView(R.layout.addcurrentlocation);
        
         //show 'up' button next to home icon
         showHomeAsUp(true);
