@@ -1,5 +1,10 @@
 package edu.umn.kill9.places.activity;
 
+import edu.umn.kill9.places.R;
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +13,8 @@ import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.CurrLocListFragment;
 import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
+import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
+
 
 /**
  * User: drmaas
@@ -21,11 +28,14 @@ public class CurrentLocationActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addcurrentlocation);
-
+        
+        //setContentView(R.layout.addcurrentlocation);
+        setContentView(R.layout.placelist_main);
+       
         //show 'up' button next to home icon
         showHomeAsUp(true);
 
+        //add in map and list
         showCurrentLocations();
     }
 
@@ -50,7 +60,7 @@ public class CurrentLocationActivity extends BaseActivity {
      */
     private void showCurrentLocations() {
         FragmentManager fm = getFragmentManager();
-        MapFragment mf = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
-        CurrLocListFragment msf = (CurrLocListFragment)fm.findFragmentById(R.id.currloclistfragment);
+        MapFragment map = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
+        AddCurrentLocFragment list = (AddCurrentLocFragment)fm.findFragmentById(R.id.currloclistfragment);
     }
 }

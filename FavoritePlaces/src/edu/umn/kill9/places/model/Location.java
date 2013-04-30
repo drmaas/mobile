@@ -9,8 +9,13 @@ import com.google.android.gms.maps.model.LatLng;
 public class Location {
 
     private long _id;
-    private String _locationName;
-    private LatLng _locationPoint; // We may want to switch to address?
+    private String locationName;
+    private String address;
+    private String phone;
+    private String website;
+    private String hours;
+    private String userComments; //users can add their own comments or notes
+    private LatLng locationPoint;
 
     //default id is -1, which means its not set yet
     public Location(String locationName, LatLng locationPoint) {
@@ -19,8 +24,8 @@ public class Location {
 
     public Location(Long id, String locationName, LatLng locationPoint) {
         this._id = id;
-        this._locationName = locationName;
-        this._locationPoint = locationPoint;
+        this.locationName = locationName;
+        this.locationPoint = locationPoint;
     }
 
     public long getId() {
@@ -32,18 +37,60 @@ public class Location {
     }
 
     public String getLocationName() {
-        return _locationName;
+        return locationName;
     }
 
     public void setLocationName(String locationName) {
-        this._locationName = locationName;
+        this.locationName = locationName;
     }
 
     public LatLng getLocationPoint() {
-        return _locationPoint;
+        return locationPoint;
     }
 
     public void setLocationPoint(LatLng locationPoint) {
-        this._locationPoint = locationPoint;
+        this.locationPoint = locationPoint;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(String userComments) {
+        this.userComments = userComments;
+    }
+
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
 }

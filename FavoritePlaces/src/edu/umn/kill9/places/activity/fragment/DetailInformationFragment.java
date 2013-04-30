@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.EditText;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
@@ -45,15 +46,21 @@ public class DetailInformationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView text = new TextView( getActivity() );
-        text.setText( "" );
-        text.append( "Location Name: " + _location.getLocationName() + "\n\n" );
-        text.append( "Location Point: " + _location.getLocationPoint() );
+        //TextView text = new TextView( getActivity() );
+        //text.setText( "" );
+        //text.append( "Location Name: " + _location.getLocationName() + "\n\n" );
+        //text.append( "Location Point: " + _location.getLocationPoint() );
 
         //inflate details fragment layout and return it
         //View item = inflater.inflate(R.layout.categoryselect, null);
 
-        return text;
+        //return text;
+
+        View item = inflater.inflate(R.layout.detail_information, null);
+        EditText name = (EditText)item.findViewById(R.id.name_text);
+        name.setText(_location.getLocationName());
+
+        return item;
     }
 
     /**
