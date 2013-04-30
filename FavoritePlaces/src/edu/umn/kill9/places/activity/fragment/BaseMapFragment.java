@@ -35,7 +35,10 @@ public class BaseMapFragment extends MapFragment
 implements OnInfoWindowClickListener {
 
 	private static final int LAT_LNG_BOUNDS_PADDING = 50;
-	private static final float MIN_DEFAULT_ZOOM = 14.0f;
+	private static final float MAX_DEFAULT_ZOOM = 16.0f;
+
+	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
+	private static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
 	
     private GoogleMap _map;
     private List<Location> _locations;
@@ -122,21 +125,35 @@ implements OnInfoWindowClickListener {
                     }
                     if ( _multiplePoints )
                     {
-                        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-                        
-                        for ( Location loc : _locations )
-                        {
-                        	LatLng locPoint = loc.getLocationPoint();
-                        	boundsBuilder.include( locPoint );
-                        }
-                        LatLngBounds bounds = boundsBuilder.build();
-                        
-                    	_map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, LAT_LNG_BOUNDS_PADDING));
+                    	if (_locations.isEmpty() )
+                    	{
+                			_map.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, MAX_DEFAULT_ZOOM));
+                    	}
+                    	else
+                    	{
+                    		// Display all the points on the screen
+                    		
+	                        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+	                        
+	                        for ( Location loc : _locations )
+	                        {
+	                        	LatLng locPoint = loc.getLocationPoint();
+	                        	boundsBuilder.include( locPoint );
+	                        }
+	                        LatLngBounds bounds = boundsBuilder.build();
+	                        
+	                        // Make sure the zoom isn't too close
+	                    	_map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, LAT_LNG_BOUNDS_PADDING));
+	                    	if ( _map.getCameraPosition().zoom > MAX_DEFAULT_ZOOM )
+	                    	{
+	                        	_map.moveCamera(CameraUpdateFactory.zoomTo(MAX_DEFAULT_ZOOM));
+	                    	}
+                    	}
                     }
                     else
                     {
                     	Location loc = _locations.get(0);
-                    	_map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc.getLocationPoint(), MIN_DEFAULT_ZOOM));
+                    	_map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc.getLocationPoint(), MAX_DEFAULT_ZOOM));
                     }
                 }
             });
