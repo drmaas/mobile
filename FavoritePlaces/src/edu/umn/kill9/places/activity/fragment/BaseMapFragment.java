@@ -28,6 +28,7 @@ public abstract class BaseMapFragment extends MapFragment {
 
 	protected static final int LAT_LNG_BOUNDS_PADDING = 50;
 	protected static final float MAX_DEFAULT_ZOOM = 16.0f;
+	protected static final float DEFAULT_ZOOM = 12.0f;
 
 	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
 	protected static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 

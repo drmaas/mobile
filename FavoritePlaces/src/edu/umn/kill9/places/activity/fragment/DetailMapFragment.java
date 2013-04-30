@@ -61,6 +61,10 @@ public class DetailMapFragment extends BaseMapFragment {
 		{
 	    	retVal = CameraUpdateFactory.newLatLngZoom(loc.getLocationPoint(), MAX_DEFAULT_ZOOM);
 		}
+		else
+    	{
+    		retVal = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, DEFAULT_ZOOM);
+    	}
 		
     	return retVal;
     }

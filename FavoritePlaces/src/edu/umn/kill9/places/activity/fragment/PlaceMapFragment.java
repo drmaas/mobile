@@ -39,7 +39,7 @@ public class PlaceMapFragment extends BaseMapFragment
     	
     	if (_locations.isEmpty() )
     	{
-    		retVal = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, MAX_DEFAULT_ZOOM);
+    		retVal = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, DEFAULT_ZOOM);
     	}
     	else
     	{
