@@ -5,7 +5,7 @@
               android:layout_height="fill_parent">
 
     <!-- search map -->
-    <fragment class="com.google.android.gms.maps.MapFragment"
+    <fragment class="edu.umn.kill9.places.activity.fragment.PlaceMapFragment"
               android:id="@+id/mapsearchmapfragment"
               android:layout_width="match_parent"
               android:layout_height="300dp" />
