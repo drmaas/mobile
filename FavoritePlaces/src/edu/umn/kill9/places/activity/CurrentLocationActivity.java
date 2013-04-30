@@ -29,14 +29,11 @@ public class CurrentLocationActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        //setContentView(R.layout.addcurrentlocation);
-        setContentView(R.layout.placelist_main);
+        setContentView(R.layout.addcurrentlocation);
        
         //show 'up' button next to home icon
         showHomeAsUp(true);
 
-        //add in map and list
-        showCurrentLocations();
     }
 
     @Override
@@ -55,12 +52,4 @@ public class CurrentLocationActivity extends BaseActivity {
         }
     }
 
-    /**
-     * TODO perform google places search and show the results in the map and list fragments
-     */
-    private void showCurrentLocations() {
-        FragmentManager fm = getFragmentManager();
-        MapFragment map = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
-        AddCurrentLocFragment list = (AddCurrentLocFragment)fm.findFragmentById(R.id.currloclistfragment);
-    }
 }
