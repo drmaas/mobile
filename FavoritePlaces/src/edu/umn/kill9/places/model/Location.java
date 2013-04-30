@@ -11,12 +11,10 @@ public class Location {
     private long _id;
     private String locationName;
     private String address;
-    private String city;
-    private String state;
-    private String zip;
-    private String country;
     private String phone;
-    private String note;
+    private String website;
+    private String hours;
+    private String userComments; //users can add their own comments or notes
     private LatLng locationPoint;
 
     //default id is -1, which means its not set yet
@@ -62,38 +60,6 @@ public class Location {
         this.address = address;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -102,11 +68,29 @@ public class Location {
         this.phone = phone;
     }
 
-    public String getNote() {
-        return note;
+    public String getUserComments() {
+        return userComments;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setUserComments(String userComments) {
+        this.userComments = userComments;
     }
+
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
 }
