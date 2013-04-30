@@ -1,8 +1,6 @@
 package edu.umn.kill9.places.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +18,17 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.model.Place;
-import edu.umn.kill9.places.R;
 
 public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	
 	PlacesAPIJSONListener jsonListener;
+	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
+	private static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
 	
 	public PlacesWebService(PlacesAPIJSONListener listenerActivity){
 		this.jsonListener = listenerActivity;	
@@ -36,15 +37,15 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	@Override
 	protected List<Place> doInBackground(String... params) {
 		
-		Double currentLat = 37.787930;
-		Double currentLong = -122.4074990;
+		Double currentLat = DEFAULT_LOCATION.latitude;
+		Double currentLong = DEFAULT_LOCATION.longitude;
 		String Device_location = currentLat +"," + currentLong;
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
     
-		//ToDo: check if we can get the API_KEY from the Manifest file
+		//TODO: check if we can get the API_KEY from the Manifest file
 		//String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
 		String API_KEY = "AIzaSyAKb3QnPVarVnI8D9Fqh8qTuh2nVSosQd8";
-		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=false&key=" + API_KEY;				
+		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=true&key=" + API_KEY;				
 				
 		AndroidHttpClient client = null;
 		String json=null;
