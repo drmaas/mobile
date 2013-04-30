@@ -14,6 +14,7 @@ import edu.umn.kill9.places.util.PlacesConstants;
  * User: drmaas
  * Date: 4/28/13
  */
+@Deprecated
 public class CurrLocListFragment extends ListFragment {
 
     /**

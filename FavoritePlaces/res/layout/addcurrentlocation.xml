@@ -11,7 +11,7 @@
               android:layout_height="300dp" />
 
     <!-- search list results -->
-    <fragment class="edu.umn.kill9.places.activity.fragment.CurrLocListFragment"
+    <fragment class="edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment"
               android:id="@+id/currloclistfragment"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

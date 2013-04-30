@@ -1,12 +1,11 @@
 package edu.umn.kill9.places.activity;
 
-<<<<<<< HEAD
+import edu.umn.kill9.places.R;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-=======
 import android.app.FragmentManager;
->>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,10 +13,8 @@ import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.CurrLocListFragment;
 import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
-<<<<<<< HEAD
-import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;;
-=======
->>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
+import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
+
 
 /**
  * User: drmaas
@@ -37,23 +34,9 @@ public class CurrentLocationActivity extends BaseActivity {
        
         //show 'up' button next to home icon
         showHomeAsUp(true);
-<<<<<<< HEAD
-        
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment content = new AddCurrentLocFragment();
 
-        ft.replace(R.id.contentview, content);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-              
-        //content.getPlaces();
-
-        
-        //showCurrentLocations();
-=======
-
+        //add in map and list
         showCurrentLocations();
->>>>>>> 7d2b18f7fd7cd47308635ac0c14c754820459954
     }
 
     @Override
@@ -77,7 +60,7 @@ public class CurrentLocationActivity extends BaseActivity {
      */
     private void showCurrentLocations() {
         FragmentManager fm = getFragmentManager();
-        MapFragment mf = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
-        CurrLocListFragment msf = (CurrLocListFragment)fm.findFragmentById(R.id.currloclistfragment);
+        MapFragment map = (MapFragment)fm.findFragmentById(R.id.currlocmapfragment);
+        AddCurrentLocFragment list = (AddCurrentLocFragment)fm.findFragmentById(R.id.currloclistfragment);
     }
 }
