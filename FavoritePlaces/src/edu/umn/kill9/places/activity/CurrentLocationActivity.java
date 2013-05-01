@@ -65,8 +65,7 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
      *
      */
     public void getCurrentLocation(){
-        LocationManager locationMgr;
-        locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        final LocationManager locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         LocationListener listener = new LocationListener() {
 
@@ -80,12 +79,15 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
+                
+                // API key
                 Bundle bundle = ai.metaData;
                 String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
                 PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this, myApiKey);
+                
+                // Execute query
                 webservice.execute(currentLocation);
-                Toast.makeText(getApplicationContext(), currentLocation, Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), location.getProvider() + ": " + currentLocation, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onProviderDisabled(String provider) {
@@ -104,7 +106,17 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
             }
         };
 
-        locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10000, 0, listener);
+        locationMgr.requestSingleUpdate(
+        		LocationManager.GPS_PROVIDER,
+        		listener,
+        		null // Use the callback on the calling thread
+        		);
+
+        locationMgr.requestSingleUpdate(
+        		LocationManager.NETWORK_PROVIDER,
+        		listener,
+        		null // Use the callback on the calling thread
+        		);
     }
 
     @Override
