@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -39,7 +44,7 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 		
 		Double currentLat = DEFAULT_LOCATION.latitude;
 		Double currentLong = DEFAULT_LOCATION.longitude;
-		String Device_location = currentLat +"," + currentLong;
+		String Device_location = params[0]; //currentLat +"," + currentLong;
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
     
 		//TODO: check if we can get the API_KEY from the Manifest file
