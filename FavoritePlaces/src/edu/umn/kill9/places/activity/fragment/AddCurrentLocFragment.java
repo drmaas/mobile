@@ -5,7 +5,11 @@ import java.util.List;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +52,22 @@ public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSON
 	}
 */	
 	public void getPlaces(){
-		PlacesWebService webservice = new PlacesWebService(this);
-		webservice.execute("Test");
+		try
+		{
+			ApplicationInfo ai = getActivity().getPackageManager().getApplicationInfo(getActivity().getPackageName(), PackageManager.GET_META_DATA);
+		    Bundle bundle = ai.metaData;
+		    String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
+			PlacesWebService webservice = new PlacesWebService(this, myApiKey);
+			webservice.execute("Test");
+		}
+		catch (NameNotFoundException e)
+		{
+		    Log.e("AddCurrentLocFragment", "Failed to load meta-data, NameNotFound: " + e.getMessage());
+		}
+		catch (NullPointerException e)
+		{
+		    Log.e("AddCurrentLocFragment", "Failed to load meta-data, NullPointer: " + e.getMessage());         
+		}
 	}   
 	
 	@Override

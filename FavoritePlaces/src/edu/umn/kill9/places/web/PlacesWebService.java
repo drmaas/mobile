@@ -25,15 +25,18 @@ import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.model.Place;
 
 public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
-	
-	PlacesAPIJSONListener jsonListener;
+
+	private PlacesAPIJSONListener jsonListener;
+	private String mapsAPIKey;
+
 	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
 	private static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
-	
-	public PlacesWebService(PlacesAPIJSONListener listenerActivity){
-		this.jsonListener = listenerActivity;	
+
+	public PlacesWebService(PlacesAPIJSONListener listenerActivity, String apiKey){
+		this.jsonListener = listenerActivity;
+		this.mapsAPIKey = apiKey;
 	}
-	
+
 	@Override
 	protected List<Place> doInBackground(String... params) {
 		
@@ -42,10 +45,7 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 		String Device_location = currentLat +"," + currentLong;
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
     
-		//TODO: check if we can get the API_KEY from the Manifest file
-		//String key = ContactApplication.getContext().getResources().getString(R.string.API_KEY);
-		String API_KEY = "AIzaSyAKb3QnPVarVnI8D9Fqh8qTuh2nVSosQd8";
-		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=true&key=" + API_KEY;				
+		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;				
 				
 		AndroidHttpClient client = null;
 		String json=null;
