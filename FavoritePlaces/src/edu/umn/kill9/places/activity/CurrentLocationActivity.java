@@ -1,9 +1,14 @@
 package edu.umn.kill9.places.activity;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.Toast;
 import edu.umn.kill9.places.R;
 
@@ -41,6 +46,11 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
 
         //kick off current location listener
         getCurrentLocation();
+
+        //filter list
+        //TODO filtering does not work
+        EditText filterText = (EditText)findViewById(R.id.currlocsearchbox);
+        filterText.addTextChangedListener(filterTextWatcher);
     }
 
     @Override
@@ -51,16 +61,28 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         f.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
     }
 
+    /**
+     *
+     */
     public void getCurrentLocation(){
         LocationManager locationMgr;
         locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         LocationListener listener = new LocationListener() {
+
             @Override
             public void onLocationChanged(Location location) {
                 // A new location update is received.  Do something useful with it.
                 currentLocation = Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
-                PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this);
+                ApplicationInfo ai = null;
+                try {
+                    ai = CurrentLocationActivity.this.getPackageManager().getApplicationInfo(CurrentLocationActivity.this.getPackageName(), PackageManager.GET_META_DATA);
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Bundle bundle = ai.metaData;
+                String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
+                PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this, myApiKey);
                 webservice.execute(currentLocation);
                 Toast.makeText(getApplicationContext(), currentLocation, Toast.LENGTH_SHORT).show();
 
@@ -100,5 +122,24 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            AddCurrentLocFragment f = (AddCurrentLocFragment)getFragmentManager().findFragmentById(R.id.currloclistfragment);
+            ((PlaceAdapter)f.getListAdapter()).getFilter().filter(s);
+        }
+
+    };
+
 
 }

@@ -8,7 +8,7 @@
     <fragment class="edu.umn.kill9.places.activity.fragment.PlaceMapFragment"
               android:id="@+id/mapsearchmapfragment"
               android:layout_width="match_parent"
-              android:layout_height="300dp" />
+              android:layout_height="250dp" />
 
     <!-- search text field -->
     <EditText android:id="@+id/mapsearchtext"

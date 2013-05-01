@@ -8,9 +8,12 @@
     <fragment class="edu.umn.kill9.places.activity.fragment.PlaceMapFragment"
               android:id="@+id/currlocmapfragment"
               android:layout_width="match_parent"
-              android:layout_height="300dp" />
+              android:layout_height="250dp" />
 
     <!-- search list results -->
+    <EditText android:id="@+id/currlocsearchbox"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent" />
     <fragment class="edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment"
               android:id="@+id/currloclistfragment"
               android:layout_width="match_parent"
