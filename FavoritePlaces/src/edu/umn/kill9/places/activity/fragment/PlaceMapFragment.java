@@ -2,6 +2,7 @@ package edu.umn.kill9.places.activity.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -63,9 +64,15 @@ public class PlaceMapFragment extends BaseMapFragment
 
 	@Override
 	public void onInfoWindowClick(Marker mark) {
+	    //TODO: Do something when this item is clicked
+		
 		Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
         intent.putExtra("locationName", mark.getTitle());
+        intent.putExtra("latitude", mark.getPosition().latitude);
+        intent.putExtra("longitude", mark.getPosition().longitude);
         startActivityForResult(intent, PlacesConstants.DETAILS);
+        
+	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + mark.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }

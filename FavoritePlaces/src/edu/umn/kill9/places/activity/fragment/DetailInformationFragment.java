@@ -16,6 +16,8 @@ import edu.umn.kill9.places.model.data.SampleLocationList;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * User: drmaas
  * Date: 4/18/13
@@ -37,17 +39,45 @@ public class DetailInformationFragment extends Fragment {
         for (int i = 0; i < categories.size(); i++) {
             selected.add(Boolean.valueOf(false));
         }
+        
+        Intent actIntent = getActivity().getIntent();
 
-        String locationName = getActivity().getIntent().getStringExtra("locationName");
+        String locationName = actIntent.getStringExtra("locationName");
         _location = SampleLocationList.findByLocationName(locationName);
+        
+        if ( _location == null )
+        {
+        	// The location doesn't exist in the database, this is a new location (maybe set some other flag here)
+        	
+        	// Get the point
+            double latitude = actIntent.getDoubleExtra("latitude", 0);
+            double longitude = actIntent.getDoubleExtra("longitude", 0);
+        	_location = new DRMLocation(locationName, new LatLng(latitude, longitude));
+        	
+        	// Get other info
+        	String address = actIntent.getStringExtra("address");
+        	String hours = actIntent.getStringExtra("hours");
+        	String phone = actIntent.getStringExtra("phone");
+        	String vicinity = actIntent.getStringExtra("vicinity");
+        	String website = actIntent.getStringExtra("website");
+        	
+        	_location.setAddress(vicinity);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View item = inflater.inflate(R.layout.detail_information, null);
+
         EditText name = (EditText)item.findViewById(R.id.name_text);
+        EditText address = (EditText)item.findViewById(R.id.address_text);
+        
         name.setText(_location.getLocationName());
+        if ( _location.getAddress() != null )
+        {
+        	address.setText(_location.getAddress());
+        }
 
         return item;
     }
