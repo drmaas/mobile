@@ -157,8 +157,20 @@ public abstract class BaseMapFragment extends MapFragment {
 		if ( location != null )
 		{
 	    	try {
-	    		LatLng latLong = location.getLocationPoint();
-	    		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + latLong.latitude + "," + latLong.longitude)));
+	    		
+	    		String address = location.getAddress();
+	    		String forURL;
+	    		if ( address == null || address.equals("") || address.equals("null"))
+	    		{
+		    		LatLng latLong = location.getLocationPoint();
+		    		forURL = latLong.latitude + "," + latLong.longitude;
+	    		}
+	    		else
+	    		{
+	    			forURL = address.replace(' ', '+');
+	    		}
+	    		
+	    		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=" + forURL)));
 	    	} catch (android.content.ActivityNotFoundException ex) {
 	    	    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.no_maps_msg), Toast.LENGTH_SHORT).show();
 	    	}

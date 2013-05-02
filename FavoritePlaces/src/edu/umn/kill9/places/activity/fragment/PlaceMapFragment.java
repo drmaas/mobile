@@ -66,13 +66,41 @@ public class PlaceMapFragment extends BaseMapFragment
 	public void onInfoWindowClick(Marker mark) {
 	    //TODO: Do something when this item is clicked
 		
-		Intent intent = new Intent();
-        intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        intent.putExtra("locationName", mark.getTitle());
-        intent.putExtra("latitude", mark.getPosition().latitude);
-        intent.putExtra("longitude", mark.getPosition().longitude);
-        startActivityForResult(intent, PlacesConstants.DETAILS);
-        
-	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + mark.getTitle(), Toast.LENGTH_SHORT).show();
+		String markTitle = mark.getTitle();
+		
+		DRMLocation locFound = null;
+		for ( DRMLocation loc : _locations )
+		{
+			String locName = loc.getLocationName();
+			if ( locName.equals(markTitle) )
+			{
+				locFound = loc;
+				break;
+			}
+		}
+		
+		if ( locFound == null )
+		{
+		    Toast.makeText(getActivity().getApplicationContext(), "Can't find location for: " + markTitle, Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+		
+			Intent intent = new Intent();
+	        intent.setClass(getActivity(), PlaceDetailsActivity.class);
+	
+	        intent.putExtra("locationName", locFound.getLocationName());
+	        intent.putExtra("address", locFound.getAddress());
+	        intent.putExtra("hours", locFound.getHours());
+	        intent.putExtra("phone", locFound.getPhone());
+	        intent.putExtra("vicinity", locFound.getVicinity());
+	        intent.putExtra("website", locFound.getWebsite());
+	        intent.putExtra("latitude", locFound.getLocationPoint().latitude);
+	        intent.putExtra("longitude", locFound.getLocationPoint().longitude);
+	        
+	        startActivityForResult(intent, PlacesConstants.DETAILS);
+	        
+		    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + locFound.getLocationName(), Toast.LENGTH_SHORT).show();
+		}
     }
 }
