@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
@@ -47,7 +47,7 @@ public class PlaceMapFragment extends BaseMapFragment
     		
             LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
             
-            for ( Location loc : _locations )
+            for ( DRMLocation loc : _locations )
             {
             	LatLng locPoint = loc.getLocationPoint();
             	boundsBuilder.include( locPoint );

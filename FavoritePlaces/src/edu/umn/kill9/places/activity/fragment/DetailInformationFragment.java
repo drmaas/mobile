@@ -1,17 +1,15 @@
 package edu.umn.kill9.places.activity.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.EditText;
-import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 
@@ -26,7 +24,7 @@ public class DetailInformationFragment extends Fragment {
 
     List<Category> categories;
     List<Boolean> selected;
-    private Location _location;
+    private DRMLocation _location;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

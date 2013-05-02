@@ -11,7 +11,7 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.tab.TabListener;
 import edu.umn.kill9.places.util.PlacesConstants;
@@ -44,7 +44,7 @@ public class PlaceDetailsActivity extends BaseActivity {
                 });
         actionBar.addTab(tab);
 
-		final Location loc = SampleLocationList.findByLocationName(locationName);
+		final DRMLocation loc = SampleLocationList.findByLocationName(locationName);
         tab = actionBar.newTab()
                 .setText(R.string.tab_map)
                 .setTabListener(new TabListener<DetailMapFragment>(

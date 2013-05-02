@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
 import edu.umn.kill9.places.web.PlacesWebService.PlacesAPIJSONListener;
@@ -31,8 +32,8 @@ public class AddCurrentLocFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-    	Place place = (Place)getListAdapter().getItem(position);
-	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + place.getName() + "\n" + place.getLatLng(), Toast.LENGTH_SHORT).show();
+        DRMLocation place = (DRMLocation)getListAdapter().getItem(position);
+	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + place.getLocationName() + "\n" + place.getLocationPoint(), Toast.LENGTH_SHORT).show();
 	    
 	    //TODO: Do something when this item is clicked
     }

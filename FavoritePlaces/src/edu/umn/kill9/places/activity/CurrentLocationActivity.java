@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
 
@@ -30,7 +31,7 @@ import java.util.List;
  */
 public class CurrentLocationActivity extends BaseActivity implements PlacesWebService.PlacesAPIJSONListener {
 
-    private ArrayList<Place> places;
+    private ArrayList<DRMLocation> places;
     private String currentLocation;
 
     AddCurrentLocFragment loclist;
@@ -61,15 +62,15 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
     }
 
     @Override
-    public void onWebServiceCallComplete(List<Place> placesList){
-        places = new ArrayList<Place>();
+    public void onWebServiceCallComplete(List<DRMLocation> placesList){
+        places = new ArrayList<DRMLocation>();
         places.addAll(placesList);
 
         //refresh list
         loclist.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
 
-        //add points to map
-        //locmap.addLocation();
+        //TODO add points to map. Place Object should be integrated with DRMLocation object.
+        locmap.addLocation(places);
     }
 
     /**
