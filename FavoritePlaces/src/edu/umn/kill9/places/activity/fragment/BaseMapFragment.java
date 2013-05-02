@@ -134,6 +134,7 @@ public abstract class BaseMapFragment extends MapFragment {
     protected void addMarkersToMap()
     {
     	// TODO: Probably need to clear the exiting location on the map before adding all of them
+    	_map.clear();
     	
     	for ( DRMLocation loc : _locations )
         {
@@ -217,7 +218,6 @@ public abstract class BaseMapFragment extends MapFragment {
     {
     	_locations = new ArrayList<DRMLocation>();
     	_markers = new ArrayList<Marker>();
-    	
     }
 
     public void setLocations(List<DRMLocation> locations) {
@@ -226,9 +226,7 @@ public abstract class BaseMapFragment extends MapFragment {
     
 	public void refreshMap()
 	{
-		//TODO: Figure out how to refresh the map
         setUpMap();
-        addMarkersToMap();
 	}
     
 }
