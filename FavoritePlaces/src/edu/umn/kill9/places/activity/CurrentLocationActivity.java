@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.Toast;
 import edu.umn.kill9.places.R;
 
@@ -19,7 +20,6 @@ import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
 import edu.umn.kill9.places.model.DRMLocation;
-import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
 
 import java.util.ArrayList;
@@ -69,8 +69,10 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         //refresh list
         loclist.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
 
-        //TODO add points to map. Place Object should be integrated with DRMLocation object.
+        //add points to map
+        locmap.clearLocations();
         locmap.addLocation(places);
+        locmap.refreshMap();
     }
 
     /**
@@ -102,7 +104,7 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                 Toast.makeText(getApplicationContext(), location.getProvider() + ": " + currentLocation, Toast.LENGTH_SHORT).show();
 
                 //move map to current location
-                locmap.moveToLocation(location);
+                //locmap.moveToLocation(location);
 
             }
             @Override
@@ -163,9 +165,24 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            AddCurrentLocFragment f = (AddCurrentLocFragment)getFragmentManager().findFragmentById(R.id.currloclistfragment);
-            PlaceAdapter pa = (PlaceAdapter)f.getListAdapter();
-            pa.getFilter().filter(s);
+            //filter list
+            final PlaceAdapter pa = (PlaceAdapter)loclist.getListAdapter();
+            pa.getFilter().filter(s, new Filter.FilterListener() {
+                @Override
+                public void onFilterComplete(int count) {
+                    //filter map
+                    int c = pa.getCount();
+                    List<DRMLocation> filteredPlaces = new ArrayList<DRMLocation>();
+                    for (int i = 0; i < c; i++) {
+                        filteredPlaces.add(pa.getItem(i));
+                    }
+                    locmap.clearLocations();
+                    locmap.addLocation(filteredPlaces);
+                    locmap.refreshMap();
+                }
+            });
+
+
         }
 
     };

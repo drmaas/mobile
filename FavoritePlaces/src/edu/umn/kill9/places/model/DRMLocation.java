@@ -174,4 +174,13 @@ public class DRMLocation implements Parcelable{
 	        }
 	    };
 
+    /**
+     * needed for filtering
+     *
+     * @return
+     */
+    public String toString() {
+        return locationName + " " + address;
+    }
+
 }

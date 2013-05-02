@@ -31,11 +31,11 @@ public abstract class BaseMapFragment extends MapFragment {
 	protected static final float DEFAULT_ZOOM = 12.0f;
 
 	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
-	protected static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
+	protected static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999);
 	
     protected GoogleMap _map;
-    protected ArrayList<DRMLocation> _locations;
-    protected ArrayList<Marker> _markers;
+    protected List<DRMLocation> _locations;
+    protected List<Marker> _markers;
     
     public BaseMapFragment()
     {
@@ -219,10 +219,16 @@ public abstract class BaseMapFragment extends MapFragment {
     	_markers = new ArrayList<Marker>();
     	
     }
+
+    public void setLocations(List<DRMLocation> locations) {
+        _locations = locations;
+    }
     
 	public void refreshMap()
 	{
 		//TODO: Figure out how to refresh the map
+        setUpMap();
+        addMarkersToMap();
 	}
     
 }
