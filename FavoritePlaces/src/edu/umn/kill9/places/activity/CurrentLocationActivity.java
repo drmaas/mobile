@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
+import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
@@ -31,6 +32,9 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
 
     private ArrayList<Place> places;
     private String currentLocation;
+
+    AddCurrentLocFragment loclist;
+    PlaceMapFragment locmap;
 
     /**
      * @param savedInstanceState
@@ -48,17 +52,24 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         getCurrentLocation();
 
         //filter list
-        //TODO filtering does not work
         EditText filterText = (EditText)findViewById(R.id.currlocsearchbox);
         filterText.addTextChangedListener(filterTextWatcher);
+
+        //fragment references
+        loclist = (AddCurrentLocFragment)getFragmentManager().findFragmentById(R.id.currloclistfragment);
+        locmap = (PlaceMapFragment)getFragmentManager().findFragmentById(R.id.currlocmapfragment);
     }
 
     @Override
     public void onWebServiceCallComplete(List<Place> placesList){
         places = new ArrayList<Place>();
         places.addAll(placesList);
-        AddCurrentLocFragment f = (AddCurrentLocFragment)getFragmentManager().findFragmentById(R.id.currloclistfragment);
-        f.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
+
+        //refresh list
+        loclist.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
+
+        //add points to map
+        //locmap.addLocation();
     }
 
     /**
@@ -80,7 +91,7 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                     e.printStackTrace();
                 }
                 
-                // API key
+                //execute service call to get locations
                 Bundle bundle = ai.metaData;
                 String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
                 PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this, myApiKey);
@@ -88,6 +99,10 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                 // Execute query
                 webservice.execute(currentLocation);
                 Toast.makeText(getApplicationContext(), location.getProvider() + ": " + currentLocation, Toast.LENGTH_SHORT).show();
+
+                //move map to current location
+                locmap.moveToLocation(location);
+
             }
             @Override
             public void onProviderDisabled(String provider) {
@@ -110,10 +125,10 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         		);
 
         locationMgr.requestSingleUpdate(
-        		LocationManager.NETWORK_PROVIDER,
-        		listener,
-        		null // Use the callback on the calling thread
-        		);
+                LocationManager.NETWORK_PROVIDER,
+                listener,
+                null // Use the callback on the calling thread
+        );
     }
 
     @Override

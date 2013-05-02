@@ -36,7 +36,6 @@ public abstract class BaseMapFragment extends MapFragment {
     protected GoogleMap _map;
     protected ArrayList<Location> _locations;
     protected ArrayList<Marker> _markers;
-    protected boolean _multiplePoints;
     
     public BaseMapFragment()
     {
@@ -167,6 +166,12 @@ public abstract class BaseMapFragment extends MapFragment {
 		{
 			Toast.makeText(getActivity().getApplicationContext(), "Location is null", Toast.LENGTH_SHORT).show();
 		}
+    }
+
+    public void moveToLocation(android.location.Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+        _map.moveCamera(cameraUpdate);
     }
     
     public boolean addLocation(Location[] arrayLocation)

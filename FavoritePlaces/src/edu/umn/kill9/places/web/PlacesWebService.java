@@ -34,9 +34,6 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	private PlacesAPIJSONListener jsonListener;
 	private String mapsAPIKey;
 
-	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
-	private static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
-
 	public PlacesWebService(PlacesAPIJSONListener listenerActivity, String apiKey){
 		this.jsonListener = listenerActivity;
 		this.mapsAPIKey = apiKey;
@@ -44,13 +41,13 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 
 	@Override
 	protected List<Place> doInBackground(String... params) {
-		
-		Double currentLat = DEFAULT_LOCATION.latitude;
-		Double currentLong = DEFAULT_LOCATION.longitude;
-		String Device_location = params[0]; //currentLat +"," + currentLong;
+
+		String device_location = params[0];
+        Double currentLat = Double.parseDouble(device_location.split(",")[0]);
+        Double currentLong = Double.parseDouble(device_location.split(",")[1]);
+
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
-    
-		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;				
+		String url = baseurl+ "?location=" + device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;
 				
 		AndroidHttpClient client = null;
 		String json=null;
