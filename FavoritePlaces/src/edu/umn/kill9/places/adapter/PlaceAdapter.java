@@ -1,5 +1,7 @@
 package edu.umn.kill9.places.adapter;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.model.DRMLocation;
-import edu.umn.kill9.places.model.Place;
-
-import java.util.List;
 
 /**
  * User: drmaas
