@@ -132,6 +132,9 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         }
     }
 
+    /**
+     * filter the list adapter
+     */
     private TextWatcher filterTextWatcher = new TextWatcher() {
 
         @Override
@@ -145,7 +148,8 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             AddCurrentLocFragment f = (AddCurrentLocFragment)getFragmentManager().findFragmentById(R.id.currloclistfragment);
-            ((PlaceAdapter)f.getListAdapter()).getFilter().filter(s);
+            PlaceAdapter pa = (PlaceAdapter)f.getListAdapter();
+            pa.getFilter().filter(s);
         }
 
     };

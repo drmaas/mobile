@@ -45,4 +45,9 @@ public class Place {
 	public LatLng getLatLng(){
 		return latLng;
 	}
+
+    //needed for filtering to work
+    public String toString() {
+        return name + " " + vicinity;
+    }
 }
