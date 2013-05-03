@@ -12,8 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
+
+import java.util.ArrayList;
 
 /**
  * User: drmaas
@@ -32,7 +35,7 @@ public class MapSearchListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // Populate list with our static array of titles.
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocationStrings()));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, new ArrayList<String>()));
     }
 
     /**
@@ -47,7 +50,8 @@ public class MapSearchListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        intent.putExtra("locationName", (String)getListAdapter().getItem(position));
+        DRMLocation location = (DRMLocation)getListAdapter().getItem(position);
+        intent.putExtra("locationName", location.getLocationName());
         startActivityForResult(intent, PlacesConstants.DETAILS);
     }
 }
