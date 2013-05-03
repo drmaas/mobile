@@ -5,8 +5,6 @@ import android.os.Bundle;
 import com.example.ParseData.model.*;
 import com.parse.*;
 
-import java.util.List;
-
 public class MyActivity extends Activity {
     /**
      * Called when the activity is first created.
@@ -31,31 +29,31 @@ public class MyActivity extends Activity {
 
 
         try {
-            /********************LocationUser**************************/
-            LocationUserDataSource luds = new LocationUserDataSource();
+            /********************PlaceUser**************************/
+            PlaceUserDataSource luds = new PlaceUserDataSource();
 
 //            //First Create
-//            LocationUser locationUser = luds.createLocationUser("First Test");
+//            PlaceUser locationUser = luds.createPlaceUser("First Test");
 //
 //            //Second Create
-//            LocationUser locationUser2 = new LocationUser("Second Test");
-//            luds.createLocationUser(locationUser2);
+//            PlaceUser locationUser2 = new PlaceUser("Second Test");
+//            luds.createPlaceUser(locationUser2);
 
             //Retrieve
-            LocationUser locationUser3 = luds.getLocationUser("1Kp46acn0h");
+            PlaceUser placeUser3 = luds.getPlaceUser("1Kp46acn0h");
 //
 //            //RetrieveAll
-//            List<LocationUser> locationUsers = luds.getAllLocationUser();
+//            List<PlaceUser> locationUsers = luds.getAllPlaceUser();
 //
 //            //Update
 //            locationUser.setHomeAddress("Modified First Test");
-//            luds.updateLocationUser(locationUser);
+//            luds.updatePlaceUser(locationUser);
 //
 //            //First Delete
-//            luds.deleteLocationUser(locationUser);
+//            luds.deletePlaceUser(locationUser);
 //
 //            //Second Delete
-//            luds.deleteLocationUser(locationUser2.getId());
+//            luds.deletePlaceUser(locationUser2.getId());
 
 
 //            /********************Category**************************/
@@ -84,31 +82,31 @@ public class MyActivity extends Activity {
 //            //Second Delete
 //            cds.deleteCategory(category2.getId());
 
-            /********************Location**************************/
-            LocationDataSource lds = new LocationDataSource();
+            /********************Place**************************/
+            PlaceDataSource lds = new PlaceDataSource();
 
             //First Create
-            Location location = lds.createLocation("First Test", "First Test", "First Test", "First Test", "First Test", "First Test", locationUser3);
+            Place place = lds.createPlace("First Test", "First Test", "First Test", "First Test", "First Test", "First Test", placeUser3);
 
 //            //Second Create
-//            Location location2 = new Location("Second Test", "Second Test", "Second Test", "Second Test", "Second Test", "Second Test", locationUser3);
-//            lds.createLocation(location2);
+//            Place location2 = new Place("Second Test", "Second Test", "Second Test", "Second Test", "Second Test", "Second Test", placeUser3);
+//            lds.createPlace(location2);
 //
 //            //Retrieve
-//            Location location3 = lds.getLocation("qRrHTvXiPg");
+//            Place location3 = lds.getPlace("qRrHTvXiPg");
 //
 //            //RetrieveAll
-//            List<Location> locations = lds.getAllLocation();
+//            List<Place> locations = lds.getAllPlace();
 //
 //            //Update
-//            location.setLocationName("Modified First Test");
-//            lds.updateLocation(location);
+//            place.setPlaceName("Modified First Test");
+//            lds.updatePlace(place);
 //
 //            //First Delete
-//            lds.deleteLocation(location);
+//            lds.deletePlace(place);
 //
 //            //Second Delete
-//            lds.deleteLocation(location2.getId());
+//            lds.deletePlace(location2.getId());
 //
 //
 //            /********************Event**************************/

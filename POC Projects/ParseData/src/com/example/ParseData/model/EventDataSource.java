@@ -15,9 +15,13 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class EventDataSource {
-    public Event createEvent(Location location) throws ParseException {
+    public Event createEvent(Place place) throws ParseException {
         ParseObject parseObject = new ParseObject(Event.TABLE_EVENT);
-        parseObject.put(Event.COLUMN_LOCATION, location);
+
+        if(place != null)
+        {
+            parseObject.put(Event.COLUMN_PLACE, Place.PlaceToParseObject(place));
+        }
 
         parseObject.save();
 
