@@ -38,6 +38,7 @@ public class ExternalLocationActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addexternallocation);
+        //hideKeyboard();
 
         //show 'up' button next to home icon
         showHomeAsUp(true);
