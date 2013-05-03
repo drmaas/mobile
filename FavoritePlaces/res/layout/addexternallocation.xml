@@ -4,20 +4,21 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
 
-    <!-- search map -->
-    <fragment class="edu.umn.kill9.places.activity.fragment.PlaceMapFragment"
-              android:id="@+id/mapsearchmapfragment"
-              android:layout_width="match_parent"
-              android:layout_height="250dp" />
 
     <!-- search text field -->
     <EditText android:id="@+id/mapsearchtext"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="@string/default_search_text"
+              android:text=""
               android:inputType="text"
               android:imeOptions="actionSearch"
               android:layout_marginTop="8dp"/>
+
+    <!-- search map -->
+    <fragment class="edu.umn.kill9.places.activity.fragment.PlaceMapFragment"
+              android:id="@+id/mapsearchmapfragment"
+              android:layout_width="match_parent"
+              android:layout_height="250dp" />
 
     <!-- search list results -->
     <fragment class="edu.umn.kill9.places.activity.fragment.MapSearchListFragment"

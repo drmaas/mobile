@@ -39,6 +39,10 @@
     <!-- current location strings -->
     <string name="currentlocation_title">Add Current Location</string>
 
+    <!-- external location strings -->
+    <string name="invalid_search_string">Please Provide a Valid Search Expression</string>
+    <string name="close">Close</string>
+
     <!-- search maps strings -->
     <string name="externallocation_title">Search Locations</string>
     <string name="default_search_text">Search address or location</string>
