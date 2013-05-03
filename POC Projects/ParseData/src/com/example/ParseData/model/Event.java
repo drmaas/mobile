@@ -12,25 +12,25 @@ import com.parse.ParseObject;
 public class Event extends BaseModel {
     /*********************Table and Column Constants**************************/
     public static final String TABLE_EVENT = "Event";
-    public static final String COLUMN_LOCATION = "LocationId";
+    public static final String COLUMN_PLACE = "PlaceId";
 
     /***************************Attributes************************************/
-    private Location _location;
+    private Place _place;
 
     /**************************Constructors***********************************/
     public Event(){ }
 
-    public  Event(Location location){
-        this._location = location;
+    public  Event(Place place){
+        this._place = place;
     }
 
     /*******************Getter and Setter methods*****************************/
-    public Location getLocation() {
-        return _location;
+    public Place getPlace() {
+        return _place;
     }
 
-    public void setLocation(Location location) {
-        this._location = location;
+    public void setPlace(Place place) {
+        this._place = place;
     }
 
     /***************************Parse methods*********************************/
@@ -41,10 +41,10 @@ public class Event extends BaseModel {
         event.setId(parseObject.getObjectId());
 
         //Relational Data
-        if(parseObject.getParseObject(COLUMN_LOCATION) != null)
+        if(parseObject.getParseObject(COLUMN_PLACE) != null)
         {
-            Location location = Location.ParseObjectToLocation(parseObject.getParseObject(COLUMN_LOCATION));
-            event.setLocation(location);
+            Place place = Place.ParseObjectToPlace(parseObject.getParseObject(COLUMN_PLACE));
+            event.setPlace(place);
         }
 
         return event;
@@ -56,9 +56,9 @@ public class Event extends BaseModel {
         //Simple Data
 
         //Relational Data
-        if(event.getLocation() != null)
+        if(event.getPlace() != null)
         {
-            parseObject.put(COLUMN_LOCATION, Location.LocationToParseObject(event.getLocation()));
+            parseObject.put(COLUMN_PLACE, Place.PlaceToParseObject(event.getPlace()));
         }
 
         //Fill in the ID if it exists (for updates)
