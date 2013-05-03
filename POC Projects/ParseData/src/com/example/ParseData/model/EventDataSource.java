@@ -17,7 +17,11 @@ import java.util.List;
 public class EventDataSource {
     public Event createEvent(Location location) throws ParseException {
         ParseObject parseObject = new ParseObject(Event.TABLE_EVENT);
-        parseObject.put(Event.COLUMN_LOCATION, location);
+
+        if(location != null)
+        {
+            parseObject.put(Event.COLUMN_LOCATION, Location.LocationToParseObject(location));
+        }
 
         parseObject.save();
 

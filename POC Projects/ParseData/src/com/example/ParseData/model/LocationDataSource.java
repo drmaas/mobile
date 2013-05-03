@@ -27,9 +27,10 @@ public class LocationDataSource {
         //parseObject.put(Location.COLUMN_LOCATIONPOINT, locationPoint);
 
         //Relational Data
-        ParseObject newLocationUser = new ParseObject(LocationUser.TABLE_LOCATIONUSER);
-        newLocationUser.setObjectId(locationUser.getId());
-        parseObject.put(Location.COLUMN_LOCATIONUSER, newLocationUser);
+        if(locationUser != null)
+        {
+            parseObject.put(Location.COLUMN_LOCATIONUSER, LocationUser.LocationUserToParseObject(locationUser));
+        }
 
         parseObject.save();
 
