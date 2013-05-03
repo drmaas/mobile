@@ -2,6 +2,7 @@ package edu.umn.kill9.places.activity.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,7 +12,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
@@ -47,7 +48,7 @@ public class PlaceMapFragment extends BaseMapFragment
     		
             LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
             
-            for ( Location loc : _locations )
+            for ( DRMLocation loc : _locations )
             {
             	LatLng locPoint = loc.getLocationPoint();
             	boundsBuilder.include( locPoint );
@@ -63,9 +64,43 @@ public class PlaceMapFragment extends BaseMapFragment
 
 	@Override
 	public void onInfoWindowClick(Marker mark) {
-		Intent intent = new Intent();
-        intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        intent.putExtra("locationName", mark.getTitle());
-        startActivityForResult(intent, PlacesConstants.DETAILS);
+	    //TODO: Do something when this item is clicked
+		
+		String markTitle = mark.getTitle();
+		
+		DRMLocation locFound = null;
+		for ( DRMLocation loc : _locations )
+		{
+			String locName = loc.getLocationName();
+			if ( locName.equals(markTitle) )
+			{
+				locFound = loc;
+				break;
+			}
+		}
+		
+		if ( locFound == null )
+		{
+		    Toast.makeText(getActivity().getApplicationContext(), "Can't find location for: " + markTitle, Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+		
+			Intent intent = new Intent();
+	        intent.setClass(getActivity(), PlaceDetailsActivity.class);
+	
+	        intent.putExtra("locationName", locFound.getLocationName());
+	        intent.putExtra("address", locFound.getAddress());
+	        intent.putExtra("hours", locFound.getHours());
+	        intent.putExtra("phone", locFound.getPhone());
+	        intent.putExtra("vicinity", locFound.getVicinity());
+	        intent.putExtra("website", locFound.getWebsite());
+	        intent.putExtra("latitude", locFound.getLocationPoint().latitude);
+	        intent.putExtra("longitude", locFound.getLocationPoint().longitude);
+	        
+	        startActivityForResult(intent, PlacesConstants.DETAILS);
+	        
+		    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + locFound.getLocationName(), Toast.LENGTH_SHORT).show();
+		}
     }
 }

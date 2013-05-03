@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -27,15 +22,12 @@ import com.google.android.gms.maps.model.LatLng;
 
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.application.PlacesApplication;
-import edu.umn.kill9.places.model.Place;
+import edu.umn.kill9.places.model.DRMLocation;
 
-public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
+public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>{
 
 	private PlacesAPIJSONListener jsonListener;
 	private String mapsAPIKey;
-
-	// http://maps.googleapis.com/maps/api/geocode/json?address=Minneapolis,+MN&sensor=true
-	private static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999); 
 
 	public PlacesWebService(PlacesAPIJSONListener listenerActivity, String apiKey){
 		this.jsonListener = listenerActivity;
@@ -43,18 +35,18 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	}
 
 	@Override
-	protected List<Place> doInBackground(String... params) {
-		
-		Double currentLat = DEFAULT_LOCATION.latitude;
-		Double currentLong = DEFAULT_LOCATION.longitude;
-		String Device_location = params[0]; //currentLat +"," + currentLong;
+	protected List<DRMLocation> doInBackground(String... params) {
+
+		String device_location = params[0];
+        Double currentLat = Double.parseDouble(device_location.split(",")[0]);
+        Double currentLong = Double.parseDouble(device_location.split(",")[1]);
+
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
-    
-		String url = baseurl+ "?location=" + Device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;				
+		String url = baseurl+ "?location=" + device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;
 				
 		AndroidHttpClient client = null;
 		String json=null;
-		ArrayList<Place> jsonResults = null;
+		ArrayList<DRMLocation> jsonResults = null;
     
 		try {
             client = AndroidHttpClient.newInstance("Android", null);
@@ -79,9 +71,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
         return jsonResults;
 	}
 	
-	protected ArrayList<Place> parseJSON(String json, Double currentLat, Double currentLong ){
+	protected ArrayList<DRMLocation> parseJSON(String json, Double currentLat, Double currentLong ){
 		 
-		ArrayList<Place> jsonResults = null;
+		ArrayList<DRMLocation> jsonResults = null;
 		
 		try {
 			JSONObject jsonObj = new JSONObject(json);
@@ -91,9 +83,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
             currentLoc.setLatitude(currentLat);
             currentLoc.setLongitude(currentLong);
             
-	        jsonResults = new ArrayList<Place>(resultArray.length());
+	        jsonResults = new ArrayList<DRMLocation>(resultArray.length());
 	        for (int i = 0; i < resultArray.length(); i++) {
-	             Place newplace = new Place();
+                 DRMLocation newplace = new DRMLocation();
 	             
 	             JSONObject geometryJson = resultArray.getJSONObject(i).getJSONObject("geometry");
 	             JSONObject locationJson = geometryJson.getJSONObject("location");
@@ -108,9 +100,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	             newplace.setDistance(distance);
 	             
 	             LatLng latLng = new LatLng(latitude, longitude);
-	             newplace.setLatLng(latLng);
+	             newplace.setLocationPoint(latLng);
 	             
-	             newplace.setName(resultArray.getJSONObject(i).getString("name"));
+	             newplace.setLocationName(resultArray.getJSONObject(i).getString("name"));
 	             newplace.setReference(resultArray.getJSONObject(i).getString("reference"));
 	             newplace.setVicinity(resultArray.getJSONObject(i).getString("vicinity"));
 	         	 jsonResults.add(newplace);
@@ -123,10 +115,11 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
         return jsonResults;
 	}
 	
-	protected void onPostExecute(List<Place> placesList){
+	protected void onPostExecute(List<DRMLocation> placesList){
 		jsonListener.onWebServiceCallComplete(placesList);
 	}
+
 	public interface PlacesAPIJSONListener {
-		public void onWebServiceCallComplete(List<Place> places);
+		public void onWebServiceCallComplete(List<DRMLocation> places);
 	}
 }

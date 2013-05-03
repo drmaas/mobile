@@ -10,7 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.Marker;
 
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 
 /**
  * User: drmaas
@@ -32,7 +32,7 @@ public class DetailMapFragment extends BaseMapFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-    	Location loc = getLocation();
+    	DRMLocation loc = getLocation();
 
 		if ( loc != null )
 		{
@@ -55,7 +55,7 @@ public class DetailMapFragment extends BaseMapFragment {
     protected CameraUpdate getCameraUpdate()
     {
     	CameraUpdate retVal = null;
-    	Location loc = getLocation();
+    	DRMLocation loc = getLocation();
 
 		if ( loc != null )
 		{
@@ -78,9 +78,9 @@ public class DetailMapFragment extends BaseMapFragment {
     	mark.showInfoWindow();
     }
     
-    private Location getLocation()
+    private DRMLocation getLocation()
     {
-    	Location retVal = null;
+    	DRMLocation retVal = null;
 
     	if ( _locations != null && _locations.size() > 0 )
 		{

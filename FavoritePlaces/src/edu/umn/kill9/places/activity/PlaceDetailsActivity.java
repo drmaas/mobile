@@ -1,5 +1,7 @@
 package edu.umn.kill9.places.activity;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -11,7 +13,7 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
-import edu.umn.kill9.places.model.Location;
+import edu.umn.kill9.places.model.DRMLocation;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.tab.TabListener;
 import edu.umn.kill9.places.util.PlacesConstants;
@@ -44,7 +46,30 @@ public class PlaceDetailsActivity extends BaseActivity {
                 });
         actionBar.addTab(tab);
 
-		final Location loc = SampleLocationList.findByLocationName(locationName);
+		DRMLocation loc = SampleLocationList.findByLocationName(locationName);
+        
+        if ( loc == null )
+        {
+        	// The location doesn't exist in the database, this is a new location (maybe set some other flag here)
+        	
+        	Intent actIntent = getIntent();
+        	
+        	// Get the point
+            double latitude = actIntent.getDoubleExtra("latitude", 0);
+            double longitude = actIntent.getDoubleExtra("longitude", 0);
+            loc = new DRMLocation(locationName, new LatLng(latitude, longitude));
+        	
+        	// Get other info
+        	String address = actIntent.getStringExtra("address");
+        	String hours = actIntent.getStringExtra("hours");
+        	String phone = actIntent.getStringExtra("phone");
+        	String vicinity = actIntent.getStringExtra("vicinity");
+        	String website = actIntent.getStringExtra("website");
+        	
+        	loc.setAddress(vicinity);
+        }
+
+		final DRMLocation locFinal = loc;
         tab = actionBar.newTab()
                 .setText(R.string.tab_map)
                 .setTabListener(new TabListener<DetailMapFragment>(
@@ -57,7 +82,7 @@ public class PlaceDetailsActivity extends BaseActivity {
 								if ( mFragment instanceof DetailMapFragment )
 								{
 									DetailMapFragment dmf = (DetailMapFragment) mFragment;
-									dmf.addLocation(loc);
+									dmf.addLocation(locFinal);
 								}
 							}
                 	
