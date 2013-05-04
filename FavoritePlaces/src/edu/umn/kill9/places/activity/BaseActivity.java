@@ -37,6 +37,8 @@ public abstract class BaseActivity extends Activity {
         for (int i = 0; i < categories.size(); i++) {
             selected.add(new Boolean(false));
         }
+
+        setTitle("");
     }
 
     /**
