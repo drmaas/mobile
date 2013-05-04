@@ -10,16 +10,20 @@ public class Event {
     /*********************Table and Column Constants**************************/
     public static final String TABLE_EVENT = "Event";
     public static final String COLUMN_PLACE = "PlaceId";
+    public static final String COLUMN_CALENDARID = "CalendarId";
+
 
     /***************************Attributes************************************/
     private String _id;
     private Place _place;
+    private int _calendarId;
 
     /**************************Constructors***********************************/
     public Event(){ }
 
-    public  Event(Place place){
+    public  Event(Place place, int calendarId){
         this._place = place;
+        this._calendarId = calendarId;
     }
 
     /*******************Getter and Setter methods*****************************/
@@ -39,12 +43,21 @@ public class Event {
         this._place = place;
     }
 
+    public int getCalendarId() {
+        return _calendarId;
+    }
+
+    public void setCalendarId(int calendarId) {
+        this._calendarId = calendarId;
+    }
+
     /***************************Parse methods*********************************/
     public static Event ParseObjectToEvent(ParseObject parseObject) {
         Event event = new Event();
 
         //Simple Data
         event.setId(parseObject.getObjectId());
+        event.setCalendarId(parseObject.getInt(COLUMN_CALENDARID));
 
         //Relational Data
         if(parseObject.getParseObject(COLUMN_PLACE) != null)
@@ -60,6 +73,7 @@ public class Event {
         ParseObject parseObject = new ParseObject(TABLE_EVENT);
 
         //Simple Data
+        parseObject.put(COLUMN_CALENDARID, event.getCalendarId());
 
         //Relational Data
         if(event.getPlace() != null)
