@@ -48,11 +48,13 @@ public class EventsFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
 
         //TODO CS - Not sure if I should just change that withAppendId() method to take a String vs an int... I guess I don't know what would happen.
-        String eventID = events.get(position).getId();
+        /*
+    	String eventID = events.get(position).getId();
         Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         Intent intent = new Intent(Intent.ACTION_EDIT)
                 .setData(uri);
         startActivityForResult(intent, PlacesConstants.EVENTS);
+        */
     }
 
     @Override
