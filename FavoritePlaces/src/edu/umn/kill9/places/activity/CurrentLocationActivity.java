@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class CurrentLocationActivity extends BaseActivity implements PlacesWebService.PlacesAPIJSONListener {
 
-    private ArrayList<DRMLocation> places;
+    private ArrayList<Place> places;
     private String currentLocation;
 
     AddCurrentLocFragment loclist;
@@ -62,8 +62,8 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
     }
 
     @Override
-    public void onWebServiceCallComplete(List<DRMLocation> placesList){
-        places = new ArrayList<DRMLocation>();
+    public void onWebServiceCallComplete(List<Place> placesList){
+        places = new ArrayList<Place>();
         places.addAll(placesList);
 
         //refresh list
@@ -172,7 +172,7 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                 public void onFilterComplete(int count) {
                     //filter map
                     int c = pa.getCount();
-                    List<DRMLocation> filteredPlaces = new ArrayList<DRMLocation>();
+                    List<Place> filteredPlaces = new ArrayList<Place>();
                     for (int i = 0; i < c; i++) {
                         filteredPlaces.add(pa.getItem(i));
                     }

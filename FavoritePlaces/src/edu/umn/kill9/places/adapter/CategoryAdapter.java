@@ -46,7 +46,7 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
         //set text of list item
         final Category c = getItem(position);
         CheckedTextView ctext = (CheckedTextView)item.findViewById(R.id.itemtext);
-        ctext.setText(c.getCategoryName());
+        ctext.setText(c.getName());
         ctext.setChecked(selected.get(position));
 
         return item;

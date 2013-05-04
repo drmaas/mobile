@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.umn.kill9.places.model.Place;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -22,9 +23,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.application.PlacesApplication;
-import edu.umn.kill9.places.model.DRMLocation;
 
-public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>{
+public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 
 	private PlacesAPIJSONListener jsonListener;
 	private String mapsAPIKey;
@@ -35,7 +35,7 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
 	}
 
 	@Override
-	protected List<DRMLocation> doInBackground(String... params) {
+	protected List<Place> doInBackground(String... params) {
 
 		String device_location = params[0];
         Double currentLat = Double.parseDouble(device_location.split(",")[0]);
@@ -46,7 +46,7 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
 				
 		AndroidHttpClient client = null;
 		String json=null;
-		ArrayList<DRMLocation> jsonResults = null;
+		ArrayList<Place> jsonResults = null;
     
 		try {
             client = AndroidHttpClient.newInstance("Android", null);
@@ -71,9 +71,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
         return jsonResults;
 	}
 	
-	protected ArrayList<DRMLocation> parseJSON(String json, Double currentLat, Double currentLong ){
+	protected ArrayList<Place> parseJSON(String json, Double currentLat, Double currentLong ){
 		 
-		ArrayList<DRMLocation> jsonResults = null;
+		ArrayList<Place> jsonResults = null;
 		
 		try {
 			JSONObject jsonObj = new JSONObject(json);
@@ -83,9 +83,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
             currentLoc.setLatitude(currentLat);
             currentLoc.setLongitude(currentLong);
             
-	        jsonResults = new ArrayList<DRMLocation>(resultArray.length());
+	        jsonResults = new ArrayList<Place>(resultArray.length());
 	        for (int i = 0; i < resultArray.length(); i++) {
-                 DRMLocation newplace = new DRMLocation();
+                 Place newplace = new Place();
 	             
 	             JSONObject geometryJson = resultArray.getJSONObject(i).getJSONObject("geometry");
 	             JSONObject locationJson = geometryJson.getJSONObject("location");
@@ -100,9 +100,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
 	             newplace.setDistance(distance);
 	             
 	             LatLng latLng = new LatLng(latitude, longitude);
-	             newplace.setLocationPoint(latLng);
+	             newplace.setPlacePoint(latLng);
 	             
-	             newplace.setLocationName(resultArray.getJSONObject(i).getString("name"));
+	             newplace.setPlaceName(resultArray.getJSONObject(i).getString("name"));
 	             newplace.setReference(resultArray.getJSONObject(i).getString("reference"));
 	             newplace.setVicinity(resultArray.getJSONObject(i).getString("vicinity"));
 	         	 jsonResults.add(newplace);
@@ -115,11 +115,11 @@ public class PlacesWebService extends AsyncTask<String, Void, List<DRMLocation>>
         return jsonResults;
 	}
 	
-	protected void onPostExecute(List<DRMLocation> placesList){
+	protected void onPostExecute(List<Place> placesList){
 		jsonListener.onWebServiceCallComplete(placesList);
 	}
 
 	public interface PlacesAPIJSONListener {
-		public void onWebServiceCallComplete(List<DRMLocation> places);
+		public void onWebServiceCallComplete(List<Place> places);
 	}
 }

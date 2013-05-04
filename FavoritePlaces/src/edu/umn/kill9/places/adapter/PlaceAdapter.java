@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 
 /**
  * User: drmaas
  * Date: 4/30/13
  */
-public class PlaceAdapter extends ArrayAdapter<DRMLocation> {
-    public PlaceAdapter(Context context, int textViewResourceId, List<DRMLocation> places) {
+public class PlaceAdapter extends ArrayAdapter<Place> {
+    public PlaceAdapter(Context context, int textViewResourceId, List<Place> places) {
         super(context, textViewResourceId, places);
     }
 
@@ -25,8 +25,8 @@ public class PlaceAdapter extends ArrayAdapter<DRMLocation> {
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
         View item = inflater.inflate(R.layout.place_item, parent, false);
-        DRMLocation place = getItem(position);
-        ((TextView)item.findViewById(R.id.place_name)).setText(place.getLocationName());
+        Place place = getItem(position);
+        ((TextView)item.findViewById(R.id.place_name)).setText(place.getPlaceName());
         ((TextView)item.findViewById(R.id.place_vicinity)).setText(place.getVicinity());
         ((TextView)item.findViewById(R.id.place_distance)).setText(place.getDistance());
 

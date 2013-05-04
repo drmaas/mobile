@@ -4,7 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import com.google.android.gms.maps.model.LatLng;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,21 +22,21 @@ public class PlacesGeocoder {
         this.context = context;
     }
 
-    public List<DRMLocation> getFromLocationName(String searchText, int numResults) {
+    public List<Place> getFromLocationName(String searchText, int numResults) {
         Geocoder coder = new Geocoder(context);
-        List<DRMLocation> places = new ArrayList<DRMLocation>();
+        List<Place> places = new ArrayList<Place>();
         try {
             List<Address> addresses = coder.getFromLocationName(searchText, numResults);
-            DRMLocation place;
+            Place place;
             for (Address a : addresses) {
-                place = new DRMLocation();
-                place.setLocationPoint(new LatLng(a.getLatitude(),a.getLongitude()));
+                place = new Place();
+                place.setPlacePoint(new LatLng(a.getLatitude(),a.getLongitude()));
                 String addr = "";
                 for (int i = 0; i < a.getMaxAddressLineIndex(); i++) {
                     addr += a.getAddressLine(i) + " ";
                 }
                 place.setAddress(addr);
-                place.setLocationName(a.getFeatureName());
+                place.setPlaceName(a.getFeatureName());
                 places.add(place);
             }
         } catch (IOException e) {

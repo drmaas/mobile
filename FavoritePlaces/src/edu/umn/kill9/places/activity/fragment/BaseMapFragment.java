@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.umn.kill9.places.R;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 
 public abstract class BaseMapFragment extends MapFragment {
 
@@ -34,7 +34,7 @@ public abstract class BaseMapFragment extends MapFragment {
 	protected static final LatLng DEFAULT_LOCATION = new LatLng(44.983334, -93.26666999999999);
 	
     protected GoogleMap _map;
-    protected List<DRMLocation> _locations;
+    protected List<Place> _locations;
     protected List<Marker> _markers;
     
     public BaseMapFragment()
@@ -136,10 +136,10 @@ public abstract class BaseMapFragment extends MapFragment {
     	// TODO: Probably need to clear the exiting location on the map before adding all of them
     	_map.clear();
     	
-    	for ( DRMLocation loc : _locations )
+    	for ( Place loc : _locations )
         {
-        	LatLng locPoint = loc.getLocationPoint();
-        	String locName = loc.getLocationName();
+        	LatLng locPoint = loc.getPlacePoint();
+        	String locName = loc.getPlaceName();
         	
         	_markers.add(_map.addMarker( new MarkerOptions()
 					.position( locPoint )
@@ -152,7 +152,7 @@ public abstract class BaseMapFragment extends MapFragment {
 
     }
     
-    protected void navigateToLocation( DRMLocation location )
+    protected void navigateToLocation( Place location )
     {
 		if ( location != null )
 		{
@@ -162,7 +162,7 @@ public abstract class BaseMapFragment extends MapFragment {
 	    		String forURL;
 	    		if ( address == null || address.equals("") || address.equals("null"))
 	    		{
-		    		LatLng latLong = location.getLocationPoint();
+		    		LatLng latLong = location.getPlacePoint();
 		    		forURL = latLong.latitude + "," + latLong.longitude;
 	    		}
 	    		else
@@ -177,7 +177,7 @@ public abstract class BaseMapFragment extends MapFragment {
 		}
 		else
 		{
-			Toast.makeText(getActivity().getApplicationContext(), "DRMLocation is null", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity().getApplicationContext(), "Place is null", Toast.LENGTH_SHORT).show();
 		}
     }
 
@@ -187,13 +187,13 @@ public abstract class BaseMapFragment extends MapFragment {
         _map.moveCamera(cameraUpdate);
     }
     
-    public boolean addLocation(DRMLocation[] arrayLocation)
+    public boolean addLocation(Place[] arrayLocation)
     {
     	boolean retValue = false;
     	
     	if ( _locations != null )
     	{
-    		for ( DRMLocation loc : arrayLocation )
+    		for ( Place loc : arrayLocation )
     		{
     			retValue |= _locations.add( loc );
     		}
@@ -202,7 +202,7 @@ public abstract class BaseMapFragment extends MapFragment {
     	return retValue;
     }
     
-    public boolean addLocation(List<DRMLocation> listLocation)
+    public boolean addLocation(List<Place> listLocation)
     {
     	boolean retValue = false;
     	
@@ -214,7 +214,7 @@ public abstract class BaseMapFragment extends MapFragment {
     	return retValue;
     }
     
-    public boolean addLocation(DRMLocation location)
+    public boolean addLocation(Place location)
     {
     	boolean retValue = false;
     	
@@ -228,11 +228,11 @@ public abstract class BaseMapFragment extends MapFragment {
     
     public void clearLocations()
     {
-    	_locations = new ArrayList<DRMLocation>();
+    	_locations = new ArrayList<Place>();
     	_markers = new ArrayList<Marker>();
     }
 
-    public void setLocations(List<DRMLocation> locations) {
+    public void setLocations(List<Place> locations) {
         _locations = locations;
     }
     

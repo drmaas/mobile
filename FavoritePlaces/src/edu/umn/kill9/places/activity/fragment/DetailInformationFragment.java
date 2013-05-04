@@ -9,7 +9,7 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 
@@ -26,7 +26,7 @@ public class DetailInformationFragment extends Fragment {
 
     List<Category> categories;
     List<Boolean> selected;
-    private DRMLocation _location;
+    private Place _location;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class DetailInformationFragment extends Fragment {
         	// Get the point
             double latitude = actIntent.getDoubleExtra("latitude", 0);
             double longitude = actIntent.getDoubleExtra("longitude", 0);
-        	_location = new DRMLocation(locationName, new LatLng(latitude, longitude));
+        	_location = new Place(locationName, new LatLng(latitude, longitude));
         	
         	// Get other info
         	String address = actIntent.getStringExtra("address");
@@ -73,7 +73,7 @@ public class DetailInformationFragment extends Fragment {
         EditText name = (EditText)item.findViewById(R.id.name_text);
         EditText address = (EditText)item.findViewById(R.id.address_text);
         
-        name.setText(_location.getLocationName());
+        name.setText(_location.getPlaceName());
         if ( _location.getAddress() != null )
         {
         	address.setText(_location.getAddress());

@@ -17,7 +17,7 @@ public class SampleCategoryList {
         if (categories == null) {
             categories = new ArrayList<Category>();
             for (int i = 0; i < 8; i++) {
-                categories.add(new Category((long)i, "category"+i));
+                categories.add(new Category("category"+i));
             }
         }
 

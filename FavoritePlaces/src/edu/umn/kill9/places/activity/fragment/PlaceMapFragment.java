@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
@@ -48,9 +48,9 @@ public class PlaceMapFragment extends BaseMapFragment
     		
             LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
             
-            for ( DRMLocation loc : _locations )
+            for ( Place loc : _locations )
             {
-            	LatLng locPoint = loc.getLocationPoint();
+            	LatLng locPoint = loc.getPlacePoint();
             	boundsBuilder.include( locPoint );
             }
             LatLngBounds bounds = boundsBuilder.build();
@@ -68,10 +68,10 @@ public class PlaceMapFragment extends BaseMapFragment
 		
 		String markTitle = mark.getTitle();
 		
-		DRMLocation locFound = null;
-		for ( DRMLocation loc : _locations )
+		Place locFound = null;
+		for ( Place loc : _locations )
 		{
-			String locName = loc.getLocationName();
+			String locName = loc.getPlaceName();
 			if ( locName.equals(markTitle) )
 			{
 				locFound = loc;
@@ -89,18 +89,18 @@ public class PlaceMapFragment extends BaseMapFragment
 			Intent intent = new Intent();
 	        intent.setClass(getActivity(), PlaceDetailsActivity.class);
 	
-	        intent.putExtra("locationName", locFound.getLocationName());
+	        intent.putExtra("locationName", locFound.getPlaceName());
 	        intent.putExtra("address", locFound.getAddress());
 	        intent.putExtra("hours", locFound.getHours());
 	        intent.putExtra("phone", locFound.getPhone());
 	        intent.putExtra("vicinity", locFound.getVicinity());
 	        intent.putExtra("website", locFound.getWebsite());
-	        intent.putExtra("latitude", locFound.getLocationPoint().latitude);
-	        intent.putExtra("longitude", locFound.getLocationPoint().longitude);
+	        intent.putExtra("latitude", locFound.getPlacePoint().latitude);
+	        intent.putExtra("longitude", locFound.getPlacePoint().longitude);
 	        
 	        startActivityForResult(intent, PlacesConstants.DETAILS);
 	        
-		    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + locFound.getLocationName(), Toast.LENGTH_SHORT).show();
+		    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + locFound.getPlaceName(), Toast.LENGTH_SHORT).show();
 		}
     }
 }

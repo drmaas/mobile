@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -50,8 +50,8 @@ public class MapSearchListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        DRMLocation location = (DRMLocation)getListAdapter().getItem(position);
-        intent.putExtra("locationName", location.getLocationName());
+        Place location = (Place)getListAdapter().getItem(position);
+        intent.putExtra("locationName", location.getPlaceName());
         startActivityForResult(intent, PlacesConstants.DETAILS);
     }
 }

@@ -13,7 +13,7 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.tab.TabListener;
 import edu.umn.kill9.places.util.PlacesConstants;
@@ -46,7 +46,7 @@ public class PlaceDetailsActivity extends BaseActivity {
                 });
         actionBar.addTab(tab);
 
-		DRMLocation loc = SampleLocationList.findByLocationName(locationName);
+		Place loc = SampleLocationList.findByLocationName(locationName);
         
         if ( loc == null )
         {
@@ -57,7 +57,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         	// Get the point
             double latitude = actIntent.getDoubleExtra("latitude", 0);
             double longitude = actIntent.getDoubleExtra("longitude", 0);
-            loc = new DRMLocation(locationName, new LatLng(latitude, longitude));
+            loc = new Place(locationName, new LatLng(latitude, longitude));
         	
         	// Get other info
         	String address = actIntent.getStringExtra("address");
@@ -69,7 +69,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         	loc.setAddress(vicinity);
         }
 
-		final DRMLocation locFinal = loc;
+		final Place locFinal = loc;
         tab = actionBar.newTab()
                 .setText(R.string.tab_map)
                 .setTabListener(new TabListener<DetailMapFragment>(

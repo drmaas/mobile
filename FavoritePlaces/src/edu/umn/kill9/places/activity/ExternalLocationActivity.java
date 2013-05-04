@@ -17,7 +17,7 @@ import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.geo.PlacesGeocoder;
 import edu.umn.kill9.places.adapter.ExternalPlaceAdapter;
-import edu.umn.kill9.places.model.DRMLocation;
+import edu.umn.kill9.places.model.Place;
 
 import java.io.IOException;
 import java.util.List;
@@ -87,7 +87,7 @@ public class ExternalLocationActivity extends BaseActivity {
         MapSearchListFragment msf = (MapSearchListFragment)fm.findFragmentById(R.id.mapsearchlistfragment);
 
         PlacesGeocoder coder = new PlacesGeocoder(this);
-        List<DRMLocation> addresses = coder.getFromLocationName(searchText,NUM_SEARCH_RESULTS);
+        List<Place> addresses = coder.getFromLocationName(searchText,NUM_SEARCH_RESULTS);
         if(addresses.size() > 0) {
             mf.clearLocations();
             mf.addLocation(addresses);
