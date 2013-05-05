@@ -7,16 +7,22 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SpinnerAdapter;
+import com.parse.ParseException;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
+import edu.umn.kill9.places.application.PlacesApplication;
+import edu.umn.kill9.places.model.PlaceUser;
+import edu.umn.kill9.places.model.PlaceUserDataSource;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -79,6 +85,30 @@ public class PlacesActivity extends BaseActivity {
                 return true;
             }
         });
+
+        //get default home address
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String homeAddress = prefs.getString(getString(R.string.preference_home_address_id), "None");
+
+        //create user if not exists
+        PlaceUserDataSource ds = new PlaceUserDataSource();
+        PlaceUser user = ((PlacesApplication)getApplication()).getUser();
+        if (user == null) {
+            try {
+                user = ds.getPlaceUserByDeviceId(getDeviceId());
+            } catch (ParseException e1) {
+                user = new PlaceUser();
+                user.setDeviceId(getDeviceId());
+                user.setHomeAddress(homeAddress);
+                try {
+                    user = ds.createPlaceUser(user);
+                }
+                catch (ParseException e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+        ((PlacesApplication)getApplication()).setUser(user);
 
     }
 

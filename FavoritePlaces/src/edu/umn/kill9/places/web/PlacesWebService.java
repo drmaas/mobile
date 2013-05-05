@@ -46,7 +46,7 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 				
 		AndroidHttpClient client = null;
 		String json=null;
-		ArrayList<Place> jsonResults = null;
+		List<Place> jsonResults = null;
     
 		try {
             client = AndroidHttpClient.newInstance("Android", null);
@@ -71,9 +71,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
         return jsonResults;
 	}
 	
-	protected ArrayList<Place> parseJSON(String json, Double currentLat, Double currentLong ){
+	protected List<Place> parseJSON(String json, Double currentLat, Double currentLong ){
 		 
-		ArrayList<Place> jsonResults = null;
+		List<Place> jsonResults = null;
 		
 		try {
 			JSONObject jsonObj = new JSONObject(json);
@@ -85,9 +85,11 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
             
 	        jsonResults = new ArrayList<Place>(resultArray.length());
 	        for (int i = 0; i < resultArray.length(); i++) {
-                 Place newplace = new Place();
-	             
-	             JSONObject geometryJson = resultArray.getJSONObject(i).getJSONObject("geometry");
+                Place newplace = new Place();
+                JSONObject obj = resultArray.getJSONObject(i);
+
+
+	             JSONObject geometryJson = obj.getJSONObject("geometry");
 	             JSONObject locationJson = geometryJson.getJSONObject("location");
 	             
 	             Double latitude = locationJson.getDouble("lat");
@@ -102,9 +104,9 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	             LatLng latLng = new LatLng(latitude, longitude);
 	             newplace.setPlacePoint(latLng);
 	             
-	             newplace.setPlaceName(resultArray.getJSONObject(i).getString("name"));
-	             newplace.setReference(resultArray.getJSONObject(i).getString("reference"));
-	             newplace.setVicinity(resultArray.getJSONObject(i).getString("vicinity"));
+	             newplace.setPlaceName(obj.getString("name"));
+	             newplace.setReference(obj.getString("reference"));
+	             newplace.setVicinity(obj.getString("vicinity"));
 	         	 jsonResults.add(newplace);
 	         }
 		}

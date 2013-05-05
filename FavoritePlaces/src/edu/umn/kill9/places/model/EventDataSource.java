@@ -5,6 +5,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,6 +52,19 @@ public class EventDataSource {
         ParseQuery query = new ParseQuery(Event.TABLE_EVENT);
 
         for (ParseObject parseObject : query.find()) {
+            events.add(Event.ParseObjectToEvent(parseObject));
+        }
+
+        return events;
+    }
+
+    public List<Event> getAllPlaceEvents(String placeId) throws ParseException {
+        List<Event> events = new ArrayList<Event>();
+
+        ParseQuery query = new ParseQuery(Event.TABLE_EVENT).whereEqualTo(Event.COLUMN_PLACE, placeId);
+
+        for (ParseObject parseObject : query.find()) {
+
             events.add(Event.ParseObjectToEvent(parseObject));
         }
 

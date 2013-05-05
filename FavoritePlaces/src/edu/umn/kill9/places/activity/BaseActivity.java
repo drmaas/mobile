@@ -4,10 +4,12 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import com.parse.ParseAnalytics;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
@@ -39,6 +41,9 @@ public abstract class BaseActivity extends Activity {
         }
 
         setTitle("");
+
+        //parse analytics
+        ParseAnalytics.trackAppOpened(getIntent());
     }
 
     /**
@@ -90,6 +95,10 @@ public abstract class BaseActivity extends Activity {
         else {
             wrapper.show(new CategoryAdapter(this, R.layout.categorylist_item, categories, selected));
         }
+    }
+
+    public String getDeviceId() {
+        return ((TelephonyManager)getSystemService(TELEPHONY_SERVICE)).getDeviceId();
     }
 
 }

@@ -13,6 +13,8 @@ import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.fragment.DetailInformationFragment;
 import edu.umn.kill9.places.activity.fragment.DetailMapFragment;
 import edu.umn.kill9.places.activity.fragment.EventsFragment;
+import edu.umn.kill9.places.activity.fragment.PlaceListFragment;
+import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.tab.TabListener;
@@ -24,13 +26,17 @@ import edu.umn.kill9.places.util.PlacesConstants;
  */
 public class PlaceDetailsActivity extends BaseActivity {
 
+    Place place = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         showHomeAsUp(true);
 
-        String locationName = getIntent().getStringExtra("locationName");
+        //String locationName = getIntent().getStringExtra("locationName");
+        place  = getIntent().getParcelableExtra(PlacesConstants.LOCATION_KEY);
+        //String locationName = place.getPlaceName();
         //setTitle(locationName + " Details");
 
         // setup action bar for tabs
@@ -46,9 +52,9 @@ public class PlaceDetailsActivity extends BaseActivity {
                 });
         actionBar.addTab(tab);
 
-		Place loc = SampleLocationList.findByLocationName(locationName);
+		//Place loc = SampleLocationList.findByLocationName(locationName);
         
-        if ( loc == null )
+        if ( place == null )
         {
         	// The location doesn't exist in the database, this is a new location (maybe set some other flag here)
         	
@@ -57,19 +63,19 @@ public class PlaceDetailsActivity extends BaseActivity {
         	// Get the point
             double latitude = actIntent.getDoubleExtra("latitude", 0);
             double longitude = actIntent.getDoubleExtra("longitude", 0);
-            loc = new Place(locationName, new LatLng(latitude, longitude));
+            place = new Place("My Location", new LatLng(latitude, longitude));
         	
         	// Get other info
-        	String address = actIntent.getStringExtra("address");
-        	String hours = actIntent.getStringExtra("hours");
-        	String phone = actIntent.getStringExtra("phone");
-        	String vicinity = actIntent.getStringExtra("vicinity");
-        	String website = actIntent.getStringExtra("website");
+        	//String address = actIntent.getStringExtra("address");
+        	//String hours = actIntent.getStringExtra("hours");
+        	//String phone = actIntent.getStringExtra("phone");
+        	//String vicinity = actIntent.getStringExtra("vicinity");
+        	//String website = actIntent.getStringExtra("website");
         	
-        	loc.setAddress(vicinity);
+        	//place.setAddress(vicinity);
         }
 
-		final Place locFinal = loc;
+		final Place locFinal = place;
         tab = actionBar.newTab()
                 .setText(R.string.tab_map)
                 .setTabListener(new TabListener<DetailMapFragment>(
@@ -125,6 +131,14 @@ public class PlaceDetailsActivity extends BaseActivity {
             //do something here when returning from events activity
         }
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Place getPlace() {
+        return place;
     }
 
 }

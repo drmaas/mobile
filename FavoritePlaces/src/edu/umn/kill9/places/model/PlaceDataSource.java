@@ -69,6 +69,18 @@ public class PlaceDataSource {
         return places;
     }
 
+    public List<Place> getAllUserPlaces(String userId) throws ParseException {
+        List<Place> places = new ArrayList<Place>();
+
+        ParseQuery query = new ParseQuery(Place.TABLE_PLACE).whereEqualTo(Place.COLUMN_PLACEUSER, userId);
+
+        for (ParseObject parseObject : query.find()) {
+            places.add(Place.ParseObjectToPlace(parseObject));
+        }
+
+        return places;
+    }
+
     public void updatePlace(Place place) throws ParseException {
         ParseObject parseObject = Place.PlaceToParseObject(place);
         parseObject.save();

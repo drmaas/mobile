@@ -42,6 +42,12 @@ public class Place implements Parcelable{
     /**************************Constructors***********************************/
     public Place() {
         this("",null);
+        this._address = "n/a";
+        this._phone = "n/a";
+        this._website = "n/a";
+        this._hours = "n/a";
+        this._userComments = "n/a";
+        this._placeUser = null;
     }
 
     public Place(String placeName, String address, String phone, String website, String hours, String userComments, LatLng placePoint, PlaceUser placeUser){
@@ -61,9 +67,7 @@ public class Place implements Parcelable{
     }
 
     private Place(Parcel in) {
-        //Note from Caleb ... not sure what to do with this int being read in from the Parcel type... is it ok that the ID is set by Parse?
-        //_id = in.readLong();
-        in.readLong();
+        this._id = in.readString();
         this._placeName = in.readString();
         this._address = in.readString();
         this._phone = in.readString();
@@ -183,8 +187,7 @@ public class Place implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        //Note from Caleb - Does me removing this break writing to the Parcel?
-        //dest.writeLong(_id);
+        dest.writeString(_id);
         dest.writeString(_placeName);
         dest.writeString(_address);
         dest.writeString(_phone);
@@ -211,7 +214,7 @@ public class Place implements Parcelable{
      * @return
      */
     public String toString() {
-        return _placeName + " " + _address;
+        return _placeName;
     }
 
     /***************************Parse methods*********************************/

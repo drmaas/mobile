@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.EditText;
+import com.parse.ParseException;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
+import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
 import edu.umn.kill9.places.model.Place;
+import edu.umn.kill9.places.model.PlaceDataSource;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.maps.model.LatLng;
+import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
  * User: drmaas
@@ -42,8 +46,9 @@ public class DetailInformationFragment extends Fragment {
         
         Intent actIntent = getActivity().getIntent();
 
-        String locationName = actIntent.getStringExtra("locationName");
-        _location = SampleLocationList.findByLocationName(locationName);
+        //String locationName = actIntent.getStringExtra("locationName");
+        //_location = SampleLocationList.findByLocationName(locationName);
+        _location = actIntent.getParcelableExtra(PlacesConstants.LOCATION_KEY);
         
         if ( _location == null )
         {
@@ -52,16 +57,16 @@ public class DetailInformationFragment extends Fragment {
         	// Get the point
             double latitude = actIntent.getDoubleExtra("latitude", 0);
             double longitude = actIntent.getDoubleExtra("longitude", 0);
-        	_location = new Place(locationName, new LatLng(latitude, longitude));
+        	_location = new Place("My Location", new LatLng(latitude, longitude));
         	
         	// Get other info
-        	String address = actIntent.getStringExtra("address");
-        	String hours = actIntent.getStringExtra("hours");
-        	String phone = actIntent.getStringExtra("phone");
-        	String vicinity = actIntent.getStringExtra("vicinity");
-        	String website = actIntent.getStringExtra("website");
+        	//String address = actIntent.getStringExtra("address");
+        	//String hours = actIntent.getStringExtra("hours");
+        	//String phone = actIntent.getStringExtra("phone");
+        	//String vicinity = actIntent.getStringExtra("vicinity");
+        	//String website = actIntent.getStringExtra("website");
         	
-        	_location.setAddress(vicinity);
+        	//_location.setAddress(vicinity);
         }
     }
 
@@ -72,11 +77,26 @@ public class DetailInformationFragment extends Fragment {
 
         EditText name = (EditText)item.findViewById(R.id.name_text);
         EditText address = (EditText)item.findViewById(R.id.address_text);
-        
+        EditText phone = (EditText)item.findViewById(R.id.phone_text);
+        EditText website = (EditText)item.findViewById(R.id.website_text);
+        EditText hours = (EditText)item.findViewById(R.id.hours_text);
+        EditText comments = (EditText)item.findViewById(R.id.comments_text);
+
         name.setText(_location.getPlaceName());
-        if ( _location.getAddress() != null )
-        {
+        if ( _location.getAddress() != null ) {
         	address.setText(_location.getAddress());
+        }
+        if (_location.getPhone() != null) {
+            phone.setText(_location.getPhone());
+        }
+        if (_location.getWebsite() != null) {
+            website.setText(_location.getWebsite());
+        }
+        if (_location.getHours() != null) {
+            hours.setText(_location.getHours());
+        }
+        if (_location.getUserComments() != null) {
+            comments.setText(_location.getUserComments());
         }
 
         return item;
@@ -114,6 +134,17 @@ public class DetailInformationFragment extends Fragment {
                 return true;
             case R.id.save_location_details:
                 //add save locaton details logic - make all items uneditable and save
+
+                //make sure to set current user
+                _location.setPlaceUser(((PlacesApplication)getActivity().getApplication()).getUser());
+
+                PlaceDataSource ds = new PlaceDataSource();
+                try {
+                    ds.updatePlace(_location);
+                }
+                catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 return true;
             case R.id.delete_location:
                 //add delete location logic

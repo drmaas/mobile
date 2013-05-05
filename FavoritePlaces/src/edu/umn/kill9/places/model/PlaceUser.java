@@ -10,10 +10,12 @@ public class PlaceUser {
     /*********************Table and Column Constants**************************/
     public static final String TABLE_PLACEUSER = "PlaceUser";
     public static final String COLUMN_HOMEADDRESS = "HomeAddress";
+    public static final String DEVICE_ID = "DeviceId";
 
     /***************************Attributes************************************/
     private String _id;
     private String _homeAddress;
+    private String _deviceId;
 
     /**************************Constructors***********************************/
     public PlaceUser(){ }
@@ -37,6 +39,14 @@ public class PlaceUser {
 
     public void setHomeAddress(String homeAddress) {
         this._homeAddress = homeAddress;
+    }
+
+    public String getDeviceId() {
+        return _deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this._deviceId = deviceId;
     }
 
     /***************************Parse methods*********************************/

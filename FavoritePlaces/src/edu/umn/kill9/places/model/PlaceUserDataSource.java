@@ -32,6 +32,14 @@ public class PlaceUserDataSource {
         return placeUser;
     }
 
+    public PlaceUser getPlaceUserByDeviceId(String deviceId) throws ParseException {
+        ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
+
+        PlaceUser placeUser = PlaceUser.ParseObjectToPlaceUser(query.whereEqualTo(PlaceUser.DEVICE_ID, deviceId).getFirst());
+
+        return placeUser;
+    }
+
     public PlaceUser getPlaceUser(String id) throws ParseException {
         ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
 

@@ -11,10 +11,12 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.parse.ParseException;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.adapter.EventAdapter;
 import edu.umn.kill9.places.model.Event;
+import edu.umn.kill9.places.model.EventDataSource;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -35,11 +37,21 @@ public class EventsFragment extends ListFragment {
         setHasOptionsMenu(true);
 
         //dummy data
-        events = new ArrayList<Event>();
-        events.add(new Event());
-        events.add(new Event());
-        events.add(new Event());
-        events.add(new Event());
+        //events = new ArrayList<Event>();
+        //events.add(new Event());
+        //events.add(new Event());
+        //events.add(new Event());
+        //events.add(new Event());
+
+        //get events for this location
+        String placeId = ((PlaceDetailsActivity)getActivity()).getPlace().getId();
+        EventDataSource ds = new EventDataSource();
+        try {
+            events = ds.getAllPlaceEvents(placeId);
+        }
+        catch (ParseException e) {
+            events = new ArrayList<Event>();
+        }
 
         setListAdapter(new EventAdapter(getActivity(), R.layout.eventslist_item, events));
     }

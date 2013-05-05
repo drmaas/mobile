@@ -24,6 +24,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.model.Place;
 
+/**
+ * TODO add listener so when you click on a place, you can navigate to details screen
+ */
 public abstract class BaseMapFragment extends MapFragment {
 
 	protected static final int LAT_LNG_BOUNDS_PADDING = 50;
