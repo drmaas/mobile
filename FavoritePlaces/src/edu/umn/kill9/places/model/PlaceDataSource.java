@@ -1,6 +1,8 @@
 package edu.umn.kill9.places.model;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -15,7 +17,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class PlaceDataSource {
-    public Place createPlace(String placeName, String address, String phone, String website, String hours, String userComments, PlaceUser placeUser) throws ParseException {
+    public Place createPlace(String placeName, String address, String phone, String website, String hours, String userComments, LatLng placePoint, PlaceUser placeUser) throws ParseException {
         //Simple Data
         ParseObject parseObject = new ParseObject(Place.TABLE_PLACE);
         parseObject.put(Place.COLUMN_PLACENAME, placeName);
@@ -24,7 +26,9 @@ public class PlaceDataSource {
         parseObject.put(Place.COLUMN_WEBSITE, website);
         parseObject.put(Place.COLUMN_HOURS, hours);
         parseObject.put(Place.COLUMN_USERCOMMENTS, userComments);
-        //parseObject.put(Place.COLUMN_PLACEPOINT, placePoint);
+
+        //Convert LatLng to ParseGeoPoint
+        parseObject.put(Place.COLUMN_PLACEPOINT, new ParseGeoPoint(placePoint.latitude, placePoint.longitude));
 
         //Relational Data
         if(placeUser != null)

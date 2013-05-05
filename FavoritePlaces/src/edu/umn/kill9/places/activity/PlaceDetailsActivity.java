@@ -31,7 +31,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         showHomeAsUp(true);
 
         String locationName = getIntent().getStringExtra("locationName");
-        setTitle(locationName + " Details");
+        //setTitle(locationName + " Details");
 
         // setup action bar for tabs
         //we will have 3 tabs - information (including call action), map (including navigation action), and eventslist

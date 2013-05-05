@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 /**
@@ -225,7 +226,10 @@ public class Place implements Parcelable{
         place.setWebsite(parseObject.get(COLUMN_WEBSITE).toString());
         place.setHours(parseObject.get(COLUMN_HOURS).toString());
         place.setUserComments(parseObject.get(COLUMN_USERCOMMENTS).toString());
-        //place.setPlacePoint(parseObject.get(COLUMN_PLACEPOINT).toString());
+
+        //Convert ParseGeoPoint to LatLng
+        ParseGeoPoint geoPoint = parseObject.getParseGeoPoint(COLUMN_PLACEPOINT);
+        place.setPlacePoint(new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude()));
 
         //Relational Data
         if(parseObject.getParseObject(COLUMN_PLACEUSER) != null)
@@ -247,7 +251,10 @@ public class Place implements Parcelable{
         parseObject.put(COLUMN_WEBSITE, place.getWebsite());
         parseObject.put(COLUMN_HOURS, place.getHours());
         parseObject.put(COLUMN_USERCOMMENTS, place.getUserComments());
-        //parseObject.put(COLUMN_PLACEPOINT, place.getPlacePoint());
+
+        //Convert LatLng to ParseGeoPoint
+        LatLng placePoint = place.getPlacePoint();
+        parseObject.put(COLUMN_PLACEPOINT, new ParseGeoPoint(placePoint.latitude, placePoint.longitude));
 
         //Relational Data
         if(place.getPlaceUser() != null)
@@ -263,5 +270,4 @@ public class Place implements Parcelable{
 
         return parseObject;
     }
-
 }
