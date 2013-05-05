@@ -67,6 +67,8 @@ public class PlaceDetailsActivity extends BaseActivity {
         	String website = actIntent.getStringExtra("website");
         	
         	loc.setAddress(vicinity);
+        	loc.setPhone(phone);
+        	loc.setWebsite(website);
         }
 
 		final Place locFinal = loc;

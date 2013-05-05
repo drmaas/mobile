@@ -62,6 +62,7 @@ public class DetailInformationFragment extends Fragment {
         	String website = actIntent.getStringExtra("website");
         	
         	_location.setAddress(vicinity);
+        	_location.setPhone(phone);
         }
     }
 
@@ -72,6 +73,8 @@ public class DetailInformationFragment extends Fragment {
 
         EditText name = (EditText)item.findViewById(R.id.name_text);
         EditText address = (EditText)item.findViewById(R.id.address_text);
+        EditText phone = (EditText)item.findViewById(R.id.phone_text);
+        EditText website = (EditText)item.findViewById(R.id.website_text);
         
         name.setText(_location.getPlaceName());
         if ( _location.getAddress() != null )
@@ -79,6 +82,14 @@ public class DetailInformationFragment extends Fragment {
         	address.setText(_location.getAddress());
         }
 
+        if ( _location.getPhone() != null )
+        {
+        	phone.setText(_location.getPhone());
+        }
+        if ( _location.getWebsite() != null )
+        {
+        	website.setText(_location.getWebsite());
+        }
         return item;
     }
 

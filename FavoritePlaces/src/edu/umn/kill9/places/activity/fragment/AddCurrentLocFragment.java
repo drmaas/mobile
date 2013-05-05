@@ -1,5 +1,7 @@
 package edu.umn.kill9.places.activity.fragment;
 
+import java.util.List;
+
 import android.app.ListFragment;
 import android.content.Intent;
 
@@ -12,9 +14,13 @@ import android.widget.*;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.util.PlacesConstants;
+import edu.umn.kill9.places.web.PlaceDetailWebService;
+import edu.umn.kill9.places.web.PlaceDetailWebService.PlacesAPIJSONListener;
 
 
-public class AddCurrentLocFragment extends ListFragment {
+public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSONListener{
+	
+	Place place = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -23,10 +29,20 @@ public class AddCurrentLocFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Place place = (Place)getListAdapter().getItem(position);
+        place = (Place)getListAdapter().getItem(position);
 	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + place.getPlaceName() + "\n" + place.getPlacePoint(), Toast.LENGTH_SHORT).show();
+	       
+	    PlaceDetailWebService placeDetails = new PlaceDetailWebService(this);
+	    placeDetails.execute(place);
 	    
-	    //TODO: Do something when this item is clicked
+    }
+
+	@Override
+	public void onWebServiceCallComplete(Place placeUpdated) {
+		
+		place.setPhone(placeUpdated.getPhone());
+		place.setWebsite(placeUpdated.getWebsite());
+		
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
         intent.putExtra("locationName", place.getPlaceName());
@@ -38,6 +54,7 @@ public class AddCurrentLocFragment extends ListFragment {
         intent.putExtra("latitude", place.getPlacePoint().latitude);
         intent.putExtra("longitude", place.getPlacePoint().longitude);
         startActivityForResult(intent, PlacesConstants.DETAILS);
-    }
+		
+	}
 
 }
