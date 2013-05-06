@@ -77,14 +77,14 @@ public class ExternalLocationActivity extends BaseActivity {
     }
 
     /**
-     * TODO currently uses Geocoder to search, should we use places API instead?
+     * TODO currently uses Geocoder to search, we should use places API instead
      *
      * @param searchText
      */
     private void performSearch(String searchText) {
         FragmentManager fm = getFragmentManager();
         PlaceMapFragment mf = (PlaceMapFragment)fm.findFragmentById(R.id.mapsearchmapfragment);
-        MapSearchListFragment msf = (MapSearchListFragment)fm.findFragmentById(R.id.mapsearchlistfragment);
+        MapSearchListFragment lf = (MapSearchListFragment)fm.findFragmentById(R.id.mapsearchlistfragment);
 
         PlacesGeocoder coder = new PlacesGeocoder(this);
         List<Place> addresses = coder.getFromLocationName(searchText,NUM_SEARCH_RESULTS);
@@ -93,7 +93,7 @@ public class ExternalLocationActivity extends BaseActivity {
             mf.addLocation(addresses);
             mf.refreshMap();
 
-            msf.setListAdapter(new ExternalPlaceAdapter(this, R.layout.external_place_item, addresses));
+            lf.setListAdapter(new ExternalPlaceAdapter(this, R.layout.external_place_item, addresses));
         }
         else {
             AlertDialog.Builder ad = new AlertDialog.Builder(this);

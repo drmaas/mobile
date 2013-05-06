@@ -26,7 +26,6 @@ public class MapSearchListFragment extends ListFragment {
 
 
     /**
-     * TODO change to use map search result lists instead of location names
      *
      * @param savedInstanceState
      */
@@ -34,12 +33,11 @@ public class MapSearchListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Populate list with our static array of titles.
+        // Populate list with no initial data
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, new ArrayList<String>()));
     }
 
     /**
-     * TODO create location object and pass to details activity
      *
      * @param l
      * @param v
@@ -51,7 +49,7 @@ public class MapSearchListFragment extends ListFragment {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
         Place location = (Place)getListAdapter().getItem(position);
-        intent.putExtra("locationName", location.getPlaceName());
+        intent.putExtra(PlacesConstants.LOCATION_KEY, location);
         startActivityForResult(intent, PlacesConstants.DETAILS);
     }
 }
