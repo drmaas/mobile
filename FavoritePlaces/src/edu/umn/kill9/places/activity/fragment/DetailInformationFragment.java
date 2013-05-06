@@ -32,6 +32,13 @@ public class DetailInformationFragment extends Fragment {
     List<Boolean> selected;
     private Place _location;
 
+    private EditText name;
+    private EditText address;
+    private EditText phone;
+    private EditText website;
+    private EditText hours;
+    private EditText comments;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +80,12 @@ public class DetailInformationFragment extends Fragment {
 
         View item = inflater.inflate(R.layout.detail_information, null);
 
-        EditText name = (EditText)item.findViewById(R.id.name_text);
-        EditText address = (EditText)item.findViewById(R.id.address_text);
-        EditText phone = (EditText)item.findViewById(R.id.phone_text);
-        EditText website = (EditText)item.findViewById(R.id.website_text);
-        EditText hours = (EditText)item.findViewById(R.id.hours_text);
-        EditText comments = (EditText)item.findViewById(R.id.comments_text);
+        name = (EditText)item.findViewById(R.id.name_text);
+        address = (EditText)item.findViewById(R.id.address_text);
+        phone = (EditText)item.findViewById(R.id.phone_text);
+        website = (EditText)item.findViewById(R.id.website_text);
+        hours = (EditText)item.findViewById(R.id.hours_text);
+        comments = (EditText)item.findViewById(R.id.comments_text);
 
         name.setText(_location.getPlaceName());
         if ( _location.getAddress() != null ) {
@@ -97,14 +104,9 @@ public class DetailInformationFragment extends Fragment {
             comments.setText(_location.getUserComments());
         }
 
-        if ( _location.getPhone() != null )
-        {
-        	phone.setText(_location.getPhone());
-        }
-        if ( _location.getWebsite() != null )
-        {
-        	website.setText(_location.getWebsite());
-        }
+        //set view only
+        setWriteable(false);
+
         return item;
     }
 
@@ -137,9 +139,16 @@ public class DetailInformationFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.edit_location_details:
                 //add edit location details logic - just make certain items editable
+                setWriteable(true);
                 return true;
             case R.id.save_location_details:
                 //add save locaton details logic - make all items uneditable and save
+                _location.setPlaceName(name.getText().toString());
+                _location.setAddress(address.getText().toString());
+                _location.setPhone(phone.getText().toString());
+                _location.setWebsite(website.getText().toString());
+                _location.setHours(hours.getText().toString());
+                _location.setUserComments(comments.getText().toString());
 
                 //make sure to set current user
                 _location.setPlaceUser(((PlacesApplication)getActivity().getApplication()).getUser());
@@ -151,6 +160,10 @@ public class DetailInformationFragment extends Fragment {
                 catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+                //set view only
+                setWriteable(false);
+
                 return true;
             case R.id.delete_location:
                 //add delete location logic
@@ -158,5 +171,18 @@ public class DetailInformationFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     *
+     * @param readOnly
+     */
+    private void setWriteable(boolean readOnly) {
+        name.setEnabled(readOnly);
+        address.setEnabled(readOnly);
+        phone.setEnabled(readOnly);
+        website.setEnabled(readOnly);
+        hours.setEnabled(readOnly);
+        comments.setEnabled(readOnly);
     }
 }

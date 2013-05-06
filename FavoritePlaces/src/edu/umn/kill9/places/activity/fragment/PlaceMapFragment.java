@@ -89,18 +89,17 @@ public class PlaceMapFragment extends BaseMapFragment
 			Intent intent = new Intent();
 	        intent.setClass(getActivity(), PlaceDetailsActivity.class);
 	
-	        intent.putExtra("locationName", locFound.getPlaceName());
-	        intent.putExtra("address", locFound.getAddress());
-	        intent.putExtra("hours", locFound.getHours());
-	        intent.putExtra("phone", locFound.getPhone());
-	        intent.putExtra("vicinity", locFound.getVicinity());
-	        intent.putExtra("website", locFound.getWebsite());
-	        intent.putExtra("latitude", locFound.getPlacePoint().latitude);
-	        intent.putExtra("longitude", locFound.getPlacePoint().longitude);
-	        
+	        //intent.putExtra("locationName", locFound.getPlaceName());
+	        //intent.putExtra("address", locFound.getAddress());
+	        //intent.putExtra("hours", locFound.getHours());
+	        //intent.putExtra("phone", locFound.getPhone());
+	        //intent.putExtra("vicinity", locFound.getVicinity());
+	        //intent.putExtra("website", locFound.getWebsite());
+	        //intent.putExtra("latitude", locFound.getPlacePoint().latitude);
+	        //intent.putExtra("longitude", locFound.getPlacePoint().longitude);
+
+            intent.putExtra(PlacesConstants.LOCATION_KEY, locFound);
 	        startActivityForResult(intent, PlacesConstants.DETAILS);
-	        
-		    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + locFound.getPlaceName(), Toast.LENGTH_SHORT).show();
 		}
     }
 }

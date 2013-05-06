@@ -25,6 +25,8 @@ import java.util.List;
  */
 public class PlaceListFragment extends ListFragment {
 
+    private List<Place> locations;
+
     /**
      *
      * @param savedInstanceState
@@ -34,17 +36,7 @@ public class PlaceListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         // Populate list with our static array of titles.
-        //setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_activated_1, SampleLocationList.getLocationStrings()));
-        PlaceUser user = ((PlacesApplication)getActivity().getApplication()).getUser();
-        PlaceDataSource ds = new PlaceDataSource();
-        List<Place> places;
-        try {
-            places = ds.getAllUserPlaces(user);
-        }
-        catch (ParseException e) {
-            places = new ArrayList<Place>();
-        }
-        setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, places));
+        setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, locations));
     }
 
     @Override
@@ -53,6 +45,14 @@ public class PlaceListFragment extends ListFragment {
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
         intent.putExtra(PlacesConstants.LOCATION_KEY, (Place)getListAdapter().getItem(position));
         startActivityForResult(intent, PlacesConstants.DETAILS);
+    }
+
+    /**
+     *
+     * @param locations
+     */
+    public void setLocations(List<Place> locations) {
+        this.locations = locations;
     }
 
 }

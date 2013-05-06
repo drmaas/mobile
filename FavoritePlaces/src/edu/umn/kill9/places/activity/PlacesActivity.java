@@ -1,6 +1,7 @@
 package edu.umn.kill9.places.activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -21,6 +22,8 @@ import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.NavigationAdapter;
 import edu.umn.kill9.places.application.PlacesApplication;
+import edu.umn.kill9.places.model.Place;
+import edu.umn.kill9.places.model.PlaceDataSource;
 import edu.umn.kill9.places.model.PlaceUser;
 import edu.umn.kill9.places.model.PlaceUserDataSource;
 import edu.umn.kill9.places.model.data.SampleLocationList;
@@ -64,13 +67,12 @@ public class PlacesActivity extends BaseActivity {
                 if (item.equals( list ) ) {
                     //show list view
                     content = new PlaceListFragment();
+                    ((PlaceListFragment)content).setLocations(getAllPlaces());
                 }
                 else if (item.equals( map )) {
                     //show map view
-                	PlaceMapFragment placeMapContent = new PlaceMapFragment();
-                    placeMapContent.addLocation(SampleLocationList.getLocations());
-                	
-                    content = placeMapContent;
+                    content = new PlaceMapFragment();
+                    ((PlaceMapFragment)content).setLocations(getAllPlaces());
                 }
                 else {
                     content = new PlaceListFragment(); //default
@@ -190,6 +192,24 @@ public class PlacesActivity extends BaseActivity {
             //do something here when returning from details
         }
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    private List<Place> getAllPlaces() {
+        PlaceUser user = ((PlacesApplication)getApplication()).getUser();
+        PlaceDataSource ds = new PlaceDataSource();
+        List<Place> places;
+        try {
+            places = ds.getAllUserPlaces(user);
+        }
+        catch (ParseException e) {
+            places = new ArrayList<Place>();
+        }
+
+        return places;
     }
 
 }
