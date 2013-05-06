@@ -10,7 +10,7 @@ public class PlaceUser {
     /*********************Table and Column Constants**************************/
     public static final String TABLE_PLACEUSER = "PlaceUser";
     public static final String COLUMN_HOMEADDRESS = "HomeAddress";
-    public static final String DEVICE_ID = "DeviceId";
+    public static final String COLUMN_DEVICE_ID = "DeviceId";
 
     /***************************Attributes************************************/
     private String _id;
@@ -56,6 +56,7 @@ public class PlaceUser {
         //Simple Data
         placeUser.setId(parseObject.getObjectId());
         placeUser.setHomeAddress(parseObject.getString(COLUMN_HOMEADDRESS));
+        placeUser.setDeviceId(parseObject.getString(COLUMN_DEVICE_ID));
 
         //Relational Data
 
@@ -67,6 +68,7 @@ public class PlaceUser {
 
         //Simple Data
         parseObject.put(COLUMN_HOMEADDRESS, placeUser.getHomeAddress());
+        parseObject.put(COLUMN_DEVICE_ID, placeUser.getDeviceId());
 
         //Relational Data
 
