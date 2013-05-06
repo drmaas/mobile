@@ -65,8 +65,6 @@ public class DetailInformationFragment extends Fragment {
         	//String phone = actIntent.getStringExtra("phone");
         	//String vicinity = actIntent.getStringExtra("vicinity");
         	//String website = actIntent.getStringExtra("website");
-        	
-        	//_location.setAddress(vicinity);
         }
     }
 
@@ -99,6 +97,14 @@ public class DetailInformationFragment extends Fragment {
             comments.setText(_location.getUserComments());
         }
 
+        if ( _location.getPhone() != null )
+        {
+        	phone.setText(_location.getPhone());
+        }
+        if ( _location.getWebsite() != null )
+        {
+        	website.setText(_location.getWebsite());
+        }
         return item;
     }
 

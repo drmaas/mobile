@@ -1,5 +1,7 @@
 package edu.umn.kill9.places.activity.fragment;
 
+import java.util.List;
+
 import android.app.ListFragment;
 import android.content.Intent;
 
@@ -13,9 +15,11 @@ import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.util.PlacesConstants;
+import edu.umn.kill9.places.web.PlaceDetailWebService;
+import edu.umn.kill9.places.web.PlaceDetailWebService.PlacesAPIJSONListener;
 
 
-public class AddCurrentLocFragment extends ListFragment {
+public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSONListener{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,16 +28,20 @@ public class AddCurrentLocFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
         Place place = (Place)getListAdapter().getItem(position);
-
 	    Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + place.getPlaceName() + "\n" + place.getPlacePoint(), Toast.LENGTH_SHORT).show();
+	       
+	    PlaceDetailWebService placeDetails = new PlaceDetailWebService(this);
+	    placeDetails.execute(place);
+	    
+    }
 
-        //TODO make webservice call to get this place's details
-
-	    //call detail activity
+	@Override
+	public void onWebServiceCallComplete(Place placeUpdated) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        intent.putExtra(PlacesConstants.LOCATION_KEY, place);
+        intent.putExtra(PlacesConstants.LOCATION_KEY, placeUpdated);
         //intent.putExtra("locationName", place.getPlaceName());
         //intent.putExtra("address", place.getAddress());
         //intent.putExtra("hours", place.getHours());
@@ -43,6 +51,7 @@ public class AddCurrentLocFragment extends ListFragment {
         //intent.putExtra("latitude", place.getPlacePoint().latitude);
         //intent.putExtra("longitude", place.getPlacePoint().longitude);
         startActivityForResult(intent, PlacesConstants.DETAILS);
-    }
+		
+	}
 
 }

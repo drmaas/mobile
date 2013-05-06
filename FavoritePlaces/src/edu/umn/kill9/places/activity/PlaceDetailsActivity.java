@@ -54,8 +54,7 @@ public class PlaceDetailsActivity extends BaseActivity {
 
 		//Place loc = SampleLocationList.findByLocationName(locationName);
         
-        if ( place == null )
-        {
+        if ( place == null ) {
         	// The location doesn't exist in the database, this is a new location (maybe set some other flag here)
         	
         	Intent actIntent = getIntent();
@@ -64,15 +63,6 @@ public class PlaceDetailsActivity extends BaseActivity {
             double latitude = actIntent.getDoubleExtra("latitude", 0);
             double longitude = actIntent.getDoubleExtra("longitude", 0);
             place = new Place("My Location", new LatLng(latitude, longitude));
-        	
-        	// Get other info
-        	//String address = actIntent.getStringExtra("address");
-        	//String hours = actIntent.getStringExtra("hours");
-        	//String phone = actIntent.getStringExtra("phone");
-        	//String vicinity = actIntent.getStringExtra("vicinity");
-        	//String website = actIntent.getStringExtra("website");
-        	
-        	//place.setAddress(vicinity);
         }
 
 		final Place locFinal = place;
