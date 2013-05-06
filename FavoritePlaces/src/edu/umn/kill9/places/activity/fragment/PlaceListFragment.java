@@ -39,7 +39,7 @@ public class PlaceListFragment extends ListFragment {
         PlaceDataSource ds = new PlaceDataSource();
         List<Place> places;
         try {
-            places = ds.getAllUserPlaces(user.getId());
+            places = ds.getAllUserPlaces(user);
         }
         catch (ParseException e) {
             places = new ArrayList<Place>();

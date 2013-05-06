@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
@@ -235,9 +236,16 @@ public class Place implements Parcelable{
         place.setPlacePoint(new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude()));
 
         //Relational Data
+        PlaceUser placeUser = null;
         if(parseObject.getParseObject(COLUMN_PLACEUSER) != null)
         {
-            PlaceUser placeUser = PlaceUser.ParseObjectToPlaceUser(parseObject.getParseObject(COLUMN_PLACEUSER));
+            try {
+                placeUser = PlaceUser.ParseObjectToPlaceUser(parseObject.getParseObject(COLUMN_PLACEUSER).fetchIfNeeded());
+            }
+            catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             place.setPlaceUser(placeUser);
         }
 
