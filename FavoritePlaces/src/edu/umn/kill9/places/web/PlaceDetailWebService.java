@@ -85,7 +85,45 @@ public class PlaceDetailWebService extends AsyncTask<Place, Void, Place>{
 	        	place.setWebsite(resultObject.getString("website"));
 	        }
 	        
-	        
+	        if(resultObject.has("opening_hours"))
+	        {
+	        	
+	        	JSONObject hoursObj = resultObject.getJSONObject("opening_hours");
+	        	JSONArray daysArray = hoursObj.getJSONArray("periods");
+	        	StringBuilder hourString = new StringBuilder();
+	        	boolean found = false;
+	        	for(int index=0; index< daysArray.length(); index++)
+	        	{	
+	        		JSONObject openingHour= daysArray.getJSONObject(index).getJSONObject("open");
+	        		JSONObject closingHour= daysArray.getJSONObject(index).getJSONObject("close");
+	        		String openingtime = openingHour.getString("time");
+	        		String closingtime = closingHour.getString("time");
+	        		int day = openingHour.getInt("day");
+	        		
+	        		if(day == 0)
+	        		{
+	        			String temp = "Sun: " + openingtime + " - " + closingtime + "; ";
+	        			hourString = hourString.append(temp);
+	        		}	
+	        		else if(day == 6)
+	        		{
+	        			String temp = "Sat: "+ openingtime + " - " + closingtime + "; ";
+	        			hourString = hourString.append(temp);
+	        		}
+	        		else
+	        		{
+	        			if(found == false)
+	        			{
+	        				String temp = "Mon - Fri: "+ openingtime + " - " + closingtime + "; " ;
+	        				hourString = hourString.append(temp);
+	        				found = true;
+	        			}
+	        		}
+	        	} // end of for loop
+	        	
+	        	place.setHours(hourString.toString());
+	        } // end of if("opening_hours")
+		
 		} catch (JSONException ex) {
 		        Log.w("PlacesWebService", "Cannot process JSON results", ex);
 		    }
