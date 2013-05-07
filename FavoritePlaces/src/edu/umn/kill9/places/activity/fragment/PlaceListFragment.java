@@ -1,5 +1,6 @@
 package edu.umn.kill9.places.activity.fragment;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.ListView;
 import com.parse.ParseException;
 import edu.umn.kill9.places.activity.BaseActivity;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
+import edu.umn.kill9.places.activity.PlacesActivity;
 import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.PlaceDataSource;
@@ -40,6 +42,13 @@ public class PlaceListFragment extends ListFragment {
     }
 
     @Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+        setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, locations));
+	}
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
@@ -47,7 +56,43 @@ public class PlaceListFragment extends ListFragment {
         startActivityForResult(intent, PlacesConstants.DETAILS);
     }
 
-    /**
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == PlacesConstants.ADD_CURRENT_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+                setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, locations));
+        	}
+        }
+        else if (requestCode == PlacesConstants.ADD_EXTERNAL_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+                setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, locations));
+        	}
+        }
+        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.PREFERENCES) {
+            //do something here when returning from preferences
+        }
+        else if (requestCode == PlacesConstants.DETAILS) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+                setListAdapter(new ArrayAdapter<Place>(getActivity(), android.R.layout.simple_list_item_activated_1, locations));
+        	}
+        }
+
+	}
+
+	/**
      *
      * @param locations
      */

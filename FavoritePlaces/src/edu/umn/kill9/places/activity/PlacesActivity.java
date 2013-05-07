@@ -179,17 +179,44 @@ public class PlacesActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.ADD_CURRENT_LOCATION) {
-            //do something here when returning from add current location
+        if (requestCode == PlacesConstants.ADD_CURRENT_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Fragment f = getFragmentManager().findFragmentById(R.id.contentview);
+            if (f instanceof PlaceListFragment) {
+                ((PlaceListFragment)f).setLocations(getAllPlaces());
+            }
+            else if (f instanceof PlaceMapFragment) {
+                ((PlaceMapFragment)f).setLocations(getAllPlaces());
+                ((PlaceMapFragment)f).refreshMap();
+            }
         }
-        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.ADD_EXTERNAL_LOCATION) {
-            //do something here when returning from add external location
+        else if (requestCode == PlacesConstants.ADD_EXTERNAL_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Fragment f = getFragmentManager().findFragmentById(R.id.contentview);
+            if (f instanceof PlaceListFragment) {
+                ((PlaceListFragment)f).setLocations(getAllPlaces());
+            }
+            else if (f instanceof PlaceMapFragment) {
+                ((PlaceMapFragment)f).setLocations(getAllPlaces());
+                ((PlaceMapFragment)f).refreshMap();
+            }
         }
         else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.PREFERENCES) {
             //do something here when returning from preferences
         }
-        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.DETAILS) {
-            //do something here when returning from details
+        else if (requestCode == PlacesConstants.DETAILS) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Fragment f = getFragmentManager().findFragmentById(R.id.contentview);
+            if (f instanceof PlaceListFragment) {
+                ((PlaceListFragment)f).setLocations(getAllPlaces());
+            }
+            else if (f instanceof PlaceMapFragment) {
+                ((PlaceMapFragment)f).setLocations(getAllPlaces());
+                ((PlaceMapFragment)f).refreshMap();
+            }
         }
 
     }
@@ -198,7 +225,7 @@ public class PlacesActivity extends BaseActivity {
      *
      * @return
      */
-    private List<Place> getAllPlaces() {
+    public List<Place> getAllPlaces() {
         PlaceUser user = ((PlacesApplication)getApplication()).getUser();
         PlaceDataSource ds = new PlaceDataSource();
         List<Place> places;

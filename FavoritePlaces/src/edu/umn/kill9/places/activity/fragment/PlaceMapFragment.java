@@ -1,5 +1,6 @@
 package edu.umn.kill9.places.activity.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
+import edu.umn.kill9.places.activity.PlacesActivity;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.util.PlacesConstants;
 
@@ -101,5 +103,40 @@ public class PlaceMapFragment extends BaseMapFragment
             intent.putExtra(PlacesConstants.LOCATION_KEY, locFound);
 	        startActivityForResult(intent, PlacesConstants.DETAILS);
 		}
+    }
+
+    @Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == PlacesConstants.ADD_CURRENT_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+        		refreshMap();
+        	}
+        }
+        else if (requestCode == PlacesConstants.ADD_EXTERNAL_LOCATION) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+        		refreshMap();
+        	}
+        }
+        else if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.PREFERENCES) {
+            //do something here when returning from preferences
+        }
+        else if (requestCode == PlacesConstants.DETAILS) {
+            // TODO: There could be some refactoring here
+            //Update regardless of the resultCode
+        	Activity act = getActivity();
+        	if (act instanceof PlacesActivity) {
+        		setLocations(((PlacesActivity)act).getAllPlaces());
+        		refreshMap();
+        	}
+        }
     }
 }
