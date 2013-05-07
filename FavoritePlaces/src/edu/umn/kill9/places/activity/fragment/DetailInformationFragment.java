@@ -1,11 +1,26 @@
 package edu.umn.kill9.places.activity.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
+
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.application.PlacesApplication;
@@ -14,12 +29,6 @@ import edu.umn.kill9.places.model.Category;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.PlaceDataSource;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
-import edu.umn.kill9.places.model.data.SampleLocationList;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.android.gms.maps.model.LatLng;
 import edu.umn.kill9.places.util.PlacesConstants;
 
 /**
@@ -135,7 +144,6 @@ public class DetailInformationFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        Intent intent;
         switch (item.getItemId()) {
             case R.id.edit_location_details:
                 //add edit location details logic - just make certain items editable
@@ -156,6 +164,7 @@ public class DetailInformationFragment extends Fragment {
                 PlaceDataSource ds = new PlaceDataSource();
                 try {
                     ds.updatePlace(_location);
+                    Toast.makeText(getActivity().getApplicationContext(), "Saved location: " + name.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (ParseException e) {
                     e.printStackTrace();
@@ -166,7 +175,37 @@ public class DetailInformationFragment extends Fragment {
 
                 return true;
             case R.id.delete_location:
-                //add delete location logic
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+
+                                PlaceDataSource ds = new PlaceDataSource();
+                                try {
+                                    ds.deletePlace(_location);
+                                    Toast.makeText(getActivity().getApplicationContext(), "Deleted location: " + name.getText().toString(), Toast.LENGTH_SHORT).show();
+                                }
+                                catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            	
+                            	getActivity().setResult(Activity.RESULT_OK, null);
+                                getActivity().finish();
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //Do Nothing
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(getString(R.string.confirm_delete) + name.getText().toString() + "?")
+                	.setPositiveButton(getString(R.string.yes), dialogClickListener)
+                    .setNegativeButton(getString(R.string.no), dialogClickListener)
+                    .show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

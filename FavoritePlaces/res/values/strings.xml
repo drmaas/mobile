@@ -65,5 +65,10 @@
     <string name="comments_label">Comments</string>
     <string name="PLACE_DETAIL_API_URL">https://maps.googleapis.com/maps/api/place/details/json</string>
 	<string name="MY_API_KEY">AIzaSyAKb3QnPVarVnI8D9Fqh8qTuh2nVSosQd8</string>
+	
+    <!-- delete alert -->
+    <string name="confirm_delete">Are you sure you wish to delete: </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     
 </resources>
