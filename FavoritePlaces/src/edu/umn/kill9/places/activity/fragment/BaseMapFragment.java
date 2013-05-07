@@ -102,7 +102,7 @@ public abstract class BaseMapFragment extends MapFragment {
         // Pan to see all markers in view.
         // Cannot zoom to bounds until the map has a size.
         final View mapView = getView();
-        if (mapView.getViewTreeObserver().isAlive()) {
+        if ( mapView != null && mapView.getViewTreeObserver().isAlive()) {
             mapView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
                 @SuppressWarnings("deprecation") // We use the new method when supported
                 @SuppressLint("NewApi") // We check which build version we are using.
