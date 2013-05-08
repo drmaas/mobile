@@ -84,12 +84,14 @@ public class PlaceDetailsActivity extends BaseActivity {
                 	
                 });
         actionBar.addTab(tab);
-        
+
+        /*
         tab = actionBar.newTab()
                 .setText(R.string.tab_events)
                 .setTabListener(new TabListener<EventsFragment>(
                         this, "eventslist", EventsFragment.class));
         actionBar.addTab(tab);
+        */
     }
 
     @Override
@@ -106,21 +108,6 @@ public class PlaceDetailsActivity extends BaseActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode == Activity.RESULT_OK && requestCode == PlacesConstants.EVENTS) {
-            //do something here when returning from events activity
-        }
-
     }
 
     /**

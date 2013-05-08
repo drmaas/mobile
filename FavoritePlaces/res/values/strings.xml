@@ -70,5 +70,9 @@
     <string name="confirm_delete">Are you sure you wish to delete: </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    
+
+    <!-- events -->
+    <string name="default_title">New Event for</string>
+    <string name="default_description">Enter event details here.\nWebsite:</string>
+
 </resources>

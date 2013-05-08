@@ -16,12 +16,12 @@ public class Event {
     /***************************Attributes************************************/
     private String _id;
     private Place _place;
-    private int _calendarId;
+    private Long _calendarId;
 
     /**************************Constructors***********************************/
     public Event(){ }
 
-    public  Event(Place place, int calendarId){
+    public  Event(Place place, long calendarId){
         this._place = place;
         this._calendarId = calendarId;
     }
@@ -43,11 +43,11 @@ public class Event {
         this._place = place;
     }
 
-    public int getCalendarId() {
+    public long getCalendarId() {
         return _calendarId;
     }
 
-    public void setCalendarId(int calendarId) {
+    public void setCalendarId(long calendarId) {
         this._calendarId = calendarId;
     }
 
@@ -57,7 +57,7 @@ public class Event {
 
         //Simple Data
         event.setId(parseObject.getObjectId());
-        event.setCalendarId(parseObject.getInt(COLUMN_CALENDARID));
+        event.setCalendarId(parseObject.getLong(COLUMN_CALENDARID));
 
         //Relational Data
         if(parseObject.getParseObject(COLUMN_PLACE) != null)

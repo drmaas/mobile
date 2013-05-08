@@ -5,8 +5,10 @@
           android:icon="@drawable/content_new_event"
           android:title="@string/add_event"
           android:showAsAction="ifRoom"/>
+    <!--
     <item android:id="@+id/delete_event"
           android:icon="@drawable/content_discard"
           android:title="@string/delete_event"
           android:showAsAction="ifRoom"/>
+    -->
 </menu>
