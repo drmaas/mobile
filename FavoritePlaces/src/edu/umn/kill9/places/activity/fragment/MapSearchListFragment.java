@@ -10,11 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.model.data.SampleLocationList;
 import edu.umn.kill9.places.util.PlacesConstants;
+import edu.umn.kill9.places.web.PlaceDetailWebService;
+import edu.umn.kill9.places.web.PlaceDetailWebService.PlacesAPIJSONListener;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ import java.util.ArrayList;
  * User: drmaas
  * Date: 4/28/13
  */
-public class MapSearchListFragment extends ListFragment {
+public class MapSearchListFragment extends ListFragment implements PlacesAPIJSONListener {
 
 
     /**
@@ -46,10 +49,24 @@ public class MapSearchListFragment extends ListFragment {
      */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), PlaceDetailsActivity.class);
-        Place location = (Place)getListAdapter().getItem(position);
-        intent.putExtra(PlacesConstants.LOCATION_KEY, location);
-        startActivityForResult(intent, PlacesConstants.DETAILS);
+    	Place location = (Place)getListAdapter().getItem(position);
+    	
+    	Toast.makeText(getActivity().getApplicationContext(), "Clicked: " + location.getPlaceName(), Toast.LENGTH_SHORT).show();
+	       
+	    PlaceDetailWebService placeDetails = new PlaceDetailWebService(this);
+	    placeDetails.execute(location);
+	    
+    	
     }
+
+	@Override
+	public void onWebServiceCallComplete(Place placeUpdated) {
+		
+		Intent intent = new Intent();
+        intent.setClass(getActivity(), PlaceDetailsActivity.class);
+        
+        intent.putExtra(PlacesConstants.LOCATION_KEY, placeUpdated);
+        startActivityForResult(intent, PlacesConstants.DETAILS);
+		
+	}
 }
