@@ -3,6 +3,8 @@ package edu.umn.kill9.places.activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -13,22 +15,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.gms.maps.MapFragment;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
 import edu.umn.kill9.places.activity.fragment.MapSearchListFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
 import edu.umn.kill9.places.activity.geo.PlacesGeocoder;
+import edu.umn.kill9.places.activity.geo.PlacesLocationManager;
 import edu.umn.kill9.places.adapter.ExternalPlaceAdapter;
+import edu.umn.kill9.places.adapter.PlaceAdapter;
 import edu.umn.kill9.places.model.Place;
+import edu.umn.kill9.places.web.PlacesWebService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * User: drmaas
  * Date: 4/15/13
  */
-public class ExternalLocationActivity extends BaseActivity {
+public class ExternalLocationActivity extends BaseActivity implements PlacesWebService.PlacesAPIJSONListener {
 
+    private List<Place> places;
     private final int NUM_SEARCH_RESULTS = 20;
+
+    MapSearchListFragment loclist;
+    PlaceMapFragment locmap;
 
     /**
      *
@@ -49,7 +60,8 @@ public class ExternalLocationActivity extends BaseActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch(v.getText().toString());
+                    //performSearch(v.getText().toString());
+                    performSearchCurrentLocation(v.getText().toString());
                     hideKeyboard();
                     editText.setText("");
                     return true;
@@ -57,6 +69,10 @@ public class ExternalLocationActivity extends BaseActivity {
                 return false;
             }
         });
+
+        //fragment references
+        loclist = (MapSearchListFragment)getFragmentManager().findFragmentById(R.id.mapsearchlistfragment);
+        locmap = (PlaceMapFragment)getFragmentManager().findFragmentById(R.id.mapsearchmapfragment);
 
     }
 
@@ -76,11 +92,22 @@ public class ExternalLocationActivity extends BaseActivity {
         }
     }
 
-    /**
-     * TODO currently uses Geocoder to search, we should use places API instead
-     *
-     * @param searchText
-     */
+    private void performSearchCurrentLocation(String searchText) {
+        ApplicationInfo ai = null;
+        try {
+            ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bundle bundle = ai.metaData;
+        String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
+        PlacesWebService webservice = new PlacesWebService(ExternalLocationActivity.this, myApiKey);
+        PlacesLocationManager manager = new PlacesLocationManager(this, webservice, searchText);
+        manager.getCurrentLocation();
+    }
+
+    /*
     private void performSearch(String searchText) {
         FragmentManager fm = getFragmentManager();
         PlaceMapFragment mf = (PlaceMapFragment)fm.findFragmentById(R.id.mapsearchmapfragment);
@@ -103,5 +130,20 @@ public class ExternalLocationActivity extends BaseActivity {
             ad.show();
         }
 
+    }
+    */
+
+    @Override
+    public void onWebServiceCallComplete(List<Place> placesList) {
+        places = new ArrayList<Place>();
+        places.addAll(placesList);
+
+        //refresh list
+        loclist.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
+
+        //add points to map
+        locmap.clearLocations();
+        locmap.addLocation(places);
+        locmap.refreshMap();
     }
 }

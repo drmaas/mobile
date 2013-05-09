@@ -33,8 +33,6 @@ public class PlacesActivity extends BaseActivity {
     
     private SpinnerAdapter viewSpinnerAdapter;
 
-    private boolean firstTime = true;
-
     /**
      * Called when the activity is first created.
      */
@@ -51,8 +49,11 @@ public class PlacesActivity extends BaseActivity {
         enableNavigationMode();
 
         //setup navigation menu to switch between list and map view
+        //note that loading from preferences doesn't quite work right...
         String defaultView = getResources().getString(R.string.default_view);
-        viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), defaultView);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PlacesActivity.this);
+        final String initialView = prefs.getString(getString(R.string.preference_view_id),defaultView);
+        viewSpinnerAdapter = new NavigationAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.locations_navigation_view), initialView);
         getActionBar().setListNavigationCallbacks(viewSpinnerAdapter, new ActionBar.OnNavigationListener() {
             // Get the same strings provided for the drop-down's ArrayAdapter
             String[] strings = getResources().getStringArray(R.array.locations_navigation_view);
@@ -65,13 +66,6 @@ public class PlacesActivity extends BaseActivity {
 
                 String list = getResources().getString(R.string.list_view);
                 String map = getResources().getString(R.string.map_view);
-
-                //initially get from preferences
-                if (firstTime) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PlacesActivity.this);
-                    item = prefs.getString(getString(R.string.preference_view_id),getString(R.string.map_view));
-                    firstTime = false;
-                }
 
                 if (item.equals( list ) ) {
                     //show list view
@@ -98,7 +92,6 @@ public class PlacesActivity extends BaseActivity {
         });
 
         //get default home address
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String homeAddress = prefs.getString(getString(R.string.preference_home_address_id), "None");
 
         //create user if not exists

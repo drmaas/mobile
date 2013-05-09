@@ -38,11 +38,24 @@ public class PlacesWebService extends AsyncTask<String, Void, List<Place>>{
 	protected List<Place> doInBackground(String... params) {
 
 		String device_location = params[0];
+        String keyword = "";
+        if (params.length > 1) {
+            keyword = params[1];
+        }
         Double currentLat = Double.parseDouble(device_location.split(",")[0]);
         Double currentLong = Double.parseDouble(device_location.split(",")[1]);
 
 		String baseurl = PlacesApplication.getContext().getResources().getString(R.string.PLACE_API_BASE_URL);
-		String url = baseurl+ "?location=" + device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;
+        String url = baseurl + "?location=" + device_location;
+        if (keyword != "") {
+            url += "&keyword=" + keyword.replaceAll("([ ]+)", "+") + "&rankby=distance";
+        }
+        else {
+            url += "&radius=2000";
+        }
+        url += "&sensor=true&key=" + mapsAPIKey;
+		//String url = baseurl+ "?location=" + device_location + "&radius=2000&sensor=true&key=" + mapsAPIKey;
+        //String url = baseurl+ "?location=" + device_location + "&keyword=pizza+hut&rankby=distance&sensor=true&key=" + mapsAPIKey;
 				
 		AndroidHttpClient client = null;
 		String json=null;

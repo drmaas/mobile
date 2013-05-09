@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import edu.umn.kill9.places.activity.fragment.AddCurrentLocFragment;
 import edu.umn.kill9.places.activity.fragment.PlaceMapFragment;
+import edu.umn.kill9.places.activity.geo.PlacesLocationManager;
 import edu.umn.kill9.places.adapter.PlaceAdapter;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.web.PlacesWebService;
@@ -31,7 +32,7 @@ import java.util.List;
  */
 public class CurrentLocationActivity extends BaseActivity implements PlacesWebService.PlacesAPIJSONListener {
 
-    private ArrayList<Place> places;
+    private List<Place> places;
     private String currentLocation;
 
     AddCurrentLocFragment loclist;
@@ -50,6 +51,7 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         showHomeAsUp(true);
 
         //kick off current location listener
+        //and execute service call to get locations
         getCurrentLocation();
 
         //filter list
@@ -75,65 +77,6 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
         locmap.refreshMap();
     }
 
-    /**
-     *
-     */
-    public void getCurrentLocation(){
-        final LocationManager locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        LocationListener listener = new LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-                // A new location update is received.  Do something useful with it.
-                currentLocation = Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
-                ApplicationInfo ai = null;
-                try {
-                    ai = CurrentLocationActivity.this.getPackageManager().getApplicationInfo(CurrentLocationActivity.this.getPackageName(), PackageManager.GET_META_DATA);
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-                
-                //execute service call to get locations
-                Bundle bundle = ai.metaData;
-                String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
-                PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this, myApiKey);
-                
-                // Execute query
-                webservice.execute(currentLocation);
-                Toast.makeText(getApplicationContext(), location.getProvider() + ": " + currentLocation, Toast.LENGTH_SHORT).show();
-
-                //move map to current location
-                //locmap.moveToLocation(location);
-
-            }
-            @Override
-            public void onProviderDisabled(String provider) {
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status,Bundle extras)
-            {
-            }
-        };
-
-        locationMgr.requestSingleUpdate(
-        		LocationManager.GPS_PROVIDER,
-        		listener,
-        		null // Use the callback on the calling thread
-        		);
-
-        locationMgr.requestSingleUpdate(
-                LocationManager.NETWORK_PROVIDER,
-                listener,
-                null // Use the callback on the calling thread
-        );
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -148,6 +91,21 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void getCurrentLocation() {
+        ApplicationInfo ai = null;
+        try {
+            ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bundle bundle = ai.metaData;
+        String myApiKey = bundle.getString("com.google.android.maps.v2.API_KEY");
+        PlacesWebService webservice = new PlacesWebService(CurrentLocationActivity.this, myApiKey);
+        PlacesLocationManager manager = new PlacesLocationManager(this, webservice,"");
+        manager.getCurrentLocation();
     }
 
     /**
@@ -181,7 +139,6 @@ public class CurrentLocationActivity extends BaseActivity implements PlacesWebSe
                     locmap.refreshMap();
                 }
             });
-
 
         }
 

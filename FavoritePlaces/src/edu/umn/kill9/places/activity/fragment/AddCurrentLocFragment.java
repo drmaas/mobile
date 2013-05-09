@@ -42,14 +42,6 @@ public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSON
         Intent intent = new Intent();
         intent.setClass(getActivity(), PlaceDetailsActivity.class);
         intent.putExtra(PlacesConstants.LOCATION_KEY, placeUpdated);
-        //intent.putExtra("locationName", place.getPlaceName());
-        //intent.putExtra("address", place.getAddress());
-        //intent.putExtra("hours", place.getHours());
-        //intent.putExtra("phone", place.getPhone());
-        //intent.putExtra("vicinity", place.getVicinity());
-        //intent.putExtra("website", place.getWebsite());
-        //intent.putExtra("latitude", place.getPlacePoint().latitude);
-        //intent.putExtra("longitude", place.getPlacePoint().longitude);
         startActivityForResult(intent, PlacesConstants.DETAILS);
 		
 	}
