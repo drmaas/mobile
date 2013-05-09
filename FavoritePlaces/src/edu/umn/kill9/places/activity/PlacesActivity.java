@@ -33,6 +33,8 @@ public class PlacesActivity extends BaseActivity {
     
     private SpinnerAdapter viewSpinnerAdapter;
 
+    private boolean firstTime = true;
+
     /**
      * Called when the activity is first created.
      */
@@ -63,7 +65,14 @@ public class PlacesActivity extends BaseActivity {
 
                 String list = getResources().getString(R.string.list_view);
                 String map = getResources().getString(R.string.map_view);
-                
+
+                //initially get from preferences
+                if (firstTime) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PlacesActivity.this);
+                    item = prefs.getString(getString(R.string.preference_view_id),getString(R.string.map_view));
+                    firstTime = false;
+                }
+
                 if (item.equals( list ) ) {
                     //show list view
                     content = new PlaceListFragment();
