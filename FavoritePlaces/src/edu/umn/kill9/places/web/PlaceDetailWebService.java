@@ -97,24 +97,32 @@ public class PlaceDetailWebService extends AsyncTask<Place, Void, Place>{
 	        		JSONObject openingHour= daysArray.getJSONObject(index).getJSONObject("open");
 	        		JSONObject closingHour= daysArray.getJSONObject(index).getJSONObject("close");
 	        		String openingtime = openingHour.getString("time");
+	        		String Ominutes = openingtime.substring(2);
+	        		String Ohours = openingtime.substring(0, 2);
+	        		String formatedOpeningTime = Ohours   + ":" + Ominutes ;
+	        		
 	        		String closingtime = closingHour.getString("time");
+	        		String Cminutes = openingtime.substring(2);
+	        		String Chours = openingtime.substring(0, 2);
+	        		String formatedClosingTime = Chours + ":" + Cminutes;
+	        		
 	        		int day = openingHour.getInt("day");
 	        		
 	        		if(day == 0)
 	        		{
-	        			String temp = "Sun: " + openingtime + " - " + closingtime + "; ";
+	        			String temp = "Sun: " + formatedOpeningTime + " - " + formatedClosingTime + "; \n";
 	        			hourString = hourString.append(temp);
 	        		}	
 	        		else if(day == 6)
 	        		{
-	        			String temp = "Sat: "+ openingtime + " - " + closingtime + "; ";
+	        			String temp = "Sat: "+ formatedOpeningTime + " - " + formatedClosingTime + "; \n";
 	        			hourString = hourString.append(temp);
 	        		}
 	        		else
 	        		{
 	        			if(found == false)
 	        			{
-	        				String temp = "Mon - Fri: "+ openingtime + " - " + closingtime + "; " ;
+	        				String temp = "Mon - Fri: "+ formatedOpeningTime + " - " + formatedClosingTime + "; \n";
 	        				hourString = hourString.append(temp);
 	        				found = true;
 	        			}
