@@ -102,8 +102,8 @@ public class PlaceDetailWebService extends AsyncTask<Place, Void, Place>{
 	        		String formatedOpeningTime = Ohours   + ":" + Ominutes ;
 	        		
 	        		String closingtime = closingHour.getString("time");
-	        		String Cminutes = openingtime.substring(2);
-	        		String Chours = openingtime.substring(0, 2);
+	        		String Cminutes = closingtime.substring(2);
+	        		String Chours = closingtime.substring(0, 2);
 	        		String formatedClosingTime = Chours + ":" + Cminutes;
 	        		
 	        		int day = openingHour.getInt("day");
