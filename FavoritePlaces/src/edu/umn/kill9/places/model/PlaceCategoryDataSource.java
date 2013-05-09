@@ -16,37 +16,32 @@ import java.util.List;
  */
 public class PlaceCategoryDataSource {
     public PlaceCategory createPlaceCategory(Place place, Category category) throws ParseException {
-        ParseObject parseObject = new ParseObject(PlaceCategory.TABLE_PLACECATEGORY);
+        PlaceCategory placeCategory = new PlaceCategory();
 
         //Relational Data
         if(place != null)
         {
-            parseObject.put(PlaceCategory.COLUMN_PLACE, Place.PlaceToParseObject(place));
+            placeCategory.setPlace(place);
         }
         if(category != null)
         {
-            parseObject.put(PlaceCategory.COLUMN_CATEGORY, Category.CategoryToParseObject(category));
+            placeCategory.setCategory(category);
         }
 
-        parseObject.save();
+        placeCategory.save();
 
-        return PlaceCategory.ParseObjectToPlaceCategory(parseObject);
+        return placeCategory;
     }
 
     public PlaceCategory createPlaceCategory(PlaceCategory placeCategory) throws ParseException {
-        ParseObject parseObject = PlaceCategory.PlaceCategoryToParseObject(placeCategory);
-        parseObject.save();
-
-        placeCategory.setId(parseObject.getObjectId());
+        placeCategory.save();
         return placeCategory;
     }
 
     public PlaceCategory getPlaceCategory(String id) throws ParseException {
         ParseQuery query = new ParseQuery(PlaceCategory.TABLE_PLACECATEGORY);
 
-        PlaceCategory placeCategory = PlaceCategory.ParseObjectToPlaceCategory(query.get(id));
-
-        return placeCategory;
+        return new PlaceCategory(query.get(id));
     }
 
     public List<PlaceCategory> getAllPlaceCategory() throws ParseException {
@@ -55,20 +50,18 @@ public class PlaceCategoryDataSource {
         ParseQuery query = new ParseQuery(PlaceCategory.TABLE_PLACECATEGORY);
 
         for (ParseObject parseObject : query.find()) {
-            placeCategories.add(PlaceCategory.ParseObjectToPlaceCategory(parseObject));
+            placeCategories.add(new PlaceCategory(parseObject));
         }
 
         return placeCategories;
     }
 
     public void updatePlaceCategory(PlaceCategory placeCategory) throws ParseException {
-        ParseObject parseObject = PlaceCategory.PlaceCategoryToParseObject(placeCategory);
-        parseObject.save();
+        placeCategory.save();
     }
 
     public void deletePlaceCategory(PlaceCategory placeCategory) throws ParseException {
-        ParseObject parseObject = PlaceCategory.PlaceCategoryToParseObject(placeCategory);
-        parseObject.delete();
+        placeCategory.delete();
     }
 
     public void deletePlaceCategory(String placeCategoryId) throws ParseException {

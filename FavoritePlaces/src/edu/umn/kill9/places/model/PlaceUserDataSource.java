@@ -15,37 +15,30 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class PlaceUserDataSource {
-    public PlaceUser createPlaceUser(String homeAddress) throws ParseException {
-        ParseObject parseObject = new ParseObject(PlaceUser.TABLE_PLACEUSER);
-        parseObject.put(PlaceUser.COLUMN_HOMEADDRESS, homeAddress);
+    public PlaceUser createPlaceUser(String homeAddress, String deviceId) throws ParseException {
+        PlaceUser placeUser = new PlaceUser();
+        placeUser.setHomeAddress(homeAddress);
+        placeUser.setDeviceId(deviceId);
 
-        parseObject.save();
+        placeUser.save();
 
-        return PlaceUser.ParseObjectToPlaceUser(parseObject);
-    }
-
-    public PlaceUser createPlaceUser(PlaceUser placeUser) throws ParseException {
-        ParseObject parseObject = PlaceUser.PlaceUserToParseObject(placeUser);
-        parseObject.save();
-
-        placeUser.setId(parseObject.getObjectId());
         return placeUser;
     }
 
-    public PlaceUser getPlaceUserByDeviceId(String deviceId) throws ParseException {
-        ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
-
-        PlaceUser placeUser = PlaceUser.ParseObjectToPlaceUser(query.whereEqualTo(PlaceUser.COLUMN_DEVICE_ID, deviceId).getFirst());
-
+    public PlaceUser createPlaceUser(PlaceUser placeUser) throws ParseException {
+        placeUser.save();
         return placeUser;
     }
 
     public PlaceUser getPlaceUser(String id) throws ParseException {
         ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
+        return new PlaceUser(query.get(id));
+    }
 
-        PlaceUser placeUser = PlaceUser.ParseObjectToPlaceUser(query.get(id));
+    public PlaceUser getPlaceUserByDeviceId(String deviceId) throws ParseException {
+        ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
 
-        return placeUser;
+        return new PlaceUser(query.whereEqualTo(PlaceUser.COLUMN_DEVICEID, deviceId).getFirst());
     }
 
     public List<PlaceUser> getAllPlaceUser() throws ParseException {
@@ -54,20 +47,18 @@ public class PlaceUserDataSource {
         ParseQuery query = new ParseQuery(PlaceUser.TABLE_PLACEUSER);
 
         for (ParseObject parseObject : query.find()) {
-            placeUsers.add(PlaceUser.ParseObjectToPlaceUser(parseObject));
+            placeUsers.add(new PlaceUser(parseObject));
         }
 
         return placeUsers;
     }
 
     public void updatePlaceUser(PlaceUser placeUser) throws ParseException {
-        ParseObject parseObject = PlaceUser.PlaceUserToParseObject(placeUser);
-        parseObject.save();
+        placeUser.save();
     }
 
     public void deletePlaceUser(PlaceUser placeUser) throws ParseException {
-        ParseObject parseObject = PlaceUser.PlaceUserToParseObject(placeUser);
-        parseObject.delete();
+        placeUser.delete();
     }
 
     public void deletePlaceUser(String placeUserId) throws ParseException {

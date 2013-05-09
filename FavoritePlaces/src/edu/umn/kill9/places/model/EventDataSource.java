@@ -16,35 +16,28 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class EventDataSource {
-
-    public Event createEvent(Place place, long calendarId) throws ParseException {
-        ParseObject parseObject = new ParseObject(Event.TABLE_EVENT);
-        parseObject.put(Event.COLUMN_CALENDARID, calendarId);
+    public Event createEvent(Place place, int calendarId) throws ParseException {
+        Event event = new Event();
+        event.setCalendarId(calendarId);
 
         if(place != null)
         {
-            parseObject.put(Event.COLUMN_PLACE, Place.PlaceToParseObject(place));
+            event.setPlace(place);
         }
 
-        parseObject.save();
+        event.save();
 
-        return Event.ParseObjectToEvent(parseObject);
+        return event;
     }
 
     public Event createEvent(Event event) throws ParseException {
-        ParseObject parseObject = Event.EventToParseObject(event);
-        parseObject.save();
-
-        event.setId(parseObject.getObjectId());
+        event.save();
         return event;
     }
 
     public Event getEvent(String id) throws ParseException {
         ParseQuery query = new ParseQuery(Event.TABLE_EVENT);
-
-        Event event = Event.ParseObjectToEvent(query.get(id));
-
-        return event;
+        return new Event(query.get(id));
     }
 
     public List<Event> getAllEvent() throws ParseException {
@@ -53,7 +46,7 @@ public class EventDataSource {
         ParseQuery query = new ParseQuery(Event.TABLE_EVENT);
 
         for (ParseObject parseObject : query.find()) {
-            events.add(Event.ParseObjectToEvent(parseObject));
+            events.add(new Event(parseObject));
         }
 
         return events;
@@ -66,20 +59,18 @@ public class EventDataSource {
 
         for (ParseObject parseObject : query.find()) {
 
-            events.add(Event.ParseObjectToEvent(parseObject));
+            events.add(new Event(parseObject));
         }
 
         return events;
     }
 
     public void updateEvent(Event event) throws ParseException {
-        ParseObject parseObject = Event.EventToParseObject(event);
-        parseObject.save();
+        event.save();
     }
 
     public void deleteEvent(Event event) throws ParseException {
-        ParseObject parseObject = Event.EventToParseObject(event);
-        parseObject.delete();
+        event.delete();
     }
 
     public void deleteEvent(String eventId) throws ParseException {
