@@ -16,50 +16,42 @@ import java.util.List;
  */
 public class CategoryDataSource {
     public Category createCategory(String name) throws ParseException {
-        ParseObject parseObject = new ParseObject(Category.TABLE_CATEGORY);
-        parseObject.put(Category.COLUMN_NAME, name);
+        Category category = new Category();
+        category.setName(name);
 
-        parseObject.save();
+        category.save();
 
-        return Category.ParseObjectToCategory(parseObject);
+        return category;
     }
 
     public Category createCategory(Category category) throws ParseException {
-        ParseObject parseObject = Category.CategoryToParseObject(category);
-        parseObject.save();
-
-        category.setId(parseObject.getObjectId());
+        category.save();
         return category;
     }
 
     public Category getCategory(String id) throws ParseException {
         ParseQuery query = new ParseQuery(Category.TABLE_CATEGORY);
-
-        Category category = Category.ParseObjectToCategory(query.get(id));
-
-        return category;
+        return new Category(query.get(id));
     }
 
     public List<Category> getAllCategory() throws ParseException {
-        List<Category> categorys = new ArrayList<Category>();
+        List<Category> categories = new ArrayList<Category>();
 
         ParseQuery query = new ParseQuery(Category.TABLE_CATEGORY);
 
         for (ParseObject parseObject : query.find()) {
-            categorys.add(Category.ParseObjectToCategory(parseObject));
+            categories.add(new Category(parseObject));
         }
 
-        return categorys;
+        return categories;
     }
 
     public void updateCategory(Category category) throws ParseException {
-        ParseObject parseObject = Category.CategoryToParseObject(category);
-        parseObject.save();
+        category.save();
     }
 
     public void deleteCategory(Category category) throws ParseException {
-        ParseObject parseObject = Category.CategoryToParseObject(category);
-        parseObject.delete();
+        category.delete();
     }
 
     public void deleteCategory(String categoryId) throws ParseException {
