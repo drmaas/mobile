@@ -132,7 +132,9 @@ public class Place extends BaseModel implements Parcelable{
 
     public void setPlacePoint(LatLng placePoint) {
         //Convert from LatLng to GeoPoint
-        _parseObject.put(COLUMN_PLACEPOINT, new ParseGeoPoint(placePoint.latitude, placePoint.longitude));
+        if(placePoint != null) {
+            _parseObject.put(COLUMN_PLACEPOINT, new ParseGeoPoint(placePoint.latitude, placePoint.longitude));
+        }
     }
 
     public void setPlacePoint(ParseGeoPoint placePoint) {
