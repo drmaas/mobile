@@ -38,8 +38,10 @@ public class ExternalLocationActivity extends BaseActivity implements PlacesWebS
     private List<Place> places;
     private final int NUM_SEARCH_RESULTS = 20;
 
-    MapSearchListFragment loclist;
-    PlaceMapFragment locmap;
+    private MapSearchListFragment loclist;
+    private PlaceMapFragment locmap;
+
+    private String searchText;
 
     /**
      *
@@ -60,7 +62,7 @@ public class ExternalLocationActivity extends BaseActivity implements PlacesWebS
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    //performSearch(v.getText().toString());
+                    searchText = v.getText().toString();
                     performSearchCurrentLocation(v.getText().toString());
                     hideKeyboard();
                     editText.setText("");
@@ -107,8 +109,11 @@ public class ExternalLocationActivity extends BaseActivity implements PlacesWebS
         manager.getCurrentLocation();
     }
 
-    /*
-    private void performSearch(String searchText) {
+    /**
+     *
+     * @param searchText
+     */
+    private List<Place> performSearch(String searchText) {
         FragmentManager fm = getFragmentManager();
         PlaceMapFragment mf = (PlaceMapFragment)fm.findFragmentById(R.id.mapsearchmapfragment);
         MapSearchListFragment lf = (MapSearchListFragment)fm.findFragmentById(R.id.mapsearchlistfragment);
@@ -130,13 +135,19 @@ public class ExternalLocationActivity extends BaseActivity implements PlacesWebS
             ad.show();
         }
 
+        return addresses;
+
     }
-    */
 
     @Override
     public void onWebServiceCallComplete(List<Place> placesList) {
-        places = new ArrayList<Place>();
-        places.addAll(placesList);
+        if (placesList.size() < 1) {
+            places = performSearch(searchText);
+        }
+        else {
+            places = new ArrayList<Place>();
+            places.addAll(placesList);
+        }
 
         //refresh list
         loclist.setListAdapter(new PlaceAdapter(this, R.layout.place_item, places));
