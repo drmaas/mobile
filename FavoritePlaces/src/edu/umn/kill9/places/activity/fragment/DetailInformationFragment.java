@@ -193,6 +193,9 @@ public class DetailInformationFragment extends Fragment {
                                 catch (ParseException e) {
                                     e.printStackTrace();
                                 }
+                                catch (NullPointerException e) {
+                                    Toast.makeText(getActivity().getApplicationContext(), "Cannot Delete location because you didn't save it: " + name.getText().toString(), Toast.LENGTH_SHORT).show();
+                                }
                             	
                             	getActivity().setResult(Activity.RESULT_OK, null);
                                 getActivity().finish();
