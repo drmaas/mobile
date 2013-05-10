@@ -9,8 +9,12 @@
           android:icon="@drawable/content_save"
           android:title="@string/save_location_details"
           android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/cancel_location_details"
+          android:icon="@drawable/navigation_cancel"
+          android:title="@string/cancel_location_details"
+          android:showAsAction="ifRoom|withText"/>
     <item android:id="@+id/delete_location"
           android:icon="@drawable/content_discard"
           android:title="@string/delete_location"
-          android:showAsAction="ifRoom"/>
+          android:showAsAction="ifRoom|withText"/>
 </menu>

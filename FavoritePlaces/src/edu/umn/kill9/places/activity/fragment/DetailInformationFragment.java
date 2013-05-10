@@ -175,6 +175,9 @@ public class DetailInformationFragment extends Fragment {
                 setWriteable(false);
 
                 return true;
+            case R.id.cancel_location_details:
+                setWriteable(false);
+                return true;
             case R.id.delete_location:
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override

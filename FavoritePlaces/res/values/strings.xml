@@ -22,6 +22,7 @@
     <string name="get_directions">Directions</string>
     <string name="add_event">Add</string>
     <string name="delete_event">Delete</string>
+    <string name="cancel_location_details">Cancel</string>
 
     <!-- tab titles -->
     <string name="tab_details">Details</string>
