@@ -3,6 +3,7 @@ package edu.umn.kill9.places.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.parse.ParseException;
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.CategoryDataSource;
 
 /**
  * User: drmaas
@@ -47,7 +51,15 @@ public class AddCategoryDialogFragment extends DialogFragment {
         builder.setView(layout); //inflater.inflate(R.layout.dialog_newcategory, null));
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                adapter.add(new Category(text.getText().toString()));
+                CategoryDataSource ds = new CategoryDataSource();
+                Category c = new Category(text.getText().toString(), ((CategoryAdapter)adapter).getUser());
+                try {
+                    ds.createCategory(c);
+                }
+                catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                adapter.add(c);
                 adapter.notifyDataSetChanged();
             }
         });

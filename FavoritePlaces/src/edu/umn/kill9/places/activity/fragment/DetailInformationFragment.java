@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
 
 import edu.umn.kill9.places.R;
+import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
@@ -129,7 +130,7 @@ public class DetailInformationFragment extends Fragment {
             wrapper.dismiss();
         }
         else {
-            wrapper.show(new CategoryAdapter(getActivity(), R.layout.categorylist_item, categories, selected));
+            wrapper.show(new CategoryAdapter(getActivity(), R.layout.categorylist_item, categories, selected, ((PlacesApplication)getActivity().getApplication()).getUser()));
         }
     }
 

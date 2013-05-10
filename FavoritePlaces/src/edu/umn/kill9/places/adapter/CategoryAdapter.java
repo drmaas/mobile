@@ -10,6 +10,7 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.PlaceUser;
 
 import java.util.List;
 
@@ -20,10 +21,12 @@ import java.util.List;
 public class CategoryAdapter extends ArrayAdapter<Category> {
 
     private List<Boolean> selected;
+    private PlaceUser user;
 
-    public CategoryAdapter(Context context, int textViewResourceId, List<Category> categories, List<Boolean> selected) {
+    public CategoryAdapter(Context context, int textViewResourceId, List<Category> categories, List<Boolean> selected, PlaceUser user) {
         super(context, textViewResourceId, categories);
         this.selected = selected;
+        this.user = user;
     }
 
     /**
@@ -96,6 +99,10 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
 
     public List<Boolean> getSelected() {
         return selected;
+    }
+
+    public PlaceUser getUser() {
+        return user;
     }
 
 }

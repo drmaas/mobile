@@ -17,11 +17,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
 import edu.umn.kill9.places.R;
 import edu.umn.kill9.places.activity.preferences.PlacesPreferenceActivity;
 import edu.umn.kill9.places.adapter.CategoryAdapter;
+import edu.umn.kill9.places.application.PlacesApplication;
 import edu.umn.kill9.places.dialog.CategoryListPopupWrapper;
 import edu.umn.kill9.places.model.Category;
+import edu.umn.kill9.places.model.CategoryDataSource;
+import edu.umn.kill9.places.model.PlaceUser;
 import edu.umn.kill9.places.model.data.SampleCategoryList;
 import edu.umn.kill9.places.util.PlacesConstants;
 import edu.umn.kill9.places.web.PlacesWebService;
@@ -40,13 +44,6 @@ public abstract class BaseActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //initialize categories drop-down
-        categories = SampleCategoryList.getCategories();
-        selected = new ArrayList();
-        for (int i = 0; i < categories.size(); i++) {
-            selected.add(new Boolean(false));
-        }
 
         setTitle("");
 
@@ -96,12 +93,28 @@ public abstract class BaseActivity extends Activity {
      * @param v
      */
     public void onDropdownClick(View v) {
+        PlaceUser user = ((PlacesApplication)getApplication()).getUser();
+        //initialize categories drop-down
+        //categories = SampleCategoryList.getCategories();
+        CategoryDataSource ds = new CategoryDataSource();
+        try {
+            categories = ds.getAllUserCategories(user);
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        selected = new ArrayList();
+        for (int i = 0; i < categories.size(); i++) {
+            selected.add(new Boolean(false));
+        }
+
         CategoryListPopupWrapper wrapper = new CategoryListPopupWrapper(this);
         if (wrapper.isShowing()) {
             wrapper.dismiss();
         }
         else {
-            wrapper.show(new CategoryAdapter(this, R.layout.categorylist_item, categories, selected));
+            wrapper.show(new CategoryAdapter(this, R.layout.categorylist_item, categories, selected, user));
         }
     }
 

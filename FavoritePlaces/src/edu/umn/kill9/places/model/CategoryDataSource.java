@@ -15,9 +15,11 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class CategoryDataSource {
-    public Category createCategory(String name) throws ParseException {
+
+    public Category createCategory(String name, PlaceUser placeUser) throws ParseException {
         Category category = new Category();
         category.setName(name);
+        category.setPlaceUser(placeUser);
 
         category.save();
 
@@ -38,6 +40,18 @@ public class CategoryDataSource {
         List<Category> categories = new ArrayList<Category>();
 
         ParseQuery query = new ParseQuery(Category.TABLE_CATEGORY);
+
+        for (ParseObject parseObject : query.find()) {
+            categories.add(new Category(parseObject));
+        }
+
+        return categories;
+    }
+
+    public List<Category> getAllUserCategories(PlaceUser user) throws ParseException {
+        List<Category> categories = new ArrayList<Category>();
+
+        ParseQuery query = new ParseQuery(Category.TABLE_CATEGORY).whereEqualTo(Place.COLUMN_PLACEUSER, user.getParseObject());;
 
         for (ParseObject parseObject : query.find()) {
             categories.add(new Category(parseObject));
