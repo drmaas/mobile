@@ -19,7 +19,7 @@ import edu.umn.kill9.places.web.PlaceDetailWebService;
 import edu.umn.kill9.places.web.PlaceDetailWebService.PlacesAPIJSONListener;
 
 
-public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSONListener{
+public class AddCurrentLocFragment extends ListFragment implements PlacesAPIJSONListener {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

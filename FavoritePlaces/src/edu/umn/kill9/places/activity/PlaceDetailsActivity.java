@@ -34,6 +34,8 @@ public class PlaceDetailsActivity extends BaseActivity {
 
         showHomeAsUp(true);
 
+        hideKeyboard();
+
         //String locationName = getIntent().getStringExtra("locationName");
         place  = getIntent().getParcelableExtra(PlacesConstants.LOCATION_KEY);
         //String locationName = place.getPlaceName();

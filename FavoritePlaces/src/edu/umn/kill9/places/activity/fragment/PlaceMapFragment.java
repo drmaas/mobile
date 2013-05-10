@@ -16,14 +16,17 @@ import edu.umn.kill9.places.activity.PlaceDetailsActivity;
 import edu.umn.kill9.places.activity.PlacesActivity;
 import edu.umn.kill9.places.model.Place;
 import edu.umn.kill9.places.util.PlacesConstants;
+import edu.umn.kill9.places.web.PlaceDetailWebService;
 
 /**
  * User: drmaas
  * Date: 4/18/13
  */
 public class PlaceMapFragment extends BaseMapFragment
-		implements OnInfoWindowClickListener {
-	
+		implements OnInfoWindowClickListener, PlaceDetailWebService.PlacesAPIJSONListener {
+
+    private Place locFound;
+
     @Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +73,7 @@ public class PlaceMapFragment extends BaseMapFragment
 		
 		String markTitle = mark.getTitle();
 		
-		Place locFound = null;
+		locFound = null;
 		for ( Place loc : _locations )
 		{
 			String locName = loc.getPlaceName();
@@ -87,21 +90,8 @@ public class PlaceMapFragment extends BaseMapFragment
 		}
 		else
 		{
-		
-			Intent intent = new Intent();
-	        intent.setClass(getActivity(), PlaceDetailsActivity.class);
-	
-	        //intent.putExtra("locationName", locFound.getPlaceName());
-	        //intent.putExtra("address", locFound.getAddress());
-	        //intent.putExtra("hours", locFound.getHours());
-	        //intent.putExtra("phone", locFound.getPhone());
-	        //intent.putExtra("vicinity", locFound.getVicinity());
-	        //intent.putExtra("website", locFound.getWebsite());
-	        //intent.putExtra("latitude", locFound.getPlacePoint().latitude);
-	        //intent.putExtra("longitude", locFound.getPlacePoint().longitude);
-
-            intent.putExtra(PlacesConstants.LOCATION_KEY, locFound);
-	        startActivityForResult(intent, PlacesConstants.DETAILS);
+            PlaceDetailWebService placeDetails = new PlaceDetailWebService(this);
+            placeDetails.execute(locFound);
 		}
     }
 
@@ -138,5 +128,13 @@ public class PlaceMapFragment extends BaseMapFragment
         		refreshMap();
         	}
         }
+    }
+
+    @Override
+    public void onWebServiceCallComplete(Place placeUpdated) {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), PlaceDetailsActivity.class);
+        intent.putExtra(PlacesConstants.LOCATION_KEY, locFound);
+        startActivityForResult(intent, PlacesConstants.DETAILS);
     }
 }
