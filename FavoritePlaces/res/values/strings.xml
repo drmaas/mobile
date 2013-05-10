@@ -33,6 +33,7 @@
     <string name="categories">Categories</string>
     <string name="selectall">Select All</string>
     <string name="newcategory">Add New Category</string>
+    <string name="deletecategory">Delete Selected</string>
     <string name="samplecategory">Category Name</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

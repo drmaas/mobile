@@ -17,7 +17,7 @@ import java.util.List;
  * User: drmaas
  * Date: 4/15/13
  */
-public class CategoryListPopupWrapper {
+public class  CategoryListPopupWrapper {
 
     private Activity activity;
     private PopupWindow pw;
@@ -80,11 +80,12 @@ public class CategoryListPopupWrapper {
         pw.showAsDropDown(pwanchor);
 
         //setup select all option
-        final CheckBox selectall = (CheckBox)layout.findViewById(R.id.selectallcheckbox);
+        final CheckedTextView selectall = (CheckedTextView)layout.findViewById(R.id.selectallcheckbox);
         selectall.setChecked(((CategoryAdapter) adapter).areAllSelected());
         selectall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectall.setChecked(!selectall.isChecked());
                 if (selectall.isChecked()) {
                     ((CategoryAdapter) adapter).selectAll();
                 } else {
@@ -100,6 +101,16 @@ public class CategoryListPopupWrapper {
             public void onClick(View v) {
                 //dialog asking for new category
                 AddCategoryDialogFragment.newInstance(activity.getString(R.string.newcategory), adapter).show(activity.getFragmentManager(), "dialog");
+            }
+        });
+
+        //delete category option
+        final TextView deletetext = (TextView)layout.findViewById(R.id.deletecategory);
+        deletetext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //dialog asking for new category
+                DeleteCategoryDialogFragment.newInstance(activity.getString(R.string.deletecategory), adapter).show(activity.getFragmentManager(), "dialog");
             }
         });
 

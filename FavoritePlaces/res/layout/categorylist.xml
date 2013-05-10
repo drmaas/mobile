@@ -11,6 +11,16 @@
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content">
+        <CheckedTextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/selectallcheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+                android:text="@string/selectall"
+                android:textStyle="bold"/>
+        <!--
         <CheckBox android:id="@+id/selectallcheckbox"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
@@ -19,6 +29,7 @@
                   android:layout_height="wrap_content"
                   android:text="@string/selectall"
                   android:textStyle="bold"/>
+                  -->
     </LinearLayout>
     <ListView android:id="@+id/dropdownlist"
               android:layout_width="match_parent"
@@ -34,5 +45,10 @@
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="4dp"
                   android:text="@string/newcategory"/>
+        <Button   android:id="@+id/deletecategory"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="4dp"
+                  android:text="@string/deletecategory"/>
     </LinearLayout>
 </LinearLayout>

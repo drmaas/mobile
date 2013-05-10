@@ -3,7 +3,6 @@ package edu.umn.kill9.places.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,20 +16,24 @@ import edu.umn.kill9.places.adapter.CategoryAdapter;
 import edu.umn.kill9.places.model.Category;
 import edu.umn.kill9.places.model.CategoryDataSource;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * User: drmaas
- * Date: 4/14/13
+ * Date: 5/9/13
  */
-public class AddCategoryDialogFragment extends DialogFragment {
+public class DeleteCategoryDialogFragment extends DialogFragment {
 
     private ArrayAdapter adapter;
 
-    private AddCategoryDialogFragment(ArrayAdapter adapter) {
+    private DeleteCategoryDialogFragment(ArrayAdapter adapter) {
         this.adapter = adapter;
     }
 
-    public static AddCategoryDialogFragment newInstance(String title, ArrayAdapter categoryAdapter) {
-        AddCategoryDialogFragment frag = new AddCategoryDialogFragment(categoryAdapter);
+    public static DeleteCategoryDialogFragment newInstance(String title, ArrayAdapter categoryAdapter) {
+        DeleteCategoryDialogFragment frag = new DeleteCategoryDialogFragment(categoryAdapter);
         Bundle args = new Bundle();
         args.putString("title", title);
         frag.setArguments(args);
@@ -44,22 +47,35 @@ public class AddCategoryDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_newcategory, (ViewGroup)getActivity().findViewById(R.id.new_category_dialog_layout));
-        final TextView text = (TextView)layout.findViewById(R.id.categoryname);
+        LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.dialog_deletecategory, (ViewGroup)getActivity().findViewById(R.id.delete_category_dialog_layout));
+        //final TextView text = (TextView)layout.findViewById(R.id.categoryname);
+
+        final List<Boolean> selected = ((CategoryAdapter)adapter).getSelected();
 
         builder.setTitle(title);
         builder.setView(layout); //inflater.inflate(R.layout.dialog_newcategory, null));
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 CategoryDataSource ds = new CategoryDataSource();
-                Category c = new Category(text.getText().toString(), ((CategoryAdapter)adapter).getUser());
-                try {
-                    ds.createCategory(c);
+                Category c;
+                List<Category> tempList = new ArrayList<Category>();
+                for (int i = 0; i < selected.size(); i++) {
+                    if (selected.get(i) == Boolean.TRUE) {
+                        c = ((CategoryAdapter) adapter).getItem(i);
+                        tempList.add(c);
+                        try {
+                            ds.deleteCategory(c);
+                        }
+                        catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-                catch (ParseException e) {
-                    e.printStackTrace();
+                Iterator<Category> it = tempList.iterator();
+                while (it.hasNext()) {
+                    c = it.next();
+                    adapter.remove(c);
                 }
-                adapter.add(c);
                 adapter.notifyDataSetChanged();
             }
         });

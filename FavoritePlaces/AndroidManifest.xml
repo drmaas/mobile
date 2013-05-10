@@ -31,7 +31,7 @@
                  android:theme="@style/PlacesTheme">
         <activity android:name=".activity.PlacesActivity"
                   android:label="@string/locations_title"
-                  uiOptions="splitActionBarWhenNarrow">
+                  android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -39,16 +39,18 @@
         </activity>
         <activity android:name=".activity.CurrentLocationActivity"
                   android:label="@string/currentlocation_title"
-                  uiOptions="splitActionBarWhenNarrow"/>
+                  android:uiOptions="splitActionBarWhenNarrow"/>
         <activity android:name=".activity.ExternalLocationActivity"
                   android:label="@string/externallocation_title"
-                  uiOptions="splitActionBarWhenNarrow"/>
+                  android:uiOptions="splitActionBarWhenNarrow"/>
         <activity
                 android:name=".activity.preferences.PlacesPreferenceActivity"
-                android:label="Settings"/>
+                android:label="Settings"
+                android:uiOptions="splitActionBarWhenNarrow"/>
         <activity
                 android:name=".activity.PlaceDetailsActivity"
-                android:label="Place Details"/>
+                android:label="Place Details"
+                android:uiOptions="splitActionBarWhenNarrow"/>
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyAKb3QnPVarVnI8D9Fqh8qTuh2nVSosQd8"/>
